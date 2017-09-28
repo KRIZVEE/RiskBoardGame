@@ -1,3 +1,7 @@
 test
+<<<<<<< HEAD
 hi i'm new this is my commit
 
+=======
+hi i'm new
+>>>>>>> 47e6b2f92e4a307ba0a72fd44338e135655d7258
