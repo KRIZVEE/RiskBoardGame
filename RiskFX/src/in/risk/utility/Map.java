@@ -13,10 +13,10 @@ public class Map {
 	public void loadMap(){
 		
 		boolean done = false;
-		String next;
-		String name;
+		//String next;
+		//String name;
 		
-		Vector<String> contains;
+		//Vector<String> contains;
 		
 		try{
 
@@ -28,11 +28,13 @@ public class Map {
 
 				
 				while(done == false);
+				scanner.close();
 			}
 
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	

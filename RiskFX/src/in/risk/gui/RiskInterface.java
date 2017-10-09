@@ -19,7 +19,6 @@ public class RiskInterface extends Application {
 	Label lbl1;
 	Button btn1;
 	
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
 			
@@ -28,10 +27,7 @@ public class RiskInterface extends Application {
 			
 			btn1.setOnAction(new EventHandler<ActionEvent>() {
 				
-				/* (non-Javadoc)
-				 * @see javafx.event.EventHandlerhandle(javafx.event.Event)
-				 */
-				@Override
+				
 				public void handle(ActionEvent event) {
 					Stage stage = new Stage();
 					//buttons
