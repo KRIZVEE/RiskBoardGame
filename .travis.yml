@@ -5,8 +5,9 @@ jdk:
   - oraclejdk9
   - openjdk7
 
-script: 
-  - ant test
+matrix:
+  - JOB="./gradlew build"
 
+script: "$JOB"
   
   
