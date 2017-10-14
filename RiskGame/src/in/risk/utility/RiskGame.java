@@ -216,6 +216,12 @@ public class RiskGame {
 		
 		
 	}
+	public void editContinetn(String continentName, int action){
+		//int indexOfContinent = con.indexOf(continentName);
+		//con.remove(indexOfContinent);
+		System.out.println(con);
+		
+	}
 	
 
 

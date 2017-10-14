@@ -17,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
 public class RiskInterface extends Application {
 
 	
