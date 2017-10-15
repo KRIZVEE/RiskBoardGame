@@ -1,0 +1,1 @@
+This project is about creating game named Risk where multiple players can play game.
