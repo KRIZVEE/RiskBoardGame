@@ -7,7 +7,7 @@ public class Continent {
 	//private Vector<String> territories;
 	Territory t;
 	
-	 Continent(String name,int v) {
+	 public Continent(String name,int v) {
 		this.name = name;
 		value = v;
 	}

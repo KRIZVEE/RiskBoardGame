@@ -34,8 +34,8 @@ public class RiskGame {
 	public Vector<Card> deck = new Vector<Card>();
 	public Vector<Continent> continents = new Vector<Continent>();
 	
-	public ArrayList<String> con = new ArrayList<String>();
-	public ArrayList<String> terr = new ArrayList<String>();
+	public ArrayList<String> continentList = new ArrayList<String>();
+	public ArrayList<String> countryList = new ArrayList<String>();
 
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
@@ -176,12 +176,12 @@ public class RiskGame {
 				do{
 					name = next.replace("_", " ");
 					value = Integer.parseInt(scanner.next());
-					con.add(name);
+					continentList.add(name);
 					continents.add(new Continent(name, value));
 					next = scanner.next();
 					if(next.equals(";;")) done = true;	
 			}while(done == false);
-				System.out.println(con);
+				System.out.println(continentList);
 			}
 			
 			if(next.equals("[Territories]")){
@@ -191,7 +191,7 @@ public class RiskGame {
 					name = next.replace("_", " ");
 					x = Integer.parseInt(scanner.next());
 					y = Integer.parseInt(scanner.next());
-					terr.add(name);
+					countryList.add(name);
 					continent =scanner.next().replace("_", " ");
 					adjacents = new Vector<String>();
 					next = scanner.next();
@@ -212,8 +212,5 @@ public class RiskGame {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-	}
-	public void editContinent(String continentName, int action){
-		System.out.println(con);
 	}
 }

@@ -1,7 +1,5 @@
 package in.risk.gui;
 
-import java.util.Observable;
-
 import in.risk.utility.RiskGame;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -16,7 +14,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class game_Phase extends Application {
+public class GamePhaseInterface extends Application {
 
 	@Override
 	public void start(Stage primaryStage)
@@ -44,16 +42,16 @@ public class game_Phase extends Application {
 		Button fortify = new Button("Fortify");
 		
 		//Setting up combo box
-		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(riskobj1.con);
-		ComboBox countryp1 = new ComboBox(countryplayer1);
+		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(riskobj1.continentList);
+		ComboBox<String> countryp1 = new ComboBox(countryplayer1);
 		countryp1.setVisible(true);
 		
-		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(riskobj1.con);
-		ComboBox countryp2 = new ComboBox(countryplayer2);
+		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(riskobj1.continentList);
+		ComboBox<String> countryp2 = new ComboBox(countryplayer2);
 		countryp2.setVisible(true);
 		
-		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(riskobj1.con);
-		ComboBox countryp3 = new ComboBox(countryplayer3);
+		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(riskobj1.continentList);
+		ComboBox<String> countryp3 = new ComboBox(countryplayer3);
 		countryp3.setVisible(true);
 		
 		//setting up gridpanes

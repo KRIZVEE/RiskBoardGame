@@ -1,11 +1,13 @@
-package in.risk.utility;
+package in.risk.test;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-public class testTerritory {
+import in.risk.utility.Territory;
+
+public class TestTerritory {
 	Territory territory;
 	String nameTerritory;
 
