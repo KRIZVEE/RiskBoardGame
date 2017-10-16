@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
 
+import in.risk.*;
+
 public class RiskGame {
 	
 	//Game states
@@ -48,11 +50,12 @@ public class RiskGame {
 	public RiskGame(){
 		
 		game_state = NEW_GAME;
+		initalPlayer();
 		loadMap();
 		
 	}
 	
-	static public boolean addPlayer(String nm){
+	public static boolean addPlayer(String nm){
 		int size = players.size();
 		if(size>6){
 			return false;
@@ -62,23 +65,16 @@ public class RiskGame {
 		return true;
 	}
 	
+	public void initalPlayer(){
+        currentPlayer = players.elementAt(0);
+    }
+	 
 	public void initialPlayer(){
-	 currentPlayer = players.elementAt(0);
+		currentPlayer = players.elementAt(0);
 	}
 	
-	public void nextPlayer(){
-		if(currentPlayer == players.lastElement()){
-			currentPlayer = players.elementAt(0);
-			iter = 0;
-		}else 
-			currentPlayer = players.elementAt(++iter);
-	}
 	
-	public void removePlayer(Player p){
-		players.remove(p);
-		players.trimToSize();
-		iter--;
-	}
+
 	
 	public void distributeArmies(){
 		int numberOfPlayers = players.size();
@@ -99,56 +95,17 @@ public class RiskGame {
 		}
 	}
 	
+	
 	public void initializeDeck(){
 		for(int i=0;i < territories.size();i++){
 			deck.add(new Card(i%3, i));
 		}
 	}
+		
 	
-	public void drawCard(Player p){
-		Random draw = new Random();
-		int card = draw.nextInt(deck.size());
-		
-		Card c = deck.elementAt(card);
-		deck.remove(deck.elementAt(card));
-		deck.trimToSize();
-		p.setCards(c);
-		
-	}
 	
-	public int collectReinforcements(){
 		
-		int territoryAmount = currentPlayer.getNumberOfTerritories();
-		double bonus;
-		if(territoryAmount < 9)
-			bonus = 9;
-		else
-			bonus = Math.floor(territoryAmount/3);
-		return (int)bonus;
-	}
-	
-	/*public int collectReinforcementsFromContinents(){
-		
-		int continentBonus = 0;
-		int numberOfContinents = continents.size();
-		
-		for(int i =0 ;i <numberOfContinents;i++){
-			boolean captured = continents.elementAt(i).isContinentcaptured(currentPlayer);
-			if(captured)
-				continentBonus += continents.elementAt(i).getValue();
-			System.out.println("Bonus "+continentBonus+" for "+continents.elementAt(i).getName());
-		}
-		return continentBonus;
-	}*/
-	
-	public int turnBonus(){
-		
-		int bonus = 0;
-		bonus += collectReinforcements();
-		//bonus += collectReinforcementsFromContinents();
-		
-		return bonus;
-		}
+
 	public void loadMap(){
 		
 		boolean done = false;
