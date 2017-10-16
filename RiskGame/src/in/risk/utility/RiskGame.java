@@ -26,6 +26,7 @@ public class RiskGame {
 	
 	public static final int GAME_OVER = 99;
 	
+	@SuppressWarnings("unused")
 	static private int game_state;
 	
 	static public Vector<Territory> territories = new Vector<Territory>();
@@ -179,10 +180,8 @@ public class RiskGame {
 					continents.add(new Continent(name, value));
 					next = scanner.next();
 					if(next.equals(";;")) done = true;	
-					
-					
 			}while(done == false);
-				//System.out.println(con);
+				System.out.println(con);
 			}
 			
 			if(next.equals("[Territories]")){
@@ -205,6 +204,7 @@ public class RiskGame {
 					territories.add(new Territory(name, x, y, continent));
 					next = scanner.next();
 					if(next.equals(";;")) done = true;
+					System.out.println("Rana");
 				}while(done == false);
 			}
 		}
@@ -212,17 +212,8 @@ public class RiskGame {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
-		
-		
 	}
-	public void editContinetn(String continentName, int action){
-		//int indexOfContinent = con.indexOf(continentName);
-		//con.remove(indexOfContinent);
+	public void editContinent(String continentName, int action){
 		System.out.println(con);
-		
 	}
-	
-
-
 }

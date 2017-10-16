@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class Territory {
 	
-	private String nameTerritory;
+	public String nameTerritory;
 	private String nameContinent;
 	private int xAxis;
 	private int yAxis;
