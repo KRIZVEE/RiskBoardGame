@@ -38,9 +38,11 @@ public class RiskGame {
 	
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
+	public ArrayList<String> initianCountries = new ArrayList<String>();
 
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
+	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
 	public Player currentPlayer;
 	public Player active;
 	
@@ -95,6 +97,17 @@ public class RiskGame {
 		}
 	}
 	
+	public void initialArmies(){
+		int divider = countryList.size()/players.size();
+		for (int i = 0; i < players.size()-1; i++) {
+			if(i == 0) {
+				for (int j = 0; j <divider ; j++) {
+					initianCountries.add(countryList.get(j));
+				}
+				initialPlayerCountry.put(players.get(i), initianCountries);
+			}
+		}
+	}
 	
 	public void initializeDeck(){
 		for(int i=0;i < territories.size();i++){
