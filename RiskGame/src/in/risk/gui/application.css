@@ -1,4 +1,10 @@
 
 .vbox{
-	-fx-spacing : 20;
+	-fx-spacing : 10;
+	-fx-padding : 10;
+}
+
+.hbox{
+	-fx-spacing : 10;
+	-fx-padding : 10;
 }
