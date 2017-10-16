@@ -3,7 +3,7 @@ package in.risk.utility;
 public class Continent {
 
 	private String name;
-	private int value;
+	public int value;
 	//private Vector<String> territories;
 	Territory t;
 	
