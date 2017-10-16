@@ -1,7 +1,6 @@
 package in.risk.gui;
 
 import in.risk.utility.RiskGame;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -14,12 +13,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class GamePhaseInterface extends Application {
+public class GamePhaseInterface {
 
-	@Override
-	public void start(Stage primaryStage)
+	
+	public void gamePhaseInteface()
 	{
 		
+		Stage primaryStage = new Stage();
 		RiskGame riskobj1 = new RiskGame();
 		
 		//Setting text labels for players
@@ -90,8 +90,5 @@ public class GamePhaseInterface extends Application {
 		
 
 	}
-	public static void main(String[] args) {
-		launch(args);	
 	
-}
 }
