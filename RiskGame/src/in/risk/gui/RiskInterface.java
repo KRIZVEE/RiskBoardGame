@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 
 public class RiskInterface extends Application {
     
-    public static String css = "file:///E:/workSpace/RiskGame/src/in/risk/gui/application.css";
-    public static String logoPath = "file:///E:/workSpace/RiskGame/resources/Risk_logo.png";
+    public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
+    public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
 	
 	MapEditorInterface objMapEditorInterface = new MapEditorInterface();
 

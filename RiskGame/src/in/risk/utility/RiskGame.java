@@ -107,7 +107,6 @@ public class RiskGame {
 	
 	public void drawCard(Player p){
 		Random draw = new Random();
-		System.out.println(deck.size());
 		int card = draw.nextInt(deck.size());
 		
 		Card c = deck.elementAt(card);
@@ -146,7 +145,6 @@ public class RiskGame {
 		
 		int bonus = 0;
 		bonus += collectReinforcements();
-		System.out.println("Bonus"+ bonus);
 		//bonus += collectReinforcementsFromContinents();
 		
 		return bonus;
@@ -181,7 +179,6 @@ public class RiskGame {
 					next = scanner.next();
 					if(next.equals(";;")) done = true;	
 			}while(done == false);
-				System.out.println(continentList);
 			}
 			
 			if(next.equals("[Territories]")){
@@ -200,11 +197,9 @@ public class RiskGame {
 						adj.put(name, adjacents);
 						next = scanner.next();
 					}
-					//System.out.println(adjacents);
 					territories.add(new Territory(name, x, y, continent));
 					next = scanner.next();
 					if(next.equals(";;")) done = true;
-					System.out.println("Rana");
 				}while(done == false);
 			}
 		}
