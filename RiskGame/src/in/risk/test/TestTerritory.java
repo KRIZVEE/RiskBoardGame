@@ -14,7 +14,7 @@ public class TestTerritory {
 	@Before
 	public void Before() {
 		nameTerritory = "India";
-		territory = new Territory(nameTerritory, 10, 20, "Asia");
+		territory = new Territory(nameTerritory);
 	}
 
 	@Test

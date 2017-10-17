@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
+import org.hamcrest.core.CombinableMatcher.CombinableBothMatcher;
+
+import in.risk.utility.*;
+
 public class RiskGame {
 	
 	//paths
@@ -42,19 +46,29 @@ public class RiskGame {
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
 
+<<<<<<< HEAD
 	public HashMap<String, ArrayList<String>> continentsMap;
 	
+=======
+	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
+>>>>>>> 1298676d3ed1b6bc00dde1aec30f7bf305cacb02
 	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
 
-	public ArrayList<String> initianCountries = new ArrayList<String>();
-
+	public ArrayList<String> initialCountries = new ArrayList<String>();
+	
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
+<<<<<<< HEAD
 	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
 	
 
+=======
+	public HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
+	
+>>>>>>> 1298676d3ed1b6bc00dde1aec30f7bf305cacb02
 	public Player currentPlayer;
 	public Player active;
+	Territory t;
 	
 	public int iter = 0;
 	public boolean drawn;
@@ -63,8 +77,14 @@ public class RiskGame {
 		
 		game_state = NEW_GAME;
 		addPlayer("Preet");
-		initalPlayer();
+		addPlayer("Mohit");
+		addPlayer("Ishan");
+		
 		loadMap();
+		initialPlayer();
+		initialPlayerCountries();
+		distributeArmies();
+		placeArmies();
 		
 	}
 	
@@ -77,17 +97,10 @@ public class RiskGame {
 		players.add(p);
 		return true;
 	}
-	
-	public void initalPlayer(){
-        currentPlayer = players.elementAt(0);
-    }
 	 
 	public void initialPlayer(){
 		currentPlayer = players.elementAt(0);
 	}
-	
-	
-
 	
 	public void distributeArmies(){
 		int numberOfPlayers = players.size();
@@ -105,30 +118,75 @@ public class RiskGame {
 			armies = 20;
 		for(int i = 0;i <numberOfPlayers;i++){
 			players.elementAt(i).addArmies(armies);
+			//System.out.println(players.elementAt(i).getName() + "+" + players.elementAt(i).getArmies());
 		}
 	}
 	
-	public void initialArmies(){
-		int divider = countryList.size()/players.size();
-		for (int i = 0; i < players.size()-1; i++) {
-			if(i == 0) {
-				for (int j = 0; j <divider ; j++) {
-					initianCountries.add(countryList.get(j));
-				}
-				initialPlayerCountry.put(players.get(i), initianCountries);
+	public void nextPlayer(){
+        if (currentPlayer == players.lastElement()){
+            currentPlayer = players.elementAt(0);
+             iter = 0;
+        }
+        else
+            currentPlayer = players.elementAt(++iter);
+    }
+	
+	public void initialPlayerCountries(){
+		int i = 0;
+		int j = countryList.size()-1;
+		while (j >= 0 ) {
+			initialCountries.add(countryList.get(j));
+			players.get(i);
+
+			ArrayList<String> list;
+			if(initialPlayerCountry.containsKey(players.get(i).getName())) {
+				list = initialPlayerCountry.get(players.get(i).getName());
+				list.add(countryList.get(j));
+			}
+			else {
+				list = new ArrayList<String>();
+				list.add(countryList.get(j));
+				initialPlayerCountry.put(players.get(i).getName(), list);
+			}
+			i++; j--;
+			if(i == 3) {
+				i = 0;
 			}
 		}
+//		System.out.println("Ishna = " + initialPlayerCountry.get("Ishan") + "\n");
+//		System.out.println("Preet = " +initialPlayerCountry.get("Preet") + "\n");
+//		System.out.println("Mohit = " +initialPlayerCountry.get("Mohit"));
+//		System.out.println(initialPlayerCountry.get("Ishan").size());
+//		System.out.println(initialPlayerCountry.get("Preet").size());
+//		System.out.println(initialPlayerCountry.get("Mohit").size());
+//		System.out.println(initialPlayerCountry + "\n");
 	}
 	
+	public void placeArmies() {
+		if(currentPlayer.getNumberOfArmies() > 0) {
+			for (int i = 0; i < countryList.size(); i++) {
+				if(initialPlayerCountry.get(currentPlayer.getName()).contains(countryList.get(i))) {
+					 t = new Territory(countryList.get(i));
+					t.setPlayer(currentPlayer);
+					t.addArmy();
+					currentPlayer.looseArmy();
+					//System.out.println(t.getNameTerritory() + " " + t.getArmies());
+				}else {
+					nextPlayer();
+					i--;
+				}
+			}
+//			System.out.println(players.elementAt(0).getName() + "+" + players.elementAt(0).getArmies());
+//			System.out.println(players.elementAt(1).getName() + "+" + players.elementAt(1).getArmies());
+//			System.out.println(players.elementAt(2).getName() + "+" + players.elementAt(2).getArmies());
+			System.out.println(t.getNameTerritory()+ " " + t.getArmies());
+		}
+	}
 	public void initializeDeck(){
 		for(int i=0;i < territories.size();i++){
 			deck.add(new Card(i%3, i));
 		}
 	}
-		
-	
-	
-		
 
 	public void loadMap(){
 		
@@ -178,7 +236,7 @@ public class RiskGame {
 						adjacentsMap.put(name, adjacents);
 						next = scanner.next();
 					}
-					territories.add(new Territory(name, x, y, continent));
+//					territories.add(new Territory(name, x, y, continent));
 					next = scanner.next();
 					if(next.equals(";;")) done = true;
 				}while(done == false);
