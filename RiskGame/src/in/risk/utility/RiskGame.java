@@ -4,11 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
-
-import in.risk.*;
 
 public class RiskGame {
 	
@@ -38,18 +35,18 @@ public class RiskGame {
 	
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
-<<<<<<< HEAD
+
 	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
 
-	public Vector<String> adjacents;
+	
 	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
-=======
+
 	public ArrayList<String> initianCountries = new ArrayList<String>();
 
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
 	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
->>>>>>> dd9f85cf45d8cc1aae1586481a281e554b2efe98
+
 	public Player currentPlayer;
 	public Player active;
 	
@@ -59,6 +56,7 @@ public class RiskGame {
 	public RiskGame(){
 		
 		game_state = NEW_GAME;
+		addPlayer("Preet");
 		initalPlayer();
 		loadMap();
 		
