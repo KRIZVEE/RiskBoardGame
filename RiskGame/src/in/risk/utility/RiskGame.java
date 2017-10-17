@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Vector;
 
-import org.hamcrest.core.CombinableMatcher.CombinableBothMatcher;
-
-import in.risk.utility.*;
-
 public class RiskGame {
 	
 	//paths
@@ -46,26 +42,18 @@ public class RiskGame {
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
 
-<<<<<<< HEAD
 	public HashMap<String, ArrayList<String>> continentsMap;
 	
-=======
-	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
->>>>>>> 1298676d3ed1b6bc00dde1aec30f7bf305cacb02
+
 	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
 
 	public ArrayList<String> initialCountries = new ArrayList<String>();
 	
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
-<<<<<<< HEAD
-	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
-	
 
-=======
 	public HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
 	
->>>>>>> 1298676d3ed1b6bc00dde1aec30f7bf305cacb02
 	public Player currentPlayer;
 	public Player active;
 	Territory t;
@@ -179,7 +167,6 @@ public class RiskGame {
 //			System.out.println(players.elementAt(0).getName() + "+" + players.elementAt(0).getArmies());
 //			System.out.println(players.elementAt(1).getName() + "+" + players.elementAt(1).getArmies());
 //			System.out.println(players.elementAt(2).getName() + "+" + players.elementAt(2).getArmies());
-			System.out.println(t.getNameTerritory()+ " " + t.getArmies());
 		}
 	}
 	public void initializeDeck(){
