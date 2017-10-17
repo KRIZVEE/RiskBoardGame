@@ -8,6 +8,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
 
+import in.risk.*;
+
 public class RiskGame {
 	
 	//Game states
@@ -36,10 +38,18 @@ public class RiskGame {
 	
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
+<<<<<<< HEAD
 	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
 
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
+=======
+	public ArrayList<String> initianCountries = new ArrayList<String>();
+
+	public Vector<String> adjacents;
+	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
+	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
+>>>>>>> dd9f85cf45d8cc1aae1586481a281e554b2efe98
 	public Player currentPlayer;
 	public Player active;
 	
@@ -49,11 +59,12 @@ public class RiskGame {
 	public RiskGame(){
 		
 		game_state = NEW_GAME;
+		initalPlayer();
 		loadMap();
 		
 	}
 	
-	static public boolean addPlayer(String nm){
+	public static boolean addPlayer(String nm){
 		int size = players.size();
 		if(size>6){
 			return false;
@@ -63,23 +74,16 @@ public class RiskGame {
 		return true;
 	}
 	
+	public void initalPlayer(){
+        currentPlayer = players.elementAt(0);
+    }
+	 
 	public void initialPlayer(){
-	 currentPlayer = players.elementAt(0);
+		currentPlayer = players.elementAt(0);
 	}
 	
-	public void nextPlayer(){
-		if(currentPlayer == players.lastElement()){
-			currentPlayer = players.elementAt(0);
-			iter = 0;
-		}else 
-			currentPlayer = players.elementAt(++iter);
-	}
 	
-	public void removePlayer(Player p){
-		players.remove(p);
-		players.trimToSize();
-		iter--;
-	}
+
 	
 	public void distributeArmies(){
 		int numberOfPlayers = players.size();
@@ -100,56 +104,28 @@ public class RiskGame {
 		}
 	}
 	
+	public void initialArmies(){
+		int divider = countryList.size()/players.size();
+		for (int i = 0; i < players.size()-1; i++) {
+			if(i == 0) {
+				for (int j = 0; j <divider ; j++) {
+					initianCountries.add(countryList.get(j));
+				}
+				initialPlayerCountry.put(players.get(i), initianCountries);
+			}
+		}
+	}
+	
 	public void initializeDeck(){
 		for(int i=0;i < territories.size();i++){
 			deck.add(new Card(i%3, i));
 		}
 	}
+		
 	
-	public void drawCard(Player p){
-		Random draw = new Random();
-		int card = draw.nextInt(deck.size());
-		
-		Card c = deck.elementAt(card);
-		deck.remove(deck.elementAt(card));
-		deck.trimToSize();
-		p.setCards(c);
-		
-	}
 	
-	public int collectReinforcements(){
 		
-		int territoryAmount = currentPlayer.getNumberOfTerritories();
-		double bonus;
-		if(territoryAmount < 9)
-			bonus = 9;
-		else
-			bonus = Math.floor(territoryAmount/3);
-		return (int)bonus;
-	}
-	
-	/*public int collectReinforcementsFromContinents(){
-		
-		int continentBonus = 0;
-		int numberOfContinents = continents.size();
-		
-		for(int i =0 ;i <numberOfContinents;i++){
-			boolean captured = continents.elementAt(i).isContinentcaptured(currentPlayer);
-			if(captured)
-				continentBonus += continents.elementAt(i).getValue();
-			System.out.println("Bonus "+continentBonus+" for "+continents.elementAt(i).getName());
-		}
-		return continentBonus;
-	}*/
-	
-	public int turnBonus(){
-		
-		int bonus = 0;
-		bonus += collectReinforcements();
-		//bonus += collectReinforcementsFromContinents();
-		
-		return bonus;
-		}
+
 	public void loadMap(){
 		
 		boolean done = false;
