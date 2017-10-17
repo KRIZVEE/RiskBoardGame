@@ -14,13 +14,13 @@ public class Territory {
 	
 	
 	
-	public Territory(String t_nm,int x,int y, String c_nm) {
+	public Territory(String t_nm) {
 		
 		
 		nameTerritory = t_nm;
-		nameContinent = c_nm;
-		xAxis = x;
-		yAxis = y;
+//		nameContinent = c_nm;
+//		xAxis = x;
+//		yAxis = y;
 		adjacents = new Vector<String>();
 		armies = 0;
 		player = new Player(null, -1);
