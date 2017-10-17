@@ -30,6 +30,10 @@ public class MapEditorInterface {
 	
 	public static HashMap<String, String> pairedContinentsCountries = new HashMap<String,String>();
 	
+	public static Stage mapEditorStage = new Stage();
+	public static Stage continentEditorStage = new Stage();
+	public static Stage countryEditorStage = new Stage();
+	
 	Button editContinents;
 	Button editCountries;
 	Button back;
@@ -37,9 +41,9 @@ public class MapEditorInterface {
 	
 	public  void mapEditorInterface(){
 		
-		Stage mapEditorStage = new Stage();
 		
-		Image logo = new Image(RiskInterface.logoPath);
+		
+		Image logo = new Image(RiskGame.logoPath);
 		ImageView imgview  = new ImageView(logo);
 		
 		editContinents = new Button("Edit Continents");
@@ -84,7 +88,7 @@ public class MapEditorInterface {
 		Group mapEdiorRoot = new Group();
 		mapEdiorRoot.getChildren().addAll(vbox);
 		Scene mapEditorScene = new Scene(mapEdiorRoot,500,400);
-		mapEditorScene.getStylesheets().add(RiskInterface.css);
+		mapEditorScene.getStylesheets().add(RiskGame.css);
 		mapEditorStage.setTitle("Risk Game: Map Editor");
 		mapEditorStage.setScene(mapEditorScene);
 		mapEditorStage.centerOnScreen();
@@ -94,10 +98,8 @@ public class MapEditorInterface {
 	}
 	
 	public static void editContinentsInterface(){
-				
-		Stage continentEditorStage = new Stage();
 		
-		Image logo = new Image(RiskInterface.logoPath);
+		Image logo = new Image(RiskGame.logoPath);
 		ImageView imageView = new ImageView(logo);	
 		
 		Label lblAdd = new Label("Add a new continent: ");
@@ -110,7 +112,7 @@ public class MapEditorInterface {
 		
 		ObservableList<String> continentsList = FXCollections.observableArrayList(objRiskGame.continentList);
 		ComboBox<String> conListBox = new ComboBox<>(continentsList);
-		conListBox.setPromptText("select Continent");
+		conListBox.setPromptText("Select Continent");
 		
 		HBox hbox1 = new HBox();
 		hbox1.getStyleClass().add("hbox");
@@ -159,7 +161,7 @@ public class MapEditorInterface {
 		});
 		
 		Scene conEditorScene = new Scene(continentEditorRoot,500,400);
-		conEditorScene.getStylesheets().add(RiskInterface.css);
+		conEditorScene.getStylesheets().add(RiskGame.css);
 		continentEditorStage.setTitle("Risk Game: Edit Continents");
 		continentEditorStage.setScene(conEditorScene);
 		continentEditorStage.centerOnScreen();
@@ -169,9 +171,7 @@ public class MapEditorInterface {
 	
 	public static void editCountriesInterface(){
 		
-		Stage countryEditorStage = new Stage();
-		
-		Image logo = new Image(RiskInterface.logoPath);
+		Image logo = new Image(RiskGame.logoPath);
 		ImageView imgview = new ImageView(logo);
 		ObservableList<String> continentList;
 		
@@ -249,7 +249,7 @@ public class MapEditorInterface {
 		Group countryEditorRoot = new Group();
 		countryEditorRoot.getChildren().addAll(vbox);
 		Scene countryEditorscene = new Scene(countryEditorRoot,500,400);
-		countryEditorscene.getStylesheets().add(RiskInterface.css);
+		countryEditorscene.getStylesheets().add(RiskGame.css);
 		countryEditorStage.setTitle("Risk Game: Edit Countries");
 		countryEditorStage.setScene(countryEditorscene);
 		countryEditorStage.centerOnScreen();

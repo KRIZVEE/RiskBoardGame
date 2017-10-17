@@ -9,6 +9,12 @@ import java.util.Vector;
 
 public class RiskGame {
 	
+	//paths
+	
+	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
+    public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
+    public static String mapPath = "resources/world.map";
+	
 	//Game states
 	
 	public static final int NEW_GAME = 0;
@@ -36,8 +42,7 @@ public class RiskGame {
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
 
-	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
-
+	public HashMap<String, ArrayList<String>> continentsMap;
 	
 	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
 
@@ -46,6 +51,7 @@ public class RiskGame {
 	public Vector<String> adjacents;
 	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
 	public HashMap<Player, ArrayList<String>> initialPlayerCountry = new HashMap<Player, ArrayList<String>>();
+	
 
 	public Player currentPlayer;
 	public Player active;
@@ -135,7 +141,7 @@ public class RiskGame {
 		int y;		
 		
 		try{
-		File file = new File("resources/world.map");
+		File file = new File(mapPath);
 		Scanner scanner = new Scanner(file);
 		
 		while(scanner.hasNextLine()){
@@ -178,6 +184,7 @@ public class RiskGame {
 				}while(done == false);
 			}
 		}
+		continentsMap = new HashMap<String,ArrayList<String>>(ContinentsCountriesMap.includingMap(mapPath));
 		scanner.close();
 		}catch(Exception e){
 			e.printStackTrace();

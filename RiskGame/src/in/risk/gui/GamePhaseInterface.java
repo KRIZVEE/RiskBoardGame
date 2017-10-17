@@ -21,7 +21,7 @@ public class GamePhaseInterface {
 	public void gamePhaseInteface()
 	{
 		
-		Image logo = new Image(RiskInterface.logoPath);
+		Image logo = new Image(RiskGame.logoPath);
 		ImageView imageView = new ImageView(logo);
 		
 		Stage gamePhaseStage = new Stage();
