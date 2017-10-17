@@ -5,6 +5,7 @@ import java.util.Vector;
 public class Player {
 	
 	private String name;
+	private int index;
 	private int armies;
 	private Vector<Territory> occupiedTerritories;
 	private Vector<Card> cards;
@@ -33,11 +34,19 @@ public class Player {
 	public void setArmies(int armies) {
 		this.armies = armies;
 	}
-
+	
+	public int getPlayerIndex(){
+		return index;
+	}
+	
 	public Vector<Territory> getOccupiedTerritories() {
 		return occupiedTerritories;
 	}
 
+	public int getNumberOfArmies(){
+		return armies;
+	}
+	
 	public void setOccupiedTerritories(Vector<Territory> occupiedTerritories) {
 		this.occupiedTerritories = occupiedTerritories;
 	}
