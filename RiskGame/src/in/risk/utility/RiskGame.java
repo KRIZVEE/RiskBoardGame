@@ -36,9 +36,10 @@ public class RiskGame {
 	
 	public ArrayList<String> continentList = new ArrayList<String>();
 	public ArrayList<String> countryList = new ArrayList<String>();
+	public HashMap<String, List<String>> continentsMap = new HashMap<String,List<String>>();
 
 	public Vector<String> adjacents;
-	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
+	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
 	public Player currentPlayer;
 	public Player active;
 	
@@ -157,8 +158,7 @@ public class RiskGame {
 		int value;
 		String continent;
 		int x;
-		int y;
-		
+		int y;		
 		
 		try{
 		File file = new File("resources/world.map");
@@ -172,8 +172,9 @@ public class RiskGame {
 				next = scanner.next();
 			
 				do{
-					name = next.replace("_", " ");
-					value = Integer.parseInt(scanner.next());
+					String c[] = next.split("=");
+					name = c[0].replace("_", " ");
+					value = Integer.parseInt(c[1]);
 					continentList.add(name);
 					continents.add(new Continent(name, value));
 					next = scanner.next();
@@ -194,7 +195,7 @@ public class RiskGame {
 					next = scanner.next();
 					while(!next.equals(";")){
 						adjacents.add(next);
-						adj.put(name, adjacents);
+						adjacentsMap.put(name, adjacents);
 						next = scanner.next();
 					}
 					territories.add(new Territory(name, x, y, continent));

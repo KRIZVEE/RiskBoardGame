@@ -5,11 +5,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,8 +21,11 @@ public class GamePhaseInterface {
 	public void gamePhaseInteface()
 	{
 		
-		Stage primaryStage = new Stage();
-		RiskGame riskobj1 = new RiskGame();
+		Image logo = new Image(RiskInterface.logoPath);
+		ImageView imageView = new ImageView(logo);
+		
+		Stage gamePhaseStage = new Stage();
+		RiskGame objRiskGame = new RiskGame();
 		
 		//Setting text labels for players
 		Text player1 = new Text("Player 1");
@@ -42,16 +47,16 @@ public class GamePhaseInterface {
 		Button fortify = new Button("Fortify");
 		
 		//Setting up combo box
-		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(riskobj1.continentList);
-		ComboBox<String> countryp1 = new ComboBox(countryplayer1);
+		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ComboBox<String> countryp1 = new ComboBox<String>(countryplayer1);
 		countryp1.setVisible(true);
 		
-		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(riskobj1.continentList);
-		ComboBox<String> countryp2 = new ComboBox(countryplayer2);
+		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ComboBox<String> countryp2 = new ComboBox<String>(countryplayer2);
 		countryp2.setVisible(true);
 		
-		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(riskobj1.continentList);
-		ComboBox<String> countryp3 = new ComboBox(countryplayer3);
+		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ComboBox<String> countryp3 = new ComboBox<String>(countryplayer3);
 		countryp3.setVisible(true);
 		
 		//setting up gridpanes
@@ -77,16 +82,22 @@ public class GamePhaseInterface {
 		pane1.add(attack, 0, 11);
 		pane1.add(fortify, 0, 12);
 		
+		
+		VBox  vBox = new VBox();
+		vBox.getStyleClass().add("vbox");
+		vBox.getChildren().addAll(imageView,pane1);
+		
 		//creating group
-		Group root = new Group();
-		ObservableList<Node> list = root.getChildren();
-		list.add(pane1);
+		Group root = new Group();		
+		root.getChildren().add(vBox);
 		
 		//Creating a scene
-		Scene scene1 = new Scene(root,600,600);
-		primaryStage.setTitle("Risk Game Phases");
-		primaryStage.setScene(scene1);
-		primaryStage.show();
+		Scene gamePhaseScene = new Scene(root,600,600);
+		gamePhaseStage.setTitle("Risk Game Phases");
+		gamePhaseStage.setScene(gamePhaseScene);
+		gamePhaseStage.centerOnScreen();
+		gamePhaseStage.setOnHidden(e -> System.exit(1));
+		gamePhaseStage.show();
 		
 
 	}

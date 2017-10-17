@@ -19,6 +19,7 @@ public class RiskInterface extends Application {
     public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
 	
 	MapEditorInterface objMapEditorInterface = new MapEditorInterface();
+	GamePhaseInterface objGamePhaseInterface = new GamePhaseInterface();
 
 	Button mapEditor ;
 	Button addPlayer ;
@@ -55,8 +56,17 @@ public class RiskInterface extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.centerOnScreen();
+		primaryStage.setOnHidden(e -> System.exit(1));
 		primaryStage.show();
 		
+		startGame.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				objGamePhaseInterface.gamePhaseInteface();
+				
+			}
+		});
 		
 		mapEditor.setOnAction(new EventHandler<ActionEvent>() {			
 			@Override
@@ -66,6 +76,8 @@ public class RiskInterface extends Application {
 			}
 		});
 	}
+	
+	
 	
 	
 	public static void main(String[] args) {

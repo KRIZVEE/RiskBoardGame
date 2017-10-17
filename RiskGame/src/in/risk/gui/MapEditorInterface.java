@@ -1,6 +1,7 @@
 package in.risk.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import in.risk.utility.RiskGame;
@@ -26,6 +27,8 @@ public class MapEditorInterface {
 	
 	public static List<String> editedContinents = new ArrayList<String>();
 	public static List<String> editedCountries = new ArrayList<String>();
+	
+	public static HashMap<String, String> pairedContinentsCountries = new HashMap<String,String>();
 	
 	Button editContinents;
 	Button editCountries;
@@ -126,9 +129,8 @@ public class MapEditorInterface {
 			
 			@Override
 			public void handle(ActionEvent event){
-				if(!fieldAdd.getText().isEmpty()){
-					
-					continentsList.add(fieldAdd.getText());
+				if(!fieldAdd.getText().isEmpty()){					
+					continentsList.add(fieldAdd.getText());					
 				}					
 					fieldAdd.clear();
 			}
@@ -206,12 +208,15 @@ public class MapEditorInterface {
 		vbox.getStyleClass().add("vbox");
 		vbox.getChildren().addAll(imgview,hbox1,hbox2,submit);
 		
+		try{
+		
 		add.setOnAction(new EventHandler<ActionEvent>() {
 			
 			@Override
 			public void handle(ActionEvent event) {
-				if(!fieldAdd.getText().isEmpty() && !continentBox.getValue().isEmpty()){
-					countryList.add(fieldAdd.getText());
+				if(!fieldAdd.getText().isEmpty()){
+						countryList.add(fieldAdd.getText());	
+						pairedContinentsCountries.put(continentBox.getValue(),fieldAdd.getText());
 				}
 				fieldAdd.clear();
 			}
@@ -237,6 +242,9 @@ public class MapEditorInterface {
 				
 			}
 		});
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		Group countryEditorRoot = new Group();
 		countryEditorRoot.getChildren().addAll(vbox);

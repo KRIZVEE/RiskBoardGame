@@ -6,13 +6,13 @@ scroll=horizontal
 warn=yes
 
 [Continents]
-North_America 9 
-South_America 3
-Central_America 5
-Africa 6
-Europe 11
-Asia 15
-Australia 5
+North_America=9 
+South_America=3
+Central_America=5
+Africa=6
+Europe=11
+Asia=15
+Australia=5
 ;;
 
 [Territories]
@@ -78,12 +78,3 @@ Western_Australia 725 412 Australia Indonesia New_Guinea Eastern_Australia ;
 Eastern_Australia 771 420 Australia Western_Australia New_Guinea New_Zealand ;
 New_Zealand 852 462 Australia Eastern_Australia Argentina ;
 ;;
-
-
-
-
-
-
-
-
-
