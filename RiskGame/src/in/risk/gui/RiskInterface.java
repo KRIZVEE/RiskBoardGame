@@ -79,9 +79,8 @@ public class RiskInterface extends Application {
 	}	
 	
 	public static void main(String[] args) {
-		RiskGame objRiskGame = new RiskGame();
-		objRiskGame.loadMap();
-		launch(args);	
+		RiskGame objRiskGame =  new RiskGame();
+		launch(args);
 		
 	}
 }

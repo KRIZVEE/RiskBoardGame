@@ -7,18 +7,22 @@ import java.util.Scanner;
 
 public class ContinentsCountriesMap {
 	
+	public static ArrayList<Integer> valueList = new ArrayList<Integer>();
+	public static ArrayList<String> continentNameList = new ArrayList<String>();
+	public static ArrayList<String> countryNamelist = new ArrayList<String>();
+	
+	public static ArrayList<ArrayList<String>> listOfCountries = new ArrayList<ArrayList<String>>();
+	public static HashMap<String, ArrayList<String>> returnMap = new HashMap<String,ArrayList<String>>();
+	
 	public static HashMap<String, ArrayList<String>> includingMap(String path){
 		
 		boolean done = false;
 		String next;
 		int value;
-		ArrayList<Integer> valueList = new ArrayList<Integer>();
-		ArrayList<String> continentNameList = new ArrayList<String>();
-		ArrayList<String> countryNamelist = new ArrayList<String>();
+		
 		String continentName ;
 		String countryName;
-		ArrayList<ArrayList<String>> listOfCountries = new ArrayList<ArrayList<String>>();
-		HashMap<String, ArrayList<String>> returnMap = new HashMap<String,ArrayList<String>>();
+		
 		
 		try{
 			File file = new File(path);

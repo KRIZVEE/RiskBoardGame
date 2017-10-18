@@ -23,7 +23,6 @@ import javafx.stage.Stage;
 
 public class MapEditorInterface {
 	
-	static RiskGame objRiskGame = new RiskGame();
 	
 	public static List<String> editedContinents = new ArrayList<String>();
 	public static List<String> editedCountries = new ArrayList<String>();
@@ -110,7 +109,7 @@ public class MapEditorInterface {
 		Button del = new Button("Delete");
 		Button submit = new Button("Submit");
 		
-		ObservableList<String> continentsList = FXCollections.observableArrayList(objRiskGame.continentList);
+		ObservableList<String> continentsList = FXCollections.observableArrayList(RiskGame.continentList);
 		ComboBox<String> conListBox = new ComboBox<>(continentsList);
 		conListBox.setPromptText("Select Continent");
 		
@@ -178,12 +177,12 @@ public class MapEditorInterface {
 		if(!editedContinents.isEmpty()){
 			continentList = FXCollections.observableArrayList(editedContinents);
 		}else
-			continentList = FXCollections.observableArrayList(objRiskGame.continentList);
+			continentList = FXCollections.observableArrayList(RiskGame.continentList);
 		
 		ComboBox<String> continentBox =new ComboBox<String>(continentList);
 		continentBox.setPromptText("Select Continent");
 		
-		ObservableList<String> countryList = FXCollections.observableArrayList(objRiskGame.countryList);
+		ObservableList<String> countryList = FXCollections.observableArrayList(RiskGame.countryList);
 		ComboBox<String> countryBox = new ComboBox<String>(countryList);
 		countryBox.setPromptText("Select Country");
 		

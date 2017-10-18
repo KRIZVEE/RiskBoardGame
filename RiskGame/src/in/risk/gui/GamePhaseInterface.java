@@ -29,7 +29,6 @@ public class GamePhaseInterface {
 		ImageView imageView = new ImageView(logo);
 		
 		Stage gamePhaseStage = new Stage();
-		RiskGame objRiskGame = new RiskGame();
 		
 		//Setting text labels for players
 		Text player1 = new Text("Player 1");
@@ -51,15 +50,15 @@ public class GamePhaseInterface {
 		Button fortify = new Button("Fortify");
 		
 		//Setting up combo box
-		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ObservableList<String> countryplayer1 = FXCollections.observableArrayList(RiskGame.continentList);
 		ComboBox<String> countryp1 = new ComboBox<String>(countryplayer1);
 		countryp1.setVisible(true);
 		
-		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ObservableList<String> countryplayer2 = FXCollections.observableArrayList(RiskGame.continentList);
 		ComboBox<String> countryp2 = new ComboBox<String>(countryplayer2);
 		countryp2.setVisible(true);
 		
-		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(objRiskGame.continentList);
+		ObservableList<String> countryplayer3 = FXCollections.observableArrayList(RiskGame.continentList);
 		ComboBox<String> countryp3 = new ComboBox<String>(countryplayer3);
 		countryp3.setVisible(true);
 		

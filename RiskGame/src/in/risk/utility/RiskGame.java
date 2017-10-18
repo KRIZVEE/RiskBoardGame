@@ -8,6 +8,10 @@ import java.util.Scanner;
 import java.util.Vector;
 
 public class RiskGame {
+	
+	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
+    public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
+    public static String mapPath = "resources/world.map";
 
 	// Game states
 
@@ -31,23 +35,27 @@ public class RiskGame {
 
 	static public Vector<Territory> territories = new Vector<Territory>();
 	static public Vector<Player> players = new Vector<Player>();
-	public Vector<Card> deck = new Vector<Card>();
-	public Vector<Continent> continents = new Vector<Continent>();
+	public static Vector<Card> deck = new Vector<Card>();
+	public static Vector<Continent> continents = new Vector<Continent>();
 
-	public ArrayList<String> continentList = new ArrayList<String>();
-	public ArrayList<String> countryList = new ArrayList<String>();
+	public static ArrayList<String> continentList = new ArrayList<String>();
+	public static ArrayList<String> countryList = new ArrayList<String>();
 	public int nuberOfCardsInDeck = 0;
 
-	public HashMap<String, List<String>> continentsMap = new HashMap<String, List<String>>();
-	public HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
+	public static HashMap<String, ArrayList<String>> continentsMap ;
+	public static HashMap<String, List<String>> adjacentsMap = new HashMap<String, List<String>>();
 
-	public ArrayList<String> initialCountries = new ArrayList<String>();
+	public static ArrayList<String> initialCountries = new ArrayList<String>();
 
-	public Vector<String> adjacents;
-	public HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
-	public HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
-	public HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
-	public HashMap<String, Integer> playersCards = new HashMap<String, Integer>();
+	public static Vector<String> adjacents;
+	public static HashMap<String, List<String>> adj = new HashMap<String, List<String>>();
+	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
+	public static HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> playersCards = new HashMap<String, Integer>();
+	
+	public static ArrayList<Integer> xValues = new ArrayList<Integer>();
+	public static ArrayList<Integer> yValues = new ArrayList<Integer>();
+	public static ArrayList<String> mapDetail= new ArrayList<String>();
 
 	public Player currentPlayer;
 	public Player active;
@@ -56,20 +64,20 @@ public class RiskGame {
 	public int iter = 0;
 	public boolean drawn;
 
-	public static void main(String args[]) {
+	/*public static void main(String args[]) {
 		RiskGame rg = new RiskGame();
-	}
+	}*/
 
 	public RiskGame() {
 		game_state = NEW_GAME;
 		loadMap();
-		selectPlayers();
+		/*selectPlayers();
 		initialPlayer();
 		initialPlayerCountries();
 		distributeArmies();
 		initiallyPlaceArmies();
 		distributeCards();
-		reinforcementPhase();
+		reinforcementPhase();*/
 		// askPlayerToPlaceArmies();
 		// reinforcementPhase();
 		// getArmiesFromCards();
@@ -96,12 +104,22 @@ public class RiskGame {
 		int y;
 
 		try {
-			File file = new File("resources/world.map");
+			File file = new File(mapPath);
 			Scanner scanner = new Scanner(file);
 
 			while (scanner.hasNextLine()) {
 				done = false;
 				next = scanner.nextLine();
+				
+				if (next.equals("[Map]")){
+					next = scanner.nextLine();
+					do{
+						String line = next;
+						mapDetail.add(line);
+						next = scanner.nextLine();
+						if(next.equals(";;")) done =true;
+					}while(done == false);
+				}
 
 				if (next.equals("[Continents]")) {
 					next = scanner.next();
@@ -124,7 +142,9 @@ public class RiskGame {
 					do {
 						name = next.replace("_", " ");
 						x = Integer.parseInt(scanner.next());
+						xValues.add(x);
 						y = Integer.parseInt(scanner.next());
+						yValues.add(y);
 						countryList.add(name);
 						continent = scanner.next().replace("_", " ");
 						adjacents = new Vector<String>();
@@ -143,6 +163,8 @@ public class RiskGame {
 				}
 			}
 			scanner.close();
+			continentsMap = new HashMap<String,ArrayList<String>>(ContinentsCountriesMap.includingMap(mapPath));
+			MapWriter.mapWriter();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

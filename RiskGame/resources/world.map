@@ -4,7 +4,7 @@ image=world.bmp
 wrap=yes
 scroll=horizontal
 warn=yes
-
+;;
 [Continents]
 North_America=9 
 South_America=3
