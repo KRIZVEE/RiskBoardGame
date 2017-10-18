@@ -14,7 +14,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * This class contains interface for showing player details like number of armies owned
+ * @author ishan
+ *
+ */
 public class GamePhaseInterface {
 
 	
