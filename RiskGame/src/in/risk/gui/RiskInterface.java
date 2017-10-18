@@ -15,8 +15,7 @@ import javafx.stage.Stage;
 
 public class RiskInterface extends Application {
     
-    public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
-    public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
+    
 	
 	MapEditorInterface objMapEditorInterface = new MapEditorInterface();
 	GamePhaseInterface objGamePhaseInterface = new GamePhaseInterface();
@@ -25,7 +24,7 @@ public class RiskInterface extends Application {
 	Button addPlayer ;
 	Button startGame ;
 	
-	Image logo  = new Image(logoPath);
+	Image logo  = new Image(RiskGame.logoPath);
 	ImageView imgView = new ImageView();
 	
 	@Override
@@ -50,13 +49,12 @@ public class RiskInterface extends Application {
 		root.getChildren().add(vbox);
 		Scene scene = new Scene(root,600,500);
 		
-		scene.getStylesheets().add(css);
+		scene.getStylesheets().add(RiskGame.css);
 	
 		primaryStage.setTitle("Risk Game");
 		primaryStage.setScene(scene);
 		primaryStage.sizeToScene();
 		primaryStage.centerOnScreen();
-		primaryStage.setOnHidden(e -> System.exit(1));
 		primaryStage.show();
 		
 		startGame.setOnAction(new EventHandler<ActionEvent>() {
@@ -64,7 +62,10 @@ public class RiskInterface extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				objGamePhaseInterface.gamePhaseInteface();
-				
+				primaryStage.close();
+				MapEditorInterface.continentEditorStage.close();
+				MapEditorInterface.countryEditorStage.close();
+				MapEditorInterface.mapEditorStage.close();
 			}
 		});
 		
@@ -75,15 +76,13 @@ public class RiskInterface extends Application {
 				objMapEditorInterface.mapEditorInterface();
 			}
 		});
-	}
-	
-	
-	
+	}	
 	
 	public static void main(String[] args) {
-		launch(args);	
 		RiskGame objRiskGame = new RiskGame();
 		objRiskGame.loadMap();
+		launch(args);	
+		
 	}
 }
 

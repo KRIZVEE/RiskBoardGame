@@ -14,14 +14,18 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * This class contains interface for showing player details like number of armies owned
+ * @author ishan
+ *
+ */
 public class GamePhaseInterface {
 
 	
 	public void gamePhaseInteface()
 	{
 		
-		Image logo = new Image(RiskInterface.logoPath);
+		Image logo = new Image(RiskGame.logoPath);
 		ImageView imageView = new ImageView(logo);
 		
 		Stage gamePhaseStage = new Stage();

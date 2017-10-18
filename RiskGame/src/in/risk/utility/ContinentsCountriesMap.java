@@ -3,21 +3,22 @@ package in.risk.utility;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class ContinentsCountriesMap {
 	
-	public static HashMap<String, List<String>> includingMap(String path){
+	public static HashMap<String, ArrayList<String>> includingMap(String path){
 		
 		boolean done = false;
 		String next;
 		int value;
-		List<Integer> valueList = new ArrayList<Integer>();
-		List<String> continentNameList = new ArrayList<String>();
-		List<String> countryNamelist = new ArrayList<String>();
+		ArrayList<Integer> valueList = new ArrayList<Integer>();
+		ArrayList<String> continentNameList = new ArrayList<String>();
+		ArrayList<String> countryNamelist = new ArrayList<String>();
 		String continentName ;
 		String countryName;
+		ArrayList<ArrayList<String>> listOfCountries = new ArrayList<ArrayList<String>>();
+		HashMap<String, ArrayList<String>> returnMap = new HashMap<String,ArrayList<String>>();
 		
 		try{
 			File file = new File(path);
@@ -45,21 +46,31 @@ public class ContinentsCountriesMap {
 					next = scanner.nextLine();
 					do{
 						String[] line = next.split(" ");
-						countryName = line[0];
+						countryName = line[0].replaceAll("_", " ");
 						countryNamelist.add(countryName);
 						next = scanner.nextLine();
 						if(next.equals(";;")) done = true;
 					}while(done == false);
 				}countryNamelist.removeIf(String::isEmpty);
 			}
-			scanner.close();
+			scanner.close();	
+			ArrayList<String> out;
 			
-			System.out.println(countryNamelist);
+			for(int i=0; i<valueList.size();i++){
+					out = new ArrayList<String>(countryNamelist.subList(0, valueList.get(i)));
+					if(!countryNamelist.isEmpty()){
+						for(int k=0; k < out.size();k++){
+							countryNamelist.remove(0);
+						}	
+					}									
+					listOfCountries.add(out);
+			}	
+			for(int i=0;i< continentNameList.size();i++){
+				returnMap.put(continentNameList.get(i), listOfCountries.get(i));
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
-		}
-		
-		
-		return null;
+		}		
+		return returnMap;
 	}
  }
