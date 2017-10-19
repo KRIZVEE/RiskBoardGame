@@ -70,7 +70,8 @@ public class RiskGame {
 
 	public RiskGame() {
 		game_state = NEW_GAME;
-		loadMap();
+		MapLoader.mapLoader();
+		//MapWriter.mapWriter();
 		/*selectPlayers();
 		initialPlayer();
 		initialPlayerCountries();
@@ -89,85 +90,6 @@ public class RiskGame {
 		// System.out.println(initialPlayerCountry);
 		// fortify();
 		// System.out.println(countriesArmies);
-	}
-
-	public void loadMap() {
-
-		boolean done = false;
-		String next;
-		String name;
-		int value;
-		// @SuppressWarnings("unused")
-		String continent;
-		// @SuppressWarnings("unused")
-		int x;
-		int y;
-
-		try {
-			File file = new File(mapPath);
-			Scanner scanner = new Scanner(file);
-
-			while (scanner.hasNextLine()) {
-				done = false;
-				next = scanner.nextLine();
-				
-				if (next.equals("[Map]")){
-					next = scanner.nextLine();
-					do{
-						String line = next;
-						mapDetail.add(line);
-						next = scanner.nextLine();
-						if(next.equals(";;")) done =true;
-					}while(done == false);
-				}
-
-				if (next.equals("[Continents]")) {
-					next = scanner.next();
-
-					do {
-						String c[] = next.split("=");
-						name = c[0].replace("_", " ");
-						value = Integer.parseInt(c[1]);
-						continentList.add(name);
-						continents.add(new Continent(name, value));
-						next = scanner.next();
-						if (next.equals(";;"))
-							done = true;
-					} while (done == false);
-				}
-
-				if (next.equals("[Territories]")) {
-					next = scanner.next();
-
-					do {
-						name = next.replace("_", " ");
-						x = Integer.parseInt(scanner.next());
-						xValues.add(x);
-						y = Integer.parseInt(scanner.next());
-						yValues.add(y);
-						countryList.add(name);
-						continent = scanner.next().replace("_", " ");
-						adjacents = new Vector<String>();
-						next = scanner.next();
-						while (!next.equals(";")) {
-							adjacents.add(next);
-							adjacentsMap.put(name, adjacents);
-							next = scanner.next();
-						}
-						// territories.add(new Territory(name, x, y,
-						// continent));
-						next = scanner.next();
-						if (next.equals(";;"))
-							done = true;
-					} while (done == false);
-				}
-			}
-			scanner.close();
-			continentsMap = new HashMap<String,ArrayList<String>>(ContinentsCountriesMap.includingMap(mapPath));
-			MapWriter.mapWriter();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void selectPlayers() {
