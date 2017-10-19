@@ -28,6 +28,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This class gives information regarding user interface of map editor
+ * @author Charanpreet Singh
+ *
+ */
 public class MapEditorInterface {
 	
 	
@@ -53,7 +58,10 @@ public class MapEditorInterface {
 	Button editCountries;
 	Button back;
 	Button saveMap;
-	
+
+/**
+ * This method shows layout of main map editor screen
+ */
 	public  void mapEditorInterface(){
 		
 		
@@ -122,6 +130,10 @@ public class MapEditorInterface {
 		
 	}
 	
+/**
+ * This method shows layout for editing details of map editor like adding continents and deleting
+ * continents.
+ */
 	public static void editContinentsInterface(){
 		
 		Image logo = new Image(RiskGame.logoPath);
@@ -261,7 +273,11 @@ public class MapEditorInterface {
 		continentEditorStage.show();		
 		
 	}
-	
+
+	/**
+	 * This method shows layout for editing details of map editor like adding countries and deleting
+	 * countries.
+	 */
 	public static void editCountriesInterface(){
 		
 		Image logo = new Image(RiskGame.logoPath);

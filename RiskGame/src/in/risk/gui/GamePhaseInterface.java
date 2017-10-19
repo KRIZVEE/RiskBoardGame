@@ -21,7 +21,9 @@ import javafx.stage.Stage;
  */
 public class GamePhaseInterface {
 
-	
+/**
+ * This method is regarding building of user interface for details of player and phases of the game	
+ */
 	public void gamePhaseInteface()
 	{
 		
