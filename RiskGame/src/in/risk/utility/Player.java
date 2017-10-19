@@ -1,67 +1,98 @@
 package in.risk.utility;
 
-/**
- * This method gives all the information abotu the player.
- * 
- * @author Charanpreet Singh, Ishan Kansara, Kashif Rizvee, Mohit Rana
- * @version 1.0.0
- */
+import java.util.Vector;
+
 public class Player {
-
+	
 	private String name;
+	private int index;
 	private int armies;
-	private int playerId;
+	private Vector<Territory> occupiedTerritories;
+	private Vector<Card> cards;
+	private int id;
+	
+	 Player(String nm, int i) {
+		 name  =nm;
+		 id = i;
+		 occupiedTerritories = new Vector<Territory>();
+		 cards = new Vector<Card>();
+		 
+	 }
 
-	Player(String nm, int id) {
-		name = nm;
-		playerId = id;
-	}
-
-	/**
-	 * This method returns the name of the player
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * This method returns the number of armies own by the player
-	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getArmies() {
 		return armies;
 	}
 
-	/**
-	 * This method used increase number of armies of user by 1
-	 */
-	public void addArmy() {
-		armies++;
+	public void setArmies(int armies) {
+		this.armies = armies;
+	}
+	
+	public int getPlayerIndex(){
+		return index;
+	}
+	
+	public Vector<Territory> getOccupiedTerritories() {
+		return occupiedTerritories;
 	}
 
-	/**
-	 * This method used decrease number of armies of user by 1
-	 */
-	public void looseArmy() {
-		armies--;
+	public int getNumberOfArmies(){
+		return armies;
+	}
+	
+	public void setOccupiedTerritories(Vector<Territory> occupiedTerritories) {
+		this.occupiedTerritories = occupiedTerritories;
 	}
 
-	/**
-	 * This method used increase number of armies by a
-	 * 
-	 * @param a
-	 *            this is the number of armies to be increase
-	 */
-	public void addArmies(int a) {
-		armies += a;
+	public Vector<Card> getCards() {
+		return cards;
 	}
 
-	/**
-	 * This method used decrease number of armies by b
-	 * 
-	 * @param b
-	 *            this is the number of armies to be decrease
-	 */
-	public void loosArmies(int a) {
-		armies -= a;
+	public void setCards(Card c) {
+		cards.add(c);
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	 public int getNumberOfTerritories(){
+		 return occupiedTerritories.size(); 
+	 }
+	 
+	 public void occupyTerritory(Territory t){
+		 occupiedTerritories.add(t);
+	 }
+	 
+	 public void looseTerritory(Territory t){
+		 occupiedTerritories.remove(t);
+		 occupiedTerritories.trimToSize();
+	 }
+	 
+	 public void addArmy(){
+		 armies++;
+	 }
+	 
+	 public void looseArmy(){
+		 armies--;
+	 }
+	 
+	 public void addArmies(int a){
+		 armies += a;
+	 }
+	 
+	 public void loosArmies(int a){
+		 armies -= a;
+	 }
 }

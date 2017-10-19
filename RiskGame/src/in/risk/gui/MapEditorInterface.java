@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
+import org.hamcrest.core.Is;
+
+import com.sun.org.apache.xalan.internal.xsltc.compiler.sym;
+
 import in.risk.utility.MapLoader;
 import in.risk.utility.MapWriter;
 import in.risk.utility.RiskGame;
@@ -25,115 +29,116 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class includes all the functionality to edit the map file.
- * 
- * @author Charanpreet Singh, Ishan Kansara, Kashif Rizvee, Mohit Rana
- * @version 1.0.0
+ * This class gives information regarding user interface of map editor
+ * @author Charanpreet Singh
+ *
  */
 public class MapEditorInterface {
-
+	
+	
 	public static List<String> editedContinents = new ArrayList<String>();
 	public static List<String> editedCountries = new ArrayList<String>();
-
-	public static HashMap<String, String> pairedContinentsCountries = new HashMap<String, String>();
-
+	
+	public static HashMap<String, String> pairedContinentsCountries = new HashMap<String,String>();
+	
 	public static Stage mapEditorStage = new Stage();
 	public static Stage continentEditorStage = new Stage();
 	public static Stage countryEditorStage = new Stage();
-
+	
 	public static ObservableList<String> countryList = FXCollections.observableArrayList();
-	public static HashMap<String, List<String>> editedContinentCountries = new HashMap<String, List<String>>(
-			MapLoader.continentCountries);
-	public static HashMap<String, List<String>> editedCountryCoordinates = new HashMap<String, List<String>>(
-			MapLoader.countryCoordinates);
-	public static HashMap<String, List<String>> editedAdj = new HashMap<String, List<String>>(MapLoader.adj);
-	public static HashMap<String, String> editedCountryContinents = new HashMap<String, String>(
-			MapLoader.countryContinent);
-	public static ArrayList<String> editedAdjacents = new ArrayList<String>();
-	public static List<List<String>> listOfLists = new ArrayList<List<String>>();
-	public static List<List<String>> listOfListsNew = new ArrayList<List<String>>();
+	public static HashMap<String, List<String>> editedContinentCountries = new HashMap<String,List<String>>(MapLoader.continentCountries);
+	public static HashMap<String, List<String>> editedCountryCoordinates = new HashMap<String,List<String>>(MapLoader.countryCoordinates);
+	public static HashMap<String, List<String>> editedAdj = new HashMap<String,List<String>>(MapLoader.adj);
+	public static HashMap<String, String> editedCountryContinents = new HashMap<String,String>(MapLoader.countryContinent);
+	public static ArrayList<String> editedAdjacents =new ArrayList<String>();
+	public static List<List<String>> listOfLists= new ArrayList<List<String>>();
+	public static List<List<String>> listOfListsNew= new ArrayList<List<String>>();
 	public static List<String> keyList = new ArrayList<String>();
 	Button editContinents;
 	Button editCountries;
 	Button back;
 	Button saveMap;
 
-	/**
-	 * This interface provide a interface for editing the map.
-	 */
-	public void mapEditorInterface() {
-
+/**
+ * This method shows layout of main map editor screen
+ */
+	public  void mapEditorInterface(){
+		
+		
+		
 		Image logo = new Image(RiskGame.logoPath);
-		ImageView imgview = new ImageView(logo);
-
+		ImageView imgview  = new ImageView(logo);
+		
 		editContinents = new Button("Edit Continents");
-
-		editContinents.setOnAction(new EventHandler<ActionEvent>() {
-
+		
+		editContinents.setOnAction(new EventHandler<ActionEvent>(){
+			
 			@Override
-			public void handle(ActionEvent event) {
+			public void handle(ActionEvent event){
 				editContinentsInterface();
 			}
 		});
 		editCountries = new Button("Edit Countries");
-
+		
 		editCountries.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
 				editCountriesInterface();
-
+				
 			}
 		});
-
+		
 		back = new Button("Back");
-
+		
 		back.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
-				mapEditorStage.close();
+				mapEditorStage.close();				
 			}
 		});
-
+		
 		saveMap = new Button("Save Map");
-
+		
 		saveMap.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
-				MapWriter.mapWriter(RiskInterface.pathMap);
-
+				MapWriter.mapWriter();
+				
 			}
 		});
-
+		
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
 		HBox hbox = new HBox();
 		hbox.getStyleClass().add("hbox");
-		hbox.getChildren().addAll(editContinents, editCountries);
-		vbox.getChildren().addAll(imgview, hbox, back, saveMap);
-
+		hbox.getChildren().addAll(editContinents,editCountries);
+		vbox.getChildren().addAll(imgview,hbox,back,saveMap);
+		
+		
 		Group mapEdiorRoot = new Group();
 		mapEdiorRoot.getChildren().addAll(vbox);
-		Scene mapEditorScene = new Scene(mapEdiorRoot, 600, 500);
+		Scene mapEditorScene = new Scene(mapEdiorRoot,600,500);
 		mapEditorScene.getStylesheets().add(RiskGame.css);
 		mapEditorStage.setTitle("Risk Game: Map Editor");
 		mapEditorStage.setScene(mapEditorScene);
 		mapEditorStage.centerOnScreen();
 		mapEditorStage.show();
-
+		
+		
 	}
-
-	/**
-	 * This method provides interface to add new continents.</br>
-	 * This method is used to delete existing continents.
-	 */
-	public static void editContinentsInterface() {
-
+	
+/**
+ * This method shows layout for editing details of map editor like adding continents and deleting
+ * continents.
+ */
+	public static void editContinentsInterface(){
+		
 		Image logo = new Image(RiskGame.logoPath);
-		ImageView imageView = new ImageView(logo);
-
+		ImageView imageView = new ImageView(logo);	
+		
 		Label lblAdd = new Label("Add a new continent: ");
 		TextField fieldAdd = new TextField();
 		TextField fieldAdd1 = new TextField();
@@ -143,35 +148,35 @@ public class MapEditorInterface {
 		Button add = new Button("Add");
 		Button del = new Button("Delete");
 		Button submit = new Button("Submit");
-
+		
 		ObservableList<String> continentsList = FXCollections.observableArrayList(MapLoader.continentFilterNew);
 		ComboBox<String> conListBox = new ComboBox<>(continentsList);
 		conListBox.setPromptText("Select Continent");
-
+		
 		HBox hbox1 = new HBox();
 		hbox1.getStyleClass().add("hbox");
-		hbox1.getChildren().addAll(lblAdd, fieldAdd, fieldAdd1, add);
-
+		hbox1.getChildren().addAll(lblAdd,fieldAdd,fieldAdd1,add);
+		
 		HBox hbox2 = new HBox();
 		hbox2.getStyleClass().add("hbox");
-		hbox2.getChildren().addAll(lblDel, conListBox, del);
+		hbox2.getChildren().addAll(lblDel,conListBox,del);
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
-		vbox.getChildren().addAll(imageView, hbox1, hbox2, submit);
-		Group continentEditorRoot = new Group();
+		vbox.getChildren().addAll(imageView,hbox1,hbox2,submit);
+		Group continentEditorRoot  = new Group();
 		continentEditorRoot.getChildren().addAll(vbox);
-
+		
 		add.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
-			public void handle(ActionEvent event) {
-				if (!fieldAdd.getText().isEmpty()) {
-					continentsList.add(fieldAdd.getText());
-					String name = fieldAdd1.getText();
+			public void handle(ActionEvent event){
+				if(!fieldAdd.getText().isEmpty()){					
+					continentsList.add(fieldAdd.getText());	
+					String name =fieldAdd1.getText();
 					countryList.add(name);
 					MapLoader.countryFilter.add(name);
-					Long x = (long) Math.floor(Math.random() * 150);
-					Long y = (long) Math.floor(Math.random() * 200);
+					Long x = (long)Math.floor(Math.random() * 150);
+					Long y = (long)Math.floor(Math.random() * 200);
 					String x_ = x.toString();
 					String y_ = y.toString();
 					List<String> points = new ArrayList<>();
@@ -181,33 +186,33 @@ public class MapEditorInterface {
 					MapLoader.countryContinent.put(fieldAdd1.getText(), fieldAdd.getText());
 					List<String> newAdj = new ArrayList<String>();
 					newAdj.add(MapLoader.countryFilter.get(25));
-
-					// editedAdj.add(MapLoader.countryFilter.get(24),editedAdj.get(MapLoader.countryFilter.get(24)).add(fieldAdd1.getText()));
+					
+//					editedAdj.add(MapLoader.countryFilter.get(24),editedAdj.get(MapLoader.countryFilter.get(24)).add(fieldAdd1.getText()));
 					MapLoader.adj.put(fieldAdd1.getText(), newAdj);
 					List<String> value = MapLoader.adj.get(name);
 					List<String> value2 = new ArrayList<String>(value);
 					value2.add(name);
 					MapLoader.adj.put(MapLoader.countryFilter.get(25), value2);
-					// System.out.println(editedAdj);
-				}
-				fieldAdd.clear();
+					//System.out.println(editedAdj);
+				}					
+					fieldAdd.clear();
 			}
 		});
-
+		
 		del.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
-				String s = conListBox.getValue();
+				String s= conListBox.getValue();
 				editedContinentCountries.remove(conListBox.getValue());
 				continentsList.remove(conListBox.getValue());
 				for (Entry<String, List<String>> entry : editedContinentCountries.entrySet()) {
 					List<String> value = entry.getValue();
-					for (int i = 0; i < value.size(); i++) {
+					for(int i=0;i<value.size();i++){
 						editedCountries.add(value.get(i));
 					}
 				}
-				for (int i = 0; i <= MapLoader.continentCountries.get(s).size() - 1; i++) {
+				for(int i=0;i<=MapLoader.continentCountries.get(s).size()-1;i++){
 					editedCountryCoordinates.remove(MapLoader.continentCountries.get(s).get(i));
 					editedCountryContinents.remove(MapLoader.continentCountries.get(s).get(i));
 					editedAdj.remove(MapLoader.continentCountries.get(s).get(i));
@@ -216,117 +221,119 @@ public class MapEditorInterface {
 					List<String> value = entry.getValue();
 					listOfLists.add(value);
 				}
-				for (int i = 0; i < listOfLists.size(); i++) {
-
-					for (int j = 0; j < MapLoader.continentCountries.get(s).size(); j++) {
-						if (listOfLists.get(i).contains(MapLoader.continentCountries.get(s).get(j))) {
-							int index = listOfLists.get(i).indexOf(MapLoader.continentCountries.get(s).get(j));
+				for(int i=0;i<listOfLists.size();i++)
+				{
+					
+					for(int j = 0; j < MapLoader.continentCountries.get(s).size(); j++)
+					{
+						if(listOfLists.get(i).contains(MapLoader.continentCountries.get(s).get(j))){
+							int index = listOfLists.get(i).indexOf(MapLoader.continentCountries.get(s).get(j));		
 							List<String> newList = new ArrayList<String>(listOfLists.get(i));
 							newList.remove(index);
 							int indexofCurrent = listOfLists.indexOf(listOfLists.get(i));
 							listOfLists.remove(i);
-
+							
 							listOfLists.add(indexofCurrent, newList);
-
+							
 						}
 					}
-				}
-				List<String> value = new ArrayList<>();
-				for (Entry<String, List<String>> entry : editedAdj.entrySet()) {
-					String Key = entry.getKey();
-					keyList.add(Key);
-				}
-
-				for (int i = 0; i < listOfLists.size(); i++) {
-					value = listOfLists.get(i);
-					editedAdj.put(keyList.get(i), value);
-				}
+				}				
+       				List<String> value = new ArrayList<>();			
+					for (Entry<String, List<String>> entry : editedAdj.entrySet()) {
+						String Key = entry.getKey();
+						keyList.add(Key);
+					}
+					
+					for(int i = 0; i < listOfLists.size(); i++){
+						value = listOfLists.get(i);
+						editedAdj.put(keyList.get(i), value);
+					}
 			}
 		});
-
+		
 		submit.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
-
-				for (int i = 0; i < continentsList.size(); i++) {
+				
+				for(int i = 0;i <continentsList.size();i++){
 					editedContinents.add(continentsList.get(i));
-
+					
 				}
 				continentEditorStage.close();
-
+				
 			}
 		});
-
-		Scene conEditorScene = new Scene(continentEditorRoot, 600, 500);
+		
+		Scene conEditorScene = new Scene(continentEditorRoot,600,500);
 		conEditorScene.getStylesheets().add(RiskGame.css);
 		continentEditorStage.setTitle("Risk Game: Edit Continents");
 		continentEditorStage.setScene(conEditorScene);
 		continentEditorStage.centerOnScreen();
-		continentEditorStage.show();
-
+		continentEditorStage.show();		
+		
 	}
 
 	/**
-	 * This method provides interface to add new countries.</br>
-	 * This method is used to delete existing countries.
+	 * This method shows layout for editing details of map editor like adding countries and deleting
+	 * countries.
 	 */
-	public static void editCountriesInterface() {
-
+	public static void editCountriesInterface(){
+		
 		Image logo = new Image(RiskGame.logoPath);
 		ImageView imgview = new ImageView(logo);
 		ObservableList<String> continentList;
-
-		if (!editedContinents.isEmpty()) {
+		
+		if(!editedContinents.isEmpty()){
 			continentList = FXCollections.observableArrayList(editedContinents);
-		} else
+		}else
 			continentList = FXCollections.observableArrayList(MapLoader.continentFilterNew);
-
-		ComboBox<String> continentBox = new ComboBox<String>(continentList);
+		
+		ComboBox<String> continentBox =new ComboBox<String>(continentList);
 		continentBox.setPromptText("Select Continent");
-
-		if (editedCountries.isEmpty()) {
+		
+		if(editedCountries.isEmpty()){
 			countryList.addAll(MapLoader.countryFilter);
-		} else {
+		}else{
 			countryList.addAll(editedCountries);
-		}
+		}		
 		ComboBox<String> countryBox = new ComboBox<String>(countryList);
 		countryBox.setPromptText("Select Country");
-
+		
 		Label lblAdd = new Label("Add Country: ");
-		TextField fieldAdd = new TextField();
+		TextField fieldAdd = new TextField(); 
 		fieldAdd.setPromptText("Enter Country Name");
-		Label lblDel = new Label("Delete Country: ");
-
+		Label lblDel  = new Label("Delete Country: ");
+		
 		Button add = new Button("Add");
 		Button del = new Button("Delete");
 		Button submit = new Button("Submit");
-
+		
 		HBox hbox1 = new HBox();
 		hbox1.getStyleClass().add("hbox");
-		hbox1.getChildren().addAll(lblAdd, fieldAdd, continentBox, add);
-
+		hbox1.getChildren().addAll(lblAdd,fieldAdd,continentBox,add);
+		
 		HBox hbox2 = new HBox();
 		hbox2.getStyleClass().add("hbox");
-		hbox2.getChildren().addAll(lblDel, countryBox, del);
-
+		hbox2.getChildren().addAll(lblDel,countryBox,del);
+		
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
-		vbox.getChildren().addAll(imgview, hbox1, hbox2, submit);
-
-		try {
-
-			add.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					if (!fieldAdd.getText().isEmpty()) {
-						countryList.add(fieldAdd.getText());
+		vbox.getChildren().addAll(imgview,hbox1,hbox2,submit);
+		
+		try{
+		
+		add.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				if(!fieldAdd.getText().isEmpty()){
+						countryList.add(fieldAdd.getText());	
 						String name = fieldAdd.getText();
 						countryList.add(name);
 						editedCountries.add(name);
-						Long x = (long) Math.floor(Math.random() * 150);
-						Long y = (long) Math.floor(Math.random() * 200);
+						Long x = (long)Math.floor(Math.random() * 150);
+						Long y = (long)Math.floor(Math.random() * 200);
 						String x_ = x.toString();
 						String y_ = y.toString();
 						List<String> points = new ArrayList<>();
@@ -341,59 +348,60 @@ public class MapEditorInterface {
 						List<String> value2 = new ArrayList<String>(value);
 						value2.add(name);
 						editedAdj.put(MapLoader.countryFilter.get(17), value2);
-					}
-					fieldAdd.clear();
 				}
-			});
-
-			del.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-
-					String name = countryBox.getValue();
-					editedCountryCoordinates.remove(name);
-					editedCountryContinents.remove(name);
-					editedAdj.remove(name);
-					for (Entry<String, List<String>> entry : editedAdj.entrySet()) {
-						List<String> value = entry.getValue();
-						String key = entry.getKey();
-						if (value.contains(name)) {
+				fieldAdd.clear();
+			}
+		});
+		
+		del.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				
+				String name = countryBox.getValue();
+				editedCountryCoordinates.remove(name);
+				editedCountryContinents.remove(name);
+				editedAdj.remove(name);
+				for (Entry<String, List<String>> entry : editedAdj.entrySet()) {
+					List<String> value = entry.getValue();
+					String key = entry.getKey();
+						if(value.contains(name)){
 							int index = value.indexOf(name);
 							List<String> newList = new ArrayList<String>(value);
 							newList.remove(index);
 							editedAdj.put(key, newList);
 
-						}
-					}
-					countryList.remove(countryBox.getValue());
+
+						}					
 				}
-			});
-
-			submit.setOnAction(new EventHandler<ActionEvent>() {
-
-				@Override
-				public void handle(ActionEvent event) {
-					for (int i = 0; i < countryList.size(); i++) {
-						editedCountries.add(countryList.get(i));
-					}
-					countryEditorStage.close();
-
+				countryList.remove(countryBox.getValue());
+			}
+		});
+		
+		submit.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				for(int i=0;i<countryList.size();i++){
+					editedCountries.add(countryList.get(i));
 				}
-			});
-		} catch (Exception e) {
+				countryEditorStage.close();
+				
+			}
+		});
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		
 		Group countryEditorRoot = new Group();
 		countryEditorRoot.getChildren().addAll(vbox);
-		Scene countryEditorscene = new Scene(countryEditorRoot, 600, 500);
+		Scene countryEditorscene = new Scene(countryEditorRoot,600,500);
 		countryEditorscene.getStylesheets().add(RiskGame.css);
 		countryEditorStage.setTitle("Risk Game: Edit Countries");
 		countryEditorStage.setScene(countryEditorscene);
 		countryEditorStage.centerOnScreen();
 		countryEditorStage.show();
-
+		
 	}
 
 }
