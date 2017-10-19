@@ -12,7 +12,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
+/**
+ * This class is related to first screen of main editor
+ * @author Kashif Rizvee
+ *
+ */
 public class RiskInterface extends Application {
     
     
@@ -28,6 +32,9 @@ public class RiskInterface extends Application {
 	ImageView imgView = new ImageView();
 	
 	@Override
+	/**
+	 * This method executes layout for first screen or main screen of map editor.
+	 */
 	public void start(Stage primaryStage) throws Exception {
 		
 		mapEditor = new Button("Map Editor");
@@ -77,7 +84,10 @@ public class RiskInterface extends Application {
 			}
 		});
 	}	
-	
+	/**
+	 * This method is main method where execution starts for layout of the screen.
+	 * @param args This parameter is used to pass arguments while launching of screen
+	 */
 	public static void main(String[] args) {
 		RiskGame objRiskGame =  new RiskGame();
 		launch(args);
