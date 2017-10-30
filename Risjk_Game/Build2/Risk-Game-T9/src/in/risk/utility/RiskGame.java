@@ -1,3 +1,4 @@
+package in.risk.utility;
 
 //package in.risk.utility;
 
@@ -108,7 +109,7 @@ public class RiskGame {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			String path = "C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map";// my new path
+			String path = "Resources/World.map";// my new path
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
