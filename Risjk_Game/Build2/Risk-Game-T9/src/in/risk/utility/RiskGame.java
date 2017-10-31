@@ -9,6 +9,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+
+//import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
+//
+//import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -37,7 +42,12 @@ public class RiskGame {
 	public static ArrayList<String> valueList = new ArrayList<String>();
 	public static ArrayList<String> xPoints = new ArrayList<String>();
 	public static ArrayList<String> yPoints = new ArrayList<String>();
+	public static ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
+	public static HashMap<String, Integer> continentValue = new HashMap<String , Integer>();
+	public static HashMap<String, Integer> playersCards = new HashMap<String, Integer>();
+	public static HashMap<String, Integer> flagForCards = new HashMap<String, Integer>();
+	
 
 	Scanner sc = new Scanner(System.in);
 
@@ -56,7 +66,6 @@ public class RiskGame {
 	public Vector<String> adjacents;
 	public HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
 	public HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
-	public HashMap<String, Integer> playersCards = new HashMap<String, Integer>();
 	public HashMap<String, Integer> playerTurn = new HashMap<String, Integer>();
 
 	public Player currentPlayer;
@@ -66,7 +75,8 @@ public class RiskGame {
 	public int c = 0;
 	public int iter = 0;
 	public boolean drawn;
-	public int beforeA, currentA, afterA;
+	public int beforeA, currentA, afterA, flag = 0;
+	public int noOfReinforcementArmies = 0;
 
 	/**
 	 * This is the main method
@@ -76,7 +86,7 @@ public class RiskGame {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Hello to Risk Game");
 		RiskGame risk = new RiskGame();
-		risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map");
+		risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World2.map");
 	}
 
 	/**
@@ -89,7 +99,8 @@ public class RiskGame {
 		initialPlayerCountries();
 		distributeArmies();
 		initiallyPlaceArmies();
-		placeArmies();
+		initiallyPlaceCards();
+//		placeArmies();
 		gamePhase();
 		// distributeCards();
 		// playCards();
@@ -107,7 +118,7 @@ public class RiskGame {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			String path = "Resources/World.map";// my new path
+			String path = "Resources/World2.map";// my new path
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
@@ -133,6 +144,8 @@ public class RiskGame {
 						String[] parts = next.split("=");
 						continentFilterNew.add(parts[0]);
 						valueList.add(parts[1]);
+						int value = Integer.parseInt(parts[1]);
+						continentValue.put(parts[0] , value);
 						next = mapfile.nextLine();
 					} while (!next.equals(""));
 				}
@@ -350,7 +363,6 @@ public class RiskGame {
 	 * This method is creating a new hasmap conatining all countries with 0
 	 * number of armies. This hashmap is used in placing armies to countries in
 	 * next step one in the game logic.
-	 * 
 	 * @throws IOException
 	 */
 	public void initiallyPlaceArmies() throws IOException {
@@ -358,6 +370,20 @@ public class RiskGame {
 		for (int i = 0; i < totalNumberOfCountries; i++) {
 			countriesArmies.put(countryFilter.get(i), 0);
 		}
+	}
+	
+	/**
+	 * This method is creating a new hasmap conatining all players with 0
+	 * number of cards. This hashmap is used incalculating the reinforcement armies.
+	 * @throws IOException
+	 */
+	public void initiallyPlaceCards() throws IOException {
+		int totalNumberOfPlayers = players.size();
+		for (int i = 0; i < totalNumberOfPlayers; i++) {
+			playersCards.put(currentPlayer.getName(), 10);
+			nextPlayer();
+		}
+		System.out.println(playersCards);
 	}
 
 	/**
@@ -478,19 +504,37 @@ public class RiskGame {
 		// + currentPlayer.getArmies());
 		// sc.close();
 	}
-
+	
+	/**
+	 * This method is used to select the phase in which player want to play.
+	 * @return integer value used to select the phase.
+	 * @throws IOException 
+	 */
 	public int selectPhase() {
 		Scanner sc = new Scanner(System.in);
 		int result;
-		System.out.println(currentPlayer.getName() + ". Please select what you want to do next in the game. \n");
-		System.out.println("1. Reinforcement. \n");
-		System.out.println("2. Attack \n");
-		System.out.println("3. Fortify \n");
-		result = sc.nextInt();
-		// sc.close();
-		return result;
+		if(flag == 1) {
+			System.out.println(currentPlayer.getName() + ". Please select what you want to do next in the game. \n");
+			System.out.println("2. Attack \n");
+			System.out.println("3. Fortify \n");
+			result = sc.nextInt();
+			// sc.close();
+			return result;
+		}else {
+			System.out.println(currentPlayer.getName() + ". Please select what you want to do next in the game. \n");
+			System.out.println("1. Reinforcement. \n");
+			System.out.println("2. Attack \n");
+			System.out.println("3. Fortify \n");
+			result = sc.nextInt();
+			// sc.close();
+			return result;
+		}
 	}
 
+	/**
+	 * This method is used to play the game according to the selecteed phase.
+	 * @throws IOException 
+	 */
 	public void gamePhase() throws IOException {
 		int x = selectPhase();
 		System.out.println(x);
@@ -633,6 +677,7 @@ public class RiskGame {
 	/**
 	 * This method is about trading of cards and getting armies in return.
 	 * Armies added will be as per the game logic.
+	 * @throws IOException
 	 */
 	public void getArmiesFromCards() throws IOException {
 		System.out.println("Right now the current player is: " + currentPlayer.getName());
@@ -657,6 +702,7 @@ public class RiskGame {
 	/**
 	 * This method asks player to trade their cards in return of the armies as
 	 * per game's logic.
+	 * @throws IOException
 	 */
 	public void playCards() throws IOException {
 		int noOfCardsPlayerHave = playersCards.get(currentPlayer.getName());
@@ -805,18 +851,53 @@ public class RiskGame {
 	/**
 	 * This method places armies in their countries as per reinforcement phase
 	 * of the game.
+	 * @throws IOException
 	 */
 	public void placeReinforcementArmies() throws IOException {
+//		int noOfReinforcementArmies = 0;
+		
+		// Start Of counting reinforcement armies from continet value.
+		for (Entry<String, List<String>> entry : continentCountries.entrySet()) {
+			String Key = entry.getKey();
+			List<String> value = entry.getValue();
+			System.out.println(value);
+			for (int i = 0; i < initialPlayerCountry.get(currentPlayer.getName()).size(); i++) {
+				resultOfContinentCountry.add(value.contains(initialPlayerCountry.get(currentPlayer.getName()).get(i)));
+			}
+			System.out.println(initialPlayerCountry.get(currentPlayer.getName()));
+			if(resultOfContinentCountry.contains(false)) {
+				noOfReinforcementArmies = noOfReinforcementArmies + 0;
+			}else if(resultOfContinentCountry.contains(true)) {
+				noOfReinforcementArmies = noOfReinforcementArmies + continentValue.get(Key);
+			}
+			resultOfContinentCountry.clear();
+		}
+		// end of counting reinforcement armies from continet value.
+		
+		// Start Of counting reinforcement armies from number of countries owned by player.
+		int sizeOfCountriesCurrentPlayerOwn = initialPlayerCountry.get(currentPlayer.getName()).size();
+		
+		if(sizeOfCountriesCurrentPlayerOwn < 9) {
+			noOfReinforcementArmies = noOfReinforcementArmies + 3;
+		}else {
+			noOfReinforcementArmies = noOfReinforcementArmies + sizeOfCountriesCurrentPlayerOwn/3;
+		}
+		// end of counting reinforcement armies from number of countries owned by player.
+		
+		//Start of counting number of reinforcement armies on the basis of card trade.
+		
+		//End of counting number of reinforcement armies on the basis of card trade.
+		
+		System.out.println(currentPlayer.getName() + " has " + noOfReinforcementArmies + " number of reinforcement armies");
 		Scanner sc = new Scanner(System.in);
 		Scanner sc1 = new Scanner(System.in);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
 
 		beforeA = currentPlayer.getArmies();// 17
-		int newSize = initialPlayerCountry.get(currentPlayer.getName()).size() / players.size();
+		int newSize = noOfReinforcementArmies;
 		currentPlayer.addArmies(newSize);
 		currentA = currentPlayer.getArmies();// 23
-		// System.out.println(newSize + " " + currentPlayer.getName());
 		while (currentPlayer.getArmies() > 0) {
 			System.out.println(currentPlayer.getName() + " You have " + currentPlayer.getArmies() + " armies." + "\n");
 			System.out.println("And you own " + initialPlayerCountry.get(currentPlayer.getName()) + "\n");
@@ -828,10 +909,18 @@ public class RiskGame {
 				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies + "\n");
 				noOfArmiesWantToPlace = sc1.nextInt();// 10
 				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace);
+//				gamePhase();
 			}
 		}
 	}
 
+	/**
+	 * This method takes country name to enter the armies and number of armies want to place from the user and then perform the operation.
+	 * of the game.
+	 * @param countryNameToEnterArmies is used to define the name of country to enter the armies to.
+	 * @param noOfArmiesWantToPlace is used to specify the number of armies player wants to plave in the specified country.
+	 * @throws IOException
+	 */
 	public void placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace)
 			throws IOException {
 		if (noOfArmiesWantToPlace > currentPlayer.getArmies()) {
@@ -849,19 +938,18 @@ public class RiskGame {
 
 	/**
 	 * This method executes sub method for reinforcement phase of the game
+	 * @throws IOException
 	 */
 	public void reinforcementPhase() throws IOException {
-		int i = players.size();
-		while (i > 0) {
 			placeReinforcementArmies();
-			nextPlayer();
-			i--;
-		}
+			flag =1;
+			gamePhase();
 	}
 
 	/**
 	 * This method is related to fortification phase of the game where player
 	 * can transfer his armies from one country to another country.
+	 * @throws IOException
 	 */
 	public void fortify() throws IOException {
 		Scanner scFrom = new Scanner(System.in);
