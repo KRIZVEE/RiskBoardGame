@@ -7,13 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
-
-import org.omg.CORBA.Current;
 
 /**
  * This class contains all the methods related to game start up phase,
@@ -91,11 +89,11 @@ public class RiskGame {
 		initialPlayerCountries();
 		distributeArmies();
 		initiallyPlaceArmies();
+		placeArmies();
 		gamePhase();
-//		placeArmies();
-//		distributeCards();
-//		playCards();
-//		fortify();
+		// distributeCards();
+		// playCards();
+		// fortify();
 	}
 
 	/**
@@ -293,9 +291,11 @@ public class RiskGame {
 		if (numberOfPlayers == 2)
 			armies = 40;
 		if (numberOfPlayers == 3)
-			armies = 35;
+			armies = 15;
+		// armies = 35;
 		if (numberOfPlayers == 4)
 			armies = 30;
+		// armies = 30;
 		if (numberOfPlayers == 5)
 			armies = 25;
 		if (numberOfPlayers == 6)
@@ -315,8 +315,8 @@ public class RiskGame {
 			iter = 0;
 		} else
 			currentPlayer = players.elementAt(++iter);
-//		if (card == 1)
-//			playCards();
+		// if (card == 1)
+		// playCards();
 	}
 
 	/**
@@ -347,10 +347,11 @@ public class RiskGame {
 	}
 
 	/**
-	 * This method is creating a new hasmap conatining all countries with 0 number of armies.
-	 * This hashmap is used in placing armies to countries in next step
-	 * one in the game logic.
-	 * @throws IOException 
+	 * This method is creating a new hasmap conatining all countries with 0
+	 * number of armies. This hashmap is used in placing armies to countries in
+	 * next step one in the game logic.
+	 * 
+	 * @throws IOException
 	 */
 	public void initiallyPlaceArmies() throws IOException {
 		int totalNumberOfCountries = countryFilter.size();
@@ -358,72 +359,124 @@ public class RiskGame {
 			countriesArmies.put(countryFilter.get(i), 0);
 		}
 	}
-	
+
 	/**
-	 * This method is about placing armies in round robin fashion by asking every player.
-	 * @throws IOException 
+	 * This method is about placing armies in round robin fashion by asking
+	 * every player.
+	 * 
+	 * @throws IOException
 	 */
 	public void placeArmies() throws IOException {
-		int loopSize = players.size()*currentPlayer.getArmies();
+		int loopSize = players.size() * currentPlayer.getArmies();
 		int updatedArmies;
 		Scanner sc = new Scanner(System.in);
 		String result;
 		ArrayList<String> temp = new ArrayList<>();
-		for (int i = 1; i < loopSize+1; i++) {
-			
-			
-			
+		for (int i = 1; i < loopSize + 1; i++) {
+
 			for (Entry<String, Integer> entry : countriesArmies.entrySet()) {
 				String Key = entry.getKey();
 				Integer value = entry.getValue();
 				for (int j = 0; j < initialPlayerCountry.get(currentPlayer.getName()).size(); j++) {
-					if(initialPlayerCountry.get(currentPlayer.getName()).contains(Key)) {
-						if(value == 0) {
-							
-							if(!temp.contains(Key))
+					if (initialPlayerCountry.get(currentPlayer.getName()).contains(Key)) {
+						if (value == 0) {
+
+							if (!temp.contains(Key))
 								temp.add(Key);
 						}
 					}
 				}
 			}
-//			System.out.println("Current Player : " + currentPlayer.getName() + " has these many countries with 0 armies " +  temp);
-			
-			System.out.println(currentPlayer.getName() + " you own these countries " + initialPlayerCountry.get(currentPlayer.getName()) + ".");
+			// System.out.println("Current Player : " + currentPlayer.getName()
+			// + " has these many countries with 0 armies " + temp);
+
+			System.out.println(currentPlayer.getName() + " you own these countries "
+					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
 			System.out.println("Please enter the name of the country you want to add armies to!!");
 			result = sc.nextLine();
-			if(initialPlayerCountry.get(currentPlayer.getName()).contains(result)){
+
+			if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
 				int noOfArmiesPlayerContains = currentPlayer.getArmies();
 				int countriesWith0Armies = temp.size();
-				if(noOfArmiesPlayerContains == countriesWith0Armies){
-					System.out.println("You are not allowed to add armies to other countries except " + temp + " countries. \n Because you have minimum number of armies to place ermies in each countyr" );
-					System.out.println("Please enter the name of country from given list where you want to placce armies \n" + temp );
-					result = sc.nextLine();
-					updatedArmies = countriesArmies.get(result)+1;
+
+				if (noOfArmiesPlayerContains == 0) {
+
+					System.out.println("noOfArmiesPlayerContains == 0");
+
+					if (players.size() != 3) {
+						nextPlayer();
+						break;
+					} else
+						gamePhase();
+				}
+
+				if (noOfArmiesPlayerContains == countriesWith0Armies) {
+					System.out.println(currentPlayer.getArmies());
+					System.out.println(countriesArmies);
+
+					if (temp.contains(result))// result entered country is in
+					// temp list)
+					{
+						updatedArmies = countriesArmies.get(result) + 1;
+						countriesArmies.put(result, updatedArmies);
+						currentPlayer.looseArmy();
+						System.out.println(result + " armies has been updated. New armies of " + result + " are "
+								+ countriesArmies.get(result));
+						temp.remove(result);
+						System.out.println(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+						temp.clear();
+						nextPlayer();
+					}
+
+					else {
+
+						System.out.println("You are not allowed to add armies to other countries except " + temp
+								+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
+						System.out.println(
+								"Please enter the name of country from given list where you want to placce armies \n"
+										+ temp);
+						result = sc.nextLine();
+						if (temp.contains(result)) {
+							updatedArmies = countriesArmies.get(result) + 1;
+							countriesArmies.put(result, updatedArmies);
+							currentPlayer.looseArmy();
+							System.out.println(result + " armies has been updated. New armies of " + result + " are "
+									+ countriesArmies.get(result));
+							temp.remove(result);
+							System.out.println(
+									currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+							temp.clear();
+							nextPlayer();
+						}
+						// here should be else part
+
+					}
+
+				} else {
+					updatedArmies = countriesArmies.get(result) + 1;
 					countriesArmies.put(result, updatedArmies);
 					currentPlayer.looseArmy();
-					System.out.println(result + " armies has been updated. New armies of " + result + " are " + countriesArmies.get(result));
+					System.out.println(result + " armies has been updated. New armies of " + result + " are "
+							+ countriesArmies.get(result));
 					temp.remove(result);
-					System.out.println(currentPlayer.getName() + " has Countries with 0 number od armies " + temp );
-					temp.clear();
-					nextPlayer();
-				}else{
-					updatedArmies = countriesArmies.get(result)+1;
-					countriesArmies.put(result, updatedArmies);
-					currentPlayer.looseArmy();
-					System.out.println(result + " armies has been updated. New armies of " + result + " are " + countriesArmies.get(result));
-					temp.remove(result);
-					System.out.println((currentPlayer.getName() + " has Countries with 0 number od armies " + temp ));
+					System.out.println((currentPlayer.getName() + " has Countries with 0 number of armies " + temp));
 					temp.clear();
 					nextPlayer();
 				}
-				
-			}else {
+
+			} else {
 				System.out.println("Please enter correct name of the country");
+				i--;
 			}
+
+			System.out.println("I value is  : " + i);
+
 		}
-		System.out.println(players.size()*currentPlayer.getArmies());
-		System.out.println(currentPlayer.getName() + " " + initialPlayerCountry.get(currentPlayer.getName()) + " " + currentPlayer.getArmies());
-		sc.close();
+		// System.out.println(players.size() * currentPlayer.getArmies());
+		// System.out.println(currentPlayer.getName() + " " +
+		// initialPlayerCountry.get(currentPlayer.getName()) + " "
+		// + currentPlayer.getArmies());
+		// sc.close();
 	}
 
 	public int selectPhase() {
@@ -434,14 +487,149 @@ public class RiskGame {
 		System.out.println("2. Attack \n");
 		System.out.println("3. Fortify \n");
 		result = sc.nextInt();
+		// sc.close();
 		return result;
 	}
-	
-	public void gamePhase() {
+
+	public void gamePhase() throws IOException {
 		int x = selectPhase();
 		System.out.println(x);
+
+		if (x == 1)
+			reinforcementPhase();
+		else if (x == 2)
+			attackPhase();
+		else
+			fortify();
 	}
-	
+
+	public void attackPhase() {
+		int noOfAttackerDice;
+		int attacker, defender;
+		int attackerDiceArray[];
+		int defenderDiceArray[];
+		String attackerCountry;
+		int noOfDefenderDice;
+		String defenderCountry;
+		// Scanner sc1 = new Scanner(System.in);
+		// Scanner sc2 = new Scanner(System.in);
+
+		System.out.println("Current Player : " + currentPlayer.getName());
+		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
+		System.out.println("Please enter the name of country from where you want to attack");
+		attackerCountry = sc.nextLine();
+		countriesArmies.put(attackerCountry, 4);
+		System.out.println("Based on this country name, you can attack to corresponding countries only : "
+				+ adj.get(attackerCountry));
+		System.out.println("Please enter the name of country, to which you want to attack");
+		defenderCountry = sc.nextLine();
+		countriesArmies.put(defenderCountry, 3);
+		System.out.println(countriesArmies.get(attackerCountry));// +
+		// countriesArmies.get(currentPlayer.getArmies()));
+
+		if (countriesArmies.get(attackerCountry) >= 2) {
+			System.out.println("You have minimum 2 armies, you can attack");
+
+			if (countriesArmies.get(attackerCountry) > 3) {
+				System.out.println("you can opt among 1, 2 or 3 dice to be rolled");
+				noOfAttackerDice = sc.nextInt();
+			} else if (countriesArmies.get(attackerCountry) > 2) {
+				System.out.println("you can opt among 1, 2 or 3 dice to be rolled");
+				noOfAttackerDice = sc.nextInt();
+			} else
+				noOfAttackerDice = 1;
+
+			// System.out.println("Please enter how many dice you want to select
+			// for toss, you can choose upto : "
+			// + noOfAttackerDice + " Dice.");
+			// attacker = sc.nextInt();
+			attackerDiceArray = new int[noOfAttackerDice];
+
+			for (int i = 0; i < attackerDiceArray.length; i++) {
+				attackerDiceArray[i] = randomNumberGenerator();
+			}
+			//
+			// for (int i = 0; i < attackerDiceArray.length; i++) {
+			// System.out.println("attacked dice for index position " + i + " "
+			// + attackerDiceArray[i]);
+			// }
+
+			if (countriesArmies.get(defenderCountry) >= 2) {
+				System.out.println("you can opt among 1 or 2 dice to be rolled");
+				noOfDefenderDice = sc.nextInt();
+			} else
+				noOfDefenderDice = 1;
+
+			// System.out.println("Please enter how many dice you want to select
+			// for toss, you can choose upto : "
+			// + noOfDefenderDice + " Dice.");
+			// defender = sc.nextInt();
+			defenderDiceArray = new int[noOfDefenderDice];
+
+			for (int i = 0; i < defenderDiceArray.length; i++) {
+				defenderDiceArray[i] = randomNumberGenerator();
+			}
+
+			// for (int i = 0; i < defenderDiceArray.length; i++) {
+			// System.out.println("defender dice for index position " + i + " "
+			// + defenderDiceArray[i]);
+			// }
+
+			Arrays.sort(attackerDiceArray);
+			for (int i = 0; i < attackerDiceArray.length; i++) {
+				System.out.println("attacked dice for index position " + i + " " + attackerDiceArray[i]);
+			}
+			Arrays.sort(defenderDiceArray);
+
+			for (int i = 0; i < defenderDiceArray.length; i++) {
+				System.out.println("defender dice for index position " + i + " " + defenderDiceArray[i]);
+			}
+
+			System.out.println("Attacker COuntry " + countriesArmies.get(attackerCountry));
+			System.out.println("Defender COuntry " + countriesArmies.get(defenderCountry));
+
+			if (noOfDefenderDice == 1) {
+				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1])
+					System.out.println("attacker country wins 1 army, defender loose 1 army");
+				else
+					System.out.println("defender country wins 1 army, attacker loose 1 army");
+			} else {
+				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1])
+					System.out.println("attacker country wins 1 army, defender loose 1 army");
+
+				else
+					System.out.println("defender country wins 1 army, attacker loose 1 army");
+				if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2])
+					System.out.println("attacker country wins 1 army, defender loose 1 army");
+				// wins
+				else
+					System.out.println("defender country wins 1 army, attacker loose 1 army");
+				// wins
+
+			}
+
+			System.out.println("Attacker COuntry " + countriesArmies.get(attackerCountry));
+			System.out.println("Defender COuntry " + countriesArmies.get(defenderCountry));
+		} else
+			System.out.println("As you are having only 1 army, you can't attack");
+
+		// sc.close();
+		// sc.close();
+	}// end of attackPhase
+		// need to keep global variable to collect armies
+
+	public int randomNumberGenerator() {
+		int randomNumber;
+		Random random = new Random(); /* <-- this is a constructor */
+		randomNumber = random.nextInt(6)
+				+ 1; /*
+						 * <-- look at the API doc for nextInt() to see why we
+						 * give it 6 as and argument, and why we need to add 1
+						 * to the result
+						 */
+		return randomNumber;
+	}
+
 	/**
 	 * This method is about trading of cards and getting armies in return.
 	 * Armies added will be as per the game logic.
