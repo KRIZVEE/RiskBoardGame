@@ -1,6 +1,8 @@
 package in.risk.utility;
 
 import java.io.BufferedWriter;
+import java.io.BufferedReader;
+
 
 //package in.risk.utility;
 
@@ -589,118 +591,156 @@ public class RiskGame {
 	 * This method is used to implement the attack phase
 	 * @throws IOException 
 	 */
-	public void attackPhase() {
-		int noOfAttackerDice;
+	public void attackPhase() throws IOException {
+		int noOfAttackerDice = 0;
 		int attacker, defender;
 		int attackerDiceArray[];
 		int defenderDiceArray[];
 		String attackerCountry;
 		int noOfDefenderDice;
 		String defenderCountry;
+		int flagCheckDice = 0;
+		String attackTurnOn = "hello";
+		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+
 		// Scanner sc1 = new Scanner(System.in);
 		// Scanner sc2 = new Scanner(System.in);
 
 		System.out.println("Current Player : " + currentPlayer.getName());
 		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
-		attackerCountry = sc.nextLine();
+		attackerCountry = input.readLine();
 		countriesArmies.put(attackerCountry, 4);
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
 				+ adj.get(attackerCountry));
 		System.out.println("Please enter the name of country, to which you want to attack");
-		defenderCountry = sc.nextLine();
+		defenderCountry = input.readLine();
 		countriesArmies.put(defenderCountry, 3);
-		System.out.println(countriesArmies.get(attackerCountry));// +
+		System.out.println("Number of armies in the Attacker Country is : " + countriesArmies.get(attackerCountry));// +
 		// countriesArmies.get(currentPlayer.getArmies()));
 
 		if (countriesArmies.get(attackerCountry) >= 2) {
-			System.out.println("You have minimum 2 armies, you can attack");
+			System.out.println("As, You have minimum of 2 armies, you can attack");
 
 			if (countriesArmies.get(attackerCountry) > 3) {
-				System.out.println("you can opt among 1, 2 or 3 dice to be rolled");
+				System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice to be rolled");
 				noOfAttackerDice = sc.nextInt();
-			} else if (countriesArmies.get(attackerCountry) > 2) {
-				System.out.println("you can opt among 1, 2 or 3 dice to be rolled");
+			} else if (countriesArmies.get(attackerCountry) == 3) {
+				// flagCheckDice = 1;
+				System.out.println("Attacker Country Player, can opt among 1 or 2 dice to be rolled");
 				noOfAttackerDice = sc.nextInt();
-			} else
+			} else if (countriesArmies.get(attackerCountry) == 2) {
+				System.out.println(
+						"Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
+								+ attackerCountry);
 				noOfAttackerDice = 1;
+			}
+			if (noOfAttackerDice == 2 || noOfAttackerDice == 3)
+				flagCheckDice = 1;
 
-			// System.out.println("Please enter how many dice you want to select
-			// for toss, you can choose upto : "
-			// + noOfAttackerDice + " Dice.");
-			// attacker = sc.nextInt();
 			attackerDiceArray = new int[noOfAttackerDice];
 
 			for (int i = 0; i < attackerDiceArray.length; i++) {
 				attackerDiceArray[i] = randomNumberGenerator();
 			}
-			//
-			// for (int i = 0; i < attackerDiceArray.length; i++) {
-			// System.out.println("attacked dice for index position " + i + " "
-			// + attackerDiceArray[i]);
-			// }
 
 			if (countriesArmies.get(defenderCountry) >= 2) {
-				System.out.println("you can opt among 1 or 2 dice to be rolled");
-				noOfDefenderDice = sc.nextInt();
-			} else
-				noOfDefenderDice = 1;
 
-			// System.out.println("Please enter how many dice you want to select
-			// for toss, you can choose upto : "
-			// + noOfDefenderDice + " Dice.");
-			// defender = sc.nextInt();
+				System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
+				noOfDefenderDice = sc.nextInt();
+
+			} else {
+				System.out.println(
+						"Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
+								+ defenderCountry);
+				noOfDefenderDice = 1;
+			}
+
 			defenderDiceArray = new int[noOfDefenderDice];
 
 			for (int i = 0; i < defenderDiceArray.length; i++) {
 				defenderDiceArray[i] = randomNumberGenerator();
 			}
 
-			// for (int i = 0; i < defenderDiceArray.length; i++) {
-			// System.out.println("defender dice for index position " + i + " "
-			// + defenderDiceArray[i]);
-			// }
+			System.out.println("Attacker Dice value are as follow : ");
 
 			Arrays.sort(attackerDiceArray);
 			for (int i = 0; i < attackerDiceArray.length; i++) {
-				System.out.println("attacked dice for index position " + i + " " + attackerDiceArray[i]);
+				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
 			}
+			System.out.println("");
 			Arrays.sort(defenderDiceArray);
 
-			for (int i = 0; i < defenderDiceArray.length; i++) {
-				System.out.println("defender dice for index position " + i + " " + defenderDiceArray[i]);
-			}
+			System.out.println("Defender Dice value are as follow : ");
 
-			System.out.println("Attacker COuntry " + countriesArmies.get(attackerCountry));
-			System.out.println("Defender COuntry " + countriesArmies.get(defenderCountry));
+			for (int i = 0; i < defenderDiceArray.length; i++) {
+				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
+			}
+			System.out.println("");
+
+			System.out.println("Number of armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+			System.out.println("Number of armies in Defender Country is : " + countriesArmies.get(defenderCountry));
 
 			if (noOfDefenderDice == 1) {
-				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1])
-					System.out.println("attacker country wins 1 army, defender loose 1 army");
-				else
-					System.out.println("defender country wins 1 army, attacker loose 1 army");
+				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
+					System.out.println(" Defender country loose 1 army");
+					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					countriesArmies.put(defenderCountry, updateArmyOfDefender);
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} else {
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+				}
 			} else {
-				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1])
-					System.out.println("attacker country wins 1 army, defender loose 1 army");
-
-				else
-					System.out.println("defender country wins 1 army, attacker loose 1 army");
-				if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2])
-					System.out.println("attacker country wins 1 army, defender loose 1 army");
-				// wins
-				else
-					System.out.println("defender country wins 1 army, attacker loose 1 army");
-				// wins
+				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
+					System.out.println(" Defender country loose 1 army");
+					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					countriesArmies.put(defenderCountry, updateArmyOfDefender);
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} else {
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+				}
+				if ((flagCheckDice == 1) && (attackerDiceArray[attackerDiceArray.length
+						- 2] > defenderDiceArray[defenderDiceArray.length - 2])) {
+					System.out.println(" Defender country loose 1 army");
+					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					countriesArmies.put(defenderCountry, updateArmyOfDefender);
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} else if ((flagCheckDice == 1) && (attackerDiceArray[attackerDiceArray.length
+						- 2] <= defenderDiceArray[defenderDiceArray.length - 2])) {
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+				}
 
 			}
 
-			System.out.println("Attacker COuntry " + countriesArmies.get(attackerCountry));
-			System.out.println("Defender COuntry " + countriesArmies.get(defenderCountry));
+			System.out.println("Attacker Country " + countriesArmies.get(attackerCountry));
+			System.out.println("Defender Country " + countriesArmies.get(defenderCountry));
 		} else
 			System.out.println("As you are having only 1 army, you can't attack");
 
-		// sc.close();
-		// sc.close();
+		System.out.println("Do you want to still attack to other countries, press Y/N");
+		attackTurnOn = input.readLine();
+		if (attackTurnOn.equals("Y")) {
+
+			attackPhase();
+		} else {
+			fortify();
+		}
+
 	}// end of attackPhase
 		// need to keep global variable to collect armies
 
