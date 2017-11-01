@@ -1,9 +1,14 @@
 package in.risk.utility;
 
+import java.io.BufferedWriter;
+
 //package in.risk.utility;
 
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -102,12 +107,24 @@ public class RiskGame {
 		initiallyPlaceCards();
 		initialFlagsForPlayer();
 //		placeArmies();
-		gamePhase();
+		reinforcementPhase();
+//		gamePhase();
 		// distributeCards();
 		// playCards();
 		// fortify();
 	}
+	
+	public void logging(String data) throws IOException {
+		FileWriter fw = new FileWriter("resources/log.txt", true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter pw = new PrintWriter(bw);
 
+		Date currentDate = new Date();
+		
+		pw.println(currentDate.toString() + " - " + data);
+		pw.flush();
+		pw.close();
+	}
 	/**
 	 * This method loads the map selected by the user.
 	 * <ul>
@@ -243,6 +260,8 @@ public class RiskGame {
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
+			String logOutput = players.size() + " players are selected by the user.";
+			logging(logOutput);
 		} else if (noOfPlayers == 4) {
 			for (int i = 0; i < 4; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
@@ -250,6 +269,8 @@ public class RiskGame {
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
+			String logOutput = players.size() + " players are selected by the user.";
+			logging(logOutput);
 		} else if (noOfPlayers == 5) {
 			for (int i = 0; i < 5; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
@@ -257,6 +278,8 @@ public class RiskGame {
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
+			String logOutput = players.size() + " players are selected by the user.";
+			logging(logOutput);
 		} else if (noOfPlayers == 6) {
 			for (int i = 0; i < 6; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
@@ -264,6 +287,8 @@ public class RiskGame {
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
+			String logOutput = players.size() + " players are selected by the user.";
+			logging(logOutput);
 		} else {
 			System.out.println("Please enter a valid no of players to play with");
 		}
@@ -696,31 +721,6 @@ public class RiskGame {
 	}
 
 	/**
-	 * This method is about trading of cards and getting armies in return.
-	 * Armies added will be as per the game logic.
-	 * @throws IOException
-	 */
-	public void getArmiesFromCards() throws IOException {
-		System.out.println("Right now the current player is: " + currentPlayer.getName());
-		System.out.println(currentPlayer.getName() + "  has " + playersCards.get(currentPlayer.getName())
-				+ " cards. Do you want to trade in cards? Y/N");
-		String result;
-		Scanner sc2 = new Scanner(System.in);
-		result = sc2.nextLine();
-		if (result.equals("Y")) {
-			int currentArmies = currentPlayer.getArmies();
-			currentPlayer.addArmies(5);
-			int noOfCards = playersCards.get(currentPlayer.getName());
-			int remainingCards = noOfCards - 3;
-			nuberOfCardsInDeck = nuberOfCardsInDeck + 3;
-			System.out.println(nuberOfCardsInDeck);
-			playersCards.put(currentPlayer.getName(), remainingCards);
-
-		} else {
-		}
-	}
-
-	/**
 	 * In this method the reinforcement armies are counted in the basis of continet 
 	 * the player owns.
 	 */
@@ -769,161 +769,20 @@ public class RiskGame {
 		int newFlagForCards = initialFlagForCards +1;
 		flagForCards.put(currentPlayer.getName(), newFlagForCards);
 		int numberOfCardsPlayerHave = playersCards.get(currentPlayer.getName());
-		if(numberOfCardsPlayerHave >= 3 ){
-			System.out.println(currentPlayer.getName() + " do you want to trade in your cards? Y/N");
-			result =sc.nextLine();
-			if(result.equals("Y")) {
+		System.out.println(currentPlayer.getName() + " do you want to trade in your cards? Y/N");
+		result =sc.nextLine();
+		if(result.equals("Y")) {
+			if(numberOfCardsPlayerHave >= 3 ){
 				noOfReinforcementArmies += 5 * initialFlagForCards;
 				nuberOfCardsInDeck += 3;
 				int updatedNumberOFCardsPlayerHave = numberOfCardsPlayerHave - 3;
 				playersCards.put(currentPlayer.getName(), updatedNumberOFCardsPlayerHave);
-				System.out.println(currentPlayer.getName() + " got " + 3*initialFlagForCards + " armies by trading the cards.");
+				System.out.println(currentPlayer.getName() + " got " + 5*initialFlagForCards + " armies by trading the cards.");
 				System.out.println("Number of cards in the deck are " + nuberOfCardsInDeck);
+				playCards();
 			}
-			playCards();
+		}else {
 		}
-//		System.out.println(playersCards);
-//		int noOfCardsPlayerHave = playersCards.get(currentPlayer.getName());
-//		if (noOfCardsPlayerHave > 5) {
-//			Scanner sc = new Scanner(System.in);
-//			String result;
-//			System.out.println(currentPlayer.getName() + " is having these many cards "
-//					+ playersCards.get(currentPlayer.getName()));
-//			System.out.println(currentPlayer.getName() + " do you want to trade in from your " + noOfCardsPlayerHave
-//					+ " cards? Y/N");
-//			result = sc.nextLine();
-//			if (result.equals("Y")) {
-//				int turn = playerTurn.get(currentPlayer.getName());
-//				if (turn == 1) {
-//					int noOfArmiesToIncrease = 5;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies());
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//				} else if (turn == 2) {
-//					int noOfArmiesToIncrease = 5 * 2;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies() + "\n");
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//				} else if (turn == 3) {
-//					int noOfArmiesToIncrease = 5 * 3;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies() + "\n");
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//				} else if (turn == 4) {
-//					int noOfArmiesToIncrease = 5 * 4;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies() + "\n");
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//				} else if (turn == 5) {
-//					int noOfArmiesToIncrease = 5 * 5;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies() + "\n");
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//				} else if (turn == 6) {
-//					int noOfArmiesToIncrease = 5 * 6;
-//					System.out.println("Armies player own earlier = " + currentPlayer.getArmies() + "\n");
-//					currentPlayer.addArmies(noOfArmiesToIncrease);
-//					int newCrads = noOfCardsPlayerHave - 3;
-//					playersCards.put(currentPlayer.getName(), newCrads);
-//					nuberOfCardsInDeck += 3;
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 1;
-//					int newTurn = turn + 1;
-//					playerTurn.put(currentPlayer.getName(), newTurn);
-//					nextPlayer();
-//
-//				}
-//			} else {
-//				System.out.println("Player turn ENDS!!!!!");
-//				System.out.println("Armies player own earlier = " + currentPlayer.getArmies());
-//				System.out.println("Player Name = " + currentPlayer.getName());
-//				System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//				System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//				System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//				card = 1;
-//				int j = players.size();
-//				c++;
-//				// System.out.println(c);
-//				if (c == j) {
-//					System.out.println("Player turn ENDS!!!!!");
-//					System.out.println("Player Name = " + currentPlayer.getName());
-//					System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//					System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//					System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//					card = 0;
-//					reinforcementPhase();
-//				}
-//				nextPlayer();
-//			}
-//		} else {
-//			System.out.println("Player turn ENDS!!!!!");
-//			System.out.println("Armies player own earlier = " + currentPlayer.getArmies());
-//			System.out.println("Player Name = " + currentPlayer.getName());
-//			System.out.println("Player Cards = " + playersCards.get(currentPlayer.getName()));
-//			System.out.println("Cards in deck = " + nuberOfCardsInDeck);
-//			System.out.println("Armies player own now = " + currentPlayer.getArmies() + "\n");
-//			card = 0;
-//			reinforcementPhase();
-//		}
 	}
 	
 	/**
@@ -947,14 +806,14 @@ public class RiskGame {
 		currentPlayer.addArmies(newSize);
 		currentA = currentPlayer.getArmies();// 23
 		while (currentPlayer.getArmies() > 0) {
-			System.out.println(currentPlayer.getName() + " You have " + currentPlayer.getArmies() + " armies." + "\n");
-			System.out.println("And you own " + initialPlayerCountry.get(currentPlayer.getName()) + "\n");
-			System.out.println("Enter the name of country where you wan to place armies" + "\n");
+			System.out.println(currentPlayer.getName() + " You have " + currentPlayer.getArmies() + " armies.");
+			System.out.println("And you own " + initialPlayerCountry.get(currentPlayer.getName()));
+			System.out.println("Enter the name of country where you wan to place armies");
 			countryNameToEnterArmies = sc.nextLine();
 			if (!initialPlayerCountry.get(currentPlayer.getName()).contains(countryNameToEnterArmies)) {
-				System.out.println("You dont own this country" + "\n");
+				System.out.println("You dont own this country");
 			} else {
-				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies + "\n");
+				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies);
 				noOfArmiesWantToPlace = sc1.nextInt();// 10
 				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace);
 //				gamePhase();
@@ -977,7 +836,7 @@ public class RiskGame {
 			int initialAriesCountryOwn = countriesArmies.get(countryNameToEnterArmies);
 			int finalArmiesCOuntryHave = initialAriesCountryOwn + noOfArmiesWantToPlace;
 			countriesArmies.put(countryNameToEnterArmies, finalArmiesCOuntryHave);
-			System.out.println(noOfArmiesWantToPlace + "\n");
+//			System.out.println(noOfArmiesWantToPlace + "\n");
 			currentPlayer.loosArmies(noOfArmiesWantToPlace);
 			afterA = currentPlayer.getArmies();// 13
 
@@ -989,9 +848,10 @@ public class RiskGame {
 	 * @throws IOException
 	 */
 	public void reinforcementPhase() throws IOException {
+			System.out.println("\n" + "Reinforcement Phase starts for " + currentPlayer.getName());
 			placeReinforcementArmies();
-			flag =1;
-			gamePhase();
+			System.out.println("\n" + currentPlayer.getName() + " your attack Phase starts now. Please attack one or more copuntries.");
+			attackPhase();
 	}
 
 	/**
