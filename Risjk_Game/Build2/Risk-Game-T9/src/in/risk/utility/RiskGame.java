@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.ArrayList;
@@ -104,13 +105,13 @@ public class RiskGame {
 		selectPlayers();
 		initialPlayer();
 		initialPlayerCountries();
-		distributeArmies();
+//		distributeArmies();
 		initiallyPlaceArmies();
 		initiallyPlaceCards();
 		initialFlagsForPlayer();
-//		placeArmies();
-		reinforcementPhase();
-//		gamePhase();
+		placeArmies();
+//		reinforcementPhase();
+		gamePhase();
 		// distributeCards();
 		// playCards();
 		// fortify();
@@ -438,6 +439,7 @@ public class RiskGame {
 		Scanner sc = new Scanner(System.in);
 		String result;
 		ArrayList<String> temp = new ArrayList<>();
+		System.out.println("Start here");
 		for (int i = 1; i < loopSize + 1; i++) {
 
 			for (Entry<String, Integer> entry : countriesArmies.entrySet()) {
@@ -607,14 +609,16 @@ public class RiskGame {
 		// Scanner sc2 = new Scanner(System.in);
 
 		System.out.println("Current Player : " + currentPlayer.getName());
-		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
+		System.out.println("Current Player owning countries : " + initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
 		attackerCountry = input.readLine();
+		//System.out.println("Armies with attacking country: " +countriesArmies.get(attackerCountry));
 		countriesArmies.put(attackerCountry, 4);
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
 				+ adj.get(attackerCountry));
 		System.out.println("Please enter the name of country, to which you want to attack");
 		defenderCountry = input.readLine();
+		//System.out.println("Armies with defending country: " +countriesArmies.get(defenderCountry));
 		countriesArmies.put(defenderCountry, 3);
 		System.out.println("Number of armies in the Attacker Country is : " + countriesArmies.get(attackerCountry));// +
 		// countriesArmies.get(currentPlayer.getArmies()));
@@ -688,6 +692,15 @@ public class RiskGame {
 					countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					System.out.println(
 							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+					
+					//Code to update list after defender country looses all army
+					if(countriesArmies.get(defenderCountry) == 0)
+					{
+						adj.remove(defenderCountry);
+						
+						
+					}
+					
 				} else {
 					System.out.println(" Attacker country loose 1 army");
 					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
@@ -730,7 +743,7 @@ public class RiskGame {
 			System.out.println("Attacker Country " + countriesArmies.get(attackerCountry));
 			System.out.println("Defender Country " + countriesArmies.get(defenderCountry));
 		} else
-			System.out.println("As you are having only 1 army, you can't attack");
+			System.out.println("As you are having only 1 army, you can't attack from the selected country, please select another country to attack");
 
 		System.out.println("Do you want to still attack to other countries, press Y/N");
 		attackTurnOn = input.readLine();
