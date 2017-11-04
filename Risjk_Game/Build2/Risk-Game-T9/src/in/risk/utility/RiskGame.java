@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.Observable;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
@@ -23,7 +24,7 @@ import java.util.Vector;
  * @author Charanpreet Singh, Ishan Kansara, Kashif Rizvee, Mohit Rana
  * @version 1.0.0
  */
-public class RiskGame {
+public class RiskGame extends Observable {
 
 	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
 	public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
@@ -43,6 +44,7 @@ public class RiskGame {
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 
 	Scanner sc = new Scanner(System.in);
+	
 
 	// @SuppressWarnings("unused")
 	static public Vector<Player> players = new Vector<Player>();
@@ -70,17 +72,20 @@ public class RiskGame {
 	public int iter = 0;
 	public boolean drawn;
 	public int beforeA, currentA, afterA;
+	int oldCOuntryListSize = 0;
+	int newCOuntryListSize = 0;
+
 
 	/**
-	 * This is the main method
-	 * 
-	 * @throws IOException
-	 */
-	public static void main(String[] args) throws IOException {
-		System.out.println("Hello to Risk Game");
-		RiskGame risk = new RiskGame();
-		risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map");
-	}
+//	 * This is the main method
+//	 * 
+//	 * @throws IOException
+//	 */
+//	public static void main(String[] args) throws IOException {
+//		System.out.println("Hello to Risk Game");
+//		RiskGame risk = new RiskGame();
+//		risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map");
+//	}
 
 	/**
 	 * This method is called to play the game.
@@ -520,9 +525,7 @@ public class RiskGame {
 		String defenderCountry;
 		int flagCheckDice = 0;
 		int indx = 0;// = value.
-		int oldCOuntryListSize = 0;
-		int newCOuntryListSize = 0;
-
+		
 		String attackTurnOn = "hello";
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
@@ -657,10 +660,9 @@ public class RiskGame {
 								entry.getValue().remove(indx);
 								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
-								// initialPlayerCountry.remove(key,
-								// value.get(indx));
-								// initialPlayerCountry.keySet();
-
+								setChanged();
+								notifyObservers(this);
+								
 								System.out.println(initialPlayerCountry.get(key));
 								System.out.println("updated attacking country : "
 										+ initialPlayerCountry.get(currentPlayer.getName()));
