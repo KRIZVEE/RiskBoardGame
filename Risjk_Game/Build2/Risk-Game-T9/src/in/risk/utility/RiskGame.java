@@ -44,7 +44,6 @@ public class RiskGame extends Observable {
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 
 	Scanner sc = new Scanner(System.in);
-	
 
 	// @SuppressWarnings("unused")
 	static public Vector<Player> players = new Vector<Player>();
@@ -75,17 +74,14 @@ public class RiskGame extends Observable {
 	int oldCOuntryListSize = 0;
 	int newCOuntryListSize = 0;
 
-
 	/**
-//	 * This is the main method
-//	 * 
-//	 * @throws IOException
-//	 */
-//	public static void main(String[] args) throws IOException {
-//		System.out.println("Hello to Risk Game");
-//		RiskGame risk = new RiskGame();
-//		risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map");
-//	}
+	 * // * This is the main method // * // * @throws IOException //
+	 */
+	// public static void main(String[] args) throws IOException {
+	// System.out.println("Hello to Risk Game");
+	// RiskGame risk = new RiskGame();
+	// risk.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World.map");
+	// }
 
 	/**
 	 * This method is called to play the game.
@@ -516,6 +512,7 @@ public class RiskGame extends Observable {
 	}
 
 	public void attackPhase() throws IOException {
+
 		int noOfAttackerDice = 0;
 		int attacker, defender;
 		int attackerDiceArray[];
@@ -524,13 +521,10 @@ public class RiskGame extends Observable {
 		int noOfDefenderDice;
 		String defenderCountry;
 		int flagCheckDice = 0;
-		int indx = 0;// = value.
-		
+		int indx = 0;
+
 		String attackTurnOn = "hello";
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-		// Scanner sc1 = new Scanner(System.in);
-		// Scanner sc2 = new Scanner(System.in);
 
 		System.out.println("Current Player : " + currentPlayer.getName());
 		oldCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
@@ -543,8 +537,8 @@ public class RiskGame extends Observable {
 		System.out.println("Please enter the name of country, to which you want to attack");
 		defenderCountry = input.readLine();
 		countriesArmies.put(defenderCountry, 3);
-		System.out.println("Number of armies in the Attacker Country is : " + countriesArmies.get(attackerCountry));// +
-		// countriesArmies.get(currentPlayer.getArmies()));
+		System.out.println("Number of armies in the Attacker Country is : " + countriesArmies.get(attackerCountry));
+		System.out.println("Number of armies in the Defender Country is : " + countriesArmies.get(defenderCountry));
 
 		if (countriesArmies.get(attackerCountry) >= 2) {
 			System.out.println("As, You have minimum of 2 armies, you can attack");
@@ -570,7 +564,6 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < attackerDiceArray.length; i++) {
 				attackerDiceArray[i] = randomNumberGenerator();
 			}
-
 			if (countriesArmies.get(defenderCountry) >= 2) {
 
 				System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
@@ -605,137 +598,318 @@ public class RiskGame extends Observable {
 			}
 			System.out.println("");
 
-			System.out.println("Number of armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
-			System.out.println("Number of armies in Defender Country is : " + countriesArmies.get(defenderCountry));
-
 			if (noOfDefenderDice == 1) {
 				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
 					System.out.println(" Defender country loose 1 army");
 					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
-					if (updateArmyOfDefender == 2 || updateArmyOfDefender == 1) {
-						// defender player must remove country from defender
-						// owned list
-						// attacker player must own this country
-						// attacker player should move armies corresponig tot he
-						// no of dice thrown
-
-						/*
-						 * for (Entry<String, List<String>> entry :
-						 * map.entrySet()) { String key = entry.getKey(); List
-						 * value = entry.getValue(); List<String> tempList = new
-						 * ArrayList<String>();
-						 * tempList.add(value.get(1).toString());
-						 * tempList.add(value.get(2).toString());
-						 * countryCoordinates.put(key, tempList);
-						 * 
-						 * List<String> subList = value.subList(4,
-						 * value.size()); String continentName =
-						 * value.get(3).toString(); adj.put(key, subList);
-						 * countryContinent.put(key, continentName); }
-						 */
+					if (updateArmyOfDefender == 2) { // logic
 
 						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
 							String key = entry.getKey();
 							ArrayList<String> value = entry.getValue();
-							System.out.println("we are here : ");
-							System.out.println("key result is : " + key);
-							System.out.println("value result is : " + value);
-							System.out.println("===sop====" + initialPlayerCountry.get(key).equals(defenderCountry));
 							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
-
-								// value.toString();
 								for (int i = 0; i < value.size(); i++) {
-									System.out.println(i);
 									if (value.get(i).equals(defenderCountry)) {
 										indx = i;
-										System.out.println("==============");
-										System.out.println(indx);
 									}
 								}
-								System.out.println("our key currently : " + key);
-								System.out.println("our current value : " + value.get(indx));
-								System.out.println("lis udao");
-								
-
 								entry.getValue().remove(indx);
 								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 								setChanged();
 								notifyObservers(this);
-								
-								System.out.println(initialPlayerCountry.get(key));
-								System.out.println("updated attacking country : "
-										+ initialPlayerCountry.get(currentPlayer.getName()));
-								System.out.println("updated attacking country : "
-										+ initialPlayerCountry.get(currentPlayer.getName()).size());
+
+								// System.out.println("value of key is " + key +
+								// initialPlayerCountry.get(key));
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()));
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()).size());
 								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
 							}
 						}
-
 					} else {
 						countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					}
-					System.out.println(
-							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
-				} else {
-					System.out.println(" Attacker country loose 1 army");
-					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					countriesArmies.put(defenderCountry, updateArmyOfDefender);
+
 					System.out.println(
 							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} // end of attacker dice value greated than defender dice value
+					// of index 0
+				else {
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					if (updateArmyOfAttacker == 3) { // logic
+
+						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+							String key = entry.getKey();
+							ArrayList<String> value = entry.getValue();
+
+							if (initialPlayerCountry.get(key).contains(attackerCountry)) {
+								System.out.println("key is : " + key);
+								for (int i = 0; i < value.size(); i++) {
+									if (value.get(i).equals(attackerCountry)) {
+										indx = i;
+									}
+								}
+
+								// initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// System.out.println("index value is : " +
+								// indx);
+
+								initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// entry.getValue().remove(indx);
+
+								setChanged();
+								notifyObservers(this);
+
+							}
+							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
+								System.out.println("inside attaching loop");
+								initialPlayerCountry.get(key).add(attackerCountry);
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+
+								newCOuntryListSize = initialPlayerCountry.get(key).size();
+								System.out.println(" newCOuntryListSize " + newCOuntryListSize);
+							}
+
+						}
+
+					} else {
+						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					}
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
 				}
-			} else {
+
+			} // end of (noOfDefenderDice == 1) {
+				// no of dice = 2
+			else {
+
 				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
 					System.out.println(" Defender country loose 1 army");
 					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					if (updateArmyOfDefender == 2) { // logic
+
+						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+							String key = entry.getKey();
+							ArrayList<String> value = entry.getValue();
+							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
+								for (int i = 0; i < value.size(); i++) {
+									if (value.get(i).equals(defenderCountry)) {
+										indx = i;
+									}
+								}
+								entry.getValue().remove(indx);
+								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
+
+								setChanged();
+								notifyObservers(this);
+
+								// System.out.println("value of key is " + key +
+								// initialPlayerCountry.get(key));
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()));
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()).size());
+								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
+							}
+						}
+					} else {
+						countriesArmies.put(defenderCountry, updateArmyOfDefender);
+					}
 					countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					System.out.println(
-							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
-				} else {
-					System.out.println(" Attacker country loose 1 army");
-					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+
 					System.out.println(
 							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} // end of attacker dice value greated than defender dice value
+					// of index 0
+				else {
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					if (updateArmyOfAttacker == 3) { // logic
+
+						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+							String key = entry.getKey();
+							ArrayList<String> value = entry.getValue();
+
+							if (initialPlayerCountry.get(key).contains(attackerCountry)) {
+								System.out.println("key is : " + key);
+								for (int i = 0; i < value.size(); i++) {
+									if (value.get(i).equals(attackerCountry)) {
+										indx = i;
+									}
+								}
+
+								// initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// System.out.println("index value is : " +
+								// indx);
+
+								initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// entry.getValue().remove(indx);
+
+								setChanged();
+								notifyObservers(this);
+
+							}
+							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
+								System.out.println("inside attaching loop");
+								initialPlayerCountry.get(key).add(attackerCountry);
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+
+								newCOuntryListSize = initialPlayerCountry.get(key).size();
+								System.out.println(" newCOuntryListSize " + newCOuntryListSize);
+							}
+
+						}
+
+					} else {
+						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					}
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
 				}
-				if ((flagCheckDice == 1) && (attackerDiceArray[attackerDiceArray.length
-						- 2] > defenderDiceArray[defenderDiceArray.length - 2])) {
+
+				if (attackerDiceArray.length > 1 && attackerDiceArray[attackerDiceArray.length
+						- 2] > defenderDiceArray[defenderDiceArray.length - 2]) {
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
 					System.out.println(" Defender country loose 1 army");
 					int updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					if (updateArmyOfDefender == 1) { // logic
+
+						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+							String key = entry.getKey();
+							ArrayList<String> value = entry.getValue();
+							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
+								for (int i = 0; i < value.size(); i++) {
+									if (value.get(i).equals(defenderCountry)) {
+										indx = i;
+									}
+								}
+								entry.getValue().remove(indx);
+								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
+
+								setChanged();
+								notifyObservers(this);
+
+								// System.out.println("value of key is " + key +
+								// initialPlayerCountry.get(key));
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()));
+								// System.out.println("updated attacking country
+								// : " + key
+								// +
+								// initialPlayerCountry.get(currentPlayer.getName()).size());
+								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
+							}
+						}
+					} else {
+						countriesArmies.put(defenderCountry, updateArmyOfDefender);
+					}
 					countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					System.out.println(
-							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
-				} else if ((flagCheckDice == 1) && (attackerDiceArray[attackerDiceArray.length
-						- 2] <= defenderDiceArray[defenderDiceArray.length - 2])) {
-					System.out.println(" Attacker country loose 1 army");
-					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+
 					System.out.println(
 							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
+				} // end of attacker dice value greated than defender dice value
+					// of index 0
+				else {
+
+					System.out.println("old initialPlayerCountry : " + initialPlayerCountry);
+					System.out.println(" Attacker country loose 1 army");
+					int updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
+					if (updateArmyOfAttacker == 2) { // logic
+
+						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+							if (attackerDiceArray.length == 1)
+								break;
+							String key = entry.getKey();
+							ArrayList<String> value = entry.getValue();
+
+							if (initialPlayerCountry.get(key).contains(attackerCountry)) {
+								System.out.println("key is : " + key);
+								for (int i = 0; i < value.size(); i++) {
+									if (value.get(i).equals(attackerCountry)) {
+										indx = i;
+									}
+								}
+
+								// initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// System.out.println("index value is : " +
+								// indx);
+
+								initialPlayerCountry.get(currentPlayer.getName()).remove(indx);
+
+								// entry.getValue().remove(indx);
+
+								setChanged();
+								notifyObservers(this);
+
+							}
+							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
+								System.out.println("inside attaching loop");
+								initialPlayerCountry.get(key).add(attackerCountry);
+								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
+
+								newCOuntryListSize = initialPlayerCountry.get(key).size();
+								System.out.println(" newCOuntryListSize " + newCOuntryListSize);
+							}
+
+						}
+
+					} else {
+						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+					}
+					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+
+					System.out.println(
+							"New Value of Armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
+					System.out.println(
+							"New Value of Armies in Defender Country is : " + countriesArmies.get(defenderCountry));
 				}
 
 			}
 
-			System.out.println("Attacker Country " + countriesArmies.get(attackerCountry));
-			System.out.println("Defender Country " + countriesArmies.get(defenderCountry));
-		} else
+		} // end of attacking decision if having only 1 army
+		else
 			System.out.println("As you are having only 1 army, you can't attack");
-
-		System.out.println("Do you want to still attack to other countries, press Y/N");
-		attackTurnOn = input.readLine();
-		if (attackTurnOn.equals("Y")) {
-
-			attackPhase();
-		} else {
-
-			if (newCOuntryListSize > oldCOuntryListSize)
-				// int noOfCard =
-
-				fortify();
-		}
-
-	}// end of attackPhase
-		// need to keep global variable to collect armies
+	}// end of attack phase
 
 	public void cardType() {
 		String[] types = { "A", "B", "C" };
