@@ -909,6 +909,18 @@ public class RiskGame extends Observable {
 		} // end of attacking decision if having only 1 army
 		else
 			System.out.println("As you are having only 1 army, you can't attack");
+		System.out.println("Do you want to still attack to other countries, press Y/N");
+		attackTurnOn = input.readLine();
+		if (attackTurnOn.equals("Y")) {
+
+			attackPhase();
+		} else {
+
+			if (newCOuntryListSize > oldCOuntryListSize)
+				// int noOfCard =
+
+				fortify();
+		}
 	}// end of attack phase
 
 	public void cardType() {
