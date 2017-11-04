@@ -66,13 +66,24 @@ public class RiskGame extends Observable {
 	public Player currentPlayer;
 	public Player active;
 
+	int noOfPlayers = 0;
 	public int card = 0;
 	public int c = 0;
 	public int iter = 0;
 	public boolean drawn;
 	public int beforeA, currentA, afterA;
+	
+	//Added global variables for attack phase to find old and new country list size
 	int oldCOuntryListSize = 0;
 	int newCOuntryListSize = 0;
+	
+	//Added global variables for observer pattern for showing world dominance
+	
+	int currentPlayerCountrySize = 0;
+	double playerDominanceInPercent = 0;
+	
+
+	
 
 	/**
 	 * // * This is the main method // * // * @throws IOException //
@@ -511,6 +522,31 @@ public class RiskGame extends Observable {
 			fortify();
 	}
 
+	//Method implementing observer pattern for world dominance
+	/**
+	 * This method is regarding implementation of observer pattern for world domination percentage
+	 * @return This method returns number of countries owned by a player after loosing/winning a country 
+	 * in form of percentage and also numbers
+	 */
+	public HashMap<String,ArrayList<String>> getWorldDominance()
+	{
+		System.out.println("Total country size: " +countryFilter.size());
+		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) 
+			{
+			String key = entry.getKey();
+			ArrayList<String> value = entry.getValue();
+			double totalCountryListSize = countryFilter.size();
+			currentPlayerCountrySize = initialPlayerCountry.get(key).size();
+			playerDominanceInPercent = (currentPlayerCountrySize / totalCountryListSize) * 100;
+			System.out.println("Player: " +key +" " +"No of countries for players: " +initialPlayerCountry.get(key).size());
+			System.out.println("Player: " +key +" " +"World dominance in percentage: " +playerDominanceInPercent);
+		
+		}
+		return initialPlayerCountry;
+		
+	}
+	
+	
 	public void attackPhase() throws IOException {
 
 		int noOfAttackerDice = 0;
@@ -775,13 +811,17 @@ public class RiskGame extends Observable {
 
 								// entry.getValue().remove(indx);
 
-								setChanged();
-								notifyObservers(this);
+//								setChanged();
+//								notifyObservers(this);
 
 							}
 							if (initialPlayerCountry.get(key).contains(defenderCountry)) {
-								System.out.println("inside attaching loop");
+								System.out.println("inside attacking loop");
 								initialPlayerCountry.get(key).add(attackerCountry);
+								
+								setChanged();
+								notifyObservers();
+								
 								System.out.println("new initialPlayerCountry : " + initialPlayerCountry);
 
 								newCOuntryListSize = initialPlayerCountry.get(key).size();

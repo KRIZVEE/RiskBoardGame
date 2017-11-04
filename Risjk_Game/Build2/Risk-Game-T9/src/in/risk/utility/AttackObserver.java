@@ -1,5 +1,7 @@
 package in.risk.utility;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -10,9 +12,9 @@ public class AttackObserver implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		System.out.println("Old country list: " +risk1.oldCOuntryListSize);
-		System.out.println("New country list: " +risk1.newCOuntryListSize);
-		System.out.println("Attacked a country and conquered it !!!! WHoooooooAAAAAAA");
+		System.out.println("Obserever pattern starts: ");
+		HashMap<String,ArrayList<String>> currentWorldCountries = ((RiskGame)o).getWorldDominance();
+		System.out.println("Current number of countries owned by all players: " +currentWorldCountries);
 		
 	}
 }
