@@ -1,14 +1,18 @@
 package in.risk.utility;
 
-import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 //package in.risk.utility;
 
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
@@ -26,6 +30,8 @@ import java.util.Vector;
  */
 public class RiskGame extends Observable {
 
+	Player obj = new Player();
+
 	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
 	public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
 
@@ -42,7 +48,7 @@ public class RiskGame extends Observable {
 	public static ArrayList<String> xPoints = new ArrayList<String>();
 	public static ArrayList<String> yPoints = new ArrayList<String>();
 	public static ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
-	public static HashMap<String, Integer> continentValue = new HashMap<String , Integer>();
+	public static HashMap<String, Integer> continentValue = new HashMap<String, Integer>();
 	public static ArrayList<String> cardType = new ArrayList<String>();
 	public static ArrayList<String> deck = new ArrayList<String>();
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
@@ -50,10 +56,10 @@ public class RiskGame extends Observable {
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
 
-	Scanner sc = new Scanner(System.in);
+	static Scanner sc = new Scanner(System.in);
 
 	// @SuppressWarnings("unused")
-	static public Vector<Player> players = new Vector<Player>();
+	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
 
 	public ArrayList<String> continentList = new ArrayList<String>();
 	// public ArrayList<String> countryFilter = new ArrayList<String>();
@@ -65,12 +71,12 @@ public class RiskGame extends Observable {
 	public ArrayList<String> initialCountries = new ArrayList<String>();
 
 	public Vector<String> adjacents;
-	public HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
-	public HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
+	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
+	public static HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
 	public HashMap<String, Integer> playerTurn = new HashMap<String, Integer>();
 
-	public Player currentPlayer;
-	public Player active;
+	public static PlayerToPlay currentPlayer;
+	public PlayerToPlay active;
 
 	public static String cardTypeA = "A";
 	public static String cardTypeB = "B";
@@ -80,22 +86,24 @@ public class RiskGame extends Observable {
 	int noOfPlayers = 0;
 	public int card = 0;
 	public int c = 0;
-	public int iter = 0;
-	public int noOfReinforcementArmies = 0;
+	public static int iter = 0;
+	public static int noOfReinforcementArmies = 0;
 	public boolean drawn;
-	public int beforeA, currentA, afterA;
-	
-	//Added global variables for attack phase to find old and new country list size
+	public static int beforeA;
+
+	public static int currentA;
+
+	public static int afterA;
+
+	// Added global variables for attack phase to find old and new country list
+	// size
 	int oldCOuntryListSize = 0;
 	int newCOuntryListSize = 0;
-	
-	//Added global variables for observer pattern for showing world dominance
-	
+
+	// Added global variables for observer pattern for showing world dominance
+
 	int currentPlayerCountrySize = 0;
 	double playerDominanceInPercent = 0;
-	
-
-	
 
 	/**
 	 * // * This is the main method // * // * @throws IOException //
@@ -115,12 +123,13 @@ public class RiskGame extends Observable {
 		initialPlayer();
 		initialPlayerCountries();
 		distributeArmies();
-		placeCardsInTheDeck();
-		placeCardsInTheDeck2();
-		initialCardDistribution();
+		obj.placeCardsInTheDeck();
+		obj.placeCardsInTheDeck2();
+		obj.initialCardDistribution();
 		initiallyPlaceArmies();
-//		System.out.println(playersCards.get(currentPlayer.getName()));
-//		getArmiesFromCards();
+
+		// System.out.println(playersCards.get(currentPlayer.getName()));
+		// getArmiesFromCards();
 		// placeArmies();
 		gamePhase();
 		// distributeCards();
@@ -226,6 +235,17 @@ public class RiskGame extends Observable {
 
 	}
 
+	public void loggingString(String whatToLog) throws IOException {
+		FileWriter fw = new FileWriter("Resources/log.txt", true);
+		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter pw = new PrintWriter(bw);
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
+		pw.flush();
+		pw.close();
+	}
+
 	/**
 	 * this method is used to iterate over the hashmap to obtain particular
 	 * values </br>
@@ -255,6 +275,8 @@ public class RiskGame extends Observable {
 
 		System.out.println("Please enter how many players you want to play with, Choose between 3 and 6");
 		noOfPlayers = sc.nextInt();
+
+		loggingString(noOfPlayers + " players are choosen by the user to play the game.");
 		// SelectPlayerLogic(String sc , String sc2, int numofplyrs, String
 		// Plyrname);
 		if (noOfPlayers == 3) {
@@ -288,6 +310,7 @@ public class RiskGame extends Observable {
 		} else {
 			System.out.println("Please enter a valid no of players to play with");
 		}
+
 	}
 
 	/**
@@ -303,8 +326,11 @@ public class RiskGame extends Observable {
 		if (size > 6) {
 			return false;
 		}
-		Player p = new Player(nm, size);
+		PlayerToPlay p = new PlayerToPlay(nm, size);
 		players.add(p);
+		PrintWriter writer = new PrintWriter("Resources/log.txt");
+		writer.print("");
+		writer.close();
 		return true;
 	}
 
@@ -344,7 +370,7 @@ public class RiskGame extends Observable {
 	 * This method calls next player in the game and also calls method for play
 	 * cards
 	 */
-	public void nextPlayer() throws IOException {
+	public static void nextPlayer() throws IOException {
 		if (currentPlayer == players.lastElement()) {
 			currentPlayer = players.elementAt(0);
 			iter = 0;
@@ -517,6 +543,7 @@ public class RiskGame extends Observable {
 
 	/**
 	 * This method is used to select the phase by the current player.
+	 * 
 	 * @return
 	 */
 	public int selectPhase() {
@@ -533,47 +560,53 @@ public class RiskGame extends Observable {
 
 	/**
 	 * This method is used to implement the different game phases.
+	 * 
 	 * @throws IOException
 	 */
 	public void gamePhase() throws IOException {
-		int x = selectPhase();
-		System.out.println(x);
 
-		if (x == 1)
-			reinforcementPhase();
-		else if (x == 2)
-			attackPhase();
-		else
-			fortify();
+		obj.reinforcementPhase();
+
+		// int x = selectPhase();
+		// System.out.println(x);
+		//
+		// if (x == 1)
+		// reinforcementPhase();
+		// else if (x == 2) {
+		// obj.attackPhase();
+		// } else
+		// System.out.println("====");
+		// // obj.fortify(currentPlayer);
 	}
 
 	/**
-	 * This method is regarding implementation of observer pattern for world domination percentage
-	 * @return This method returns number of countries owned by a player after loosing/winning a country 
-	 * in form of percentage and also numbers
+	 * This method is regarding implementation of observer pattern for world
+	 * domination percentage
+	 * 
+	 * @return This method returns number of countries owned by a player after
+	 *         loosing/winning a country in form of percentage and also numbers
 	 */
-	public HashMap<String,ArrayList<String>> getWorldDominance()
-	{
-		System.out.println("Total country size: " +countryFilter.size());
-		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) 
-			{
+	public HashMap<String, ArrayList<String>> getWorldDominance() {
+		System.out.println("Total country size: " + countryFilter.size());
+		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
 			String key = entry.getKey();
 			ArrayList<String> value = entry.getValue();
 			double totalCountryListSize = countryFilter.size();
 			currentPlayerCountrySize = initialPlayerCountry.get(key).size();
 			playerDominanceInPercent = (currentPlayerCountrySize / totalCountryListSize) * 100;
-			System.out.println("Player: " +key +" " +"No of countries for players: " +initialPlayerCountry.get(key).size());
-			System.out.println("Player: " +key +" " +"World dominance in percentage: " +playerDominanceInPercent);
-		
+			System.out.println(
+					"Player: " + key + " " + "No of countries for players: " + initialPlayerCountry.get(key).size());
+			System.out.println("Player: " + key + " " + "World dominance in percentage: " + playerDominanceInPercent);
+
 		}
 		return initialPlayerCountry;
-		
+
 	}
-	
+
 	/**
 	 * This method is used to generate the random number.
 	 */
-	public int randomNumberGenerator() {
+	public static int randomNumberGenerator() {
 		int randomNumber;
 		Random random = new Random(); /* <-- this is a constructor */
 		randomNumber = random.nextInt(6)
@@ -583,746 +616,6 @@ public class RiskGame extends Observable {
 						 * to the result
 						 */
 		return randomNumber;
-	}
-
-	public static void placeCardsInTheDeck(){
-		cardType.add(cardTypeA);
-		cardType.add(cardTypeB);
-		cardType.add(cardTypeC); 
-		int j = 0;
-		cardInTheDeck = countryFilter.size();
-		for(int i = 0; i < cardInTheDeck ; i++){
-			deck.add(cardType.get(j));
-			j++;
-			if(j == 3){
-				j = 0;
-			}
-		}
-	}
-	
-	public static void placeCardsInTheDeck2(){
-		cardType.add(cardTypeA);
-		cardType.add(cardTypeB);
-		cardType.add(cardTypeC); 
-		int j = 0;
-		cardInTheDeck = countryFilter.size();
-		for(int i = 0; i < cardInTheDeck ; i++){
-			cardsInTheDeck.add(cardType.get(j));
-			j++;
-			if(j == 3){
-				j = 0;
-			}
-		}
-	}
-	
-	public void initialCardDistribution(){
-		int size = players.size();
-		for (int i = 0; i < size; i++) {
-			playersCards.put(players.get(i).getName(),deck.subList(0, deck.size()/5));
-		}
-	}
-	
-	public void checkUniqueCombination(int tempSize) throws IOException {
-		List<Integer> tempListA = new ArrayList<Integer>();
-		List<Integer> tempListB = new ArrayList<Integer>();
-		List<Integer> tempListC = new ArrayList<Integer>();
-		for (int i = 0; i <tempSize ; i++) {
-			if(playersCards.get(currentPlayer.getName()).get(i).contains("A")) {
-				tempListA.add(i);
-			}
-		}
-		for (int i = 0; i <tempSize ; i++) {
-			if(playersCards.get(currentPlayer.getName()).get(i).contains("B")) {
-				tempListB.add(i);
-			}
-		}
-		for (int i = 0; i <tempSize ; i++) {
-			if(playersCards.get(currentPlayer.getName()).get(i).contains("C")) {
-				tempListC.add(i);
-			}
-		}
-		if(tempListA.size() >= 3) {
-			int firstIndexToRemove = tempListA.get(0);
-			int secondIndexToRemove = tempListA.get(1);
-			int thirdIndexToRemove = tempListA.get(2);
-			cardsInTheDeck.add("A");
-			cardsInTheDeck.add("A");
-			cardsInTheDeck.add("A");
-			playersCards.get(currentPlayer.getName()).remove(firstIndexToRemove);
-			playersCards.get(currentPlayer.getName()).remove(secondIndexToRemove-1);
-			playersCards.get(currentPlayer.getName()).remove(thirdIndexToRemove-2);
-			noOfReinforcementArmies += 5*cardFlag;
-			cardFlag +=1;
-			tempListA.clear();
-			getArmiesFromCards();
-		}
-		else if(tempListB.size() >= 3) {
-			int firstIndexToRemove = tempListB.get(0);
-			int secondIndexToRemove = tempListB.get(1);
-			int thirdIndexToRemove = tempListB.get(2);
-			cardsInTheDeck.add("B");
-			cardsInTheDeck.add("B");
-			cardsInTheDeck.add("B");
-			playersCards.get(currentPlayer.getName()).remove(firstIndexToRemove);
-			playersCards.get(currentPlayer.getName()).remove(secondIndexToRemove-1);
-			playersCards.get(currentPlayer.getName()).remove(thirdIndexToRemove-2);
-			noOfReinforcementArmies += 5*cardFlag;
-			cardFlag +=1;
-			tempListB.clear();
-			getArmiesFromCards();
-		}else if(tempListC.size() >= 3) {
-			int firstIndexToRemove = tempListC.get(0);
-			int secondIndexToRemove = tempListC.get(1);
-			int thirdIndexToRemove = tempListC.get(2);
-			cardsInTheDeck.add("C");
-			cardsInTheDeck.add("C");
-			cardsInTheDeck.add("C");
-			playersCards.get(currentPlayer.getName()).remove(firstIndexToRemove);
-			playersCards.get(currentPlayer.getName()).remove(secondIndexToRemove-1);
-			playersCards.get(currentPlayer.getName()).remove(thirdIndexToRemove-2);
-			noOfReinforcementArmies += 5*cardFlag;
-			cardFlag +=1;
-			tempListC.clear();
-			getArmiesFromCards();
-		}
-	}
-
-	public void checkDiscreteCombination() {
-		List<Integer> tempListABCFirst = new ArrayList<Integer>();
-		List<Integer> tempListABCSecond = new ArrayList<Integer>();
-		int flagForA = 0;
-		int flagForB = 0;
-		int flagForC = 0;
-		String value;
-		for(int i = 0; i < playersCards.get(currentPlayer.getName()).size(); i++) {
-			value = playersCards.get(currentPlayer.getName()).get(i);
-			if(value.equals("A")) {
-				if(flagForA <= 1) {
-					if(flagForA == 0) {
-						tempListABCFirst.add(i);
-					}else if(flagForA == 1) {
-						tempListABCSecond.add(i);
-					}
-					flagForA += 1;
-				}
-			}else if(value.equals("B")) {
-				if(flagForB <= 1) {
-					if(flagForB == 0) {
-						tempListABCFirst.add(i);
-					}else if(flagForB == 1) {
-						tempListABCSecond.add(i);
-					}
-					flagForB += 1;
-				}
-				
-			}else if(value.equals("C")) {
-				if(flagForC <= 1) {
-					if(flagForC == 0) {
-						tempListABCFirst.add(i);
-					}else if(flagForC == 1) {
-						tempListABCSecond.add(i);
-					}
-					flagForC += 1;
-				}
-				
-			}
-	}
-		if(tempListABCFirst.size() >= 3) {
-			int firstIndexToRemove = tempListABCFirst.get(0);
-			int secondIndexToRemove = tempListABCFirst.get(1);
-			int thirdIndexToRemove = tempListABCFirst.get(2);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(firstIndexToRemove));
-			playersCards.get(currentPlayer.getName()).remove(firstIndexToRemove);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(secondIndexToRemove-1));
-			playersCards.get(currentPlayer.getName()).remove(secondIndexToRemove-1);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(thirdIndexToRemove-2));
-			playersCards.get(currentPlayer.getName()).remove(thirdIndexToRemove-2);
-			noOfReinforcementArmies += 5*cardFlag;
-			cardFlag += 1;
-		}
-		if(tempListABCSecond.size() >= 3) {
-			int fourthIndexToRemove = tempListABCSecond.get(0);
-			int fifthIndexToRemove = tempListABCSecond.get(1);
-			int sixthINdexToRemove = tempListABCSecond.get(2);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(fourthIndexToRemove-3));
-			playersCards.get(currentPlayer.getName()).remove(fourthIndexToRemove-3);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(fifthIndexToRemove-4));
-			playersCards.get(currentPlayer.getName()).remove(fifthIndexToRemove-4);
-			cardsInTheDeck.add(playersCards.get(currentPlayer.getName()).get(sixthINdexToRemove-5));
-			playersCards.get(currentPlayer.getName()).remove(sixthINdexToRemove-5);
-			noOfReinforcementArmies += 5*cardFlag;
-			cardFlag += 1;
-		}
-	}
-	
-	/**
-	 * This method is about trading of cards and getting armies in return.
-	 * Armies added will be as per the game logic.
-	 */
-	public void getArmiesFromCards() throws IOException {
-		
-		System.out.println(playersCards.get(currentPlayer.getName()));
-		int tempSize = playersCards.get(currentPlayer.getName()).size();
-		
-//				System.out.println(playersCards.get(currentPlayer.getName()));
-		if(tempSize >= 5) {
-			checkUniqueCombination(tempSize);
-			checkDiscreteCombination();
-		}else {
-			String result;
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Now you have less than 5 cards. Do you want to play cards now? Y/N");
-			result = sc.nextLine();
-			if(result.equals("Y")) {
-				checkUniqueCombination(playersCards.get(currentPlayer.getName()).size());
-				checkDiscreteCombination();
-			}
-		}
-	}
-	
-	/**
-	 * This method is used to get reinforcement armies from owned
-	 * continents.
-	 */
-	public void getArmiesaFromContinet() {
-		for (Entry<String, List<String>> entry : continentCountries.entrySet()) {
-			String Key = entry.getKey();
-			List<String> value = entry.getValue();
-//			System.out.println(value);
-			for (int i = 0; i < initialPlayerCountry.get(currentPlayer.getName()).size(); i++) {
-				resultOfContinentCountry.add(value.contains(initialPlayerCountry.get(currentPlayer.getName()).get(i)));
-			}
-//			System.out.println(initialPlayerCountry.get(currentPlayer.getName()));
-			if(resultOfContinentCountry.contains(false)) {
-				noOfReinforcementArmies = noOfReinforcementArmies + 0;
-			}else if(resultOfContinentCountry.contains(true)) {
-				noOfReinforcementArmies = noOfReinforcementArmies + continentValue.get(Key);
-			}
-			resultOfContinentCountry.clear();
-		}
-	}
-	
-	/**
-	 * This method is used to get reinforcement armies from owned
-	 * countries.
-	 */
-	public void getArmiesFromCountries() {
-		int sizeOfCountriesCurrentPlayerOwn = initialPlayerCountry.get(currentPlayer.getName()).size();
-
-		if(sizeOfCountriesCurrentPlayerOwn < 9) {
-			noOfReinforcementArmies = noOfReinforcementArmies + 3;
-		}else {
-			noOfReinforcementArmies = noOfReinforcementArmies + sizeOfCountriesCurrentPlayerOwn/3;
-		}
-	}
-	
-	/**
-	 * This method places armies in their countries as per reinforcement phase
-	 * of the game.
-	 */
-	public void placeReinforcementArmies() throws IOException {
-		
-		
-		// Start Of counting reinforcement armies from continet value.
-		getArmiesaFromContinet();
-		int noOfArmiesFromContinents = noOfReinforcementArmies;
-		System.out.println("You have " + initialPlayerCountry.get(currentPlayer.getName()));
-		System.out.println("You got " + noOfArmiesFromContinents + " from you continets.");
-		// end of counting reinforcement armies from continet value.
-		
-		// Start Of counting reinforcement armies from number of countries owned by player.
-		getArmiesFromCountries();
-		int noOfArmiesFromCountries = noOfReinforcementArmies - noOfArmiesFromContinents;
-		System.out.println("You have " + initialPlayerCountry.get(currentPlayer.getName()).size()+ " no of countries.");
-		System.out.println("Your got " + noOfArmiesFromCountries + " from your countris.");
-		// end of counting reinforcement armies from number of countries owned by player.
-		
-		//Start of counting number of reinforcement armies on the basis of card trade.
-		getArmiesFromCards();
-		int noOfArmiesFromCards = noOfReinforcementArmies - (noOfArmiesFromCountries+noOfArmiesFromContinents);
-		System.out.println("You got " + noOfArmiesFromCards + " armies from tradin cards");
-		//End of counting number of reinforcement armies on the basis of card trade.
-		
-		System.out.println("Cards in the deck" + cardsInTheDeck);
-		System.out.println(currentPlayer.getName() + " has " + noOfReinforcementArmies + " number of reinforcement armies");
-		Scanner sc = new Scanner(System.in);
-		Scanner sc1 = new Scanner(System.in);
-		String countryNameToEnterArmies;
-		int noOfArmiesWantToPlace;
-
-		beforeA = currentPlayer.getArmies();// 17
-		int newSize = noOfReinforcementArmies;
-		currentPlayer.addArmies(newSize);
-		currentA = currentPlayer.getArmies();// 23
-		while (currentPlayer.getArmies() > 0) {
-			System.out.println(currentPlayer.getName() + " You have " + currentPlayer.getArmies() + " armies." + "\n");
-			System.out.println("And you own " + initialPlayerCountry.get(currentPlayer.getName()) + "\n");
-			System.out.println("Enter the name of country where you wan to place armies" + "\n");
-			countryNameToEnterArmies = sc.nextLine();
-			if (!initialPlayerCountry.get(currentPlayer.getName()).contains(countryNameToEnterArmies)) {
-				System.out.println("You dont own this country" + "\n");
-			} else {
-				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies + "\n");
-				noOfArmiesWantToPlace = sc1.nextInt();// 10
-				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace);
-//				gamePhase();
-			}
-		}
-	}
-
-	/**
-	 * This method is called in the placeREinforcementArmies to place reinforcement
-	 * armies in the given country by the use.
-	 */
-	public void placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace)
-			throws IOException {
-		if (noOfArmiesWantToPlace > currentPlayer.getArmies()) {
-			System.out.println("You don't have suffecient armies" + "\n");
-		} else {
-			int initialAriesCountryOwn = countriesArmies.get(countryNameToEnterArmies);
-			int finalArmiesCOuntryHave = initialAriesCountryOwn + noOfArmiesWantToPlace;
-			countriesArmies.put(countryNameToEnterArmies, finalArmiesCOuntryHave);
-			System.out.println(noOfArmiesWantToPlace + "\n");
-			currentPlayer.loosArmies(noOfArmiesWantToPlace);
-			afterA = currentPlayer.getArmies();// 13
-
-		}
-	}
-
-	/**
-	 * This method executes sub method for reinforcement phase of the game
-	 */
-	public void reinforcementPhase() throws IOException {
-		placeReinforcementArmies();
-		attackPhase();
-	}
-
-	public void attackPhase() throws IOException {
-		int noOfAttackerDice = 0;
-		int attacker, defender;
-		int attackerDiceArray[];
-		int defenderDiceArray[];
-		String attackerCountry;
-		int noOfDefenderDice;
-		String defenderCountry;
-		int flagCheckDice = 0;
-		int indx = 0;// = value.
-		int oldCOuntryListSize = 0;
-		int newCOuntryListSize = 0;
-		String newDefenderCountry = "";
-		int updateArmyOfAttacker;
-		int updateArmyOfDefender;
-
-		String attackTurnOn = "hello";
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-		// Scanner sc1 = new Scanner(System.in);
-		// Scanner sc2 = new Scanner(System.in);
-
-		/*
-		 * Alaska,70,126,South America,Alberta Alberta,147,163,North
-		 * America,Alaska,Ontario Greenland,324,76,South
-		 * America,Ontario,Quebec,Iceland Ontario,199,167,North
-		 * America,Alberta,Greenland,Quebec Quebec,253,166,North
-		 * America,Greenland,Ontario
-		 * 
-		 * Venezuala,259,303,South America,Central America,Peru,Brazil
-		 * Peru,262,349,South America,Venezuala,Brazil,Argentina
-		 * Argentina,263,407,South America,Peru,Brazil Brazil,308,337,South
-		 * America,Venezuala,Peru,Argentina
-		 */
-		countriesArmies.put("India", 3);
-		countriesArmies.put("China", 1);
-//		countriesArmies.put("Ontario", 2);
-//		countriesArmies.put("Quebec", 2);
-//		countriesArmies.put("Venezuala", 1);
-//		countriesArmies.put("Peru", 2);
-//		countriesArmies.put("Argentina", 1);
-//		countriesArmies.put("Brazil", 4);
-//		countriesArmies.put("Alberta", 2);
-
-		System.out.println("Initailly player country list before any attack : " + initialPlayerCountry);
-		System.out.println("Initailly player country list with initial army : " + countriesArmies);
-
-		System.out.println("Current Player : " + currentPlayer.getName());
-		oldCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
-		System.out.println("Please enter the name of country from where you want to attack");
-		attackerCountry = input.readLine();
-		// countriesArmies.put(attackerCountry, 4);
-
-		System.out.println("No of armies in the attacker country : " + countriesArmies.get(attackerCountry));
-		// HashMap<String, List<String>> attckerCountryAdjacent = new
-		// HashMap<String, List<String>>();
-		List<String> attackerCountryAdjacent = new ArrayList<String>();
-		int size = initialPlayerCountry.get(currentPlayer.getName()).size();
-//		System.out.println(initialPlayerCountry.get(currentPlayer.getName()).size());
-		int size2 = adj.get(attackerCountry).size();
-		for (int i = 0; i < size2; i++) {
-			if (initialPlayerCountry.get(currentPlayer.getName()).contains(adj.get(attackerCountry).get(i))) {
-				continue;
-			} else {
-				attackerCountryAdjacent.add(adj.get(attackerCountry).get(i));
-			}
-		}
-
-		// for (Entry<String, List<String>> entry : adj.entrySet()) {
-		// String key = entry.getKey();
-		// List<String> value = entry.getValue();
-		//
-		// System.out.println("Valu is " + value);
-		// // if (key.equals(attackerCountry)) {
-		// // for (int i = 0; i < value.size(); i++) {
-		// // // System.out.println(attackerCountry.contains(value.get(i)));
-		// // if (key.contains(value.get(i)))
-		// // continue;
-		// // else
-		// // attackerCountryAdjacent.add(value.get(i));
-		// //
-		// // }
-		// // }
-		//
-		// }
-
-		// System.out.println("Based on this country name, you can attack to
-		// corresponding countries only : "
-		// + adj.get(attackerCountry)); // need to work here
-		System.out.println("Based on this country name, you can attack to corresponding countries only : "
-				+ attackerCountryAdjacent); // need to work here
-		System.out.println("Please enter the name of country, to which you want to attack");
-		defenderCountry = input.readLine();
-		System.out.println("No of armies in the defender country : " + countriesArmies.get(defenderCountry));
-
-		// countriesArmies.put(defenderCountry, 1);
-
-		if (countriesArmies.get(attackerCountry) >= 2) {
-			System.out.println("As, You have minimum of 2 armies, you can attack");
-
-			if (countriesArmies.get(attackerCountry) > 3) {
-				System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice to be rolled");
-				noOfAttackerDice = sc.nextInt();
-			} else if (countriesArmies.get(attackerCountry) == 3) {
-				// flagCheckDice = 1;
-				System.out.println("Attacker Country Player, can opt among 1 or 2 dice to be rolled");
-				noOfAttackerDice = sc.nextInt();
-			} else if (countriesArmies.get(attackerCountry) == 2) {
-				System.out.println(
-						"Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
-								+ attackerCountry);
-				noOfAttackerDice = 1;
-			}
-			if (noOfAttackerDice == 2 || noOfAttackerDice == 3)
-				flagCheckDice = 1;
-
-			attackerDiceArray = new int[noOfAttackerDice];
-
-			for (int i = 0; i < attackerDiceArray.length; i++) {
-				attackerDiceArray[i] = randomNumberGenerator();
-			}
-
-			if (countriesArmies.get(defenderCountry) >= 2) {
-
-				System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
-				noOfDefenderDice = sc.nextInt();
-
-			} else {
-				System.out.println(
-						"Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
-								+ defenderCountry);
-				noOfDefenderDice = 1;
-			}
-
-			defenderDiceArray = new int[noOfDefenderDice];
-
-			for (int i = 0; i < defenderDiceArray.length; i++) {
-				defenderDiceArray[i] = randomNumberGenerator();
-			}
-
-			System.out.println("Attacker Dice value are as follow : ");
-
-			Arrays.sort(attackerDiceArray);
-			for (int i = 0; i < attackerDiceArray.length; i++) {
-				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
-			}
-			System.out.println("");
-			Arrays.sort(defenderDiceArray);
-
-			System.out.println("Defender Dice value are as follow : ");
-
-			for (int i = 0; i < defenderDiceArray.length; i++) {
-				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
-			}
-			System.out.println("");
-
-			System.out.println("Number of armies in Attacker Country is : " + countriesArmies.get(attackerCountry));
-			System.out.println("Number of armies in Defender Country is : " + countriesArmies.get(defenderCountry));
-
-			if (noOfDefenderDice == 1) {
-
-				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
-					System.out.println(" Defender country loose 1 army");
-					updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
-					if (updateArmyOfDefender == 0) {
-
-						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
-							String key = entry.getKey();
-							ArrayList<String> value = entry.getValue();
-
-							if ((initialPlayerCountry.get(key).contains(defenderCountry))
-									&& key != currentPlayer.getName()) {
-
-								for (int i = 0; i < value.size(); i++) {
-									if (value.get(i).equals(defenderCountry)) {
-										indx = i;
-										break;
-									}
-								}
-								entry.getValue().remove(indx);
-								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
-
-								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-							}
-						}
-
-						countriesArmies.put(defenderCountry, noOfAttackerDice);
-
-					} else {
-						countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					}
-					System.out.println("new list of initial player country" + initialPlayerCountry);
-					System.out.println("Initailly player country list with initial army : " + countriesArmies);
-
-				} else {//// DCD(0) > ACD(0)// for defender dice == 1
-					System.out.println(" Attacker country loose 1 army");
-					updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-
-					countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-
-					System.out.println("new list of initial player country" + initialPlayerCountry);
-					System.out.println("Initailly player country list with initial army : " + countriesArmies);
-				}
-			} // end of defenderdice ==1
-
-			else {
-
-				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
-					System.out.println(" Defender country loose 1 army");
-					updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
-					countriesArmies.put(defenderCountry, updateArmyOfDefender);
-
-					if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length
-							- 2]) {
-						System.out.println(" Defender country loose 1 more army");
-						updateArmyOfDefender = updateArmyOfDefender - 1;
-						countriesArmies.put(defenderCountry, updateArmyOfDefender);
-
-						if (updateArmyOfDefender == 0) {
-
-							for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
-								String key = entry.getKey();
-								ArrayList<String> value = entry.getValue();
-
-								if ((initialPlayerCountry.get(key).contains(defenderCountry))
-										&& key != currentPlayer.getName()) {
-
-									for (int i = 0; i < value.size(); i++) {
-										if (value.get(i).equals(defenderCountry)) {
-											indx = i;
-											break;
-										}
-									}
-									entry.getValue().remove(indx);
-									initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
-
-									newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-								}
-							}
-
-							countriesArmies.put(defenderCountry, noOfAttackerDice);
-
-						} else {
-							countriesArmies.put(defenderCountry, updateArmyOfDefender);
-						}
-						System.out.println("new list of initial player country" + initialPlayerCountry);
-						System.out.println("Initailly player country list with initial army : " + countriesArmies);
-					} else {
-						System.out.println(" Attacker country loose 1 army");
-						updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-
-						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-
-						System.out.println("new list of initial player country" + initialPlayerCountry);
-						System.out.println("Initailly player country list with initial army : " + countriesArmies);
-
-					}
-
-				} else {
-					if (attackerDiceArray[attackerDiceArray.length - 1] <= defenderDiceArray[defenderDiceArray.length
-							- 1]) {
-						System.out.println(" Attacker country loose 1 army");
-						updateArmyOfAttacker = countriesArmies.get(attackerCountry) - 1;
-						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-
-						if (attackerDiceArray[attackerDiceArray.length
-								- 2] <= defenderDiceArray[defenderDiceArray.length - 2]) {
-							System.out.println(" Attacker country loose 1 more army");
-							updateArmyOfAttacker -= 1;
-							countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-
-						} else {
-							System.out.println(" Defender country loose 1 more army");
-							updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
-							countriesArmies.put(defenderCountry, updateArmyOfDefender);
-
-							if (updateArmyOfDefender == 0) {
-
-								for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
-									String key = entry.getKey();
-									ArrayList<String> value = entry.getValue();
-
-									if ((initialPlayerCountry.get(key).contains(defenderCountry))
-											&& key != currentPlayer.getName()) {
-
-										for (int i = 0; i < value.size(); i++) {
-											if (value.get(i).equals(defenderCountry)) {
-												indx = i;
-												break;
-											}
-										}
-										entry.getValue().remove(indx);
-										initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
-
-										newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-									}
-								}
-
-								countriesArmies.put(defenderCountry, noOfAttackerDice);
-
-							} else {
-								countriesArmies.put(defenderCountry, updateArmyOfDefender);
-							}
-
-						}
-
-						countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-
-						System.out.println("new list of initial player country" + initialPlayerCountry);
-						System.out.println("Initailly player country list with initial army : " + countriesArmies);
-					}
-
-				}
-			}
-		} else
-			System.out.println("As you are having only 1 army, you can't attack");
-
-		System.out.println("Do you want to still attack to other countries, press Y/N");
-		attackTurnOn = input.readLine();
-		if (attackTurnOn.equals("Y")) {
-
-			attackPhase();
-		} else {
-
-			if (newCOuntryListSize > oldCOuntryListSize) {
-
-				// code for card need to be done here
-				int indexOfCardToBeGet = (int) (Math.random() * ( cardsInTheDeck.size() - 0 ));
-				playersCards.get(currentPlayer.getName()).add(cardsInTheDeck.get(indexOfCardToBeGet));
-				cardsInTheDeck.remove(indexOfCardToBeGet);
-				setChanged();
-				notifyObservers(this);
-			}
-
-			fortify();
-		}
-
-	}// end of attackPhase
-		// need to keep global variable to collect armies
-	
-	/**
-	 * This method is related to fortification phase of the game where player
-	 * can transfer his armies from one country to another country.
-	 */
-	public void fortify() throws IOException {
-		Scanner scFrom = new Scanner(System.in);
-		System.out.println(currentPlayer.getName());
-		System.out.println("You have these countries under your control " + initialPlayerCountry.get(currentPlayer.getName()));
-		System.out.println("Enter the name of country from which you want to move armies.");
-		String from;
-		from = scFrom.nextLine();
-		System.out.println(from);
-//		System.out.println("You can move armies to these many countries only from your chosen country.");
-//		System.out.println(adj.get(from));
-		
-//		System.out.println(adj.get(from));
-//		System.out.println(initialPlayerCountry.get(currentPlayer.getName()));
-		int tempCountrySize = initialPlayerCountry.get(currentPlayer.getName()).size();
-		int tempAdjSize = adj.get(from).size();
-//		System.out.println(tempAdjSize);
-//		System.out.println(tempCountrySize);
-		ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
-		for(int i = 0; i < tempAdjSize; i++){
-			for(int j = 0; j < tempCountrySize; j++){
-				if(initialPlayerCountry.get(currentPlayer.getName()).get(j).contains(adj.get(from).get(i))){
-					tempAdjCountryToWhichWeCanMOve.add(adj.get(from).get(i));
-				}
-			}
-		}
-//		System.out.println(tempAdjCountryToWhichWeCanMOve);
-		Scanner scto = new Scanner(System.in);
-		System.out.println("Select the countries from your owned countries  and adjacent to " + from + " where you want to move your armies");
-//		System.out.println(adj.get(from));
-		System.out.println(tempAdjCountryToWhichWeCanMOve);
-		String to;
-		int numberOfArmiesToMove;
-		to = scto.nextLine();
-//		System.out.println(to);
-//		System.out.println(adj.get(from));
-//		System.out.println("adjacentsMap: " + adj);
-//		System.out.println(initialPlayerCountry);
-		if(tempAdjCountryToWhichWeCanMOve.contains(to)){
-			System.out.println(currentPlayer.getName() + " you have " + countriesArmies.get(from) + " armies on " + from + ".");
-			System.out.println("Please Enter the number of armies you want to move to " + "" + to + " " + "country.s");
-            numberOfArmiesToMove = sc.nextInt();
-//            System.out.println(from + " " + countriesArmies.get(from));
-//            System.out.println(to);
-            if(countriesArmies.get(from) > 1){
-            	int currentArmiesOfToCountry = countriesArmies.get(to);
-                int newArmiesToAdd = currentArmiesOfToCountry + numberOfArmiesToMove;
-                countriesArmies.put(to, newArmiesToAdd);
-                int currentArmiesOfFromCountry = countriesArmies.get(from);
-                int newArmiesToDelete = currentArmiesOfFromCountry - numberOfArmiesToMove;
-                countriesArmies.put(from, newArmiesToDelete);
-                System.out.println(from + " = " + countriesArmies.get(from));
-                System.out.println(to + " = " + countriesArmies.get(to) + "\n");
-                nextPlayer();
-                reinforcementPhase();
-            }else{
-            	Scanner sc = new Scanner(System.in);
-            	String result;
-            	System.out.println("You dont have sufficient number of armies to move from " + from + "Do you want to play fortify again? Y/N");
-            	result = sc.nextLine();
-            	if(result.equals("N")){
-    				fortify();
-    			}else{
-    				nextPlayer();
-    				reinforcementPhase();
-    			}
-            }
-			
-		}else{
-			System.out.println(currentPlayer.getName() + " doesnt contain the country where you want to place armies.");
-			Scanner sc = new Scanner(System.in);
-			String result;
-			System.out.println("Do you want to stop? Y/N");
-			result = sc.nextLine();
-			if(result.equals("N")){
-				fortify();
-			}else{
-				nextPlayer();
-				reinforcementPhase();
-			}
-		}
-		
 	}
 
 }
