@@ -73,7 +73,6 @@ public class RiskGame extends Observable {
 	public int beforeA, currentA, afterA;
 	public int currentPlayerCountrySize = 0;
 	public double playerDominanceInPercent = 0;
-	
 
 	/**
 	 * This is the main method
@@ -513,23 +512,22 @@ public class RiskGame extends Observable {
 		else
 			fortify();
 	}
-	
-	public HashMap<String,ArrayList<String>> getWorldDominance()
-	 	{
-	 		System.out.println("Total country size: " +countryFilter.size());
-	 		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) 
-	 			{
-	 			String key = entry.getKey();
-	 			ArrayList<String> value = entry.getValue();
-	 			double totalCountryListSize = countryFilter.size();
-	 			currentPlayerCountrySize = initialPlayerCountry.get(key).size();
-	 			playerDominanceInPercent = (currentPlayerCountrySize / totalCountryListSize) * 100;
-	 			System.out.println("Player: " +key +" " +"No of countries for players: " +initialPlayerCountry.get(key).size());
-	 			System.out.println("Player: " +key +" " +"World dominance in percentage: " +playerDominanceInPercent);
-	 		
-	 		}
-	 		return initialPlayerCountry;
-	 	}
+
+	public HashMap<String, ArrayList<String>> getWorldDominance() {
+		System.out.println("Total country size: " + countryFilter.size());
+		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
+			String key = entry.getKey();
+			ArrayList<String> value = entry.getValue();
+			double totalCountryListSize = countryFilter.size();
+			currentPlayerCountrySize = initialPlayerCountry.get(key).size();
+			playerDominanceInPercent = (currentPlayerCountrySize / totalCountryListSize) * 100;
+			System.out.println(
+					"Player: " + key + " " + "No of countries for players: " + initialPlayerCountry.get(key).size());
+			System.out.println("Player: " + key + " " + "World dominance in percentage: " + playerDominanceInPercent);
+
+		}
+		return initialPlayerCountry;
+	}
 
 	public void attackPhase() throws IOException {
 		int noOfAttackerDice = 0;
@@ -565,15 +563,15 @@ public class RiskGame extends Observable {
 		 * Argentina,263,407,South America,Peru,Brazil Brazil,308,337,South
 		 * America,Venezuala,Peru,Argentina
 		 */
-//		countriesArmies.put("Alaska", 2);
-//		countriesArmies.put("Greenland", 1);
-//		countriesArmies.put("Ontario", 2);
-//		countriesArmies.put("Quebec", 2);
-//		countriesArmies.put("Venezuala", 1);
-//		countriesArmies.put("Peru", 2);
-//		countriesArmies.put("Argentina", 1);
-//		countriesArmies.put("Brazil", 4);
-//		countriesArmies.put("Alberta", 2);
+		countriesArmies.put("Alaska", 2);
+		countriesArmies.put("Greenland", 1);
+		countriesArmies.put("Ontario", 2);
+		countriesArmies.put("Quebec", 2);
+		countriesArmies.put("Venezuala", 1);
+		countriesArmies.put("Peru", 2);
+		countriesArmies.put("Argentina", 1);
+		countriesArmies.put("Brazil", 4);
+		countriesArmies.put("Alberta", 2);
 
 		System.out.println("Initailly player country list before any attack : " + initialPlayerCountry);
 		System.out.println("Initailly player country list with initial army : " + countriesArmies);
@@ -583,17 +581,51 @@ public class RiskGame extends Observable {
 		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
 		attackerCountry = input.readLine();
-		 countriesArmies.put(attackerCountry, 4);
+		// countriesArmies.put(attackerCountry, 4);
 
 		System.out.println("No of armies in the attacker country : " + countriesArmies.get(attackerCountry));
+		// HashMap<String, List<String>> attckerCountryAdjacent = new
+		// HashMap<String, List<String>>();
+		List<String> attackerCountryAdjacent = new ArrayList<String>();
+		int size = initialPlayerCountry.get(currentPlayer.getName()).size();
+		System.out.println(initialPlayerCountry.get(currentPlayer.getName()).size());
+		int size2 = adj.get(attackerCountry).size();
+		for (int i = 0; i < size2; i++) {
+			if (initialPlayerCountry.get(currentPlayer.getName()).contains(adj.get(attackerCountry).get(i))) {
+				continue;
+			} else {
+				attackerCountryAdjacent.add(adj.get(attackerCountry).get(i));
+			}
+		}
+
+		// for (Entry<String, List<String>> entry : adj.entrySet()) {
+		// String key = entry.getKey();
+		// List<String> value = entry.getValue();
+		//
+		// System.out.println("Valu is " + value);
+		// // if (key.equals(attackerCountry)) {
+		// // for (int i = 0; i < value.size(); i++) {
+		// // // System.out.println(attackerCountry.contains(value.get(i)));
+		// // if (key.contains(value.get(i)))
+		// // continue;
+		// // else
+		// // attackerCountryAdjacent.add(value.get(i));
+		// //
+		// // }
+		// // }
+		//
+		// }
+
+		// System.out.println("Based on this country name, you can attack to
+		// corresponding countries only : "
+		// + adj.get(attackerCountry)); // need to work here
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
-				+ adj.get(attackerCountry)); // need to work here
+				+ attackerCountryAdjacent); // need to work here
 		System.out.println("Please enter the name of country, to which you want to attack");
 		defenderCountry = input.readLine();
-		countriesArmies.put(defenderCountry, 2);
 		System.out.println("No of armies in the defender country : " + countriesArmies.get(defenderCountry));
 
-		 
+		// countriesArmies.put(defenderCountry, 1);
 
 		if (countriesArmies.get(attackerCountry) >= 2) {
 			System.out.println("As, You have minimum of 2 armies, you can attack");
@@ -662,11 +694,6 @@ public class RiskGame extends Observable {
 				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
-					
-					//Implementing observer patern
-					setChanged();
-					notifyObservers(this);
-					
 					if (updateArmyOfDefender == 0) {
 
 						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
@@ -686,11 +713,6 @@ public class RiskGame extends Observable {
 								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-								
-								//Implementing observer pattern
-								setChanged();
-								notifyObservers(this);
-								
 							}
 						}
 
@@ -745,11 +767,6 @@ public class RiskGame extends Observable {
 									initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 									newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-									
-									//Implementing observer patern
-									setChanged();
-									notifyObservers(this);
-									
 								}
 							}
 
@@ -808,11 +825,6 @@ public class RiskGame extends Observable {
 										initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 										newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
-										
-										//Implementing observer patern
-										setChanged();
-										notifyObservers(this);
-										
 									}
 								}
 
@@ -843,6 +855,8 @@ public class RiskGame extends Observable {
 		} else {
 
 			if (newCOuntryListSize > oldCOuntryListSize) {
+
+				// code for card need to be done here
 
 				setChanged();
 				notifyObservers(this);
