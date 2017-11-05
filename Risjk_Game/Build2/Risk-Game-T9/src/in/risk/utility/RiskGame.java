@@ -71,6 +71,9 @@ public class RiskGame extends Observable {
 	public int iter = 0;
 	public boolean drawn;
 	public int beforeA, currentA, afterA;
+	public int currentPlayerCountrySize = 0;
+	public double playerDominanceInPercent = 0;
+	
 
 	/**
 	 * This is the main method
@@ -111,7 +114,7 @@ public class RiskGame extends Observable {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			String path = "Resources/World3.map";// my new path
+			String path = "Resources/World.map";// my new path
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
@@ -510,6 +513,23 @@ public class RiskGame extends Observable {
 		else
 			fortify();
 	}
+	
+	public HashMap<String,ArrayList<String>> getWorldDominance()
+	 	{
+	 		System.out.println("Total country size: " +countryFilter.size());
+	 		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) 
+	 			{
+	 			String key = entry.getKey();
+	 			ArrayList<String> value = entry.getValue();
+	 			double totalCountryListSize = countryFilter.size();
+	 			currentPlayerCountrySize = initialPlayerCountry.get(key).size();
+	 			playerDominanceInPercent = (currentPlayerCountrySize / totalCountryListSize) * 100;
+	 			System.out.println("Player: " +key +" " +"No of countries for players: " +initialPlayerCountry.get(key).size());
+	 			System.out.println("Player: " +key +" " +"World dominance in percentage: " +playerDominanceInPercent);
+	 		
+	 		}
+	 		return initialPlayerCountry;
+	 	}
 
 	public void attackPhase() throws IOException {
 		int noOfAttackerDice = 0;
@@ -563,16 +583,17 @@ public class RiskGame extends Observable {
 		System.out.println("Current Player owning ciuntries : " + initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
 		attackerCountry = input.readLine();
-		// countriesArmies.put(attackerCountry, 4);
+		 countriesArmies.put(attackerCountry, 4);
 
 		System.out.println("No of armies in the attacker country : " + countriesArmies.get(attackerCountry));
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
 				+ adj.get(attackerCountry)); // need to work here
 		System.out.println("Please enter the name of country, to which you want to attack");
 		defenderCountry = input.readLine();
+		countriesArmies.put(defenderCountry, 2);
 		System.out.println("No of armies in the defender country : " + countriesArmies.get(defenderCountry));
 
-		// countriesArmies.put(defenderCountry, 1);
+		 
 
 		if (countriesArmies.get(attackerCountry) >= 2) {
 			System.out.println("As, You have minimum of 2 armies, you can attack");
@@ -641,6 +662,11 @@ public class RiskGame extends Observable {
 				if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = countriesArmies.get(defenderCountry) - 1;
+					
+					//Implementing observer patern
+					setChanged();
+					notifyObservers(this);
+					
 					if (updateArmyOfDefender == 0) {
 
 						for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
@@ -660,6 +686,11 @@ public class RiskGame extends Observable {
 								initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 								newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
+								
+								//Implementing observer pattern
+								setChanged();
+								notifyObservers(this);
+								
 							}
 						}
 
@@ -714,6 +745,11 @@ public class RiskGame extends Observable {
 									initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 									newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
+									
+									//Implementing observer patern
+									setChanged();
+									notifyObservers(this);
+									
 								}
 							}
 
@@ -772,6 +808,11 @@ public class RiskGame extends Observable {
 										initialPlayerCountry.get(currentPlayer.getName()).add(defenderCountry);
 
 										newCOuntryListSize = initialPlayerCountry.get(currentPlayer.getName()).size();
+										
+										//Implementing observer patern
+										setChanged();
+										notifyObservers(this);
+										
 									}
 								}
 
