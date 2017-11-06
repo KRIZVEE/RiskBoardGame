@@ -148,7 +148,7 @@ public class RiskGame extends Observable {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			String path = "Resources/World.map";// my new path
+			String path = "Resources/World2.map";// my new path
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
@@ -173,6 +173,7 @@ public class RiskGame extends Observable {
 					do {
 						String[] parts = next.split("=");
 						continentFilterNew.add(parts[0]);
+						continentValue.put(parts[0], Integer.parseInt(parts[1]));
 						valueList.add(parts[1]);
 						next = mapfile.nextLine();
 					} while (!next.equals(""));
