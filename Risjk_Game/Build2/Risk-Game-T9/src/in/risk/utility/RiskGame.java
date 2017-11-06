@@ -130,7 +130,7 @@ public class RiskGame extends Observable {
 
 		// System.out.println(playersCards.get(currentPlayer.getName()));
 		// getArmiesFromCards();
-		// placeArmies();
+		 placeArmies();
 		gamePhase();
 		// distributeCards();
 		// playCards();
@@ -418,7 +418,7 @@ public class RiskGame extends Observable {
 	public void initiallyPlaceArmies() throws IOException {
 		int totalNumberOfCountries = countryFilter.size();
 		for (int i = 0; i < totalNumberOfCountries; i++) {
-			countriesArmies.put(countryFilter.get(i), 20);
+			countriesArmies.put(countryFilter.get(i), 0);
 		}
 	}
 
