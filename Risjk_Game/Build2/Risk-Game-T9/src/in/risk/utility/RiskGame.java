@@ -1,6 +1,7 @@
 package in.risk.utility;
 
 import java.io.BufferedWriter;
+import java.io.File;
 
 //package in.risk.utility;
 
@@ -239,14 +240,15 @@ public class RiskGame extends Observable {
 	}
 
 	public void loggingString(String whatToLog) throws IOException {
-		FileWriter fw = new FileWriter("Resources/log.txt", true);
+		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/logs.txt");
+		FileWriter fw = new FileWriter(file,true);
 		BufferedWriter bw = new BufferedWriter(fw);
-		PrintWriter pw = new PrintWriter(bw);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
-		pw.flush();
-		pw.close();
+		bw.write(whatToLog);
+		bw.newLine();
+		bw.flush();
+		bw.close();
 	}
 
 	/**
@@ -279,13 +281,15 @@ public class RiskGame extends Observable {
 		System.out.println("Please enter how many players you want to play with, Choose between 3 and 6");
 		noOfPlayers = sc.nextInt();
 
-		loggingString(noOfPlayers + " players are choosen by the user to play the game.");
+		loggingString("Start up phase started: ");
+		loggingString("Total number of players: " +noOfPlayers);
 		// SelectPlayerLogic(String sc , String sc2, int numofplyrs, String
 		// Plyrname);
 		if (noOfPlayers == 3) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -293,6 +297,7 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 4; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -300,6 +305,7 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 5; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -307,6 +313,7 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 6; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -367,6 +374,7 @@ public class RiskGame extends Observable {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			players.elementAt(i).addArmies(armies);
 		}
+		loggingString("Total armies with each player: " +armies);
 	}
 
 	/**
@@ -410,6 +418,8 @@ public class RiskGame extends Observable {
 			if (i == players.size()) {
 				i = 0;
 			}
+			
+			//loggingString("Countries owned by players: " +initialPlayerCountry);
 		}
 		getWorldDominance();
 
@@ -429,6 +439,8 @@ public class RiskGame extends Observable {
 		for (int i = 0; i < totalNumberOfCountries; i++) {
 			countriesArmies.put(countryFilter.get(i), 0);
 		}
+		
+		//loggingString("Armies in countries: " +countriesArmies);
 	}
 
 	/**
@@ -444,6 +456,7 @@ public class RiskGame extends Observable {
 		String result;
 		ArrayList<String> temp = new ArrayList<>();
 		System.out.println("start here  :  ");
+		//loggingString("Reinforcement phase started: ");
 		for (int i = 1; i < loopSize + 1; i++) {
 
 			for (Entry<String, Integer> entry : countriesArmies.entrySet()) {
@@ -466,6 +479,7 @@ public class RiskGame extends Observable {
 					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
 			System.out.println("Please enter the name of the country you want to add armies to!!");
 			result = sc.nextLine();
+			
 
 			if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
 				int noOfArmiesPlayerContains = currentPlayer.getArmies();

@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Player extends Observable {
 
-	RiskGame rg;
+	RiskGame rg;;
 	int x = 5;
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 
@@ -97,9 +97,10 @@ public class Player extends Observable {
 
 	/**
 	 * This method is used to get reinforcement armies from owned continents.
+	 * @throws IOException 
 	 */
 	// commented for time being
-	public void getArmiesaFromContinet() {
+	public void getArmiesaFromContinet() throws IOException {
 		for (Entry<String, List<String>> entry : RiskGame.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
@@ -116,6 +117,8 @@ public class Player extends Observable {
 			}
 			RiskGame.resultOfContinentCountry.clear();
 		}
+		
+		//rg.loggingString("No of reinforcement armies from continent :" +rg.noOfReinforcementArmies);
 	}
 
 	/**
@@ -157,7 +160,7 @@ public class Player extends Observable {
 	/**
 	 * This method is used to get reinforcement armies from owned countries.
 	 */
-	public static void getArmiesFromCountries() {
+	public  void getArmiesFromCountries() {
 		int sizeOfCountriesRiskGame = RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size();
 
 		if (sizeOfCountriesRiskGame < 9) {
@@ -165,6 +168,7 @@ public class Player extends Observable {
 		} else {
 			RiskGame.noOfReinforcementArmies = RiskGame.noOfReinforcementArmies + sizeOfCountriesRiskGame / 3;
 		}
+		
 	}
 
 	/**
@@ -186,7 +190,7 @@ public class Player extends Observable {
 		}
 	}
 
-	public static void placeCardsInTheDeck() {
+	public void placeCardsInTheDeck() throws IOException {
 		RiskGame.cardType.add(RiskGame.cardTypeA);
 		RiskGame.cardType.add(RiskGame.cardTypeB);
 		RiskGame.cardType.add(RiskGame.cardTypeC);
@@ -199,6 +203,8 @@ public class Player extends Observable {
 				j = 0;
 			}
 		}
+		//rg.loggingString("Total cards type in deck " +rg.cardType);
+		//rg.loggingString("Total cards in deck " +rg.cardInTheDeck);
 	}
 
 	public static void placeCardsInTheDeck2() {
@@ -216,11 +222,13 @@ public class Player extends Observable {
 		}
 	}
 
-	public void initialCardDistribution() {
+	public void initialCardDistribution() throws IOException {
 		int size = RiskGame.players.size();
 		for (int i = 0; i < size; i++) {
 			playersCards.put(RiskGame.players.get(i).getName(), RiskGame.deck.subList(0, RiskGame.deck.size() / 2));
 		}
+		
+		//rg.loggingString("Cards with each player " +playersCards);
 	}
 
 	public void checkUniqueCombination(int tempSize) throws IOException {
