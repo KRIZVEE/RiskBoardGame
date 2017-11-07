@@ -31,6 +31,7 @@ import java.util.Vector;
 public class RiskGame extends Observable {
 
 	Player obj = new Player();
+	// RiskGame objRiskGame = new RiskGame();
 
 	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
 	public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
@@ -51,7 +52,6 @@ public class RiskGame extends Observable {
 	public static HashMap<String, Integer> continentValue = new HashMap<String, Integer>();
 	public static ArrayList<String> cardType = new ArrayList<String>();
 	public static ArrayList<String> deck = new ArrayList<String>();
-	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 	public static HashMap<String, String> playersContinent = new HashMap<String, String>();
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
@@ -83,7 +83,7 @@ public class RiskGame extends Observable {
 	public static String cardTypeC = "C";
 	public static int cardInTheDeck;
 	public static int cardFlag = 1;
-	int noOfPlayers = 0;
+	public static int noOfPlayers = 0;
 	public int card = 0;
 	public int c = 0;
 	public static int iter = 0;
@@ -130,7 +130,7 @@ public class RiskGame extends Observable {
 
 		// System.out.println(playersCards.get(currentPlayer.getName()));
 		// getArmiesFromCards();
-		 placeArmies();
+		placeArmies();
 		gamePhase();
 		// distributeCards();
 		// playCards();
@@ -148,7 +148,9 @@ public class RiskGame extends Observable {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			String path = "Resources/World2.map";// my new path
+			// String path = "Resources/World3.map";// my new path
+			String path = "resources/maps/" + pathMap;
+
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
@@ -353,7 +355,7 @@ public class RiskGame extends Observable {
 		if (numberOfPlayers == 2)
 			armies = 40;
 		if (numberOfPlayers == 3)
-			armies = 15;
+			armies = 4;
 		// armies = 35;
 		if (numberOfPlayers == 4)
 			armies = 30;
@@ -399,6 +401,9 @@ public class RiskGame extends Observable {
 				list = new ArrayList<String>();
 				list.add(countryFilter.get(j));
 				initialPlayerCountry.put(players.get(i).getName(), list);
+				setChanged();
+				RiskGame rglocal = new RiskGame();
+				rglocal.notifyObservers();
 			}
 			i++;
 			j--;
@@ -406,6 +411,10 @@ public class RiskGame extends Observable {
 				i = 0;
 			}
 		}
+		getWorldDominance();
+
+		// setChanged();
+		// notifyObservers(this);
 	}
 
 	/**
@@ -535,6 +544,9 @@ public class RiskGame extends Observable {
 			System.out.println("I value is  : " + i);
 
 		}
+		System.out.println(
+				"===================end of place armies method, trying for observer pattern========================");
+
 		// System.out.println(players.size() * currentPlayer.getArmies());
 		// System.out.println(currentPlayer.getName() + " " +
 		// initialPlayerCountry.get(currentPlayer.getName()) + " "
@@ -587,7 +599,7 @@ public class RiskGame extends Observable {
 	 * @return This method returns number of countries owned by a player after
 	 *         loosing/winning a country in form of percentage and also numbers
 	 */
-	public HashMap<String, ArrayList<String>> getWorldDominance() {
+	public void getWorldDominance() {
 		System.out.println("Total country size: " + countryFilter.size());
 		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
 			String key = entry.getKey();
@@ -600,7 +612,9 @@ public class RiskGame extends Observable {
 			System.out.println("Player: " + key + " " + "World dominance in percentage: " + playerDominanceInPercent);
 
 		}
-		return initialPlayerCountry;
+		setChanged();
+		notifyObservers(this);
+		// return initialPlayerCountry;
 
 	}
 

@@ -1,0 +1,23 @@
+[Map]
+author=Sean O'Connor
+image=world.bmp
+wrap=no
+scroll=horizontal
+warn=yes
+
+[Continents]
+North America=5
+South America=2
+
+[Territories]
+Alaska,70,126,South America,Alberta
+Alberta,147,163,North America,Alaska,Ontario
+Greenland,324,76,South America,Ontario,Quebec,Iceland
+Ontario,199,167,North America,Alberta,Greenland,Quebec
+Quebec,253,166,North America,Greenland,Ontario
+
+Venezuala,259,303,South America,Central America,Peru,Brazil
+Peru,262,349,South America,Venezuala,Brazil,Argentina
+Argentina,263,407,South America,Peru,Brazil
+Brazil,308,337,South America,Venezuala,Peru,Argentina
+ 

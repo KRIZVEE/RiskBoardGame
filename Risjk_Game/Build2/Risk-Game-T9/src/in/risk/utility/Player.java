@@ -1,3 +1,6 @@
+//line no 98 to line 119 being commented purposefully
+//line no 35 being commented purposefully
+
 package in.risk.utility;
 
 import java.io.BufferedReader;
@@ -5,12 +8,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Scanner;
 
 public class Player extends Observable {
+
+	RiskGame rg;
+	int x = 5;
+	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 
 	static Scanner sc = new Scanner(System.in);
 
@@ -28,6 +36,7 @@ public class Player extends Observable {
 	public void placeReinforcementArmies() throws IOException {
 
 		// Start Of counting reinforcement armies from continet value.
+		// commented for time being
 		getArmiesaFromContinet();
 		int noOfArmiesFromContinents = RiskGame.noOfReinforcementArmies;
 		System.out.println("You have " + RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()));
@@ -89,7 +98,8 @@ public class Player extends Observable {
 	/**
 	 * This method is used to get reinforcement armies from owned continents.
 	 */
-	public static void getArmiesaFromContinet() {
+	// commented for time being
+	public void getArmiesaFromContinet() {
 		for (Entry<String, List<String>> entry : RiskGame.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
@@ -112,26 +122,36 @@ public class Player extends Observable {
 	 * This method is about trading of cards and getting armies in return.
 	 * Armies added will be as per the game logic.
 	 */
-	public static void getArmiesFromCards() throws IOException {
+	public void getArmiesFromCards() throws IOException {
 
-		// System.out.println(RiskGame.playersCards);
-		System.out.println(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()));
-		int tempSize = RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).size();
+		// System.out.println(playersCards);
+		System.out.println(playersCards.get(RiskGame.currentPlayer.getName()));
+		int tempSize = playersCards.get(RiskGame.currentPlayer.getName()).size();
 
 		// System.out.println(playersCards.get(RiskGame.currentPlayer.getName()));
 		if (tempSize >= 5) {
 			checkUniqueCombination(tempSize);
 			checkDiscreteCombination();
+			System.out.println(
+					"==============i am going with observer pattern for card exchange view with card size > = 5==========");
+			setChanged();
+			notifyObservers(this);
 		} else {
 			String result;
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Now you have less than 5 cards. Do you want to play cards now? Y/N");
 			result = sc.nextLine();
 			if (result.equals("Y")) {
-				checkUniqueCombination(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).size());
+				checkUniqueCombination(playersCards.get(RiskGame.currentPlayer.getName()).size());
 				checkDiscreteCombination();
+				System.out.println(
+						"==============i am going with observer pattern for card exchange view with card size < = 5==========");
+				setChanged();
+				notifyObservers(this);
+
 			}
 		}
+
 	}
 
 	/**
@@ -199,27 +219,26 @@ public class Player extends Observable {
 	public void initialCardDistribution() {
 		int size = RiskGame.players.size();
 		for (int i = 0; i < size; i++) {
-			RiskGame.playersCards.put(RiskGame.players.get(i).getName(),
-					RiskGame.deck.subList(0, RiskGame.deck.size() / 5));
+			playersCards.put(RiskGame.players.get(i).getName(), RiskGame.deck.subList(0, RiskGame.deck.size() / 2));
 		}
 	}
 
-	public static void checkUniqueCombination(int tempSize) throws IOException {
+	public void checkUniqueCombination(int tempSize) throws IOException {
 		List<Integer> tempListA = new ArrayList<Integer>();
 		List<Integer> tempListB = new ArrayList<Integer>();
 		List<Integer> tempListC = new ArrayList<Integer>();
 		for (int i = 0; i < tempSize; i++) {
-			if (RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("A")) {
+			if (playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("A")) {
 				tempListA.add(i);
 			}
 		}
 		for (int i = 0; i < tempSize; i++) {
-			if (RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("B")) {
+			if (playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("B")) {
 				tempListB.add(i);
 			}
 		}
 		for (int i = 0; i < tempSize; i++) {
-			if (RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("C")) {
+			if (playersCards.get(RiskGame.currentPlayer.getName()).get(i).contains("C")) {
 				tempListC.add(i);
 			}
 		}
@@ -230,9 +249,9 @@ public class Player extends Observable {
 			RiskGame.cardsInTheDeck.add("A");
 			RiskGame.cardsInTheDeck.add("A");
 			RiskGame.cardsInTheDeck.add("A");
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListA.clear();
@@ -244,9 +263,9 @@ public class Player extends Observable {
 			RiskGame.cardsInTheDeck.add("B");
 			RiskGame.cardsInTheDeck.add("B");
 			RiskGame.cardsInTheDeck.add("B");
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListB.clear();
@@ -258,9 +277,9 @@ public class Player extends Observable {
 			RiskGame.cardsInTheDeck.add("C");
 			RiskGame.cardsInTheDeck.add("C");
 			RiskGame.cardsInTheDeck.add("C");
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListC.clear();
@@ -275,8 +294,8 @@ public class Player extends Observable {
 		int flagForB = 0;
 		int flagForC = 0;
 		String value;
-		for (int i = 0; i < RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).size(); i++) {
-			value = RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(i);
+		for (int i = 0; i < playersCards.get(RiskGame.currentPlayer.getName()).size(); i++) {
+			value = playersCards.get(RiskGame.currentPlayer.getName()).get(i);
 			if (value.equals("A")) {
 				if (flagForA <= 1) {
 					if (flagForA == 0) {
@@ -312,15 +331,13 @@ public class Player extends Observable {
 			int firstIndexToRemove = tempListABCFirst.get(0);
 			int secondIndexToRemove = tempListABCFirst.get(1);
 			int thirdIndexToRemove = tempListABCFirst.get(2);
+			RiskGame.cardsInTheDeck.add(playersCards.get(RiskGame.currentPlayer.getName()).get(firstIndexToRemove));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
 			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(firstIndexToRemove));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(firstIndexToRemove);
-			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(secondIndexToRemove - 1));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
-			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(thirdIndexToRemove - 2));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
+					.add(playersCards.get(RiskGame.currentPlayer.getName()).get(secondIndexToRemove - 1));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(secondIndexToRemove - 1);
+			RiskGame.cardsInTheDeck.add(playersCards.get(RiskGame.currentPlayer.getName()).get(thirdIndexToRemove - 2));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(thirdIndexToRemove - 2);
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 		}
@@ -329,14 +346,12 @@ public class Player extends Observable {
 			int fifthIndexToRemove = tempListABCSecond.get(1);
 			int sixthINdexToRemove = tempListABCSecond.get(2);
 			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(fourthIndexToRemove - 3));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(fourthIndexToRemove - 3);
-			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(fifthIndexToRemove - 4));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(fifthIndexToRemove - 4);
-			RiskGame.cardsInTheDeck
-					.add(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).get(sixthINdexToRemove - 5));
-			RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).remove(sixthINdexToRemove - 5);
+					.add(playersCards.get(RiskGame.currentPlayer.getName()).get(fourthIndexToRemove - 3));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(fourthIndexToRemove - 3);
+			RiskGame.cardsInTheDeck.add(playersCards.get(RiskGame.currentPlayer.getName()).get(fifthIndexToRemove - 4));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(fifthIndexToRemove - 4);
+			RiskGame.cardsInTheDeck.add(playersCards.get(RiskGame.currentPlayer.getName()).get(sixthINdexToRemove - 5));
+			playersCards.get(RiskGame.currentPlayer.getName()).remove(sixthINdexToRemove - 5);
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 		}
@@ -359,6 +374,9 @@ public class Player extends Observable {
 		int updateArmyOfDefender;
 
 		String attackTurnOn = "hello";
+
+		System.out.println(RiskGame.initialPlayerCountry);
+
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 
 		// Scanner sc1 = new Scanner(System.in);
@@ -383,7 +401,7 @@ public class Player extends Observable {
 		// countriesArmies.put("Ontario", 2);
 		// countriesArmies.put("Quebec", 2);
 		// countriesArmies.put("Venezuala", 1);
-		// countriesArmies.put("Peru", 2);
+		RiskGame.countriesArmies.put("Peru", 1);
 		// countriesArmies.put("Argentina", 1);
 		// countriesArmies.put("Brazil", 4);
 		// countriesArmies.put("Alberta", 2);
@@ -393,6 +411,7 @@ public class Player extends Observable {
 
 		System.out.println("Current Player : " + RiskGame.currentPlayer.getName());
 		oldCOuntryListSize = RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size();
+		System.out.println("===========oldCOuntryListSize :========== " + oldCOuntryListSize);
 		System.out.println("Current Player owning ciuntries : "
 				+ RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
@@ -683,15 +702,22 @@ public class Player extends Observable {
 			attackPhase();
 		} else {
 
+			// System.out.println(RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer));
+
+			newCOuntryListSize = RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size();
+			System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
+
 			if (newCOuntryListSize > oldCOuntryListSize) {
 
 				// code for card need to be done here
 				int indexOfCardToBeGet = (int) (Math.random() * (RiskGame.cardsInTheDeck.size() - 0));
-				RiskGame.playersCards.get(RiskGame.currentPlayer.getName())
-						.add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
+				playersCards.get(RiskGame.currentPlayer.getName()).add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
 				RiskGame.cardsInTheDeck.remove(indexOfCardToBeGet);
-				setChanged();
-				notifyObservers(this);
+				rg = new RiskGame();
+				rg.getWorldDominance();
+
+				// setChanged();
+				// notifyObservers(this);
 			}
 
 			fortify(RiskGame.currentPlayer);
