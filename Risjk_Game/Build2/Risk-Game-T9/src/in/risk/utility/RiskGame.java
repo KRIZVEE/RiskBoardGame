@@ -240,7 +240,7 @@ public class RiskGame extends Observable {
 	}
 
 	public void loggingString(String whatToLog) throws IOException {
-		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/logs.txt");
+		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/log.txt");
 		FileWriter fw = new FileWriter(file,true);
 		BufferedWriter bw = new BufferedWriter(fw);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
@@ -419,7 +419,7 @@ public class RiskGame extends Observable {
 				i = 0;
 			}
 			
-			//loggingString("Countries owned by players: " +initialPlayerCountry);
+			loggingString("Countries owned by players: " +initialPlayerCountry);
 		}
 		getWorldDominance();
 

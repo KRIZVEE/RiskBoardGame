@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 public class Player extends Observable {
 
-	RiskGame rg;;
+	RiskGame rg;
 	int x = 5;
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 
