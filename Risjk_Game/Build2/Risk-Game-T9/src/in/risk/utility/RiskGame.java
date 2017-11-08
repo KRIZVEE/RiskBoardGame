@@ -1,6 +1,7 @@
 package in.risk.utility;
 
 import java.io.BufferedWriter;
+import java.io.File;
 
 //package in.risk.utility;
 
@@ -244,14 +245,19 @@ public class RiskGame extends Observable {
 	}
 
 	public void loggingString(String whatToLog) throws IOException {
-		FileWriter fw = new FileWriter("Resources/log.txt", true);
+		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/Log Files/Log.txt");
+		FileWriter fw = new FileWriter(file,true);
 		BufferedWriter bw = new BufferedWriter(fw);
-		PrintWriter pw = new PrintWriter(bw);
+		
+//		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/log.txt");
+//		FileWriter fw = new FileWriter(file,true);
+//		BufferedWriter bw = new BufferedWriter(fw);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
-		pw.flush();
-		pw.close();
+		bw.write( dateFormat.format(date) +" " +whatToLog);
+		bw.newLine();
+		bw.flush();
+		bw.close();
 	}
 
 	/**
@@ -283,14 +289,15 @@ public class RiskGame extends Observable {
 
 		System.out.println("Please enter how many players you want to play with, Choose between 3 and 6");
 		noOfPlayers = sc.nextInt();
-
-		loggingString(noOfPlayers + " players are choosen by the user to play the game.");
+		loggingString("Start up phase started: ");
+		loggingString(noOfPlayers + " players are chosen by the user to play the game.");
 		// SelectPlayerLogic(String sc , String sc2, int numofplyrs, String
 		// Plyrname);
 		if (noOfPlayers == 3) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				loggingString("Player name entered: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -298,6 +305,7 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 4; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				loggingString("Player name entered: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -305,6 +313,7 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 5; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				loggingString("Player name entered: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -312,11 +321,13 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 6; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
+				loggingString("Player name entered: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
 		} else {
 			System.out.println("Please enter a valid no of players to play with");
+			loggingString("Incorrect number of players entered to play");
 		}
 
 	}
@@ -347,6 +358,7 @@ public class RiskGame extends Observable {
 	 */
 	public void initialPlayer() throws IOException {
 		currentPlayer = players.elementAt(0);
+		loggingString("Current player stored : " +currentPlayer.getName());
 	}
 
 	/**
@@ -357,10 +369,8 @@ public class RiskGame extends Observable {
 		int numberOfPlayers = players.size();
 		int armies = 0;
 
-		if (numberOfPlayers == 2)
-			armies = 40;
 		if (numberOfPlayers == 3)
-			armies = 4;
+			armies = 3;
 		// armies = 35;
 		if (numberOfPlayers == 4)
 			armies = 30;
@@ -372,6 +382,7 @@ public class RiskGame extends Observable {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			players.elementAt(i).addArmies(armies);
 		}
+		loggingString("Number of armies for each player: " +armies);
 		initiallyPlaceArmies();
 		RiskInterface objRISUP = new RiskInterface();
 		objRISUP.demoStartUpPhase();
@@ -381,7 +392,7 @@ public class RiskGame extends Observable {
 	 * This method calls next player in the game and also calls method for play
 	 * cards
 	 */
-	public static void nextPlayer() throws IOException {
+	public  static void nextPlayer() throws IOException {
 		if (currentPlayer == players.lastElement()) {
 			currentPlayer = players.elementAt(0);
 			iter = 0;
@@ -405,10 +416,12 @@ public class RiskGame extends Observable {
 			if (initialPlayerCountry.containsKey(players.get(i).getName())) {
 				list = initialPlayerCountry.get(players.get(i).getName());
 				list.add(countryFilter.get(j));
+				//loggingString("Player owning countries: " +list);
 			} else {
 				list = new ArrayList<String>();
 				list.add(countryFilter.get(j));
 				initialPlayerCountry.put(players.get(i).getName(), list);
+				//loggingString("Player owning countries: " +initialPlayerCountry);
 			}
 			i++;
 			j--;
@@ -438,7 +451,7 @@ public class RiskGame extends Observable {
 	public void initiallyPlaceArmies() throws IOException {
 		int totalNumberOfCountries = countryFilter.size();
 		for (int i = 0; i < totalNumberOfCountries; i++) {
-			countriesArmies.put(countryFilter.get(i), 10); // mohit change
+			countriesArmies.put(countryFilter.get(i), 0); // mohit change
 		}
 	}
 
@@ -475,16 +488,21 @@ public class RiskGame extends Observable {
 
 			System.out.println(currentPlayer.getName() + " you own these countries "
 					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
+			loggingString(currentPlayer.getName() + " you own these countries "
+					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
 			System.out.println("Please enter the name of the country you want to add armies to!!");
 			result = sc.nextLine();
+			loggingString("Armies added to country: " +result);
 
 			if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
 				int noOfArmiesPlayerContains = currentPlayer.getArmies();
+				loggingString("Armies with current player: " +noOfArmiesPlayerContains);
 				int countriesWith0Armies = temp.size();
 
 				if (noOfArmiesPlayerContains == 0) {
 
 					System.out.println("noOfArmiesPlayerContains == 0");
+					loggingString("noOfArmiesPlayerContains == 0");
 
 					if (players.size() != 3) {
 						nextPlayer();
@@ -495,7 +513,9 @@ public class RiskGame extends Observable {
 
 				if (noOfArmiesPlayerContains == countriesWith0Armies) {
 					System.out.println(currentPlayer.getArmies());
+					loggingString("Armies with current player: " +currentPlayer.getArmies());
 					System.out.println(countriesArmies);
+					loggingString("Armies in each countries: " +countriesArmies);
 
 					if (temp.contains(result))// result entered country is in
 					// temp list)
@@ -505,8 +525,11 @@ public class RiskGame extends Observable {
 						currentPlayer.looseArmy();
 						System.out.println(result + " armies has been updated. New armies of " + result + " are "
 								+ countriesArmies.get(result));
+						loggingString(result + " armies has been updated. New armies of " + result + " are "
+								+ countriesArmies.get(result));
 						temp.remove(result);
 						System.out.println(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+						loggingString(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
 						temp.clear();
 						nextPlayer();
 					}
@@ -515,19 +538,26 @@ public class RiskGame extends Observable {
 
 						System.out.println("You are not allowed to add armies to other countries except " + temp
 								+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
+						loggingString("You are not allowed to add armies to other countries except " + temp
+								+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
 						System.out.println(
 								"Please enter the name of country from given list where you want to placce armies \n"
 										+ temp);
 						result = sc.nextLine();
+						loggingString("Armies added to country: " +result);
+						
 						if (temp.contains(result)) {
 							updatedArmies = countriesArmies.get(result) + 1;
 							countriesArmies.put(result, updatedArmies);
 							currentPlayer.looseArmy();
 							System.out.println(result + " armies has been updated. New armies of " + result + " are "
 									+ countriesArmies.get(result));
+							loggingString(result + " armies has been updated. New armies of " + result + " are "
+									+ countriesArmies.get(result));
 							temp.remove(result);
 							System.out.println(
 									currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+							loggingString(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
 							temp.clear();
 							nextPlayer();
 						}
@@ -541,18 +571,23 @@ public class RiskGame extends Observable {
 					currentPlayer.looseArmy();
 					System.out.println(result + " armies has been updated. New armies of " + result + " are "
 							+ countriesArmies.get(result));
+					loggingString(result + " armies has been updated. New armies of " + result + " are "
+							+ countriesArmies.get(result));
 					temp.remove(result);
 					System.out.println((currentPlayer.getName() + " has Countries with 0 number of armies " + temp));
+					loggingString(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
 					temp.clear();
 					nextPlayer();
 				}
 
 			} else {
 				System.out.println("Please enter correct name of the country");
+				loggingString("Incorrect name of country added");
 				i--;
 			}
 
 			System.out.println("I value is  : " + i);
+			loggingString("Count of placing armies: " +i);
 
 		}
 		System.out.println(

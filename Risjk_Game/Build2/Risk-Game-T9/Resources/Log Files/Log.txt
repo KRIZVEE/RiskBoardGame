@@ -1,0 +1,1141 @@
+2017/11/08 00:54:14 Start up phase started: 
+2017/11/08 00:54:14 3 players are chosen by the user to play the game.
+2017/11/08 00:54:15 Player name entered: Mohit
+2017/11/08 00:54:17 Player name entered: Rana
+2017/11/08 00:54:18 Player name entered: Preet
+2017/11/08 00:54:18 Current player stored : Mohit
+2017/11/08 00:54:18 Number of armies for each player: 4
+2017/11/08 00:54:18 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 00:54:22 Armies added to country: Test
+2017/11/08 00:54:22 Armies with current player: 4
+2017/11/08 00:54:22 Test armies has been updated. New armies of Test are 1
+2017/11/08 00:54:22 Mohit has Countries with 0 number of armies [Alaska, Greenland]
+2017/11/08 00:54:22 Count of placing armies: 1
+2017/11/08 00:54:22 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 00:54:26 Armies added to country: Ontario
+2017/11/08 00:54:26 Armies with current player: 4
+2017/11/08 00:54:26 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 00:54:26 Rana has Countries with 0 number of armies [Brazil, Peru]
+2017/11/08 00:54:26 Count of placing armies: 2
+2017/11/08 00:54:26 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 00:54:28 Armies added to country: Alberta
+2017/11/08 00:54:28 Armies with current player: 4
+2017/11/08 00:54:28 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 00:54:28 Preet has Countries with 0 number of armies [Argentina, Venezuala]
+2017/11/08 00:54:28 Count of placing armies: 3
+2017/11/08 00:54:28 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 00:54:30 Armies added to country: Test
+2017/11/08 00:54:30 Armies with current player: 3
+2017/11/08 00:54:30 Test armies has been updated. New armies of Test are 2
+2017/11/08 00:54:30 Mohit has Countries with 0 number of armies [Alaska, Greenland]
+2017/11/08 00:54:30 Count of placing armies: 4
+2017/11/08 00:54:30 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 00:54:32 Armies added to country: Ontario
+2017/11/08 00:54:32 Armies with current player: 3
+2017/11/08 00:54:32 Ontario armies has been updated. New armies of Ontario are 2
+2017/11/08 00:54:32 Rana has Countries with 0 number of armies [Brazil, Peru]
+2017/11/08 00:54:32 Count of placing armies: 5
+2017/11/08 00:54:32 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 00:54:34 Armies added to country: Alberta
+2017/11/08 00:54:34 Armies with current player: 3
+2017/11/08 00:54:34 Alberta armies has been updated. New armies of Alberta are 2
+2017/11/08 00:54:34 Preet has Countries with 0 number of armies [Argentina, Venezuala]
+2017/11/08 00:54:34 Count of placing armies: 6
+2017/11/08 00:54:34 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 00:54:37 Armies added to country: Test
+2017/11/08 00:54:37 Armies with current player: 2
+2017/11/08 00:54:37 Armies with current player: 2
+2017/11/08 00:54:37 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=0, Alaska=0, Venezuala=0, Peru=0, Ontario=2, Greenland=0}
+2017/11/08 00:54:37 You are not allowed to add armies to other countries except [Alaska, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 00:54:41 Armies added to country: Alaska
+2017/11/08 00:54:41 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 00:54:41 Mohit has Countries with 0 number of armies [Greenland]
+2017/11/08 00:54:41 Count of placing armies: 7
+2017/11/08 00:54:41 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 00:54:45 Armies added to country: Peru
+2017/11/08 00:54:45 Armies with current player: 2
+2017/11/08 00:54:45 Armies with current player: 2
+2017/11/08 00:54:45 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=0, Alaska=1, Venezuala=0, Peru=0, Ontario=2, Greenland=0}
+2017/11/08 00:54:45 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 00:54:45 Rana has Countries with 0 number of armies [Brazil]
+2017/11/08 00:54:45 Count of placing armies: 8
+2017/11/08 00:54:45 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 00:54:47 Armies added to country: Venezuala
+2017/11/08 00:54:47 Armies with current player: 2
+2017/11/08 00:54:47 Armies with current player: 2
+2017/11/08 00:54:47 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=0, Alaska=1, Venezuala=0, Peru=1, Ontario=2, Greenland=0}
+2017/11/08 00:54:47 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 00:54:47 Preet has Countries with 0 number of armies [Argentina]
+2017/11/08 00:54:47 Count of placing armies: 9
+2017/11/08 00:54:47 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 00:54:49 Armies added to country: Greenland
+2017/11/08 00:54:49 Armies with current player: 1
+2017/11/08 00:54:49 Armies with current player: 1
+2017/11/08 00:54:49 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=0, Alaska=1, Venezuala=1, Peru=1, Ontario=2, Greenland=0}
+2017/11/08 00:54:49 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 00:54:49 Mohit has Countries with 0 number of armies []
+2017/11/08 00:54:49 Count of placing armies: 10
+2017/11/08 00:54:49 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 00:54:52 Armies added to country: Brazil
+2017/11/08 00:54:52 Armies with current player: 1
+2017/11/08 00:54:52 Armies with current player: 1
+2017/11/08 00:54:52 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=0, Alaska=1, Venezuala=1, Peru=1, Ontario=2, Greenland=1}
+2017/11/08 00:54:52 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 00:54:52 Rana has Countries with 0 number of armies []
+2017/11/08 00:54:52 Count of placing armies: 11
+2017/11/08 00:54:52 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 00:54:55 Armies added to country: Argentina
+2017/11/08 00:54:55 Armies with current player: 1
+2017/11/08 00:54:55 Armies with current player: 1
+2017/11/08 00:54:55 Armies in each countries: {Argentina=0, Alberta=2, Test=2, Brazil=1, Alaska=1, Venezuala=1, Peru=1, Ontario=2, Greenland=1}
+2017/11/08 00:54:55 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 00:54:55 Preet has Countries with 0 number of armies []
+2017/11/08 00:54:55 Count of placing armies: 12
+2017/11/08 00:54:55 Total cards in the deck: 9
+2017/11/08 00:54:55 Card types: [A, B, C]
+2017/11/08 00:54:55 Cards in the deck: []
+2017/11/08 00:54:55 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 00:54:55 =====================Reinforment phase started=====================
+2017/11/08 00:54:55 Number of reinforcement armies for player from continent: 0
+2017/11/08 00:54:55 Number of reinforcement armies for player from continent: 0
+2017/11/08 00:54:55 Number of reinforcement armies for player from continent: 0
+2017/11/08 00:54:55 You have [Test, Greenland, Alaska]
+2017/11/08 00:54:55 You got 0 from you continets.
+2017/11/08 00:54:55 Reinforcement armies from country: 3
+2017/11/08 00:54:55 You have 3 no of countries.
+2017/11/08 00:54:55 Your got 3 from your countries.
+2017/11/08 00:58:20 =====================Reinforment phase started=====================
+2017/11/08 00:58:20 Number of reinforcement armies for player from continent: 3
+2017/11/08 00:58:20 Number of reinforcement armies for player from continent: 3
+2017/11/08 00:58:20 Number of reinforcement armies for player from continent: 3
+2017/11/08 00:58:20 You have [Ontario, Peru, Brazil]
+2017/11/08 00:58:20 You got 3 from you continets.
+2017/11/08 00:58:20 Reinforcement armies from country: 6
+2017/11/08 00:58:20 You have 3 no of countries.
+2017/11/08 00:58:20 Your got 3 from your countries.
+2017/11/08 01:00:36 Start up phase started: 
+2017/11/08 01:00:36 3 players are chosen by the user to play the game.
+2017/11/08 01:00:37 Player name entered: a
+2017/11/08 01:00:37 Player name entered: s
+2017/11/08 01:00:38 Player name entered: d
+2017/11/08 01:00:38 Current player stored : a
+2017/11/08 01:00:38 Number of armies for each player: 4
+2017/11/08 01:00:38 a you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:01:23 Start up phase started: 
+2017/11/08 01:01:23 3 players are chosen by the user to play the game.
+2017/11/08 01:01:24 Player name entered: a
+2017/11/08 01:01:24 Player name entered: s
+2017/11/08 01:01:24 Player name entered: d
+2017/11/08 01:01:24 Current player stored : a
+2017/11/08 01:01:24 Number of armies for each player: 10
+2017/11/08 01:01:24 a you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:01:31 Armies added to country: Brazil
+2017/11/08 01:01:31 Armies with current player: 10
+2017/11/08 01:01:31 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:01:31 a has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:01:31 Count of placing armies: 1
+2017/11/08 01:01:31 s you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:01:33 Armies added to country: Alaska
+2017/11/08 01:01:33 Incorrect name of country added
+2017/11/08 01:01:33 Count of placing armies: 1
+2017/11/08 01:01:33 s you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:01:36 Armies added to country: Argentina
+2017/11/08 01:01:36 Armies with current player: 10
+2017/11/08 01:01:36 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:01:36 s has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:01:36 Count of placing armies: 2
+2017/11/08 01:01:36 d you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:02:18 Start up phase started: 
+2017/11/08 01:02:18 3 players are chosen by the user to play the game.
+2017/11/08 01:02:20 Player name entered: MOhit
+2017/11/08 01:02:21 Player name entered: Rana
+2017/11/08 01:02:23 Player name entered: Preet
+2017/11/08 01:02:23 Current player stored : MOhit
+2017/11/08 01:02:23 Number of armies for each player: 10
+2017/11/08 01:02:23 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:02:27 Armies added to country: Brazil
+2017/11/08 01:02:27 Armies with current player: 10
+2017/11/08 01:02:27 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:02:27 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:02:27 Count of placing armies: 1
+2017/11/08 01:02:27 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:02:36 Armies added to country: Argentina
+2017/11/08 01:02:36 Armies with current player: 10
+2017/11/08 01:02:36 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:02:36 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:02:36 Count of placing armies: 2
+2017/11/08 01:02:36 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:02:40 Armies added to country: Peru
+2017/11/08 01:02:40 Armies with current player: 10
+2017/11/08 01:02:40 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:02:40 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:02:40 Count of placing armies: 3
+2017/11/08 01:02:40 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:02:43 Armies added to country: Brazil
+2017/11/08 01:02:43 Armies with current player: 9
+2017/11/08 01:02:43 Brazil armies has been updated. New armies of Brazil are 2
+2017/11/08 01:02:43 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:02:43 Count of placing armies: 4
+2017/11/08 01:02:43 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:02:45 Armies added to country: Argentina
+2017/11/08 01:02:45 Armies with current player: 9
+2017/11/08 01:02:45 Argentina armies has been updated. New armies of Argentina are 2
+2017/11/08 01:02:45 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:02:45 Count of placing armies: 5
+2017/11/08 01:02:45 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:02:47 Armies added to country: Peru
+2017/11/08 01:02:47 Armies with current player: 9
+2017/11/08 01:02:47 Peru armies has been updated. New armies of Peru are 2
+2017/11/08 01:02:47 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:02:47 Count of placing armies: 6
+2017/11/08 01:02:47 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:02:49 Armies added to country: Brazil
+2017/11/08 01:02:49 Armies with current player: 8
+2017/11/08 01:02:49 Brazil armies has been updated. New armies of Brazil are 3
+2017/11/08 01:02:49 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:02:49 Count of placing armies: 7
+2017/11/08 01:02:49 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:02:51 Armies added to country: Argentina
+2017/11/08 01:02:51 Armies with current player: 8
+2017/11/08 01:02:51 Argentina armies has been updated. New armies of Argentina are 3
+2017/11/08 01:02:51 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:02:51 Count of placing armies: 8
+2017/11/08 01:02:51 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:02:53 Armies added to country: Peru
+2017/11/08 01:02:53 Armies with current player: 8
+2017/11/08 01:02:53 Peru armies has been updated. New armies of Peru are 3
+2017/11/08 01:02:53 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:02:53 Count of placing armies: 9
+2017/11/08 01:02:53 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:02:55 Armies added to country: Brazil
+2017/11/08 01:02:55 Armies with current player: 7
+2017/11/08 01:02:55 Brazil armies has been updated. New armies of Brazil are 4
+2017/11/08 01:02:55 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:02:55 Count of placing armies: 10
+2017/11/08 01:02:55 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:02:57 Armies added to country: Argentina
+2017/11/08 01:02:57 Armies with current player: 7
+2017/11/08 01:02:57 Argentina armies has been updated. New armies of Argentina are 4
+2017/11/08 01:02:57 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:02:57 Count of placing armies: 11
+2017/11/08 01:02:57 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:02:59 Armies added to country: Peru
+2017/11/08 01:02:59 Armies with current player: 7
+2017/11/08 01:02:59 Peru armies has been updated. New armies of Peru are 4
+2017/11/08 01:02:59 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:02:59 Count of placing armies: 12
+2017/11/08 01:02:59 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:03:01 Armies added to country: Brazil
+2017/11/08 01:03:01 Armies with current player: 6
+2017/11/08 01:03:01 Brazil armies has been updated. New armies of Brazil are 5
+2017/11/08 01:03:01 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:03:01 Count of placing armies: 13
+2017/11/08 01:03:01 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:03:03 Armies added to country: Argentina
+2017/11/08 01:03:03 Armies with current player: 6
+2017/11/08 01:03:03 Argentina armies has been updated. New armies of Argentina are 5
+2017/11/08 01:03:03 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:03:03 Count of placing armies: 14
+2017/11/08 01:03:03 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:03:05 Armies added to country: Peru
+2017/11/08 01:03:05 Armies with current player: 6
+2017/11/08 01:03:05 Peru armies has been updated. New armies of Peru are 5
+2017/11/08 01:03:05 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:03:05 Count of placing armies: 15
+2017/11/08 01:03:05 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:03:07 Armies added to country: Brazil
+2017/11/08 01:03:07 Armies with current player: 5
+2017/11/08 01:03:07 Brazil armies has been updated. New armies of Brazil are 6
+2017/11/08 01:03:07 MOhit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:03:07 Count of placing armies: 16
+2017/11/08 01:03:07 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:03:10 Armies added to country: Argentina
+2017/11/08 01:03:10 Armies with current player: 5
+2017/11/08 01:03:10 Argentina armies has been updated. New armies of Argentina are 6
+2017/11/08 01:03:10 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:03:10 Count of placing armies: 17
+2017/11/08 01:03:10 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:03:11 Armies added to country: Peru
+2017/11/08 01:03:11 Armies with current player: 5
+2017/11/08 01:03:11 Peru armies has been updated. New armies of Peru are 6
+2017/11/08 01:03:11 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:03:11 Count of placing armies: 18
+2017/11/08 01:03:11 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:03:13 Armies added to country: Brazil
+2017/11/08 01:03:13 Armies with current player: 4
+2017/11/08 01:03:13 Armies with current player: 4
+2017/11/08 01:03:13 Armies in each countries: {Central America=0, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=0, Western United States=0, Ontario=0, Venezuala=0, Peru=6, Greenland=0}
+2017/11/08 01:03:13 You are not allowed to add armies to other countries except [Alaska, Western United States, Venezuala, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:03:21 Armies added to country: Western United States
+2017/11/08 01:03:21 Western United States armies has been updated. New armies of Western United States are 1
+2017/11/08 01:03:21 MOhit has Countries with 0 number of armies [Alaska, Venezuala, Greenland]
+2017/11/08 01:03:21 Count of placing armies: 19
+2017/11/08 01:03:21 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:03:26 Armies added to country: Central America
+2017/11/08 01:03:26 Armies with current player: 4
+2017/11/08 01:03:26 Central America armies has been updated. New armies of Central America are 1
+2017/11/08 01:03:26 Rana has Countries with 0 number of armies [Alberta, Quebec]
+2017/11/08 01:03:26 Count of placing armies: 20
+2017/11/08 01:03:26 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:03:30 Armies added to country: Eastern United States
+2017/11/08 01:03:31 Armies with current player: 4
+2017/11/08 01:03:31 Eastern United States armies has been updated. New armies of Eastern United States are 1
+2017/11/08 01:03:31 Preet has Countries with 0 number of armies [Northwest Territory, Ontario]
+2017/11/08 01:03:31 Count of placing armies: 21
+2017/11/08 01:03:31 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:03:35 Armies added to country: Venezuala
+2017/11/08 01:03:35 Armies with current player: 3
+2017/11/08 01:03:35 Armies with current player: 3
+2017/11/08 01:03:35 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=0, Brazil=6, Alaska=0, Western United States=1, Ontario=0, Venezuala=0, Peru=6, Greenland=0}
+2017/11/08 01:03:36 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:03:36 MOhit has Countries with 0 number of armies [Alaska, Greenland]
+2017/11/08 01:03:36 Count of placing armies: 22
+2017/11/08 01:03:36 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:03:38 Armies added to country: Quebec
+2017/11/08 01:03:38 Armies with current player: 3
+2017/11/08 01:03:38 Quebec armies has been updated. New armies of Quebec are 1
+2017/11/08 01:03:38 Rana has Countries with 0 number of armies [Alberta]
+2017/11/08 01:03:38 Count of placing armies: 23
+2017/11/08 01:03:38 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:03:41 Armies added to country: Ontario
+2017/11/08 01:03:41 Armies with current player: 3
+2017/11/08 01:03:41 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:03:41 Preet has Countries with 0 number of armies [Northwest Territory]
+2017/11/08 01:03:41 Count of placing armies: 24
+2017/11/08 01:03:41 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:03:47 Armies added to country: Venezuala
+2017/11/08 01:03:47 Armies with current player: 2
+2017/11/08 01:03:47 Armies with current player: 2
+2017/11/08 01:03:47 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=1, Brazil=6, Alaska=0, Western United States=1, Ontario=1, Venezuala=1, Peru=6, Greenland=0}
+2017/11/08 01:03:47 You are not allowed to add armies to other countries except [Alaska, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:03:52 Armies added to country: Alaska
+2017/11/08 01:03:52 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:03:52 MOhit has Countries with 0 number of armies [Greenland]
+2017/11/08 01:03:52 Count of placing armies: 25
+2017/11/08 01:03:52 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:03:56 Armies added to country: Quebec
+2017/11/08 01:03:56 Armies with current player: 2
+2017/11/08 01:03:56 Quebec armies has been updated. New armies of Quebec are 2
+2017/11/08 01:03:56 Rana has Countries with 0 number of armies [Alberta]
+2017/11/08 01:03:56 Count of placing armies: 26
+2017/11/08 01:03:56 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:04:02 Armies added to country: Ontario
+2017/11/08 01:04:02 Armies with current player: 2
+2017/11/08 01:04:02 Ontario armies has been updated. New armies of Ontario are 2
+2017/11/08 01:04:02 Preet has Countries with 0 number of armies [Northwest Territory]
+2017/11/08 01:04:02 Count of placing armies: 27
+2017/11/08 01:04:02 MOhit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:04:05 Armies added to country: Greenland
+2017/11/08 01:04:05 Armies with current player: 1
+2017/11/08 01:04:05 Armies with current player: 1
+2017/11/08 01:04:05 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=2, Brazil=6, Alaska=1, Western United States=1, Ontario=2, Venezuala=1, Peru=6, Greenland=0}
+2017/11/08 01:04:05 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:04:05 MOhit has Countries with 0 number of armies []
+2017/11/08 01:04:05 Count of placing armies: 28
+2017/11/08 01:04:05 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:04:08 Armies added to country: Quebec
+2017/11/08 01:04:08 Armies with current player: 1
+2017/11/08 01:04:08 Armies with current player: 1
+2017/11/08 01:04:08 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=2, Brazil=6, Alaska=1, Western United States=1, Ontario=2, Venezuala=1, Peru=6, Greenland=1}
+2017/11/08 01:04:08 You are not allowed to add armies to other countries except [Alberta] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:04:11 Armies added to country: Alberta
+2017/11/08 01:04:11 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:04:11 Rana has Countries with 0 number of armies []
+2017/11/08 01:04:11 Count of placing armies: 29
+2017/11/08 01:04:11 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:04:15 Armies added to country: Ontario
+2017/11/08 01:04:15 Armies with current player: 1
+2017/11/08 01:04:15 Armies with current player: 1
+2017/11/08 01:04:15 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=1, Eastern United States=1, Quebec=2, Brazil=6, Alaska=1, Western United States=1, Ontario=2, Venezuala=1, Peru=6, Greenland=1}
+2017/11/08 01:04:15 You are not allowed to add armies to other countries except [Northwest Territory] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:04:20 Armies added to country: Northwest Territory
+2017/11/08 01:04:20 Northwest Territory armies has been updated. New armies of Northwest Territory are 1
+2017/11/08 01:04:20 Preet has Countries with 0 number of armies []
+2017/11/08 01:04:20 Count of placing armies: 30
+2017/11/08 01:04:20 Total cards in the deck: 13
+2017/11/08 01:04:20 Card types: [A, B, C]
+2017/11/08 01:04:20 Cards in the deck: []
+2017/11/08 01:04:20 Cards with each player: {MOhit=[], Rana=[], Preet=[]}
+2017/11/08 01:04:20 =====================Reinforment phase started=====================
+2017/11/08 01:04:20 Number of reinforcement armies for player from continent: 2
+2017/11/08 01:04:20 Number of reinforcement armies for player from continent: 2
+2017/11/08 01:04:20 You have [Brazil, Venezuala, Western United States, Greenland, Alaska]
+2017/11/08 01:04:20 You got 2 from you continets.
+2017/11/08 01:04:20 Reinforcement armies from country: 5
+2017/11/08 01:04:20 You have 5 no of countries.
+2017/11/08 01:04:20 Your got 3 from your countries.
+2017/11/08 01:07:23 Start up phase started: 
+2017/11/08 01:07:23 3 players are chosen by the user to play the game.
+2017/11/08 01:07:24 Player name entered: Mohit
+2017/11/08 01:07:25 Player name entered: Rana
+2017/11/08 01:07:27 Player name entered: Preet
+2017/11/08 01:07:27 Current player stored : Mohit
+2017/11/08 01:07:27 Number of armies for each player: 10
+2017/11/08 01:07:27 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:07:30 Armies added to country: Brazil
+2017/11/08 01:07:30 Armies with current player: 10
+2017/11/08 01:07:30 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:07:30 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:07:30 Count of placing armies: 1
+2017/11/08 01:07:30 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:07:33 Armies added to country: Argentina
+2017/11/08 01:07:33 Armies with current player: 10
+2017/11/08 01:07:33 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:07:33 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:07:33 Count of placing armies: 2
+2017/11/08 01:07:33 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:07:36 Armies added to country: Peru
+2017/11/08 01:07:36 Armies with current player: 10
+2017/11/08 01:07:36 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:07:36 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:07:36 Count of placing armies: 3
+2017/11/08 01:07:36 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:07:39 Armies added to country: Brazil
+2017/11/08 01:07:39 Armies with current player: 9
+2017/11/08 01:07:39 Brazil armies has been updated. New armies of Brazil are 2
+2017/11/08 01:07:39 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:07:39 Count of placing armies: 4
+2017/11/08 01:07:39 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:07:41 Armies added to country: Argentina
+2017/11/08 01:07:41 Armies with current player: 9
+2017/11/08 01:07:41 Argentina armies has been updated. New armies of Argentina are 2
+2017/11/08 01:07:41 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:07:41 Count of placing armies: 5
+2017/11/08 01:07:41 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:07:42 Armies added to country: Peru
+2017/11/08 01:07:42 Armies with current player: 9
+2017/11/08 01:07:42 Peru armies has been updated. New armies of Peru are 2
+2017/11/08 01:07:42 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:07:42 Count of placing armies: 6
+2017/11/08 01:07:42 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:07:44 Armies added to country: Brazil
+2017/11/08 01:07:44 Armies with current player: 8
+2017/11/08 01:07:44 Brazil armies has been updated. New armies of Brazil are 3
+2017/11/08 01:07:44 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:07:44 Count of placing armies: 7
+2017/11/08 01:07:44 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:07:45 Armies added to country: Argentina
+2017/11/08 01:07:45 Armies with current player: 8
+2017/11/08 01:07:45 Argentina armies has been updated. New armies of Argentina are 3
+2017/11/08 01:07:45 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:07:45 Count of placing armies: 8
+2017/11/08 01:07:45 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:07:49 Armies added to country: Peru
+2017/11/08 01:07:49 Armies with current player: 8
+2017/11/08 01:07:49 Peru armies has been updated. New armies of Peru are 3
+2017/11/08 01:07:49 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:07:49 Count of placing armies: 9
+2017/11/08 01:07:49 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:07:51 Armies added to country: Brazil
+2017/11/08 01:07:51 Armies with current player: 7
+2017/11/08 01:07:51 Brazil armies has been updated. New armies of Brazil are 4
+2017/11/08 01:07:51 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:07:51 Count of placing armies: 10
+2017/11/08 01:07:51 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:07:52 Armies added to country: Argentina
+2017/11/08 01:07:52 Armies with current player: 7
+2017/11/08 01:07:52 Argentina armies has been updated. New armies of Argentina are 4
+2017/11/08 01:07:52 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:07:52 Count of placing armies: 11
+2017/11/08 01:07:52 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:07:54 Armies added to country: Peru
+2017/11/08 01:07:54 Armies with current player: 7
+2017/11/08 01:07:54 Peru armies has been updated. New armies of Peru are 4
+2017/11/08 01:07:54 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:07:54 Count of placing armies: 12
+2017/11/08 01:07:54 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:07:55 Armies added to country: Brazil
+2017/11/08 01:07:55 Armies with current player: 6
+2017/11/08 01:07:55 Brazil armies has been updated. New armies of Brazil are 5
+2017/11/08 01:07:55 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:07:55 Count of placing armies: 13
+2017/11/08 01:07:55 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:07:57 Armies added to country: Argentina
+2017/11/08 01:07:57 Armies with current player: 6
+2017/11/08 01:07:57 Argentina armies has been updated. New armies of Argentina are 5
+2017/11/08 01:07:57 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:07:57 Count of placing armies: 14
+2017/11/08 01:07:57 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:07:58 Armies added to country: Peru
+2017/11/08 01:07:58 Armies with current player: 6
+2017/11/08 01:07:58 Peru armies has been updated. New armies of Peru are 5
+2017/11/08 01:07:58 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:07:58 Count of placing armies: 15
+2017/11/08 01:07:58 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:08:00 Armies added to country: Brazil
+2017/11/08 01:08:00 Armies with current player: 5
+2017/11/08 01:08:00 Brazil armies has been updated. New armies of Brazil are 6
+2017/11/08 01:08:00 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:08:00 Count of placing armies: 16
+2017/11/08 01:08:00 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:08:01 Armies added to country: Argentina
+2017/11/08 01:08:01 Armies with current player: 5
+2017/11/08 01:08:01 Argentina armies has been updated. New armies of Argentina are 6
+2017/11/08 01:08:01 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:08:01 Count of placing armies: 17
+2017/11/08 01:08:01 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:08:03 Armies added to country: Peru
+2017/11/08 01:08:03 Armies with current player: 5
+2017/11/08 01:08:03 Peru armies has been updated. New armies of Peru are 6
+2017/11/08 01:08:03 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:08:03 Count of placing armies: 18
+2017/11/08 01:08:03 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:08:06 Armies added to country: Brazil
+2017/11/08 01:08:06 Armies with current player: 4
+2017/11/08 01:08:06 Armies with current player: 4
+2017/11/08 01:08:06 Armies in each countries: {Central America=0, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=0, Western United States=0, Ontario=0, Venezuala=0, Peru=6, Greenland=0}
+2017/11/08 01:08:06 You are not allowed to add armies to other countries except [Alaska, Western United States, Venezuala, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:08:10 Armies added to country: Alaska
+2017/11/08 01:08:10 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:08:10 Mohit has Countries with 0 number of armies [Western United States, Venezuala, Greenland]
+2017/11/08 01:08:10 Count of placing armies: 19
+2017/11/08 01:08:10 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:08:16 Armies added to country: Central America
+2017/11/08 01:08:16 Armies with current player: 4
+2017/11/08 01:08:16 Central America armies has been updated. New armies of Central America are 1
+2017/11/08 01:08:16 Rana has Countries with 0 number of armies [Alberta, Quebec]
+2017/11/08 01:08:16 Count of placing armies: 20
+2017/11/08 01:08:16 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:08:21 Armies added to country: Eastern United States
+2017/11/08 01:08:21 Armies with current player: 4
+2017/11/08 01:08:21 Eastern United States armies has been updated. New armies of Eastern United States are 1
+2017/11/08 01:08:21 Preet has Countries with 0 number of armies [Northwest Territory, Ontario]
+2017/11/08 01:08:21 Count of placing armies: 21
+2017/11/08 01:08:21 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:08:25 Armies added to country: Venezuala
+2017/11/08 01:08:25 Armies with current player: 3
+2017/11/08 01:08:25 Armies with current player: 3
+2017/11/08 01:08:25 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=0, Brazil=6, Alaska=1, Western United States=0, Ontario=0, Venezuala=0, Peru=6, Greenland=0}
+2017/11/08 01:08:25 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:08:25 Mohit has Countries with 0 number of armies [Western United States, Greenland]
+2017/11/08 01:08:25 Count of placing armies: 22
+2017/11/08 01:08:25 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:08:30 Armies added to country: Quebec
+2017/11/08 01:08:30 Armies with current player: 3
+2017/11/08 01:08:30 Quebec armies has been updated. New armies of Quebec are 1
+2017/11/08 01:08:30 Rana has Countries with 0 number of armies [Alberta]
+2017/11/08 01:08:30 Count of placing armies: 23
+2017/11/08 01:08:30 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:08:37 Armies added to country: Ontario
+2017/11/08 01:08:37 Armies with current player: 3
+2017/11/08 01:08:37 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:08:37 Preet has Countries with 0 number of armies [Northwest Territory]
+2017/11/08 01:08:37 Count of placing armies: 24
+2017/11/08 01:08:37 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:08:43 Armies added to country: Greenland
+2017/11/08 01:08:43 Armies with current player: 2
+2017/11/08 01:08:43 Armies with current player: 2
+2017/11/08 01:08:43 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=1, Quebec=1, Brazil=6, Alaska=1, Western United States=0, Ontario=1, Venezuala=1, Peru=6, Greenland=0}
+2017/11/08 01:08:43 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:08:43 Mohit has Countries with 0 number of armies [Western United States]
+2017/11/08 01:08:43 Count of placing armies: 25
+2017/11/08 01:08:43 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:08:46 Armies added to country: Alberta
+2017/11/08 01:08:46 Armies with current player: 2
+2017/11/08 01:08:46 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:08:46 Rana has Countries with 0 number of armies []
+2017/11/08 01:08:46 Count of placing armies: 26
+2017/11/08 01:08:46 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:08:50 Armies added to country: Northwest Territory
+2017/11/08 01:08:50 Armies with current player: 2
+2017/11/08 01:08:50 Northwest Territory armies has been updated. New armies of Northwest Territory are 1
+2017/11/08 01:08:50 Preet has Countries with 0 number of armies []
+2017/11/08 01:08:50 Count of placing armies: 27
+2017/11/08 01:08:50 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:08:52 Armies added to country: Alaska
+2017/11/08 01:08:52 Armies with current player: 1
+2017/11/08 01:08:52 Armies with current player: 1
+2017/11/08 01:08:52 Armies in each countries: {Central America=1, Argentina=6, Northwest Territory=1, Alberta=1, Eastern United States=1, Quebec=1, Brazil=6, Alaska=1, Western United States=0, Ontario=1, Venezuala=1, Peru=6, Greenland=1}
+2017/11/08 01:08:52 You are not allowed to add armies to other countries except [Western United States] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:08:58 Armies added to country: Western United States
+2017/11/08 01:08:58 Western United States armies has been updated. New armies of Western United States are 1
+2017/11/08 01:08:58 Mohit has Countries with 0 number of armies []
+2017/11/08 01:08:58 Count of placing armies: 28
+2017/11/08 01:08:58 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:09:02 Armies added to country: Quebec
+2017/11/08 01:09:02 Armies with current player: 1
+2017/11/08 01:09:02 Quebec armies has been updated. New armies of Quebec are 2
+2017/11/08 01:09:02 Rana has Countries with 0 number of armies []
+2017/11/08 01:09:02 Count of placing armies: 29
+2017/11/08 01:09:02 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:09:06 Armies added to country: Ontario
+2017/11/08 01:09:06 Armies with current player: 1
+2017/11/08 01:09:06 Ontario armies has been updated. New armies of Ontario are 2
+2017/11/08 01:09:06 Preet has Countries with 0 number of armies []
+2017/11/08 01:09:06 Count of placing armies: 30
+2017/11/08 01:09:06 Total cards in the deck: 13
+2017/11/08 01:09:06 Card types: [A, B, C]
+2017/11/08 01:09:06 Cards in the deck: []
+2017/11/08 01:09:06 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 01:09:06 =====================Reinforment phase started=====================
+2017/11/08 01:10:52 Start up phase started: 
+2017/11/08 01:10:52 3 players are chosen by the user to play the game.
+2017/11/08 01:10:53 Player name entered: Mohit
+2017/11/08 01:10:54 Player name entered: Rana
+2017/11/08 01:10:59 Player name entered: Preet
+2017/11/08 01:10:59 Current player stored : Mohit
+2017/11/08 01:10:59 Number of armies for each player: 10
+2017/11/08 01:10:59 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:03 Armies added to country: Brazil
+2017/11/08 01:11:03 Armies with current player: 10
+2017/11/08 01:11:03 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:11:03 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:03 Count of placing armies: 1
+2017/11/08 01:11:03 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:06 Armies added to country: Argentina
+2017/11/08 01:11:06 Armies with current player: 10
+2017/11/08 01:11:06 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:11:06 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:06 Count of placing armies: 2
+2017/11/08 01:11:06 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:08 Armies added to country: Peru
+2017/11/08 01:11:08 Armies with current player: 10
+2017/11/08 01:11:08 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:11:08 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:08 Count of placing armies: 3
+2017/11/08 01:11:08 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:10 Armies added to country: Brazil
+2017/11/08 01:11:10 Armies with current player: 9
+2017/11/08 01:11:10 Brazil armies has been updated. New armies of Brazil are 2
+2017/11/08 01:11:10 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:10 Count of placing armies: 4
+2017/11/08 01:11:10 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:11 Armies added to country: Argentina
+2017/11/08 01:11:11 Armies with current player: 9
+2017/11/08 01:11:11 Argentina armies has been updated. New armies of Argentina are 2
+2017/11/08 01:11:11 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:11 Count of placing armies: 5
+2017/11/08 01:11:11 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:12 Armies added to country: Peru
+2017/11/08 01:11:12 Armies with current player: 9
+2017/11/08 01:11:12 Peru armies has been updated. New armies of Peru are 2
+2017/11/08 01:11:12 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:12 Count of placing armies: 6
+2017/11/08 01:11:12 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:13 Armies added to country: Brazil
+2017/11/08 01:11:13 Armies with current player: 8
+2017/11/08 01:11:13 Brazil armies has been updated. New armies of Brazil are 3
+2017/11/08 01:11:13 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:13 Count of placing armies: 7
+2017/11/08 01:11:13 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:16 Armies added to country: Argentina
+2017/11/08 01:11:16 Armies with current player: 8
+2017/11/08 01:11:16 Argentina armies has been updated. New armies of Argentina are 3
+2017/11/08 01:11:16 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:16 Count of placing armies: 8
+2017/11/08 01:11:16 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:18 Armies added to country: Peru
+2017/11/08 01:11:18 Armies with current player: 8
+2017/11/08 01:11:18 Peru armies has been updated. New armies of Peru are 3
+2017/11/08 01:11:18 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:18 Count of placing armies: 9
+2017/11/08 01:11:18 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:20 Armies added to country: Brazil
+2017/11/08 01:11:20 Armies with current player: 7
+2017/11/08 01:11:20 Brazil armies has been updated. New armies of Brazil are 4
+2017/11/08 01:11:20 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:20 Count of placing armies: 10
+2017/11/08 01:11:20 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:21 Armies added to country: Argentina
+2017/11/08 01:11:21 Armies with current player: 7
+2017/11/08 01:11:21 Argentina armies has been updated. New armies of Argentina are 4
+2017/11/08 01:11:21 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:21 Count of placing armies: 11
+2017/11/08 01:11:21 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:22 Armies added to country: Peru
+2017/11/08 01:11:22 Armies with current player: 7
+2017/11/08 01:11:22 Peru armies has been updated. New armies of Peru are 4
+2017/11/08 01:11:22 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:22 Count of placing armies: 12
+2017/11/08 01:11:22 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:26 Armies added to country: Brazil
+2017/11/08 01:11:26 Armies with current player: 6
+2017/11/08 01:11:26 Brazil armies has been updated. New armies of Brazil are 5
+2017/11/08 01:11:27 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:27 Count of placing armies: 13
+2017/11/08 01:11:27 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:29 Armies added to country: Argentina
+2017/11/08 01:11:29 Armies with current player: 6
+2017/11/08 01:11:29 Argentina armies has been updated. New armies of Argentina are 5
+2017/11/08 01:11:29 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:29 Count of placing armies: 14
+2017/11/08 01:11:29 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:31 Armies added to country: Peru
+2017/11/08 01:11:31 Armies with current player: 6
+2017/11/08 01:11:31 Peru armies has been updated. New armies of Peru are 5
+2017/11/08 01:11:31 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:31 Count of placing armies: 15
+2017/11/08 01:11:31 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:33 Armies added to country: Brazil
+2017/11/08 01:11:33 Armies with current player: 5
+2017/11/08 01:11:33 Brazil armies has been updated. New armies of Brazil are 6
+2017/11/08 01:11:33 Mohit has Countries with 0 number of armies [Alaska, Western United States, Venezuala, Greenland]
+2017/11/08 01:11:33 Count of placing armies: 16
+2017/11/08 01:11:33 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:34 Armies added to country: Argentina
+2017/11/08 01:11:34 Armies with current player: 5
+2017/11/08 01:11:34 Argentina armies has been updated. New armies of Argentina are 6
+2017/11/08 01:11:34 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:34 Count of placing armies: 17
+2017/11/08 01:11:34 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:35 Armies added to country: Peru
+2017/11/08 01:11:35 Armies with current player: 5
+2017/11/08 01:11:35 Peru armies has been updated. New armies of Peru are 6
+2017/11/08 01:11:35 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:35 Count of placing armies: 18
+2017/11/08 01:11:35 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:38 Armies added to country: Brazil
+2017/11/08 01:11:38 Armies with current player: 4
+2017/11/08 01:11:38 Armies with current player: 4
+2017/11/08 01:11:38 Armies in each countries: {Central America=0, Argentina=6, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=0, Western United States=0, Ontario=0, Venezuala=0, Peru=6, Greenland=0}
+2017/11/08 01:11:38 You are not allowed to add armies to other countries except [Alaska, Western United States, Venezuala, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:11:41 Armies added to country: Alaska
+2017/11/08 01:11:41 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:11:41 Mohit has Countries with 0 number of armies [Western United States, Venezuala, Greenland]
+2017/11/08 01:11:41 Count of placing armies: 19
+2017/11/08 01:11:41 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:43 Armies added to country: Argentina
+2017/11/08 01:11:43 Armies with current player: 4
+2017/11/08 01:11:43 Argentina armies has been updated. New armies of Argentina are 7
+2017/11/08 01:11:43 Rana has Countries with 0 number of armies [Central America, Alberta, Quebec]
+2017/11/08 01:11:43 Count of placing armies: 20
+2017/11/08 01:11:43 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:11:47 Armies added to country: Peru
+2017/11/08 01:11:47 Armies with current player: 4
+2017/11/08 01:11:47 Peru armies has been updated. New armies of Peru are 7
+2017/11/08 01:11:47 Preet has Countries with 0 number of armies [Northwest Territory, Eastern United States, Ontario]
+2017/11/08 01:11:47 Count of placing armies: 21
+2017/11/08 01:11:47 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:11:49 Armies added to country: Brazil
+2017/11/08 01:11:49 Armies with current player: 3
+2017/11/08 01:11:49 Armies with current player: 3
+2017/11/08 01:11:49 Armies in each countries: {Central America=0, Argentina=7, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=0, Ontario=0, Venezuala=0, Peru=7, Greenland=0}
+2017/11/08 01:11:49 You are not allowed to add armies to other countries except [Western United States, Venezuala, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:11:54 Armies added to country: Western United States
+2017/11/08 01:11:54 Western United States armies has been updated. New armies of Western United States are 1
+2017/11/08 01:11:54 Mohit has Countries with 0 number of armies [Venezuala, Greenland]
+2017/11/08 01:11:54 Count of placing armies: 22
+2017/11/08 01:11:54 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:11:56 Armies added to country: Argentina
+2017/11/08 01:11:56 Armies with current player: 3
+2017/11/08 01:11:56 Armies with current player: 3
+2017/11/08 01:11:56 Armies in each countries: {Central America=0, Argentina=7, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=0, Peru=7, Greenland=0}
+2017/11/08 01:11:56 You are not allowed to add armies to other countries except [Central America, Alberta, Quebec] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:00 Armies added to country: Central America
+2017/11/08 01:12:00 Central America armies has been updated. New armies of Central America are 1
+2017/11/08 01:12:00 Rana has Countries with 0 number of armies [Alberta, Quebec]
+2017/11/08 01:12:00 Count of placing armies: 23
+2017/11/08 01:12:00 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:12:02 Armies added to country: Peru
+2017/11/08 01:12:02 Armies with current player: 3
+2017/11/08 01:12:02 Armies with current player: 3
+2017/11/08 01:12:02 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=0, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=0, Peru=7, Greenland=0}
+2017/11/08 01:12:02 You are not allowed to add armies to other countries except [Northwest Territory, Eastern United States, Ontario] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:05 Armies added to country: Northwest Territory
+2017/11/08 01:12:05 Northwest Territory armies has been updated. New armies of Northwest Territory are 1
+2017/11/08 01:12:05 Preet has Countries with 0 number of armies [Eastern United States, Ontario]
+2017/11/08 01:12:05 Count of placing armies: 24
+2017/11/08 01:12:05 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:12:09 Armies added to country: Brazil
+2017/11/08 01:12:09 Armies with current player: 2
+2017/11/08 01:12:09 Armies with current player: 2
+2017/11/08 01:12:09 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=0, Peru=7, Greenland=0}
+2017/11/08 01:12:09 You are not allowed to add armies to other countries except [Venezuala, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:11 Armies added to country: Venezuala
+2017/11/08 01:12:11 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:12:11 Mohit has Countries with 0 number of armies [Greenland]
+2017/11/08 01:12:11 Count of placing armies: 25
+2017/11/08 01:12:11 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:12:13 Armies added to country: Argentina
+2017/11/08 01:12:13 Armies with current player: 2
+2017/11/08 01:12:13 Armies with current player: 2
+2017/11/08 01:12:13 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=0, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=1, Peru=7, Greenland=0}
+2017/11/08 01:12:13 You are not allowed to add armies to other countries except [Alberta, Quebec] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:15 Armies added to country: Alberta
+2017/11/08 01:12:15 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:12:15 Rana has Countries with 0 number of armies [Quebec]
+2017/11/08 01:12:15 Count of placing armies: 26
+2017/11/08 01:12:15 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:12:17 Armies added to country: Peru
+2017/11/08 01:12:17 Armies with current player: 2
+2017/11/08 01:12:17 Armies with current player: 2
+2017/11/08 01:12:17 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=1, Eastern United States=0, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=1, Peru=7, Greenland=0}
+2017/11/08 01:12:17 You are not allowed to add armies to other countries except [Eastern United States, Ontario] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:21 Armies added to country: Eastern United States
+2017/11/08 01:12:21 Eastern United States armies has been updated. New armies of Eastern United States are 1
+2017/11/08 01:12:21 Preet has Countries with 0 number of armies [Ontario]
+2017/11/08 01:12:21 Count of placing armies: 27
+2017/11/08 01:12:21 Mohit you own these countries [Brazil, Venezuala, Western United States, Greenland, Alaska].
+2017/11/08 01:12:23 Armies added to country: Brazil
+2017/11/08 01:12:23 Armies with current player: 1
+2017/11/08 01:12:23 Armies with current player: 1
+2017/11/08 01:12:23 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=1, Eastern United States=1, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=1, Peru=7, Greenland=0}
+2017/11/08 01:12:23 You are not allowed to add armies to other countries except [Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:25 Armies added to country: Greenland
+2017/11/08 01:12:25 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:12:25 Mohit has Countries with 0 number of armies []
+2017/11/08 01:12:25 Count of placing armies: 28
+2017/11/08 01:12:25 Rana you own these countries [Argentina, Central America, Quebec, Alberta].
+2017/11/08 01:12:27 Armies added to country: Argentina
+2017/11/08 01:12:27 Armies with current player: 1
+2017/11/08 01:12:27 Armies with current player: 1
+2017/11/08 01:12:27 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=1, Eastern United States=1, Quebec=0, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=1, Peru=7, Greenland=1}
+2017/11/08 01:12:27 You are not allowed to add armies to other countries except [Quebec] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:29 Armies added to country: Quebec
+2017/11/08 01:12:29 Quebec armies has been updated. New armies of Quebec are 1
+2017/11/08 01:12:29 Rana has Countries with 0 number of armies []
+2017/11/08 01:12:29 Count of placing armies: 29
+2017/11/08 01:12:29 Preet you own these countries [Peru, Eastern United States, Ontario, Northwest Territory].
+2017/11/08 01:12:32 Armies added to country: Peru
+2017/11/08 01:12:32 Armies with current player: 1
+2017/11/08 01:12:32 Armies with current player: 1
+2017/11/08 01:12:32 Armies in each countries: {Central America=1, Argentina=7, Northwest Territory=1, Alberta=1, Eastern United States=1, Quebec=1, Brazil=6, Alaska=1, Western United States=1, Ontario=0, Venezuala=1, Peru=7, Greenland=1}
+2017/11/08 01:12:32 You are not allowed to add armies to other countries except [Ontario] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:12:34 Armies added to country: Ontario
+2017/11/08 01:12:34 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:12:34 Preet has Countries with 0 number of armies []
+2017/11/08 01:12:34 Count of placing armies: 30
+2017/11/08 01:12:34 Total cards in the deck: 13
+2017/11/08 01:12:34 Card types: [A, B, C]
+2017/11/08 01:12:34 Cards in the deck: []
+2017/11/08 01:12:34 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 01:12:34 =====================Reinforment phase started=====================
+2017/11/08 01:12:34 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:12:34 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:12:34 You have [Brazil, Venezuala, Western United States, Greenland, Alaska]
+2017/11/08 01:12:34 You got 0 from you continets.
+2017/11/08 01:12:34 Reinforcement armies from country: 3
+2017/11/08 01:12:34 You have 5 no of countries.
+2017/11/08 01:12:34 Your got 3 from your countries.
+2017/11/08 01:14:12 Start up phase started: 
+2017/11/08 01:14:12 3 players are chosen by the user to play the game.
+2017/11/08 01:14:13 Player name entered: Mohit
+2017/11/08 01:14:14 Player name entered: Rana
+2017/11/08 01:14:16 Player name entered: Preet
+2017/11/08 01:14:16 Current player stored : Mohit
+2017/11/08 01:14:16 Number of armies for each player: 3
+2017/11/08 01:14:16 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 01:14:20 Armies added to country: Test
+2017/11/08 01:14:20 Armies with current player: 3
+2017/11/08 01:14:20 Armies with current player: 3
+2017/11/08 01:14:20 Armies in each countries: {Argentina=0, Alberta=0, Test=0, Brazil=0, Alaska=0, Venezuala=0, Peru=0, Ontario=0, Greenland=0}
+2017/11/08 01:14:20 Test armies has been updated. New armies of Test are 1
+2017/11/08 01:14:20 Mohit has Countries with 0 number of armies [Alaska, Greenland]
+2017/11/08 01:14:20 Count of placing armies: 1
+2017/11/08 01:14:20 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 01:14:22 Armies added to country: Ontario
+2017/11/08 01:14:22 Armies with current player: 3
+2017/11/08 01:14:22 Armies with current player: 3
+2017/11/08 01:14:22 Armies in each countries: {Argentina=0, Alberta=0, Test=1, Brazil=0, Alaska=0, Venezuala=0, Peru=0, Ontario=0, Greenland=0}
+2017/11/08 01:14:22 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:14:22 Rana has Countries with 0 number of armies [Brazil, Peru]
+2017/11/08 01:14:22 Count of placing armies: 2
+2017/11/08 01:14:22 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 01:14:24 Armies added to country: Alberta
+2017/11/08 01:14:24 Armies with current player: 3
+2017/11/08 01:14:24 Armies with current player: 3
+2017/11/08 01:14:24 Armies in each countries: {Argentina=0, Alberta=0, Test=1, Brazil=0, Alaska=0, Venezuala=0, Peru=0, Ontario=1, Greenland=0}
+2017/11/08 01:14:24 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:14:24 Preet has Countries with 0 number of armies [Argentina, Venezuala]
+2017/11/08 01:14:24 Count of placing armies: 3
+2017/11/08 01:14:24 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 01:14:27 Armies added to country: Test
+2017/11/08 01:14:27 Armies with current player: 2
+2017/11/08 01:14:27 Armies with current player: 2
+2017/11/08 01:14:27 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=0, Alaska=0, Venezuala=0, Peru=0, Ontario=1, Greenland=0}
+2017/11/08 01:14:27 You are not allowed to add armies to other countries except [Alaska, Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:14:29 Armies added to country: Alaska
+2017/11/08 01:14:29 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:14:29 Mohit has Countries with 0 number of armies [Greenland]
+2017/11/08 01:14:29 Count of placing armies: 4
+2017/11/08 01:14:29 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 01:14:31 Armies added to country: Peru
+2017/11/08 01:14:31 Armies with current player: 2
+2017/11/08 01:14:31 Armies with current player: 2
+2017/11/08 01:14:31 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=0, Alaska=1, Venezuala=0, Peru=0, Ontario=1, Greenland=0}
+2017/11/08 01:14:31 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:14:31 Rana has Countries with 0 number of armies [Brazil]
+2017/11/08 01:14:31 Count of placing armies: 5
+2017/11/08 01:14:31 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 01:14:33 Armies added to country: Venezuala
+2017/11/08 01:14:33 Armies with current player: 2
+2017/11/08 01:14:33 Armies with current player: 2
+2017/11/08 01:14:33 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=0, Alaska=1, Venezuala=0, Peru=1, Ontario=1, Greenland=0}
+2017/11/08 01:14:33 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:14:33 Preet has Countries with 0 number of armies [Argentina]
+2017/11/08 01:14:33 Count of placing armies: 6
+2017/11/08 01:14:33 Mohit you own these countries [Test, Greenland, Alaska].
+2017/11/08 01:14:36 Armies added to country: Alaska
+2017/11/08 01:14:36 Armies with current player: 1
+2017/11/08 01:14:36 Armies with current player: 1
+2017/11/08 01:14:36 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=0, Alaska=1, Venezuala=1, Peru=1, Ontario=1, Greenland=0}
+2017/11/08 01:14:36 You are not allowed to add armies to other countries except [Greenland] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:14:39 Armies added to country: Greenland
+2017/11/08 01:14:39 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:14:39 Mohit has Countries with 0 number of armies []
+2017/11/08 01:14:39 Count of placing armies: 7
+2017/11/08 01:14:39 Rana you own these countries [Ontario, Peru, Brazil].
+2017/11/08 01:14:41 Armies added to country: Brazil
+2017/11/08 01:14:41 Armies with current player: 1
+2017/11/08 01:14:41 Armies with current player: 1
+2017/11/08 01:14:41 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=0, Alaska=1, Venezuala=1, Peru=1, Ontario=1, Greenland=1}
+2017/11/08 01:14:41 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:14:41 Rana has Countries with 0 number of armies []
+2017/11/08 01:14:41 Count of placing armies: 8
+2017/11/08 01:14:41 Preet you own these countries [Alberta, Venezuala, Argentina].
+2017/11/08 01:14:43 Armies added to country: Argentina
+2017/11/08 01:14:43 Armies with current player: 1
+2017/11/08 01:14:43 Armies with current player: 1
+2017/11/08 01:14:43 Armies in each countries: {Argentina=0, Alberta=1, Test=1, Brazil=1, Alaska=1, Venezuala=1, Peru=1, Ontario=1, Greenland=1}
+2017/11/08 01:14:43 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:14:43 Preet has Countries with 0 number of armies []
+2017/11/08 01:14:43 Count of placing armies: 9
+2017/11/08 01:14:43 Total cards in the deck: 9
+2017/11/08 01:14:43 Card types: [A, B, C]
+2017/11/08 01:14:43 Cards in the deck: []
+2017/11/08 01:14:43 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 01:14:43 =====================Reinforment phase started=====================
+2017/11/08 01:14:43 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:14:43 Number of reinforcement armies for player from continent: 2
+2017/11/08 01:14:43 Number of reinforcement armies for player from continent: 2
+2017/11/08 01:14:43 You have [Test, Greenland, Alaska]
+2017/11/08 01:14:43 You got 2 from you continets.
+2017/11/08 01:14:43 Reinforcement armies from country: 5
+2017/11/08 01:14:43 You have 3 no of countries.
+2017/11/08 01:14:43 Your got 3 from your countries.
+2017/11/08 01:18:03 Start up phase started: 
+2017/11/08 01:18:03 3 players are chosen by the user to play the game.
+2017/11/08 01:18:04 Player name entered: Mohit
+2017/11/08 01:18:06 Player name entered: Rana
+2017/11/08 01:18:08 Player name entered: Preet
+2017/11/08 01:18:08 Current player stored : Mohit
+2017/11/08 01:18:08 Number of armies for each player: 3
+2017/11/08 01:18:08 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:18:15 Armies added to country: Brazil
+2017/11/08 01:18:15 Armies with current player: 3
+2017/11/08 01:18:15 Armies with current player: 3
+2017/11/08 01:18:15 Armies in each countries: {Argentina=0, Alberta=0, Quebec=0, Brazil=0, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:18:15 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:18:15 Mohit has Countries with 0 number of armies [Venezuala, Greenland]
+2017/11/08 01:18:15 Count of placing armies: 1
+2017/11/08 01:18:15 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:18:17 Armies added to country: Argentina
+2017/11/08 01:18:17 Armies with current player: 3
+2017/11/08 01:18:17 Armies with current player: 3
+2017/11/08 01:18:17 Armies in each countries: {Argentina=0, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:18:17 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:18:17 Rana has Countries with 0 number of armies [Alberta, Quebec]
+2017/11/08 01:18:17 Count of placing armies: 2
+2017/11/08 01:18:17 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:18:23 Armies added to country: Peru
+2017/11/08 01:18:23 Armies with current player: 3
+2017/11/08 01:18:23 Armies with current player: 3
+2017/11/08 01:18:23 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:18:23 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:18:23 Preet has Countries with 0 number of armies [Alaska, Ontario]
+2017/11/08 01:18:23 Count of placing armies: 3
+2017/11/08 01:18:23 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:18:28 Armies added to country: Venezuala
+2017/11/08 01:18:28 Armies with current player: 2
+2017/11/08 01:18:28 Armies with current player: 2
+2017/11/08 01:18:28 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=1, Greenland=0}
+2017/11/08 01:18:28 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:18:28 Mohit has Countries with 0 number of armies [Greenland]
+2017/11/08 01:18:28 Count of placing armies: 4
+2017/11/08 01:18:28 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:18:30 Armies added to country: Quebec
+2017/11/08 01:18:30 Armies with current player: 2
+2017/11/08 01:18:30 Armies with current player: 2
+2017/11/08 01:18:30 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:18:30 Quebec armies has been updated. New armies of Quebec are 1
+2017/11/08 01:18:30 Rana has Countries with 0 number of armies [Alberta]
+2017/11/08 01:18:30 Count of placing armies: 5
+2017/11/08 01:18:30 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:18:32 Armies added to country: Ontario
+2017/11/08 01:18:32 Armies with current player: 2
+2017/11/08 01:18:32 Armies with current player: 2
+2017/11/08 01:18:32 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=0, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:18:32 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:18:32 Preet has Countries with 0 number of armies [Alaska]
+2017/11/08 01:18:32 Count of placing armies: 6
+2017/11/08 01:18:32 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:18:35 Armies added to country: Greenland
+2017/11/08 01:18:35 Armies with current player: 1
+2017/11/08 01:18:35 Armies with current player: 1
+2017/11/08 01:18:35 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:18:35 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:18:35 Mohit has Countries with 0 number of armies []
+2017/11/08 01:18:35 Count of placing armies: 7
+2017/11/08 01:18:35 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:18:37 Armies added to country: Alberta
+2017/11/08 01:18:37 Armies with current player: 1
+2017/11/08 01:18:37 Armies with current player: 1
+2017/11/08 01:18:37 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=1}
+2017/11/08 01:18:37 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:18:37 Rana has Countries with 0 number of armies []
+2017/11/08 01:18:37 Count of placing armies: 8
+2017/11/08 01:18:37 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:18:39 Armies added to country: Peru
+2017/11/08 01:18:39 Armies with current player: 1
+2017/11/08 01:18:39 Armies with current player: 1
+2017/11/08 01:18:39 Armies in each countries: {Argentina=1, Alberta=1, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=1}
+2017/11/08 01:18:39 You are not allowed to add armies to other countries except [Alaska] countries. 
+ Because you have minimum number of armies to place ermies in each countyr
+2017/11/08 01:18:42 Armies added to country: Alaska
+2017/11/08 01:18:42 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:18:42 Preet has Countries with 0 number of armies []
+2017/11/08 01:18:42 Count of placing armies: 9
+2017/11/08 01:18:42 Total cards in the deck: 9
+2017/11/08 01:18:42 Card types: [A, B, C]
+2017/11/08 01:18:42 Cards in the deck: []
+2017/11/08 01:18:42 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 01:18:42 =====================Reinforment phase started=====================
+2017/11/08 01:18:42 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:18:42 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:18:42 You have [Brazil, Venezuala, Greenland]
+2017/11/08 01:18:42 You got 0 from you continets.
+2017/11/08 01:18:42 Reinforcement armies from country: 3
+2017/11/08 01:18:42 You have 3 no of countries.
+2017/11/08 01:18:42 Your got 3 from your countries.
+2017/11/08 01:21:10 =====================Reinforment phase started=====================
+2017/11/08 01:21:10 Number of reinforcement armies for player from continent: 3
+2017/11/08 01:21:10 Number of reinforcement armies for player from continent: 3
+2017/11/08 01:21:10 You have [Argentina, Quebec, Alberta]
+2017/11/08 01:21:10 You got 3 from you continets.
+2017/11/08 01:21:10 Reinforcement armies from country: 6
+2017/11/08 01:21:10 You have 3 no of countries.
+2017/11/08 01:21:10 Your got 3 from your countries.
+2017/11/08 01:25:39 Start up phase started: 
+2017/11/08 01:25:39 3 players are chosen by the user to play the game.
+2017/11/08 01:25:40 Player name entered: Mohit
+2017/11/08 01:25:41 Player name entered: Rana
+2017/11/08 01:25:42 Player name entered: Preet
+2017/11/08 01:25:42 Current player stored : Mohit
+2017/11/08 01:25:42 Number of armies for each player: 3
+2017/11/08 01:25:42 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:25:45 Armies added to country: Brazil
+2017/11/08 01:25:45 Armies with current player: 3
+2017/11/08 01:25:45 Armies with current player: 3
+2017/11/08 01:25:45 Armies in each countries: {Argentina=0, Alberta=0, Quebec=0, Brazil=0, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:25:45 Brazil armies has been updated. New armies of Brazil are 1
+2017/11/08 01:25:45 Mohit has Countries with 0 number of armies [Venezuala, Greenland]
+2017/11/08 01:25:45 Count of placing armies: 1
+2017/11/08 01:25:45 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:25:47 Armies added to country: Argentina
+2017/11/08 01:25:47 Armies with current player: 3
+2017/11/08 01:25:47 Armies with current player: 3
+2017/11/08 01:25:47 Armies in each countries: {Argentina=0, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:25:47 Argentina armies has been updated. New armies of Argentina are 1
+2017/11/08 01:25:47 Rana has Countries with 0 number of armies [Alberta, Quebec]
+2017/11/08 01:25:47 Count of placing armies: 2
+2017/11/08 01:25:47 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:25:50 Armies added to country: Peru
+2017/11/08 01:25:50 Armies with current player: 3
+2017/11/08 01:25:50 Armies with current player: 3
+2017/11/08 01:25:50 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=0, Greenland=0}
+2017/11/08 01:25:50 Peru armies has been updated. New armies of Peru are 1
+2017/11/08 01:25:50 Preet has Countries with 0 number of armies [Alaska, Ontario]
+2017/11/08 01:25:50 Count of placing armies: 3
+2017/11/08 01:25:50 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:25:52 Armies added to country: Venezuala
+2017/11/08 01:25:52 Armies with current player: 2
+2017/11/08 01:25:52 Armies with current player: 2
+2017/11/08 01:25:52 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=0, Peru=1, Greenland=0}
+2017/11/08 01:25:52 Venezuala armies has been updated. New armies of Venezuala are 1
+2017/11/08 01:25:52 Mohit has Countries with 0 number of armies [Greenland]
+2017/11/08 01:25:52 Count of placing armies: 4
+2017/11/08 01:25:52 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:25:55 Armies added to country: Quebec
+2017/11/08 01:25:55 Armies with current player: 2
+2017/11/08 01:25:55 Armies with current player: 2
+2017/11/08 01:25:55 Armies in each countries: {Argentina=1, Alberta=0, Quebec=0, Brazil=1, Alaska=0, Ontario=0, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:25:55 Quebec armies has been updated. New armies of Quebec are 1
+2017/11/08 01:25:55 Rana has Countries with 0 number of armies [Alberta]
+2017/11/08 01:25:55 Count of placing armies: 5
+2017/11/08 01:25:55 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:25:57 Armies added to country: Ontario
+2017/11/08 01:25:57 Armies with current player: 2
+2017/11/08 01:25:57 Armies with current player: 2
+2017/11/08 01:25:57 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=0, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:25:57 Ontario armies has been updated. New armies of Ontario are 1
+2017/11/08 01:25:57 Preet has Countries with 0 number of armies [Alaska]
+2017/11/08 01:25:57 Count of placing armies: 6
+2017/11/08 01:25:57 Mohit you own these countries [Brazil, Venezuala, Greenland].
+2017/11/08 01:25:59 Armies added to country: Greenland
+2017/11/08 01:25:59 Armies with current player: 1
+2017/11/08 01:25:59 Armies with current player: 1
+2017/11/08 01:25:59 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=0}
+2017/11/08 01:25:59 Greenland armies has been updated. New armies of Greenland are 1
+2017/11/08 01:25:59 Mohit has Countries with 0 number of armies []
+2017/11/08 01:25:59 Count of placing armies: 7
+2017/11/08 01:25:59 Rana you own these countries [Argentina, Quebec, Alberta].
+2017/11/08 01:26:01 Armies added to country: Alberta
+2017/11/08 01:26:01 Armies with current player: 1
+2017/11/08 01:26:01 Armies with current player: 1
+2017/11/08 01:26:01 Armies in each countries: {Argentina=1, Alberta=0, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=1}
+2017/11/08 01:26:01 Alberta armies has been updated. New armies of Alberta are 1
+2017/11/08 01:26:01 Rana has Countries with 0 number of armies []
+2017/11/08 01:26:01 Count of placing armies: 8
+2017/11/08 01:26:01 Preet you own these countries [Peru, Ontario, Alaska].
+2017/11/08 01:26:03 Armies added to country: Alaska
+2017/11/08 01:26:03 Armies with current player: 1
+2017/11/08 01:26:03 Armies with current player: 1
+2017/11/08 01:26:03 Armies in each countries: {Argentina=1, Alberta=1, Quebec=1, Brazil=1, Alaska=0, Ontario=1, Venezuala=1, Peru=1, Greenland=1}
+2017/11/08 01:26:03 Alaska armies has been updated. New armies of Alaska are 1
+2017/11/08 01:26:03 Preet has Countries with 0 number of armies []
+2017/11/08 01:26:03 Count of placing armies: 9
+2017/11/08 01:26:03 Total cards in the deck: 9
+2017/11/08 01:26:03 Card types: [A, B, C]
+2017/11/08 01:26:03 Cards in the deck: []
+2017/11/08 01:26:03 Cards with each player: {Mohit=[], Rana=[], Preet=[]}
+2017/11/08 01:26:03 =====================Reinforment phase started=====================
+2017/11/08 01:26:03 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:26:03 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:26:03 You have [Brazil, Venezuala, Greenland]
+2017/11/08 01:26:03 You got 0 from you continets.
+2017/11/08 01:26:03 Reinforcement armies from country: 3
+2017/11/08 01:26:03 You have 3 no of countries.
+2017/11/08 01:26:03 Your got 3 from your countries.
+2017/11/08 01:28:33 =====================Reinforment phase started=====================
+2017/11/08 01:28:33 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:28:33 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:28:33 You have [Argentina, Quebec, Alberta]
+2017/11/08 01:28:33 You got 0 from you continets.
+2017/11/08 01:28:33 Reinforcement armies from country: 3
+2017/11/08 01:28:33 You have 3 no of countries.
+2017/11/08 01:28:33 Your got 3 from your countries.
+2017/11/08 01:30:44 =====================Reinforment phase started=====================
+2017/11/08 01:30:44 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:30:44 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:30:44 You have [Ontario, Alaska]
+2017/11/08 01:30:44 You got 0 from you continets.
+2017/11/08 01:30:45 Reinforcement armies from country: 3
+2017/11/08 01:30:45 You have 2 no of countries.
+2017/11/08 01:30:45 Your got 3 from your countries.
+2017/11/08 01:32:02 =====================Reinforment phase started=====================
+2017/11/08 01:32:02 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:32:02 Number of reinforcement armies for player from continent: 0
+2017/11/08 01:32:02 You have [Brazil, Venezuala, Greenland]
+2017/11/08 01:32:02 You got 0 from you continets.
+2017/11/08 01:32:02 Reinforcement armies from country: 3
+2017/11/08 01:32:02 You have 3 no of countries.
+2017/11/08 01:32:02 Your got 3 from your countries.

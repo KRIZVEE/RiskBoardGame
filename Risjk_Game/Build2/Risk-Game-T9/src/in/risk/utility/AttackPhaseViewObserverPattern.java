@@ -18,7 +18,7 @@ public class AttackPhaseViewObserverPattern implements Observer {
 			// writer = new
 			// PrintWriter("C:\\Users\\Kashif_Rizvee\\Desktop\\RiskAttack.txt",
 			// "UTF-8");
-			writer = new PrintWriter("C:\\Users\\Kashif_Rizvee\\Desktop\\GamePhaseView.txt", "UTF-8");
+			writer = new PrintWriter("E:/Risk_Game/Risjk_Game/phaseviewlog.txt", "UTF-8");
 
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
