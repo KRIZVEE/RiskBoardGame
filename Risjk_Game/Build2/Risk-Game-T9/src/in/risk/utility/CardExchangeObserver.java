@@ -12,7 +12,8 @@ public class CardExchangeObserver implements Observer {
 		// System.out.println("i am in card exchange method " + ((RiskGame)
 		// o).playersCards);// +
 		// ((Player)
-		System.out.println("i am in card exchange method " + ((Player) o).x);// +
+		// System.out.println("i am in card exchange method " + ((Player)
+		// o).x);// +
 		// o).getArmiesFromCards());
 
 	}

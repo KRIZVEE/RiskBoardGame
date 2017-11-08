@@ -14,12 +14,40 @@ import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Scanner;
 
+import in.risk.gui.RiskInterface;
+
+// team file//
 public class Player extends Observable {
 
 	RiskGame rg;
-	int x = 5;
-	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 
+	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
+	public static HashMap<String, Integer> countriesArmiesObserver = new HashMap<String, Integer>();
+	public static HashMap<String, ArrayList<String>> initialPlayerCountryObserver = new HashMap<String, ArrayList<String>>();
+
+	String attackerCountry = "";
+	String defenderCountry = "";
+
+	int noOfArmiesFromCountries = 0;
+	int noOfArmiesFromContinents = 0;
+	int noOfArmiesFromCards = 0;
+	int noOfAttackerDice = 0;
+	int attacker, defender;
+	int attackerDiceArray[];
+	int defenderDiceArray[];
+
+	int noOfDefenderDice;
+	int flagCheckDice = 0;
+	int indx = 0;// = value.
+	int oldCOuntryListSize = 0;
+	int newCOuntryListSize = 0;
+	String newDefenderCountry = "";
+	int updateArmyOfAttacker;
+	int updateArmyOfDefender;
+	int countNoOfAttack = 0;
+
+	String from = "";
+	String to = "";
 	static Scanner sc = new Scanner(System.in);
 
 	/**
@@ -38,7 +66,7 @@ public class Player extends Observable {
 		// Start Of counting reinforcement armies from continet value.
 		// commented for time being
 		getArmiesaFromContinet();
-		int noOfArmiesFromContinents = RiskGame.noOfReinforcementArmies;
+		noOfArmiesFromContinents = RiskGame.noOfReinforcementArmies;
 		System.out.println("You have " + RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()));
 		System.out.println("You got " + noOfArmiesFromContinents + " from you continets.");
 		// end of counting reinforcement armies from continet value.
@@ -46,7 +74,7 @@ public class Player extends Observable {
 		// Start Of counting reinforcement armies from number of countries owned
 		// by player.
 		getArmiesFromCountries();
-		int noOfArmiesFromCountries = RiskGame.noOfReinforcementArmies - noOfArmiesFromContinents;
+		noOfArmiesFromCountries = RiskGame.noOfReinforcementArmies - noOfArmiesFromContinents;
 		System.out.println("You have " + RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size()
 				+ " no of countries.");
 		System.out.println("Your got " + noOfArmiesFromCountries + " from your countris.");
@@ -55,9 +83,11 @@ public class Player extends Observable {
 
 		// Start of counting number of reinforcement armies on the basis of card
 		// trade.
-		getArmiesFromCards();
-		int noOfArmiesFromCards = RiskGame.noOfReinforcementArmies
-				- (noOfArmiesFromCountries + noOfArmiesFromContinents);
+
+		RiskInterface objRI4 = new RiskInterface();
+		objRI4.demoCardExchange();
+		// getArmiesFromCards();
+		noOfArmiesFromCards = RiskGame.noOfReinforcementArmies - (noOfArmiesFromCountries + noOfArmiesFromContinents);
 		System.out.println("You got " + noOfArmiesFromCards + " armies from tradin cards");
 		// End of counting number of reinforcement armies on the basis of card
 		// trade.
@@ -87,20 +117,29 @@ public class Player extends Observable {
 			} else {
 				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies + "\n");
 				noOfArmiesWantToPlace = sc.nextInt();// 10
-				attackPhase();
+				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace);
 				// placeReinforcementArmies(countryNameToEnterArmies,
 				// noOfArmiesWantToPlace);
 				// gamePhase();
 			}
 		}
+
+		countriesArmiesObserver.putAll(RiskGame.countriesArmies);
+		System.out.println("countriesArmies :" + RiskGame.countriesArmies);
+		System.out.println("countriesArmiesObserver : " + countriesArmiesObserver);
+		setChanged();
+		notifyObservers(this);
+		// RiskGame objRGLocal = new RiskGame();
+		RiskInterface objRILocalAttack = new RiskInterface();
+		objRILocalAttack.demoAttackPhaseView();
+		// attackPhase();
 	}
 
 	/**
 	 * This method is used to get reinforcement armies from owned continents.
-	 * @throws IOException 
 	 */
 	// commented for time being
-	public void getArmiesaFromContinet() throws IOException {
+	public void getArmiesaFromContinet() {
 		for (Entry<String, List<String>> entry : RiskGame.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
@@ -117,8 +156,6 @@ public class Player extends Observable {
 			}
 			RiskGame.resultOfContinentCountry.clear();
 		}
-		
-		//rg.loggingString("No of reinforcement armies from continent :" +rg.noOfReinforcementArmies);
 	}
 
 	/**
@@ -127,7 +164,14 @@ public class Player extends Observable {
 	 */
 	public void getArmiesFromCards() throws IOException {
 
-		// System.out.println(playersCards);
+		// System.out.println(RiskGame.playersCards);
+		// int tempSize =
+		// playersCards.get(RiskGame.currentPlayer.getName()).size();
+		//
+		// System.out.println(RiskGame.playersCards.get(RiskGame.currentPlayer.getName()));
+		// int tempSize =
+		// RiskGame.playersCards.get(RiskGame.currentPlayer.getName()).size();
+
 		System.out.println(playersCards.get(RiskGame.currentPlayer.getName()));
 		int tempSize = playersCards.get(RiskGame.currentPlayer.getName()).size();
 
@@ -151,16 +195,14 @@ public class Player extends Observable {
 						"==============i am going with observer pattern for card exchange view with card size < = 5==========");
 				setChanged();
 				notifyObservers(this);
-
 			}
 		}
-
 	}
 
 	/**
 	 * This method is used to get reinforcement armies from owned countries.
 	 */
-	public  void getArmiesFromCountries() {
+	public static void getArmiesFromCountries() {
 		int sizeOfCountriesRiskGame = RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size();
 
 		if (sizeOfCountriesRiskGame < 9) {
@@ -168,7 +210,6 @@ public class Player extends Observable {
 		} else {
 			RiskGame.noOfReinforcementArmies = RiskGame.noOfReinforcementArmies + sizeOfCountriesRiskGame / 3;
 		}
-		
 	}
 
 	/**
@@ -186,28 +227,11 @@ public class Player extends Observable {
 			System.out.println(noOfArmiesWantToPlace + "\n");
 			RiskGame.currentPlayer.loosArmies(noOfArmiesWantToPlace);
 			RiskGame.afterA = RiskGame.currentPlayer.getArmies();// 13
-
 		}
+
 	}
 
-	public void placeCardsInTheDeck() throws IOException {
-		RiskGame.cardType.add(RiskGame.cardTypeA);
-		RiskGame.cardType.add(RiskGame.cardTypeB);
-		RiskGame.cardType.add(RiskGame.cardTypeC);
-		int j = 0;
-		RiskGame.cardInTheDeck = RiskGame.countryFilter.size();
-		for (int i = 0; i < RiskGame.cardInTheDeck; i++) {
-			RiskGame.deck.add(RiskGame.cardType.get(j));
-			j++;
-			if (j == 3) {
-				j = 0;
-			}
-		}
-		//rg.loggingString("Total cards type in deck " +rg.cardType);
-		//rg.loggingString("Total cards in deck " +rg.cardInTheDeck);
-	}
-
-	public static void placeCardsInTheDeck2() {
+	public static void placeCardsInTheDeck() {
 		RiskGame.cardType.add(RiskGame.cardTypeA);
 		RiskGame.cardType.add(RiskGame.cardTypeB);
 		RiskGame.cardType.add(RiskGame.cardTypeC);
@@ -222,16 +246,29 @@ public class Player extends Observable {
 		}
 	}
 
-	public void initialCardDistribution() throws IOException {
+	// public static void placeCardsInTheDeck2() {
+	// RiskGame.cardType.add(RiskGame.cardTypeA);
+	// RiskGame.cardType.add(RiskGame.cardTypeB);
+	// RiskGame.cardType.add(RiskGame.cardTypeC);
+	// int j = 0;
+	// RiskGame.cardInTheDeck = RiskGame.countryFilter.size();
+	// for (int i = 0; i < RiskGame.cardInTheDeck; i++) {
+	// RiskGame.cardsInTheDeck.add(RiskGame.cardType.get(j));
+	// j++;
+	// if (j == 3) {
+	// j = 0;
+	// }
+	// }
+	// }
+
+	public void initialCardDistribution() {
 		int size = RiskGame.players.size();
 		for (int i = 0; i < size; i++) {
-			playersCards.put(RiskGame.players.get(i).getName(), RiskGame.deck.subList(0, RiskGame.deck.size() / 2));
+			playersCards.put(RiskGame.players.get(i).getName(), RiskGame.deck.subList(0, 0));
 		}
-		
-		//rg.loggingString("Cards with each player " +playersCards);
 	}
 
-	public void checkUniqueCombination(int tempSize) throws IOException {
+	public static void checkUniqueCombination(int tempSize) throws IOException {
 		List<Integer> tempListA = new ArrayList<Integer>();
 		List<Integer> tempListB = new ArrayList<Integer>();
 		List<Integer> tempListC = new ArrayList<Integer>();
@@ -263,7 +300,9 @@ public class Player extends Observable {
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListA.clear();
-			getArmiesFromCards();
+			RiskInterface objRICE = new RiskInterface();
+			objRICE.demoCardExchange();
+			// getArmiesFromCards();
 		} else if (tempListB.size() >= 3) {
 			int firstIndexToRemove = tempListB.get(0);
 			int secondIndexToRemove = tempListB.get(1);
@@ -277,7 +316,9 @@ public class Player extends Observable {
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListB.clear();
-			getArmiesFromCards();
+			RiskInterface objRICE2 = new RiskInterface();
+			objRICE2.demoCardExchange();
+			// getArmiesFromCards();
 		} else if (tempListC.size() >= 3) {
 			int firstIndexToRemove = tempListC.get(0);
 			int secondIndexToRemove = tempListC.get(1);
@@ -291,7 +332,10 @@ public class Player extends Observable {
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 			tempListC.clear();
-			getArmiesFromCards();
+
+			RiskInterface objRICE3 = new RiskInterface();
+			objRICE3.demoCardExchange();
+			// getArmiesFromCards();
 		}
 	}
 
@@ -349,6 +393,7 @@ public class Player extends Observable {
 			RiskGame.noOfReinforcementArmies += 5 * RiskGame.cardFlag;
 			RiskGame.cardFlag += 1;
 		}
+		// i am having doubt in this whether copy paste done correctly
 		if (tempListABCSecond.size() >= 3) {
 			int fourthIndexToRemove = tempListABCSecond.get(0);
 			int fifthIndexToRemove = tempListABCSecond.get(1);
@@ -366,20 +411,20 @@ public class Player extends Observable {
 	}
 
 	public void attackPhase() throws IOException {
-		int noOfAttackerDice = 0;
-		int attacker, defender;
-		int attackerDiceArray[];
-		int defenderDiceArray[];
-		String attackerCountry;
-		int noOfDefenderDice;
-		String defenderCountry;
-		int flagCheckDice = 0;
-		int indx = 0;// = value.
-		int oldCOuntryListSize = 0;
-		int newCOuntryListSize = 0;
-		String newDefenderCountry = "";
-		int updateArmyOfAttacker;
-		int updateArmyOfDefender;
+		// noOfAttackerDice;
+		// attacker = 0; defender = 0;
+		// attackerDiceArray[];
+		// defenderDiceArray[];
+		// attackerCountry;
+		// int noOfDefenderDice;
+		// defenderCountry;
+		// flagCheckDice = 0;
+		// int indx = 0;// = value.
+		// int oldCOuntryListSize = 0;
+		// int newCOuntryListSize = 0;
+		// String newDefenderCountry = "";
+		// int updateArmyOfAttacker;
+		// int updateArmyOfDefender;
 
 		String attackTurnOn = "hello";
 
@@ -411,11 +456,13 @@ public class Player extends Observable {
 		// countriesArmies.put("Venezuala", 1);
 		RiskGame.countriesArmies.put("Peru", 1);
 		// countriesArmies.put("Argentina", 1);
-		// countriesArmies.put("Brazil", 4);
+		// RiskGame.countriesArmies.put("Brazil", 4);
 		// countriesArmies.put("Alberta", 2);
 
-		System.out.println("Initailly player country list before any attack : " + RiskGame.initialPlayerCountry);
-		System.out.println("Initailly player country list with initial army : " + RiskGame.countriesArmies);
+		System.out.println("Initailly player country list before any attack : "
+				+ RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()));
+		System.out.println("Initailly player country list with initial army : "
+				+ RiskGame.countriesArmies.get(RiskGame.currentPlayer.getName()));
 
 		System.out.println("Current Player : " + RiskGame.currentPlayer.getName());
 		oldCOuntryListSize = RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer.getName()).size();
@@ -707,7 +754,11 @@ public class Player extends Observable {
 		attackTurnOn = input.readLine();
 		if (attackTurnOn.equals("Y")) {
 
-			attackPhase();
+			countNoOfAttack++;
+
+			RiskInterface objRIAPV = new RiskInterface();
+			objRIAPV.demoAttackPhaseView();
+			// attackPhase();
 		} else {
 
 			// System.out.println(RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer));
@@ -716,19 +767,35 @@ public class Player extends Observable {
 			System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
 
 			if (newCOuntryListSize > oldCOuntryListSize) {
-
+				System.out.println("asljdhdsfjkldkafhhsjdkgfv");
 				// code for card need to be done here
 				int indexOfCardToBeGet = (int) (Math.random() * (RiskGame.cardsInTheDeck.size() - 0));
-				playersCards.get(RiskGame.currentPlayer.getName()).add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
+				List<String> temp = new ArrayList<String>(playersCards.get(RiskGame.currentPlayer.getName()));
+				// System.out.println(temp);
+				System.out.println(RiskGame.cardsInTheDeck);
+				temp.add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
+				System.out.println("temp " + temp);
+				System.out.println("cards in the deck " + RiskGame.cardsInTheDeck);
+				playersCards.put(RiskGame.currentPlayer.getName(), temp);
+				temp.clear();
+				// playersCards.get(RiskGame.currentPlayer.getName()).add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
 				RiskGame.cardsInTheDeck.remove(indexOfCardToBeGet);
-				rg = new RiskGame();
-				rg.getWorldDominance();
+				RiskInterface objRIWD = new RiskInterface();
+				objRIWD.demoWorldDominance();
 
 				// setChanged();
 				// notifyObservers(this);
 			}
 
-			fortify(RiskGame.currentPlayer);
+			countriesArmiesObserver.putAll(RiskGame.countriesArmies);
+			initialPlayerCountryObserver.putAll(RiskGame.initialPlayerCountry);
+			setChanged();
+			notifyObservers(this);
+
+			RiskInterface objRIFPV = new RiskInterface();
+			objRIFPV.demoFortifyPhaseView();
+
+			// fortify(RiskGame.currentPlayer);
 		}
 
 	}// end of attackPhase
@@ -789,10 +856,14 @@ public class Player extends Observable {
 					int currentArmiesOfFromCountry = RiskGame.countriesArmies.get(from);
 					int newArmiesToDelete = currentArmiesOfFromCountry - numberOfArmiesToMove;
 					RiskGame.countriesArmies.put(from, newArmiesToDelete);
+					countriesArmiesObserver.putAll(RiskGame.countriesArmies);
 					System.out.println(from + " = " + RiskGame.countriesArmies.get(from));
 					System.out.println(to + " = " + RiskGame.countriesArmies.get(to) + "\n");
+					setChanged();
+					notifyObservers(this);
 					RiskGame.nextPlayer();
-					reinforcementPhase();
+					RiskInterface objRIRPV = new RiskInterface();
+					objRIRPV.demoReinforcePhaseView();
 				} else {
 					Scanner sc = new Scanner(System.in);
 					String result;
@@ -800,10 +871,16 @@ public class Player extends Observable {
 							+ "Do you want to play fortify again? Y/N");
 					result = sc.nextLine();
 					if (result.equals("N")) {
-						fortify(currentPlayer);
+						RiskInterface objRILocalFortify2 = new RiskInterface();
+						objRILocalFortify2.demoFortifyPhaseView();
+						// fortify(currentPlayer);
 					} else {
+						setChanged();
+						notifyObservers(this);
 						RiskGame.nextPlayer();
-						reinforcementPhase();
+						RiskInterface objRILocalNew1 = new RiskInterface();
+						objRILocalNew1.demoReinforcePhaseView();
+						// reinforcementPhase();
 					}
 					// System.out.println(from + " " +
 					// RiskGame.countriesArmies.get(from));
@@ -816,10 +893,16 @@ public class Player extends Observable {
 				System.out.println("Do you want to stop? Y/N");
 				result = sc.nextLine();
 				if (result.equals("N")) {
-					fortify(currentPlayer);
+					RiskInterface objRILocalFortify3 = new RiskInterface();
+					objRILocalFortify3.demoFortifyPhaseView();
+					// fortify(currentPlayer);
 				} else {
+					setChanged();
+					notifyObservers(this);
 					RiskGame.nextPlayer();
-					reinforcementPhase();
+					RiskInterface objRILocalNew2 = new RiskInterface();
+					objRILocalNew2.demoReinforcePhaseView();
+					// reinforcementPhase();
 				}
 			}
 
@@ -830,10 +913,16 @@ public class Player extends Observable {
 			System.out.println("Do you want to stop? Y/N");
 			result = sc.nextLine();
 			if (result.equals("N")) {
-				fortify(currentPlayer);
+				RiskInterface objRILocalFortify4 = new RiskInterface();
+				objRILocalFortify4.demoFortifyPhaseView();
+				// fortify(currentPlayer);
 			} else {
+				setChanged();
+				notifyObservers(this);
 				RiskGame.nextPlayer();
-				reinforcementPhase();
+				RiskInterface objRILocalNewNew1 = new RiskInterface();
+				objRILocalNewNew1.demoReinforcePhaseView();
+				// reinforcementPhase();
 			}
 		}
 	}

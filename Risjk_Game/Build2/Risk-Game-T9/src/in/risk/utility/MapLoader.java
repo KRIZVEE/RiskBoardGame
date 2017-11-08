@@ -31,6 +31,8 @@ public class MapLoader {
 	public static ArrayList<String> xPoints = new ArrayList<String>();
 	public static ArrayList<String> yPoints = new ArrayList<String>();
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
+	public static int flag;
+	
 
 	/**
 	 * This method is called to load the map.
@@ -115,8 +117,62 @@ public class MapLoader {
 			mapfile.close();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}		
+	}
+	
+	public static boolean emptyContinent(){
+		
+		if(continentFilterNew.size() != continentCountries.size()){
+			return false;
 		}
-
+		return true;
+	}
+	
+	public static boolean connectedContinent(){
+		
+		HashMap<String, String> temp = new HashMap<String, String>();
+		adj.forEach((k,v)->{
+			if(continentCountries.get(countryContinent.get(k)).containsAll(v)){	
+			 temp.put(k, "Invalid");
+			}
+			else {
+				temp.put(k, "Valid");
+			}
+		});
+		List<String> checkFinal = new ArrayList<String>();
+		continentCountries.forEach((key,value) ->{
+			List<String> temp1 = new ArrayList<String>();
+			for(int i = 0; i < value.size(); i++){
+				String value1 = temp.get(value.get(i));
+				temp1.add(value1);
+			}
+			if(temp1.contains("Valid")){				
+				checkFinal.add("valid");
+			}else{				
+				checkFinal.add("Invalid");
+			}
+		});
+		
+		if(checkFinal.contains("Invalid")){
+			return false;
+		}else{
+			return true;
+		}
+		
+	}
+		
+	public static boolean connectedCountry(){
+	
+		adj.forEach((key,value)->{
+			if(value.isEmpty()){				
+				flag= 1;
+			}
+		});	
+		if(flag==1){
+			return false;
+		}else{
+			return true;
+		}		
 	}
 
 	/**
@@ -124,15 +180,15 @@ public class MapLoader {
 	 * values </br>
 	 * and then use them to make another hasmap with same key.
 	 */
-	public static HashMap<String, List<String>> fun(String Key, String Value) {
+	public static HashMap<String, List<String>> fun(String key, String value) {
 
-		if (continentCountries.containsKey(Key)) {
-			List<String> values = continentCountries.get(Key);
-			values.add(Value);
+		if (continentCountries.containsKey(key)) {
+			List<String> values = continentCountries.get(key);
+			values.add(value);
 		} else {
 			List<String> values = new ArrayList<String>();
-			values.add(Value);
-			continentCountries.put(Key, values);
+			values.add(value);
+			continentCountries.put(key, values);
 		}
 		return continentCountries;
 	}

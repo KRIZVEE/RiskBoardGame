@@ -1,24 +1,19 @@
 package in.risk.utility;
 
-public class observerDemo extends Object {
+import java.io.IOException;
 
-	// RiskGame rNew;// = new RiskGame();
-	// Player objPlayer;
-	// AttackObserver Attack;// = new AttackObserver();
-	// PlaceArmiesObserver placeArmiesObject;// = new PlaceArmiesObserver();
-	// CardExchangeObserver cardExchangeObject;
+public class ObserverDemo extends Object {
 
-	public observerDemo() {
+	RiskGame rNew;// = new RiskGame();
+	AttackObserver Attack;// = new AttackObserver();
+	PlaceArmiesObserver placeArmiesObject;// = new PlaceArmiesObserver();
 
-		// rNew = new RiskGame();
-		// objPlayer = new Player();
-		// Attack = new AttackObserver();
-		// placeArmiesObject = new PlaceArmiesObserver();
-		// cardExchangeObject = new CardExchangeObserver();
-		//
-		// rNew.addObserver(placeArmiesObject);
-		// rNew.addObserver(Attack);
-		// objPlayer.addObserver(cardExchangeObject);
+	public ObserverDemo() {
+		placeArmiesObject = new PlaceArmiesObserver();
+		rNew = new RiskGame();
+		Attack = new AttackObserver();
+		rNew.addObserver(placeArmiesObject);
+		rNew.addObserver(Attack);
 	}
 
 	/*
@@ -28,12 +23,9 @@ public class observerDemo extends Object {
 	 * }
 	 */
 
-	// public void demo() throws IOException {
-	// // pathMap
-	// rNew.startGame(RiskInterface.pathMap);
-	//
-	// // rNew.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World3.map");
-	//
-	// }
+	public void demo(String path) throws IOException {
+		rNew.startGame(path);
+
+	}
 
 };

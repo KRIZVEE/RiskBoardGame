@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import in.risk.utility.AttackObserver;
+import in.risk.utility.AttackPhaseViewObserverPattern;
 import in.risk.utility.CardExchangeObserver;
+import in.risk.utility.FortifyPhaseView;
 import in.risk.utility.MapLoader;
-import in.risk.utility.PlaceArmiesObserver;
+import in.risk.utility.ObserverDemo;
 import in.risk.utility.Player;
+import in.risk.utility.ReinforcePhaseViewObserverPattern;
 import in.risk.utility.RiskGame;
+import in.risk.utility.StartUpPhaseObserver;
+import in.risk.utility.WorldDominanceObserver;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +24,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -31,25 +37,56 @@ import javafx.stage.Stage;
  * @author Charanpreet Singh, Ishan Kansara, Kashif Rizvee, Mohit Rana
  * @version 1.0.0
  */
+
+// team file///
 public class RiskInterface extends Application {
 
-	RiskGame rNew;// = new RiskGame();
-	Player objPlayer;
-	AttackObserver Attack;// = new AttackObserver();
-	PlaceArmiesObserver placeArmiesObject;// = new PlaceArmiesObserver();
-	CardExchangeObserver cardExchangeObject;
+	RiskGame obj_RI_WDO;
+	RiskGame obj_RI_SUPO;
+	Player obj_P_RPVO;
+	Player obj_P_CEO;
+	Player obj_P_APV;
+	Player obj_P_FPV;
+
+	WorldDominanceObserver objWorldDominance;
+	CardExchangeObserver objCardExchangeObserver;
+	StartUpPhaseObserver objStartUpPhaseObserver;
+	ReinforcePhaseViewObserverPattern objReinforcePhaseViewObserverPattern;
+	AttackPhaseViewObserverPattern objAttackPhaseViewObserverPattern;
+	FortifyPhaseView objFortifyPhaseView;
 
 	public RiskInterface() {
 		// TODO Auto-generated constructor stub
-		rNew = new RiskGame();
-		objPlayer = new Player();
-		Attack = new AttackObserver();
-		placeArmiesObject = new PlaceArmiesObserver();
-		cardExchangeObject = new CardExchangeObserver();
+		obj_RI_WDO = new RiskGame();
+		obj_RI_SUPO = new RiskGame();
+		obj_P_CEO = new Player();
+		obj_P_RPVO = new Player();
+		obj_P_APV = new Player();
+		obj_P_FPV = new Player();
 
-		rNew.addObserver(placeArmiesObject);
-		rNew.addObserver(Attack);
-		objPlayer.addObserver(cardExchangeObject);
+		objWorldDominance = new WorldDominanceObserver();
+		objCardExchangeObserver = new CardExchangeObserver();
+		objStartUpPhaseObserver = new StartUpPhaseObserver();
+		objReinforcePhaseViewObserverPattern = new ReinforcePhaseViewObserverPattern();
+		objAttackPhaseViewObserverPattern = new AttackPhaseViewObserverPattern();
+		objFortifyPhaseView = new FortifyPhaseView();
+
+		// rNew1 = new RiskGame();
+		// rNew2 = new RiskGame();
+		// objPlayer = new Player();
+		// Attack = new AttackObserver();
+		// placeArmiesObject = new PlaceArmiesObserver();
+
+		obj_RI_WDO.addObserver(objWorldDominance);
+		obj_P_CEO.addObserver(objCardExchangeObserver);
+		obj_RI_SUPO.addObserver(objStartUpPhaseObserver);
+		obj_P_RPVO.addObserver(objReinforcePhaseViewObserverPattern);
+		obj_P_APV.addObserver(objAttackPhaseViewObserverPattern);
+		obj_P_FPV.addObserver(objFortifyPhaseView);
+
+		// rNew1.addObserver(placeArmiesObject);
+		// rNew2.addObserver(Attack);
+		// objPlayer.addObserver(objCardExchangeObserver);
 	}
 
 	MapEditorInterface objMapEditorInterface = new MapEditorInterface();
@@ -59,11 +96,10 @@ public class RiskInterface extends Application {
 	public static String pathMap;
 
 	Button mapEditor;
-	Button addPlayer;
 	Button startGame;
 
-	// Image logo = new Image(RiskGame.logoPath);
-	// ImageView imgView = new ImageView();
+	Image logo = new Image(RiskGame.logoPath);
+	ImageView imgView = new ImageView();
 
 	public ArrayList<String> path;
 
@@ -80,7 +116,6 @@ public class RiskInterface extends Application {
 		path = new ArrayList<String>(Arrays.asList(dir.list()));
 
 		mapEditor = new Button("Map Editor");
-		addPlayer = new Button("Add Players");
 		startGame = new Button("Start Game");
 
 		Text selectmap = new Text("Select Maps: ");
@@ -93,14 +128,14 @@ public class RiskInterface extends Application {
 
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
-		vbox.getChildren().addAll(selectmap, maplist2, mapEditor, addPlayer, startGame);
+		vbox.getChildren().addAll(imgView, selectmap, maplist2, mapEditor, startGame);
 
 		Group root = new Group();
 
 		root.getChildren().add(vbox);
 		Scene scene = new Scene(root, 600, 500);
 
-		// scene.getStylesheets().add(RiskGame.css);
+		scene.getStylesheets().add(RiskGame.css);
 
 		primaryStage.setTitle("Risk Game");
 		primaryStage.setScene(scene);
@@ -112,20 +147,20 @@ public class RiskInterface extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
-				pathMap = maplist2.getValue();
-				System.out.println(pathMap);
-				try {
-					objRiskGame.startGame(pathMap);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				primaryStage.close();
-
-				MapLoader.mapLoader(pathMap);
 				MapEditorInterface.continentEditorStage.close();
 				MapEditorInterface.countryEditorStage.close();
 				MapEditorInterface.mapEditorStage.close();
+				ObserverDemo obj = new ObserverDemo();
+				pathMap = maplist2.getValue();
+				try {
+					// objRiskGame.startGame(pathMap);
+					obj.demo(pathMap);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				MapLoader.mapLoader(pathMap);
+
 			}
 		});
 
@@ -134,7 +169,19 @@ public class RiskInterface extends Application {
 			public void handle(ActionEvent event) {
 				pathMap = maplist2.getValue();
 				MapLoader.mapLoader(pathMap);
-				objMapEditorInterface.mapEditorInterface();
+				if (MapLoader.connectedCountry() == false) {
+					System.out.println("It is an unconnected map.");
+					primaryStage.close();
+				} else if (MapLoader.connectedContinent() == false) {
+					System.out.println("Map has unconnected continent.");
+					primaryStage.close();
+				} else if (MapLoader.emptyContinent() == false) {
+					System.out.println("Map has a continent with no countries");
+					primaryStage.close();
+				} else {
+					objMapEditorInterface.mapEditorInterface();
+				}
+
 			}
 		});
 	}
@@ -143,23 +190,32 @@ public class RiskInterface extends Application {
 	 * This method launches the main method
 	 */
 
-	public static void main(String[] args) throws IOException {
-		System.out.println("hi");
+	public static void main(String[] args) {
 		launch(args);
-		// observerDemo obj = new observerDemo();
 
-		RiskInterface objRiskInterface = new RiskInterface();
-		objRiskInterface.demo();
-		RiskGame rg = new RiskGame();
-		rg.notifyObservers();
 	}
 
-	public void demo() throws IOException {
-		// pathMap
-		rNew.startGame(RiskInterface.pathMap);
-		rNew.initialPlayerCountries();
+	public void demoWorldDominance() throws IOException {
+		obj_RI_WDO.getWorldDominance();
+	}
 
-		// rNew.startGame("C:\\Users\\mohit\\Desktop\\Risjk_Game\\World3.map");
+	public void demoCardExchange() throws IOException {
+		obj_P_CEO.getArmiesFromCards();
+	}
 
+	public void demoStartUpPhase() throws IOException {
+		// obj_RI_SUPO.placeArmies(); // mohit change
+	}
+
+	public void demoReinforcePhaseView() throws IOException {
+		obj_P_RPVO.reinforcementPhase();
+	}
+
+	public void demoAttackPhaseView() throws IOException {
+		obj_P_APV.attackPhase();
+	}
+
+	public void demoFortifyPhaseView() throws IOException {
+		obj_P_FPV.fortify(RiskGame.currentPlayer);
 	}
 }

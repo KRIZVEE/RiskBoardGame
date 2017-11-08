@@ -1,7 +1,6 @@
 package in.risk.utility;
 
 import java.io.BufferedWriter;
-import java.io.File;
 
 //package in.risk.utility;
 
@@ -22,6 +21,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
 
+import in.risk.gui.RiskInterface;
+
 /**
  * This class contains all the methods related to game start up phase,
  * reinforcement phase and fortify phase
@@ -29,13 +30,15 @@ import java.util.Vector;
  * @author Charanpreet Singh, Ishan Kansara, Kashif Rizvee, Mohit Rana
  * @version 1.0.0
  */
+
+// team file//
+
 public class RiskGame extends Observable {
 
 	Player obj = new Player();
-	// RiskGame objRiskGame = new RiskGame();
 
-	public static String css = "file:///E:/Git/RiskGame/src/in/risk/gui/application.css";
-	public static String logoPath = "file:///E:/Git/RiskGame/resources/Risk_logo.png";
+	public static String css = "file:resources/css/application.css";
+	public static String logoPath = "file:resources/logo/Risk_logo.png";
 
 	public static ArrayList<String> continentFilterNew = new ArrayList<String>();
 	public static List<String> newList;
@@ -53,6 +56,8 @@ public class RiskGame extends Observable {
 	public static HashMap<String, Integer> continentValue = new HashMap<String, Integer>();
 	public static ArrayList<String> cardType = new ArrayList<String>();
 	public static ArrayList<String> deck = new ArrayList<String>();
+	// public static HashMap<String, List<String>> playersCards = new
+	// HashMap<String, List<String>>();
 	public static HashMap<String, String> playersContinent = new HashMap<String, String>();
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
@@ -125,13 +130,14 @@ public class RiskGame extends Observable {
 		initialPlayerCountries();
 		distributeArmies();
 		obj.placeCardsInTheDeck();
-		obj.placeCardsInTheDeck2();
+		// obj.placeCardsInTheDeck2();
 		obj.initialCardDistribution();
-		initiallyPlaceArmies();
+
+		// initiallyPlaceArmies();// my change
 
 		// System.out.println(playersCards.get(currentPlayer.getName()));
 		// getArmiesFromCards();
-		placeArmies();
+		// placeArmies();//my change
 		gamePhase();
 		// distributeCards();
 		// playCards();
@@ -149,9 +155,7 @@ public class RiskGame extends Observable {
 		try {
 			// String path = "NewRiskGame/resources/maps/" + pathMap; old path
 			// for build 1 game
-			// String path = "Resources/World3.map";// my new path
-			String path = "resources/maps/" + pathMap;
-
+			String path = "resources/maps/" + pathMap;// my new path
 			FileInputStream file = new FileInputStream(path);
 
 			boolean done = false;
@@ -240,15 +244,14 @@ public class RiskGame extends Observable {
 	}
 
 	public void loggingString(String whatToLog) throws IOException {
-		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/log.txt");
-		FileWriter fw = new FileWriter(file,true);
+		FileWriter fw = new FileWriter("Resources/log.txt", true);
 		BufferedWriter bw = new BufferedWriter(fw);
+		PrintWriter pw = new PrintWriter(bw);
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Date date = new Date();
-		bw.write(whatToLog);
-		bw.newLine();
-		bw.flush();
-		bw.close();
+		pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
+		pw.flush();
+		pw.close();
 	}
 
 	/**
@@ -281,15 +284,13 @@ public class RiskGame extends Observable {
 		System.out.println("Please enter how many players you want to play with, Choose between 3 and 6");
 		noOfPlayers = sc.nextInt();
 
-		loggingString("Start up phase started: ");
-		loggingString("Total number of players: " +noOfPlayers);
+		loggingString(noOfPlayers + " players are choosen by the user to play the game.");
 		// SelectPlayerLogic(String sc , String sc2, int numofplyrs, String
 		// Plyrname);
 		if (noOfPlayers == 3) {
 			for (int i = 0; i < 3; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
-				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -297,7 +298,6 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 4; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
-				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -305,7 +305,6 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 5; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
-				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -313,7 +312,6 @@ public class RiskGame extends Observable {
 			for (int i = 0; i < 6; i++) {
 				System.out.println("Please enter Name for your player no :" + (i + 1));
 				playerName = sc2.nextLine();
-				//loggingString("Player Name: " +playerName);
 				addPlayer(playerName);
 				playerTurn.put(playerName, 1);
 			}
@@ -374,7 +372,9 @@ public class RiskGame extends Observable {
 		for (int i = 0; i < numberOfPlayers; i++) {
 			players.elementAt(i).addArmies(armies);
 		}
-		loggingString("Total armies with each player: " +armies);
+		initiallyPlaceArmies();
+		RiskInterface objRISUP = new RiskInterface();
+		objRISUP.demoStartUpPhase();
 	}
 
 	/**
@@ -409,20 +409,21 @@ public class RiskGame extends Observable {
 				list = new ArrayList<String>();
 				list.add(countryFilter.get(j));
 				initialPlayerCountry.put(players.get(i).getName(), list);
-				setChanged();
-				RiskGame rglocal = new RiskGame();
-				rglocal.notifyObservers();
 			}
 			i++;
 			j--;
 			if (i == players.size()) {
 				i = 0;
 			}
-			
-			loggingString("Countries owned by players: " +initialPlayerCountry);
 		}
-		getWorldDominance();
 
+		setChanged();
+		notifyObservers(this);
+
+		RiskInterface objRIWD = new RiskInterface();
+		objRIWD.demoWorldDominance();
+
+		// getWorldDominance();
 		// setChanged();
 		// notifyObservers(this);
 	}
@@ -437,10 +438,8 @@ public class RiskGame extends Observable {
 	public void initiallyPlaceArmies() throws IOException {
 		int totalNumberOfCountries = countryFilter.size();
 		for (int i = 0; i < totalNumberOfCountries; i++) {
-			countriesArmies.put(countryFilter.get(i), 0);
+			countriesArmies.put(countryFilter.get(i), 10); // mohit change
 		}
-		
-		//loggingString("Armies in countries: " +countriesArmies);
 	}
 
 	/**
@@ -456,7 +455,6 @@ public class RiskGame extends Observable {
 		String result;
 		ArrayList<String> temp = new ArrayList<>();
 		System.out.println("start here  :  ");
-		//loggingString("Reinforcement phase started: ");
 		for (int i = 1; i < loopSize + 1; i++) {
 
 			for (Entry<String, Integer> entry : countriesArmies.entrySet()) {
@@ -479,7 +477,6 @@ public class RiskGame extends Observable {
 					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
 			System.out.println("Please enter the name of the country you want to add armies to!!");
 			result = sc.nextLine();
-			
 
 			if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
 				int noOfArmiesPlayerContains = currentPlayer.getArmies();
@@ -560,7 +557,8 @@ public class RiskGame extends Observable {
 		}
 		System.out.println(
 				"===================end of place armies method, trying for observer pattern========================");
-
+		setChanged();
+		notifyObservers();
 		// System.out.println(players.size() * currentPlayer.getArmies());
 		// System.out.println(currentPlayer.getName() + " " +
 		// initialPlayerCountry.get(currentPlayer.getName()) + " "
@@ -592,7 +590,13 @@ public class RiskGame extends Observable {
 	 */
 	public void gamePhase() throws IOException {
 
-		obj.reinforcementPhase();
+		RiskInterface objRISUP2 = new RiskInterface();
+		objRISUP2.demoStartUpPhase();
+
+		RiskInterface objRIRPV = new RiskInterface();
+		objRIRPV.demoReinforcePhaseView();
+
+		// obj.reinforcementPhase();
 
 		// int x = selectPhase();
 		// System.out.println(x);
@@ -614,6 +618,8 @@ public class RiskGame extends Observable {
 	 *         loosing/winning a country in form of percentage and also numbers
 	 */
 	public void getWorldDominance() {
+
+		System.out.println("::::::::World Domination::::::::");
 		System.out.println("Total country size: " + countryFilter.size());
 		for (Entry<String, ArrayList<String>> entry : initialPlayerCountry.entrySet()) {
 			String key = entry.getKey();

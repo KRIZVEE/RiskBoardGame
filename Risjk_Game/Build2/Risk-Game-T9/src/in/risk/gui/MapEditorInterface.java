@@ -50,6 +50,7 @@ public class MapEditorInterface {
 	Button saveMap;
 
 	public void mapEditorInterface() {
+		
 
 		editedContinentCountries.putAll(MapLoader.continentCountries);
 		editedCountryContinents.putAll(MapLoader.countryContinent);
@@ -95,6 +96,7 @@ public class MapEditorInterface {
 
 			@Override
 			public void handle(ActionEvent event) {
+				mapEditorStage.close();
 				MapWriter.mapWriter(RiskInterface.pathMap);
 
 			}
@@ -149,7 +151,7 @@ public class MapEditorInterface {
 		vbox.getChildren().addAll(imageView, hbox1, hbox2, submit);
 		Group continentEditorRoot = new Group();
 		continentEditorRoot.getChildren().addAll(vbox);
-
+		
 		add.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
