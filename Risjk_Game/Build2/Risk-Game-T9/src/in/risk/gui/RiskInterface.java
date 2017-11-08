@@ -9,7 +9,7 @@ import in.risk.utility.AttackPhaseViewObserverPattern;
 import in.risk.utility.CardExchangeObserver;
 import in.risk.utility.FortifyPhaseView;
 import in.risk.utility.MapLoader;
-import in.risk.utility.ObserverDemo;
+
 import in.risk.utility.Player;
 import in.risk.utility.ReinforcePhaseViewObserverPattern;
 import in.risk.utility.RiskGame;

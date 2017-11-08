@@ -245,7 +245,7 @@ public class RiskGame extends Observable {
 	}
 
 	public void loggingString(String whatToLog) throws IOException {
-		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/Log Files/Log.txt");
+		File file = new File("E:/Risk_Game/Risjk_Game/Build2/Risk-Game-T9/Resources/Log Files/log.txt");
 		FileWriter fw = new FileWriter(file,true);
 		BufferedWriter bw = new BufferedWriter(fw);
 		
