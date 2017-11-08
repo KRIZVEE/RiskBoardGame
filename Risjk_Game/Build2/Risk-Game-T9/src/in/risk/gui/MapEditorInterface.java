@@ -171,14 +171,14 @@ public class MapEditorInterface {
 					MapLoader.countryCoordinates.put(name, points);
 					MapLoader.countryContinent.put(fieldAdd1.getText(), fieldAdd.getText());
 					List<String> newAdj = new ArrayList<String>();
-					newAdj.add(MapLoader.countryFilter.get(25));
+					newAdj.add(MapLoader.countryFilter.get(3));
 
 					// editedAdj.add(MapLoader.countryFilter.get(24),editedAdj.get(MapLoader.countryFilter.get(24)).add(fieldAdd1.getText()));
 					MapLoader.adj.put(fieldAdd1.getText(), newAdj);
 					List<String> value = MapLoader.adj.get(name);
 					List<String> value2 = new ArrayList<String>(value);
 					value2.add(name);
-					MapLoader.adj.put(MapLoader.countryFilter.get(25), value2);
+					MapLoader.adj.put(MapLoader.countryFilter.get(3), value2);
 					// System.out.println(editedAdj);
 				}
 				fieldAdd.clear();
@@ -320,12 +320,12 @@ public class MapEditorInterface {
 						editedCountryCoordinates.put(name, points);
 						editedCountryContinents.put(name, continentBox.getValue());
 						List<String> newAdj = new ArrayList<String>();
-						newAdj.add(MapLoader.countryFilter.get(17));
+						newAdj.add(MapLoader.countryFilter.get(4));
 						editedAdj.put(name, newAdj);
 						List<String> value = editedAdj.get(name);
 						List<String> value2 = new ArrayList<String>(value);
 						value2.add(name);
-						editedAdj.put(MapLoader.countryFilter.get(17), value2);
+						editedAdj.put(MapLoader.countryFilter.get(4), value2);
 					}
 					fieldAdd.clear();
 				}

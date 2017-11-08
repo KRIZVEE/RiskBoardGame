@@ -151,15 +151,15 @@ public class RiskInterface extends Application {
 				MapEditorInterface.continentEditorStage.close();
 				MapEditorInterface.countryEditorStage.close();
 				MapEditorInterface.mapEditorStage.close();
-				ObserverDemo obj = new ObserverDemo();
+//				ObserverDemo obj = new ObserverDemo();
 				pathMap = maplist2.getValue();
 				try {
 					// objRiskGame.startGame(pathMap);
-					obj.demo(pathMap);
+					obj_RI_WDO.startGame(pathMap);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				MapLoader.mapLoader(pathMap);
+//				MapLoader.mapLoader(pathMap);
 
 			}
 		});
@@ -204,7 +204,7 @@ public class RiskInterface extends Application {
 	}
 
 	public void demoStartUpPhase() throws IOException {
-		// obj_RI_SUPO.placeArmies(); // mohit change
+		 obj_RI_SUPO.placeArmies(); // mohit change
 	}
 
 	public void demoReinforcePhaseView() throws IOException {

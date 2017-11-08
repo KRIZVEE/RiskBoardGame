@@ -1,0 +1,6 @@
+chosen country FROM where to move army/armies :  
+
+chosen country TO where to move army/armies :  
+
+Updated Country list and corresponding army values :
+{Argentina=2, Alberta=5, Quebec=1, Brazil=1, Alaska=1, Ontario=2, Venezuala=2, Peru=1, Greenland=1}
