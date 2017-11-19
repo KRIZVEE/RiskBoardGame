@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
@@ -534,7 +535,7 @@ public class Player extends StartUpPhase {
 		attackerDiceArray = new int[noOfAttackerDice];
 
 		for (int i = 0; i < attackerDiceArray.length; i++) {
-			attackerDiceArray[i] = StartUpPhase.randomNumberGenerator();
+			attackerDiceArray[i] = randomNumberGenerator();
 		}
 
 		if (StartUpPhase.countriesArmies.get(defenderCountry) >= 2) {
@@ -555,7 +556,7 @@ public class Player extends StartUpPhase {
 		defenderDiceArray = new int[noOfDefenderDice];
 
 		for (int i = 0; i < defenderDiceArray.length; i++) {
-			defenderDiceArray[i] = StartUpPhase.randomNumberGenerator();
+			defenderDiceArray[i] = randomNumberGenerator();
 		}
 
 		System.out.println("Attacker Dice value are as follow : ");
@@ -869,7 +870,18 @@ public class Player extends StartUpPhase {
 	}
 
 }// end of attackPhase
-	
+	/**
+	 * This is a random generator method
+	 * for generating random number in a dice
+	 * @return
+	 */
+	public static int randomNumberGenerator() {
+		int randomNumber;
+		Random random = new Random(); /* <-- this is a constructor */
+		randomNumber = random.nextInt(6)
+				+ 1; 
+		return randomNumber;
+	}
 	
 	/**
 	 * This method used to capture the fortify phase information
