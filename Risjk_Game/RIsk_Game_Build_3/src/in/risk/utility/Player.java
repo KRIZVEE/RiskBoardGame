@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Map.Entry;
 
-import com.sun.javafx.PlatformUtil;
-
-
 /**
  * This class implements the Reinforcement, Attack and Fortify game phases.
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
@@ -35,7 +32,7 @@ public class Player extends StartUpPhase {
 	 */
 	public static int getArmiesFromCountries(String playerName){
 		int noOfReinforcementArmiesForCountry = 0;
-		if(initialPlayerCountry.get(playerName).size() < 3){
+		if(initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
 		}else{
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + initialPlayerCountry.get(playerName).size()/3;
@@ -72,6 +69,9 @@ public class Player extends StartUpPhase {
 	/**
 	 * This method is about trading of cards and getting armies in return.
 	 * Armies added will be as per the game logic.
+	 * @param playerName name of the player
+	 * @return no of reinforcement armies from the cards
+	 * @throws IOException exception
 	 */
 	public static int getArmiesFromCards(String playerName) throws IOException {
 		int noOfReinforcementArmiesForCards = 0;
@@ -109,7 +109,7 @@ public class Player extends StartUpPhase {
 	}
 
 	/**
-	 * This method is used to place cards in the deck of player intially.
+	 * This method is used to place cards in the deck of player initially.
 	 * @return the deck
 	 * @throws IOException exception.
 	 */
@@ -133,8 +133,11 @@ public class Player extends StartUpPhase {
 	 * This method is used to check the combination of players cards and then give reinforcemtn armies.
 	 * @param playerName name of the current player.
 	 * @return reinforcement armies.
+	 * @throws IOException exception
 	 */
-	public static int checkDiscreteCombination(String playerName) {
+	public static int checkDiscreteCombination(String playerName) throws IOException {
+		initialCardDistribution();
+		placeCardsInTheDeck();
 		int noOfReinforcementArmiesForDiscrete = 0;
 		List<Integer> tempListABCFirst = new ArrayList<Integer>();
 		List<Integer> tempListABCSecond = new ArrayList<Integer>();
@@ -271,5 +274,58 @@ public class Player extends StartUpPhase {
 			cardFlag += 1;
 		}
 		return noOfReinforcementArmiesForUnique;
+	}
+
+	/**
+	 * This method is used to place reinforcement armies and then place them in the countries where player want to place them
+	 * @param playerName name of the player.
+	 * @throws IOException exception
+	 */
+	public static void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
+		Scanner sc = new Scanner(System.in);
+		String countryNameToEnterArmies;
+		int noOfArmiesWantToPlace;
+		int noOfReinforcementArmiesFromCountrie = getArmiesFromCountries(playerName.getName());
+		int noOfReinforcementArmiesFromContinents = getArmiesaFromContinet(playerName.getName());
+		int noOfReinforcementArmiesFromCards = getArmiesFromCards(playerName.getName());
+		
+		int noOfRinforcementArmies = noOfReinforcementArmiesFromCards + noOfReinforcementArmiesFromContinents + noOfReinforcementArmiesFromCountrie;
+		System.out.println(playerName.getName() + " you have " + noOfRinforcementArmies + " number of reinforcement armies.");
+		playerName.addArmies(noOfRinforcementArmies);
+		
+		int iteratorForPlayerArmies = playerName.getArmies();
+		while (iteratorForPlayerArmies < 0) {
+			System.out.println(playerName.getName() + " You have " + iteratorForPlayerArmies + " armies.");
+			System.out.println("And you own " + StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			System.out.println("Enter the name of country where you wan to place armies");
+			countryNameToEnterArmies = sc.nextLine();
+			if (!StartUpPhase.initialPlayerCountry.get(playerName.getName()).contains(countryNameToEnterArmies)){
+				System.out.println("You dont own this country");
+			}else {
+				System.out.println("Enter thhe number of armies you want to add on " + countryNameToEnterArmies);
+				noOfArmiesWantToPlace = sc.nextInt();
+				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
+			}
+		}
+	}
+
+	/**
+	 * This method is used to update the countries armies according to user inputed data.
+	 * @param countryNameToEnterArmies Name of the country to add armies.
+	 * @param noOfArmiesWantToPlace Number of armies player wants to add to the selected country.
+	 * @param playerName Player who wants to add the armies.
+	 * @return true if everything goes well.
+	 */
+	public static boolean placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace , PlayerToPlay playerName) {
+		if (noOfArmiesWantToPlace > playerName.getArmies()) {
+			System.out.println("You don't have suffecient armies");
+		}else {
+			int initialAriesCountryOwn = StartUpPhase.countriesArmies.get(countryNameToEnterArmies);
+			int finalArmiesCOuntryHave = initialAriesCountryOwn + noOfArmiesWantToPlace;
+			StartUpPhase.countriesArmies.put(countryNameToEnterArmies, finalArmiesCOuntryHave);
+			StartUpPhase.currentPlayer.loosArmies(noOfArmiesWantToPlace);
+		}
+		return true;
+		
 	}
 }

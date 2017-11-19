@@ -41,7 +41,7 @@ public class TestPlayer {
 	 */
 	@Test
 	public void testCGetArmiesFromCountries() throws IOException {
-		int expectedValue = 2;
+		int expectedValue = 3;
 		int actualValue = Player.getArmiesFromCountries("Mohit");
 		assertEquals(expectedValue, actualValue);
 	}
@@ -70,11 +70,24 @@ public class TestPlayer {
 	
 	/**
 	 * This method is used to test the discrete combination method.
+	 * @throws IOException 
 	 */
 	@Test
-	public void testCheckDiscreteCombination(){
+	public void testCheckDiscreteCombination() throws IOException{
 		int expectedValue = 0;
 		int actualValue = Player.checkDiscreteCombination("Mohit");
+		assertEquals(expectedValue, actualValue);
+	}
+	
+	/**
+	 * This method is used to testr the placing reinforcement armies method.
+	 */
+	@Test
+	public void testPlaceReinforcementArmies() {
+		StartUpPhase.countriesArmies.put("fifthright", 0);
+		Player.placeReinforcementArmies("fifthright", 4, StartUpPhase.players.get(0));
+		int expectedValue = 4;
+		int actualValue = StartUpPhase.countriesArmies.get("fifthright");
 		assertEquals(expectedValue, actualValue);
 	}
 	

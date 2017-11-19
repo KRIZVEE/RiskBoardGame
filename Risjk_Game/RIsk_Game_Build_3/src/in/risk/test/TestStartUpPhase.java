@@ -67,6 +67,7 @@ public class TestStartUpPhase {
 	 */
 	@Test
 	public void testAddPlayerName() throws IOException{
+		StartUpPhase.countriesArmies.put("fifthright", 0);
 		String expectedValue = "Preet";
 		StartUpPhase.addPlayerName(expectedValue);
 		String actualValue = StartUpPhase.players.get(2).getName();

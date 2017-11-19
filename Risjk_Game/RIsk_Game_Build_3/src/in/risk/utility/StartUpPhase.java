@@ -20,7 +20,7 @@ public class StartUpPhase {
 	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
 	public static ArrayList<String> initialCountries = new ArrayList<String>();
 	public static HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
-
+	public static int iter = 0;
 	/**
 	 * This method is used to initially start the game.
 	 * @param args arguments.
@@ -29,6 +29,9 @@ public class StartUpPhase {
 	public static void main(String args[]) throws IOException{
 		obj.loadMap("3D Cliff.map");
 		askUserToSelectPlayers();
+		initiallyPlaceArmies();
+		placeArmies();
+		Player.placeReinforcementArmies(currentPlayer);
 	}
 
 	/**
@@ -42,7 +45,6 @@ public class StartUpPhase {
 		result = sc.nextInt();
 		noOfPlayer = result;
 		selectPlayer(noOfPlayer);
-		sc.close();
 	}
 
 	/**
@@ -74,13 +76,12 @@ public class StartUpPhase {
 	public static void playerName(int noOfPlayers) throws IOException{
 		Scanner sc1 = new Scanner(System.in);
 		String result = null;
-		for (int i = 1; i <= noOfPlayers; i++) {
+		for (int i = 0; i < noOfPlayers; i++) {
 			System.out.println("Enter the name of the player you want to add.");
 			result = sc1.nextLine();
 			addPlayerName(result);
 		}
 		initialPlayerCountry();
-		sc1.close();
 	}
 
 	/**
@@ -157,12 +158,6 @@ public class StartUpPhase {
 		for (int i = 0; i < noOfPlayers; i++) {
 			players.elementAt(i).addArmies(armies);
 		}
-//		initiallyPlaceArmies();
-//		placeArmies();
-		Player player = new Player();
-		player.getArmiesFromCountries(currentPlayer.getName());
-		player.getArmiesaFromContinet(currentPlayer.getName());
-		player.getArmiesFromCards(currentPlayer.getName());
 		return true;
 	}
 
@@ -171,12 +166,11 @@ public class StartUpPhase {
 	 * @throws IOException excpetion.
 	 */
 	public static void nextPlayer() throws IOException {
-		int iter = 0;
 		if (currentPlayer == players.lastElement()) {
 			currentPlayer = players.elementAt(0);
 			iter = 0;
 		} else
-			currentPlayer = players.elementAt(iter+1);
+			currentPlayer = players.elementAt(++iter);
 	}
 	
 	/**
@@ -216,7 +210,6 @@ public class StartUpPhase {
 					}
 				}
 			}
-			
 			System.out.println(currentPlayer.getName() + " you own these countries "
 					+ initialPlayerCountry.get(currentPlayer.getName()) + ".");
 			
@@ -284,8 +277,6 @@ public class StartUpPhase {
 				i--;
 			}
 		}
-//		Player player = new Player();
-//		player.getArmiesFromCountries();
 		return true;
 	}
 

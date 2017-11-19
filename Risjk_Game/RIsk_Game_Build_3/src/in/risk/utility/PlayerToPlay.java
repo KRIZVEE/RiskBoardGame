@@ -17,6 +17,7 @@ public class PlayerToPlay {
 
 	/**
 	 * This method returns the name of the player
+	 * @return name of the palyer
 	 */
 	public String getName() {
 		return name;
@@ -24,6 +25,7 @@ public class PlayerToPlay {
 
 	/**
 	 * This method returns the number of armies own by the player
+	 * @return armies of the player
 	 */
 	public int getArmies() {
 		return armies;
@@ -45,7 +47,6 @@ public class PlayerToPlay {
 
 	/**
 	 * This method used increase number of armies by a
-	 * 
 	 * @param a this is the number of armies to be increase
 	 */
 	public void addArmies(int a) {
@@ -54,8 +55,7 @@ public class PlayerToPlay {
 
 	/**
 	 * This method used decrease number of armies by b
-	 * 
-	 * @param b this is the number of armies to be decrease
+	 * @param a for the no of armies to loose
 	 */
 	public void loosArmies(int a) {
 		armies -= a;

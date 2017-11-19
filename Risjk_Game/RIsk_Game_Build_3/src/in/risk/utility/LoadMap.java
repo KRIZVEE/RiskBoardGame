@@ -30,7 +30,7 @@ public class LoadMap {
 
 	/**
 	 * Method for calling the LoadMap class at once.
-	 * @param path
+	 * @param path for the path fo the map.
 	 */
 	public void loadMap(String path){
 		loadContinent(path);
