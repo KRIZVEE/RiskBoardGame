@@ -31,7 +31,7 @@ public class StartUpPhase {
 		askUserToSelectPlayers();
 		initiallyPlaceArmies();
 		placeArmies();
-		Player.placeReinforcementArmies(currentPlayer);
+		HumanPlayer.placeReinforcementArmies(currentPlayer);
 	}
 
 	/**

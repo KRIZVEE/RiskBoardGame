@@ -10,7 +10,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import in.risk.utility.LoadMap;
-import in.risk.utility.Player;
+import in.risk.utility.HumanPlayer;
 import in.risk.utility.StartUpPhase;
 /**
  * This class test the Player class.
@@ -42,7 +42,7 @@ public class TestPlayer {
 	@Test
 	public void testCGetArmiesFromCountries() throws IOException {
 		int expectedValue = 3;
-		int actualValue = Player.getArmiesFromCountries("Mohit");
+		int actualValue = HumanPlayer.getArmiesFromCountries("Mohit");
 		assertEquals(expectedValue, actualValue);
 	}
 	
@@ -53,7 +53,7 @@ public class TestPlayer {
 	@Test
 	public void testBGetArmiesFromContinent() throws IOException{
 		int expectedValue = 0;
-		int actualValue = Player.getArmiesaFromContinet("Mohit");
+		int actualValue = HumanPlayer.getArmiesaFromContinet("Mohit");
 		assertEquals(expectedValue, actualValue);
 	}
 	
@@ -64,7 +64,7 @@ public class TestPlayer {
 	@Test
 	public void testCCheckUniqueCombination() throws IOException{
 		int expectedValue = 0;
-		int actualValue = Player.checkUniqueCombination(0, "Mohit");
+		int actualValue = HumanPlayer.checkUniqueCombination(0, "Mohit");
 		assertEquals(expectedValue, actualValue);
 	}
 	
@@ -75,7 +75,7 @@ public class TestPlayer {
 	@Test
 	public void testCheckDiscreteCombination() throws IOException{
 		int expectedValue = 0;
-		int actualValue = Player.checkDiscreteCombination("Mohit");
+		int actualValue = HumanPlayer.checkDiscreteCombination("Mohit");
 		assertEquals(expectedValue, actualValue);
 	}
 	
@@ -85,7 +85,7 @@ public class TestPlayer {
 	@Test
 	public void testPlaceReinforcementArmies() {
 		StartUpPhase.countriesArmies.put("fifthright", 0);
-		Player.placeReinforcementArmies("fifthright", 4, StartUpPhase.players.get(0));
+		HumanPlayer.placeReinforcementArmies("fifthright", 4, StartUpPhase.players.get(0));
 		int expectedValue = 4;
 		int actualValue = StartUpPhase.countriesArmies.get("fifthright");
 		assertEquals(expectedValue, actualValue);
