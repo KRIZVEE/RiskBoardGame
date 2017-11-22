@@ -16,7 +16,7 @@ import java.util.Map.Entry;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class RandomPlayer extends StartUpPhase {
+public class RandomPlayer implements Strategy{
 
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
@@ -70,12 +70,12 @@ public class RandomPlayer extends StartUpPhase {
 	 * @param playerName used to specify the name of the current player
 	 * @return true is all goes well.
 	 */
-	public static int getArmiesFromCountries(String playerName){
+	public int getArmiesFromCountries(String playerName){
 		int noOfReinforcementArmiesForCountry = 0;
-		if(initialPlayerCountry.get(playerName).size() < 9){
+		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
 		}else{
-			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + initialPlayerCountry.get(playerName).size()/3;
+			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + StartUpPhase.initialPlayerCountry.get(playerName).size()/3;
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
 		return noOfReinforcementArmiesForCountry;
@@ -93,7 +93,7 @@ public class RandomPlayer extends StartUpPhase {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
-				resultOfContinentCountry.add(initialPlayerCountry.get(playerName).contains(value.get(i)));
+				resultOfContinentCountry.add(StartUpPhase.initialPlayerCountry.get(playerName).contains(value.get(i)));
 			}
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
@@ -322,7 +322,7 @@ public class RandomPlayer extends StartUpPhase {
 	 * @throws IOException exception
 	 */
 	
-	public static void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
+	public void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
@@ -397,7 +397,7 @@ public class RandomPlayer extends StartUpPhase {
 	 * @throws IOException
 	 */
 
-	public static void attackPhase(PlayerToPlay playerName) throws IOException {
+	public void attackPhase(PlayerToPlay playerName) throws IOException {
 		
 	
 		String attackTurnOn = "hello";
@@ -794,7 +794,7 @@ public class RandomPlayer extends StartUpPhase {
 	 * @param currentPlayer
 	 * @throws IOException
 	 */
-		public static void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
+		public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
 			System.out.println(currentPlayer.getName());
 			System.out.println("You have these countries under your control "
 					+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));

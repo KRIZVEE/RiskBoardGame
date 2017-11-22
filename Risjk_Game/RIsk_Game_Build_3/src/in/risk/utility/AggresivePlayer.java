@@ -17,7 +17,7 @@ import java.util.Map.Entry;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class AggresivePlayer extends StartUpPhase {
+public class AggresivePlayer implements Strategy{
 
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
@@ -79,10 +79,10 @@ public class AggresivePlayer extends StartUpPhase {
 	 */
 	public static int getArmiesFromCountries(String playerName){
 		int noOfReinforcementArmiesForCountry = 0;
-		if(initialPlayerCountry.get(playerName).size() < 9){
+		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
 		}else{
-			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + initialPlayerCountry.get(playerName).size()/3;
+			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + StartUpPhase.initialPlayerCountry.get(playerName).size()/3;
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
 		return noOfReinforcementArmiesForCountry;
@@ -100,7 +100,7 @@ public class AggresivePlayer extends StartUpPhase {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
-				resultOfContinentCountry.add(initialPlayerCountry.get(playerName).contains(value.get(i)));
+				resultOfContinentCountry.add(StartUpPhase.initialPlayerCountry.get(playerName).contains(value.get(i)));
 			}
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
@@ -328,7 +328,7 @@ public class AggresivePlayer extends StartUpPhase {
 	 * @param playerName name of the player.
 	 * @throws IOException exception
 	 */
-	public static void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
+	public void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
 		//Scanner sc = new Scanner(System.in);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
@@ -390,7 +390,7 @@ public class AggresivePlayer extends StartUpPhase {
 	 * @param currentPlayer
 	 * @throws IOException
 	 */
-	public static void attackPhase(PlayerToPlay playerName) throws IOException {
+	public void attackPhase(PlayerToPlay playerName) throws IOException {
 
 		//Scanner sc = new Scanner(System.in);
 		String attackTurnOn = "hello";
@@ -735,7 +735,7 @@ public class AggresivePlayer extends StartUpPhase {
 	 * @param currentPlayer
 	 * @throws IOException
 	 */
-	public static void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
+	public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
 		//		Scanner scFrom = new Scanner(System.in);
 		//		Scanner sc = new Scanner(System.in);
 		System.out.println(currentPlayer.getName());

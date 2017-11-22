@@ -17,7 +17,7 @@ import java.util.Map.Entry;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class BenevolentPlayer extends StartUpPhase implements Strategy {
+public class BenevolentPlayer implements Strategy {
 
 	// variables for reinforce phase
 	
@@ -69,12 +69,12 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @param playerName used to specify the name of the current player
 	 * @return true is all goes well.
 	 */
-	public static int getArmiesFromCountries(String playerName){
+	public int getArmiesFromCountries(String playerName){
 		int noOfReinforcementArmiesForCountry = 0;
-		if(initialPlayerCountry.get(playerName).size() < 9){
+		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
 		}else{
-			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + initialPlayerCountry.get(playerName).size()/3;
+			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + StartUpPhase.initialPlayerCountry.get(playerName).size()/3;
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
 		return noOfReinforcementArmiesForCountry;
@@ -85,14 +85,14 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @param playerName used to specify the name of current player.
 	 * @return true if everything goes well.
 	 */
-	public static int getArmiesaFromContinet(String playerName){
+	public int getArmiesaFromContinet(String playerName){
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
 		for (Entry<String, List<String>> entry : LoadMap.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
-				resultOfContinentCountry.add(initialPlayerCountry.get(playerName).contains(value.get(i)));
+				resultOfContinentCountry.add(StartUpPhase.initialPlayerCountry.get(playerName).contains(value.get(i)));
 			}
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
@@ -112,7 +112,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @return no of reinforcement armies from the cards
 	 * @throws IOException exception
 	 */
-	public static int getArmiesFromCards(String playerName) throws IOException {
+	public int getArmiesFromCards(String playerName) throws IOException {
 		int noOfReinforcementArmiesForCards = 0;
 		initialCardDistribution();
 		int tempSize = playersCards.get(playerName).size();
@@ -140,7 +140,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * This method is used to distribute catds in the deck intially.
 	 * @throws IOException exception
 	 */
-	public static void initialCardDistribution() throws IOException {
+	public void initialCardDistribution() throws IOException {
 		int size = StartUpPhase.players.size();
 		for (int i = 0; i < size; i++) {
 			playersCards.put(StartUpPhase.players.get(i).getName(), deck.subList(0, 0));
@@ -152,7 +152,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @return the deck
 	 * @throws IOException exception.
 	 */
-	public static List<String> placeCardsInTheDeck() throws IOException {
+	public List<String> placeCardsInTheDeck() throws IOException {
 		cardType.add(cardTypeA);
 		cardType.add(cardTypeB);
 		cardType.add(cardTypeC);
@@ -174,7 +174,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @return reinforcement armies.
 	 * @throws IOException exception
 	 */
-	public static int checkDiscreteCombination(String playerName) throws IOException {
+	public int checkDiscreteCombination(String playerName) throws IOException {
 		initialCardDistribution();
 		placeCardsInTheDeck();
 		int noOfReinforcementArmiesForDiscrete = 0;
@@ -253,7 +253,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @return no of reinforcement armies
 	 * @throws IOException exception.
 	 */
-	public static int checkUniqueCombination(int tempSize, String playerName) throws IOException {
+	public int checkUniqueCombination(int tempSize, String playerName) throws IOException {
 		int noOfReinforcementArmiesForUnique = 0;
 		List<Integer> tempListA = new ArrayList<Integer>();
 		List<Integer> tempListB = new ArrayList<Integer>();
@@ -364,7 +364,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 		countryNameToEnterArmies = weakestCountry;
 		noOfArmiesWantToPlace = noOfRinforcementArmies;
 		placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
-		fortifyPhase(currentPlayer);
+		fortifyPhase(playerName);
 	}// end of reinforcement phase	
 
 	/**
@@ -374,7 +374,7 @@ public class BenevolentPlayer extends StartUpPhase implements Strategy {
 	 * @param playerName Player who wants to add the armies.
 	 * @return true if everything goes well.
 	 */
-	public static boolean placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace , PlayerToPlay playerName) {
+	public boolean placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace , PlayerToPlay playerName) {
 		int initialAriesCountryOwn = StartUpPhase.countriesArmies.get(countryNameToEnterArmies);
 		int finalArmiesCOuntryHave = initialAriesCountryOwn + noOfArmiesWantToPlace;
 		StartUpPhase.countriesArmies.put(countryNameToEnterArmies, finalArmiesCOuntryHave);
