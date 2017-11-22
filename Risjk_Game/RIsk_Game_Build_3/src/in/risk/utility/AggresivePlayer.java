@@ -349,7 +349,7 @@ public class AggresivePlayer implements Strategy{
 			Integer value = entry.getValue();
 
 			if(StartUpPhase.initialPlayerCountry.get(playerName.getName()).contains(key)){
-				if(armyOfStrongestCountry > value) {
+				if(armyOfStrongestCountry >= value) {
 					strongestCountry = key;
 					armyOfStrongestCountry = value;
 					updatedarmyOfStrongestCountry = value;
@@ -413,7 +413,10 @@ public class AggresivePlayer implements Strategy{
 
 		// Aggresive player always attack with country having strongest army
 		System.out.println("The name of country (STRONGEST COUNTRY) from where you suppose to attack");
-		attackerCountry = strongestCountry;
+		//attackerCountry = strongestCountry;
+		attackerCountry = "Suecia";
+		System.out.println(attackerCountry);
+		
 
 		//countriesArmies.put(attackerCountry, 4);// for checking
 
@@ -441,7 +444,7 @@ public class AggresivePlayer implements Strategy{
 
 			if (newCOuntryListSize > oldCOuntryListSize) {
 
-
+				System.out.println("Inside of newCOuntryListSize > oldCOuntryListSize");
 				//=================================================//
 				//=========Do Card Distribution Logic on===========//
 				//=========winning a country during attack=========//
@@ -459,19 +462,24 @@ public class AggresivePlayer implements Strategy{
 				temp.clear();
 				cardsInTheDeck.remove(indexOfCardToBeGet);				
 			}
-			countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
-			initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
+			System.out.println("Outside of newCOuntryListSize > oldCOuntryListSize");
+
 			// need to go to fortify phase automatically if attack not possible after calculting card
 			fortifyPhase(playerName);
 		}
 		System.out.println("Please enter the name of country, to which you want to attack");
 
 		// selection of defender country
+		int i12 =0;
 		do{
+			// i12 = 0;
+			System.out.println(" defenderCountryChoose : "+ defenderCountryChoose);
+			System.out.println("attackerCountryAdjacent : " +  attackerCountryAdjacent);
 			defenderCountry = attackerCountryAdjacent.get(defenderCountryChoose);
 			defenderCountryChoose++;
+			i12++;
 
-		}while(attackerCountryAdjacent.size()>0);
+		}while(i12==0);
 
 		System.out.println("No of armies in the defender country : " + StartUpPhase.countriesArmies.get(defenderCountry));
 
@@ -480,12 +488,14 @@ public class AggresivePlayer implements Strategy{
 
 			if (StartUpPhase.countriesArmies.get(attackerCountry) > 3) {
 				System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice to be rolled");
-				noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;//need to uncomment this
+				//noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;//need to uncomment this
+				noOfAttackerDice = 1;
 				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
 
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 3) {
 				System.out.println("Attacker Country Player, can opt among 1 or 2 dice to be rolled");
 				noOfAttackerDice = r.nextInt(2 - 1 + 1) + 1;//need to uncomment this
+				//noOfAttackerDice = 1;
 				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
 
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 2) {
@@ -504,7 +514,8 @@ public class AggresivePlayer implements Strategy{
 			if (StartUpPhase.countriesArmies.get(defenderCountry) >= 2) {
 
 				System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
-				noOfDefenderDice = r.nextInt(2 - 1 + 1) + 1;//need to uncomment this
+				//noOfDefenderDice = r.nextInt(2 - 1 + 1) + 1;//need to uncomment this
+				noOfDefenderDice = 2;
 				System.out.println("No of Dice chosen by defender is :"+noOfDefenderDice);
 
 			} else {
@@ -592,7 +603,7 @@ public class AggresivePlayer implements Strategy{
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]) {
+					if (flagCheckDice==1 && attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]) {
 						// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2
 						System.out.println(" Defender country loose 1 more army");
 						updateArmyOfDefender = updateArmyOfDefender - 1;
@@ -644,7 +655,7 @@ public class AggresivePlayer implements Strategy{
 				} else {
 					if (attackerDiceArray[attackerDiceArray.length - 1] <= defenderDiceArray[defenderDiceArray.length - 1]) {
 						// IF Condition for ======ACD(1) <= DCD(1)==== for defender dice == 2
-						System.out.println(" Attacker country loose 1 more army");
+						System.out.println(" Attacker country loose 1 army");
 						updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 						StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 
@@ -735,23 +746,24 @@ public class AggresivePlayer implements Strategy{
 	 * @param currentPlayer
 	 * @throws IOException
 	 */
-	public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
-		//		Scanner scFrom = new Scanner(System.in);
-		//		Scanner sc = new Scanner(System.in);
-		System.out.println(currentPlayer.getName());
-		System.out.println("You have these countries under your control " + StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
+	public void fortifyPhase(PlayerToPlay playerName) throws IOException {
+		
+		System.out.println(StartUpPhase.countriesArmies);
+		System.out.println(playerName.getName());
+		System.out.println("You have these countries under your control " + StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 
 		//find the strongest country adjacent and try to out it in FROM and then place strongest country under TO list
 
 		List<String> strongestCountryAdjacent = new ArrayList<String>();
-		int size = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
+		int size = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		int size2 = LoadMap.adj.get(strongestCountry).size();
 		for (int i = 0; i < size2; i++) {
-			if (StartUpPhase.initialPlayerCountry.get(currentPlayer.getName())
+			if (StartUpPhase.initialPlayerCountry.get(playerName.getName())
 					.contains(LoadMap.adj.get(strongestCountry).get(i))) {
-				continue;
+				strongestCountryAdjacent.add(LoadMap.adj.get(strongestCountry).get(i));
+
 			} else {
-				strongestCountryAdjacent.add(LoadMap.adj.get(attackerCountry).get(i));
+				continue;
 			}
 			System.out.println("The name of country from which you want to move armies, to strongest country.");
 			Random r = new Random();
@@ -765,7 +777,7 @@ public class AggresivePlayer implements Strategy{
 
 
 
-			int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
+			int tempCountrySize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 			int tempAdjSize = LoadMap.adj.get(from).size();
 
 			ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
@@ -790,12 +802,12 @@ public class AggresivePlayer implements Strategy{
 				System.out.println(from + " = " + StartUpPhase.countriesArmies.get(from));
 				System.out.println(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
 				StartUpPhase.nextPlayer();
-				placeReinforcementArmies(currentPlayer);
+				placeReinforcementArmies(playerName);
 			}
 			else
 			{
 				System.out.println("You dont have sufficient number of armies to move from " + from);
-				fortifyPhase(currentPlayer);
+				placeReinforcementArmies(playerName);
 			}
 		}
 	}

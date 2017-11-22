@@ -348,7 +348,7 @@ public class BenevolentPlayer implements Strategy {
 			Integer value = entry.getValue();
 			
 			if(StartUpPhase.initialPlayerCountry.get(playerName.getName()).contains(key)){
-				if(armyOfWeakestCountry > value) {
+				if(armyOfWeakestCountry >= value) {
 					weakestCountry = key;
 					armyOfWeakestCountry = value;
 					updatedarmyOfWeakestCountry = value;
@@ -416,7 +416,7 @@ public class BenevolentPlayer implements Strategy {
 			Integer value = entry.getValue();
 			
 			if(StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).contains(key)){
-				if(armyOfStrongestCountry > value) {
+				if(armyOfStrongestCountry >= value) {
 					strongestCountry = key;
 					armyOfStrongestCountry = value;
 					updatedarmyOfStrongestCountry = value;

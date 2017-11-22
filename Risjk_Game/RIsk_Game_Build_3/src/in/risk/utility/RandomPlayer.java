@@ -499,7 +499,8 @@ public class RandomPlayer implements Strategy{
 		System.out.println("As, You have minimum of 2 armies, you can attack");
 		if (StartUpPhase.countriesArmies.get(attackerCountry) > 3) {
 			System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice for rolling");
-			noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;
+			noOfAttackerDice = 1;
+			//noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;
 			System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
 		} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 3) {
 			System.out.println("Attacker Country Player, can opt among 1 or 2  dice for rolling");
@@ -519,7 +520,8 @@ public class RandomPlayer implements Strategy{
 		}
 		if (StartUpPhase.countriesArmies.get(defenderCountry) >= 2) {
 			System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
-			noOfDefenderDice = r.nextInt(2 - 1 + 1) + 1;
+			noOfDefenderDice=2;
+			//noOfDefenderDice = r.nextInt(2 - 1 + 1) + 1;
 			System.out.println(noOfDefenderDice);
 		} else {
 			System.out.println(
@@ -611,7 +613,7 @@ public class RandomPlayer implements Strategy{
 				updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 				StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 
-				if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]) {
+				if (flagCheckDice == 1 && attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]) {
 					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2
 					System.out.println(" Defender country loose 1 more army");
 					updateArmyOfDefender = updateArmyOfDefender - 1;
@@ -662,14 +664,14 @@ public class RandomPlayer implements Strategy{
 							"Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				}
 			} else {
-				if (attackerDiceArray[attackerDiceArray.length - 1] <= defenderDiceArray[defenderDiceArray.length
+				if (flagCheckDice == 1 && attackerDiceArray[attackerDiceArray.length - 1] <= defenderDiceArray[defenderDiceArray.length
 						- 1]) {
 					// IF Condition for ======ACD(1) <= DCD(1)==== for defender dice == 2
-					System.out.println(" Attacker country loose 1 more army");					
+					System.out.println(" Attacker country loose 1 army");					
 					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 										
-					if (flagCheckDice ==1 && attackerDiceArray[attackerDiceArray.length- 2] <= defenderDiceArray[defenderDiceArray.length - 2]) {
+					if (flagCheckDice == 1 && attackerDiceArray[attackerDiceArray.length- 2] <= defenderDiceArray[defenderDiceArray.length - 2]) {
 						// IF 
 						// flagCheckDice on attacker chooses either 2 or 3 dice for attack
 						//	Condition for ======ACD(0) on choosing dice as 2
@@ -802,6 +804,7 @@ public class RandomPlayer implements Strategy{
 			Random r = new Random();
 			int indexFROM  = r.nextInt(StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size());
 			from =  StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(indexFROM);
+			//from = "Groenlandia";
 			System.out.println("Choosen Country as FROM : " + from);
 			System.out.println("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));		
 
@@ -820,8 +823,13 @@ public class RandomPlayer implements Strategy{
 			}
 			System.out.println("Select the countries from your owned countries  and adjacent to " + from
 					+ " where you want to move your armies");
-			//loggingString("Select the countries from your owned countries  and adjacent to " + from					+ " where you want to move your armies");
+		//	System.out.println("tempAdjCountryToWhichWeCanMOve.size() "+tempAdjCountryToWhichWeCanMOve.size());
+			if(tempAdjCountryToWhichWeCanMOve.size()==0)
+				{System.out.println("There is no adjacent country present");
+				placeReinforcementArmies(currentPlayer);}
+			
 			int indexTO  = r.nextInt(tempAdjCountryToWhichWeCanMOve.size());
+			System.out.println(indexTO);
 			to =  tempAdjCountryToWhichWeCanMOve.get(indexTO);
 			System.out.println(" TO country Name : " + to);
 			int numberOfArmiesToMove = 0;
