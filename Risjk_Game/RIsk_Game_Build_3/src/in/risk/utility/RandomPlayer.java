@@ -89,7 +89,7 @@ public class RandomPlayer implements Strategy{
 	public static int getArmiesaFromContinet(String playerName){
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
-		for (Entry<String, List<String>> entry : LoadMap.continentCountries.entrySet()) {
+		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
@@ -98,7 +98,7 @@ public class RandomPlayer implements Strategy{
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
 			} else if (resultOfContinentCountry.contains(true)) {
-				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + LoadMap.continentValue.get(Key);
+				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + MapLoader.continentValue.get(Key);
 			}
 			resultOfContinentCountry.clear();
 		}
@@ -158,7 +158,7 @@ public class RandomPlayer implements Strategy{
 		cardType.add(cardTypeB);
 		cardType.add(cardTypeC);
 		int j = 0;
-		cardInTheDeck = LoadMap.countryFilter.size();
+		cardInTheDeck = MapLoader.countryFilter.size();
 		for (int i = 0; i < cardInTheDeck; i++) {
 			cardsInTheDeck.add(cardType.get(j));
 			j++;
@@ -427,13 +427,13 @@ public class RandomPlayer implements Strategy{
 		
 		List<String> attackerCountryAdjacent = new ArrayList<String>();
 		int size = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
-		int size2 = LoadMap.adj.get(attackerCountry).size();
+		int size2 = MapLoader.adj.get(attackerCountry).size();
 		for (int i = 0; i < size2; i++) {
 			if (StartUpPhase.initialPlayerCountry.get(playerName.getName())
-					.contains(LoadMap.adj.get(attackerCountry).get(i))) {
+					.contains(MapLoader.adj.get(attackerCountry).get(i))) {
 				continue;
 			} else {
-				attackerCountryAdjacent.add(LoadMap.adj.get(attackerCountry).get(i));
+				attackerCountryAdjacent.add(MapLoader.adj.get(attackerCountry).get(i));
 			}
 		}
 		
@@ -586,7 +586,7 @@ public class RandomPlayer implements Strategy{
 
 					StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 					//ON WINNING A GAME LOGIC
-					if(newCOuntryListSize == LoadMap.countryFilter.size()){
+					if(newCOuntryListSize == MapLoader.countryFilter.size()){
 						System.out.println("WooHooo you conquered the whole world map");
 						conqueredMapCounter = 1;
 					}
@@ -645,7 +645,7 @@ public class RandomPlayer implements Strategy{
 
 						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == LoadMap.countryFilter.size()){
+						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
 							conqueredMapCounter = 1;
 						}
@@ -715,7 +715,7 @@ public class RandomPlayer implements Strategy{
 							StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 
 							//ON WINNING A GAME LOGIC
-							if(newCOuntryListSize == LoadMap.countryFilter.size()){
+							if(newCOuntryListSize == MapLoader.countryFilter.size()){
 								System.out.println("WooHooo you conquered the whole world map");
 								conqueredMapCounter = 1;
 							}
@@ -809,15 +809,15 @@ public class RandomPlayer implements Strategy{
 			System.out.println("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));		
 
 			int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
-			int tempAdjSize = LoadMap.adj.get(from).size();
+			int tempAdjSize = MapLoader.adj.get(from).size();
 
 			ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
 			
 			for (int i = 0; i < tempAdjSize; i++) {
 				for (int j = 0; j < tempCountrySize; j++) {
 					if (StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(j)
-							.contains(LoadMap.adj.get(from).get(i))) {
-						tempAdjCountryToWhichWeCanMOve.add(LoadMap.adj.get(from).get(i));
+							.contains(MapLoader.adj.get(from).get(i))) {
+						tempAdjCountryToWhichWeCanMOve.add(MapLoader.adj.get(from).get(i));
 					}
 				}
 			}

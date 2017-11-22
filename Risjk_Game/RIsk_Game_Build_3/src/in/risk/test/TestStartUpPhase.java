@@ -8,7 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.risk.utility.LoadMap;
+import in.risk.utility.MapLoader;
 import in.risk.utility.PlayerToPlay;
 import in.risk.utility.StartUpPhase;
 /**
@@ -20,8 +20,8 @@ public class TestStartUpPhase {
 
 	@BeforeClass
 	public static void Startup() throws IOException{
-		LoadMap.loadContinent("3D Cliff.map");
-		LoadMap.removeSpcaes();
+		MapLoader.loadContinent("3D Cliff.map");
+		MapLoader.removeSpcaes();
 		StartUpPhase.addPlayerName("Mohit");
 		StartUpPhase.addPlayerName("Rana");
 	}
@@ -114,8 +114,8 @@ public class TestStartUpPhase {
 	
 	@AfterClass
 	public static void tearDown(){
-		LoadMap.countryFilter.clear();
-		LoadMap.continentFilterNew.clear();
+		MapLoader.countryFilter.clear();
+		MapLoader.continentFilterNew.clear();
 		StartUpPhase.players.removeAllElements();
 		StartUpPhase.initialPlayerCountry.clear();
 	}

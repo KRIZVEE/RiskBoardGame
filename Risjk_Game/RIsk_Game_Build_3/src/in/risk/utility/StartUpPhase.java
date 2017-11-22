@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
+
+import in.risk.gui.RiskInterface;
+
 import java.util.Map.Entry;
 
 /**
@@ -14,8 +17,13 @@ import java.util.Map.Entry;
  *
  */
 public class StartUpPhase {
+	
+	public static String css = "file:resources/css/application.css";
+	public static String logoPath = "file:resources/logo/Risk_logo.png";
+
+	
 	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
-	static LoadMap obj = new LoadMap();
+	static MapLoader obj = new MapLoader();
 	static int noOfPlayer = 0;
 	public static PlayerToPlay currentPlayer;
 	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
@@ -28,36 +36,35 @@ public class StartUpPhase {
 	 * @throws IOException Throw excetion.
 	 */
 
-	public static void main(String args[]) throws IOException{
-		obj.loadMap("World3.map");
-		askUserToSelectPlayers();
-		initiallyPlaceArmies();
-		//placeArmies();
-
+	public static void gamePlay(){
 		
-		AssigningStrategy objAssigningStrategy = new AssigningStrategy();
-        
-        // Three contexts following different strategies
-		objAssigningStrategy.setStrategy(new BenevolentPlayer());
-		objAssigningStrategy.executeStrategy(currentPlayer);
+		try{
+			obj.loadMap(RiskInterface.pathMap);
+			askUserToSelectPlayers();
+			initiallyPlaceArmies();
+			//placeArmies();
+
+			
+			AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+	        
+	        // Three contexts following different strategies
+			objAssigningStrategy.setStrategy(new BenevolentPlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
 
 
-		objAssigningStrategy.setStrategy(new AggresivePlayer());
-		objAssigningStrategy.executeStrategy(currentPlayer);
+			objAssigningStrategy.setStrategy(new AggresivePlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
 
-		objAssigningStrategy.setStrategy(new RandomPlayer());
-		objAssigningStrategy.executeStrategy(currentPlayer);
-
-        
-
+			objAssigningStrategy.setStrategy(new RandomPlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
+			
+//			Player.placeReinforcementArmies(currentPlayer);
+//			Player.attackPhase(currentPlayer);// @author Kashif
+//			Player.fortifyPhase(currentPlayer);// @author Kashif
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
-		
-		
-//		Player.placeReinforcementArmies(currentPlayer);
-//		Player.attackPhase(currentPlayer);// @author Kashif
-//		Player.fortifyPhase(currentPlayer);// @author Kashif
-
-
 	}
 
 	/**
@@ -139,18 +146,18 @@ public class StartUpPhase {
 	 */
 	public static boolean initialPlayerCountry() throws IOException{
 		int i = 0;
-		int j = LoadMap.countryFilter.size() - 1;
+		int j = MapLoader.countryFilter.size() - 1;
 		while (j >= 0) {
-			initialCountries.add(LoadMap.countryFilter.get(j));
+			initialCountries.add(MapLoader.countryFilter.get(j));
 			players.get(i);
 
 			ArrayList<String> list;
 			if (initialPlayerCountry.containsKey(players.get(i).getName())) {
 				list = initialPlayerCountry.get(players.get(i).getName());
-				list.add(LoadMap.countryFilter.get(j));
+				list.add(MapLoader.countryFilter.get(j));
 			} else {
 				list = new ArrayList<String>();
-				list.add(LoadMap.countryFilter.get(j));
+				list.add(MapLoader.countryFilter.get(j));
 				initialPlayerCountry.put(players.get(i).getName(), list);
 				}
 			i++;
@@ -204,9 +211,9 @@ public class StartUpPhase {
 	 * @throws IOException exception.
 	 */
 	public static void initiallyPlaceArmies() throws IOException {
-		int totalNumberOfCountries = LoadMap.countryFilter.size();
+		int totalNumberOfCountries = MapLoader.countryFilter.size();
 		for (int i = 0; i < totalNumberOfCountries; i++) {
-			countriesArmies.put(LoadMap.countryFilter.get(i), 2);
+			countriesArmies.put(MapLoader.countryFilter.get(i), 2);
 		}
 	}
 	

@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.risk.utility.LoadMap;
+import in.risk.utility.MapLoader;
 /**
  * THis class test load map class.
  * @author mohitrana
@@ -21,10 +21,10 @@ public class TestLoadMap {
 	@BeforeClass
 	public static void startup(){
 		String path = "3D Cliff.map";
-		LoadMap.loadContinent(path);
-		LoadMap.loadCountries(path);
-		LoadMap.getCountriesAdjacency();
-		LoadMap.removeSpcaes();
+		MapLoader.loadContinent(path);
+		MapLoader.loadCountries(path);
+		MapLoader.getCountriesAdjacency();
+		MapLoader.removeSpcaes();
 	}
 	
 	/**
@@ -33,7 +33,7 @@ public class TestLoadMap {
 	@Test
 	public void testLoadContinents() {
 		String expected  = "bottom";
-		assertTrue(LoadMap.continentFilterNew.contains(expected));
+		assertTrue(MapLoader.continentFilterNew.contains(expected));
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class TestLoadMap {
 	@Test
 	public void testLoadCountries(){
 		String expected = "topleft";
-		assertTrue(LoadMap.countryFilter.contains(expected));
+		assertTrue(MapLoader.countryFilter.contains(expected));
 	}
 	
 	/**
@@ -55,16 +55,16 @@ public class TestLoadMap {
 		String expected1 = "fourthleft";
 		String expected2 = "thirdleft";
 		String expected3 = "ledgeleft";
-		assertTrue(LoadMap.adj.get(expectedCountry).contains(expected));
-		assertTrue(LoadMap.adj.get(expectedCountry).contains(expected1));
-		assertTrue(LoadMap.adj.get(expectedCountry).contains(expected2));
-		assertTrue(LoadMap.adj.get(expectedCountry).contains(expected3));
+		assertTrue(MapLoader.adj.get(expectedCountry).contains(expected));
+		assertTrue(MapLoader.adj.get(expectedCountry).contains(expected1));
+		assertTrue(MapLoader.adj.get(expectedCountry).contains(expected2));
+		assertTrue(MapLoader.adj.get(expectedCountry).contains(expected3));
 	}
 	
 	@AfterClass
 	public static void tearDown(){
-		LoadMap.countryFilter.clear();
-		LoadMap.continentFilterNew.clear();
-		LoadMap.adj.clear();
+		MapLoader.countryFilter.clear();
+		MapLoader.continentFilterNew.clear();
+		MapLoader.adj.clear();
 	}
 }

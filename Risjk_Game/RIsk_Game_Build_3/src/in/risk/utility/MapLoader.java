@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
@@ -13,7 +14,7 @@ import java.util.Map.Entry;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class LoadMap {
+public class MapLoader {
 
 	public static ArrayList<String> continentFilterNew = new ArrayList<String>();
 	public static List<String> newList;
@@ -25,6 +26,7 @@ public class LoadMap {
 	public static HashMap<String, List<String>> countryCoordinates = new HashMap<String, List<String>>();
 	public static ArrayList<String> valueList = new ArrayList<String>();
 	public static HashMap<String, Integer> continentValue = new HashMap<String, Integer>();
+	public static ArrayList<String> mapDetail = new ArrayList<String>();
 
 	private static int flag;
 
@@ -39,8 +41,6 @@ public class LoadMap {
 		getCountriesAdjacency();
 		getContinentCountries();
 		emptyContinent();
-		connectedContinent();
-		connectedCountry();
 	}
 
 	/**
@@ -56,6 +56,15 @@ public class LoadMap {
 			Scanner mapfile = new Scanner(file);
 			while (mapfile.hasNextLine()) {
 				next = mapfile.nextLine();
+				
+				if (next.equals("[Map]")) {
+					next = mapfile.nextLine();
+					do {
+						mapDetail.add(next);
+						next = mapfile.nextLine();
+					} while (!next.equals(""));
+				}
+				
 				if (next.equals("[Continents]")) {
 					next = mapfile.nextLine();
 					do {
@@ -91,7 +100,6 @@ public class LoadMap {
 
 			while (mapfile.hasNextLine()) {
 				next = mapfile.nextLine();
-				String[] arr;
 				if (next.equals("[Territories]")) {
 					next = mapfile.nextLine();
 					do {
@@ -186,9 +194,30 @@ public class LoadMap {
 	}
 
 	/**
-	 * This method is used to stop loading the map if the map doesnt have the connected continents.
-	 * @return true if everything goes wwell.
+	 * This method is used to stop loading the map if the map does'nt have the connected continents.
+	 * @return true if everything goes well.
 	 */
+	
+public static boolean unconnectedContinent(){
+		HashMap<String, String> temp = new HashMap<String, String>();
+		ArrayList<String> flags = new ArrayList<String>();
+		adj.forEach((k,v)->{			
+			if(!Collections.disjoint(continentCountries.get(countryContinent.get(k)), v)){
+				temp.put(k, "V");
+			}else{
+				temp.put(k, "I");
+			}			
+		});
+		temp.forEach((key,value)->{
+			flags.add(value);
+		});
+		if(flags.contains("I")){
+			return false;
+		}else{
+			return true;
+		}		
+	}
+	
 	public static boolean connectedContinent(){
 
 		HashMap<String, String> temp = new HashMap<String, String>();
