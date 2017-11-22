@@ -7,13 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Map.Entry;
-
-//import in.risk.gui.RiskInterface;
-
-//import in.risk.gui.RiskInterface;
 
 /**
  * This class implements the Reinforcement, Attack and Fortify game phases.
@@ -61,11 +57,6 @@ public class HumanPlayer extends StartUpPhase {
 
 	public static String from = "";
 	public static String to = "";
-	
-	
-	
-	
-	
 	
 	
 	/**
@@ -350,6 +341,7 @@ public class HumanPlayer extends StartUpPhase {
 				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
 			}
 		}
+		sc.close();
 	}
 
 	/**
@@ -386,38 +378,25 @@ public class HumanPlayer extends StartUpPhase {
 		String attackTurnOn = "hello";
 
 		System.out.println(StartUpPhase.initialPlayerCountry);
-		//loggingString("Initial countries with player: " + StartUpPhase.initialPlayerCountry);
-
 		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-
-		//StartUpPhase.countriesArmies.put("Peru", 1);// for checking
-		
 
 		System.out.println("Initailly player country list before any attack : "
 				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-		//loggingString("Initailly player country list before any attack : "+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		
 		System.out.println("Initailly player country list with initial army : "
 				+ StartUpPhase.countriesArmies.get(playerName.getName()));
-		//loggingString("Initailly player country list with initial army : "+ StartUpPhase.countriesArmies.get(playerName.getName()));
-
+		
 		System.out.println("Current Player : " + playerName.getName());
-		//loggingString("Current Player : " + playerName.getName());
 		
 		oldCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		System.out.println("===========oldCOuntryListSize :========== " + oldCOuntryListSize);
-		//loggingString("===========oldCOuntryListSize :========== " + oldCOuntryListSize);
 		
 		System.out.println("Current Player owning ciuntries : "
 				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-		//loggingString("Current Player owning ciuntries : " + StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("Please enter the name of country from where you want to attack");
 		attackerCountry = input.readLine();
-		//loggingString(bdsbs);
-		// countriesArmies.put(attackerCountry, 4);
 
 		System.out.println("No of armies in the attacker country : " + StartUpPhase.countriesArmies.get(attackerCountry));
-		//loggingString("No of armies in the attacker country : " + StartUpPhase.countriesArmies.get(attackerCountry));
 
 		List<String> attackerCountryAdjacent = new ArrayList<String>();
 		int size = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
@@ -431,71 +410,38 @@ public class HumanPlayer extends StartUpPhase {
 			}
 		}
 
-		
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
 				+ attackerCountryAdjacent); // need to work here
-		//loggingString("Based on this country name, you can attack to corresponding countries only : " + attackerCountryAdjacent);
-		
 		
 		if(attackerCountryAdjacent.isEmpty()){
 			Scanner sc123 = new Scanner(System.in);
 			String result123;
 			System.out.println("You cannot attack because the country is not adjacent to any enemy country. Do you want to attack more? Y/N");
 			result123 = sc123.nextLine();
-	//	loggingString("You cannot attack because the country is not adjacent to any enemy country. Do you want to attack more? Y/N" + " your chosen result : " + result123);
 		if (attackTurnOn.equals("Y")) {
 
 			attackPhase(currentPlayer);
 
-//			RiskInterface objRIAPV = new RiskInterface();
-//			objRIAPV.demoAttackPhaseView();
 		} else {
-
-			// System.out.println(RiskGame.initialPlayerCountry.get(RiskGame.currentPlayer));
 
 			newCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 			System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
-			//loggingString("===========newCOuntryListSize :========== " + newCOuntryListSize);
 
 			if (newCOuntryListSize > oldCOuntryListSize) {
-				//System.out.println("asljdhdsfjkldkafhhsjdkgfv");
-				// code for card need to be done here
 				int indexOfCardToBeGet = (int) (Math.random() * (cardsInTheDeck.size() - 0));
 				List<String> temp = new ArrayList<String>(playersCards.get(playerName.getName()));
-				// System.out.println(temp);
 				System.out.println(cardsInTheDeck);
-				//loggingString((" " + (cardInTheDeck)));
 				temp.add(cardsInTheDeck.get(indexOfCardToBeGet));
 				System.out.println("temp " + temp);
-				//loggingString("temp " + temp);
 				System.out.println("cards in the deck " + cardsInTheDeck);
-				//loggingString("cards in the deck " + cardsInTheDeck);
 				playersCards.put(playerName.getName(), temp);
 				temp.clear();
-				// playersCards.get(RiskGame.currentPlayer.getName()).add(RiskGame.cardsInTheDeck.get(indexOfCardToBeGet));
 				cardsInTheDeck.remove(indexOfCardToBeGet);
-				
-				//observer pattern for world dominance
-//				RiskInterface objRIWD = new RiskInterface();
-//				objRIWD.demoWorldDominance();
-
-				
+	
 			}
 
 			countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 			initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
-			//observer pattern
-//			setChanged();
-//			notifyObservers(this);
-			
-			
-			//=========================================================
-			//=======// didn't get this part===========================
-			//=======fortifyPhase(currentPlayer);	===================	
-			//=======StartUpPhase.noOfReinforcementArmies = 0;=========
-			//=======RiskInterface objRIFPV = new RiskInterface();=====
-			//=======objRIFPV.demoFortifyPhaseView();==================
-			//=========================================================
 
 		}
 	}
@@ -505,28 +451,22 @@ public class HumanPlayer extends StartUpPhase {
 	defenderCountry = input.readLine();
 	
 	System.out.println("No of armies in the defender country : " + StartUpPhase.countriesArmies.get(defenderCountry));
-	//loggingString("No of armies in the defender country : " + StartUpPhase.countriesArmies.get(defenderCountry));
-
 
 	if (StartUpPhase.countriesArmies.get(attackerCountry) >= 2) {
 		System.out.println("As, You have minimum of 2 armies, you can attack");
-		//loggingString("As, You have minimum of 2 armies, you can attack");
-
+		
 		if (StartUpPhase.countriesArmies.get(attackerCountry) > 3) {
 			System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice to be rolled");
 			noOfAttackerDice = sc.nextInt();
 			
 		} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 3) {
-			// flagCheckDice = 1;
 			System.out.println("Attacker Country Player, can opt among 1 or 2 dice to be rolled");
 			noOfAttackerDice = sc.nextInt();
 			
 		} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 2) {
 			System.out.println(
 					"Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
-							+ attackerCountry);
-			//loggingString("Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "	+ attackerCountry);
-			
+							+ attackerCountry);			
 			noOfAttackerDice = 1;
 		}
 		if (noOfAttackerDice == 2 || noOfAttackerDice == 3)
@@ -547,9 +487,7 @@ public class HumanPlayer extends StartUpPhase {
 		} else {
 			System.out.println(
 					"Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
-							+ defenderCountry);
-			//loggingString("Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "+ defenderCountry);
-			
+							+ defenderCountry);			
 			noOfDefenderDice = 1;
 		}
 
@@ -560,44 +498,27 @@ public class HumanPlayer extends StartUpPhase {
 		}
 
 		System.out.println("Attacker Dice value are as follow : ");
-		//loggingString("Attacker Dice value are as follow : ");
-
 		Arrays.sort(attackerDiceArray);
 		for (int i = 0; i < attackerDiceArray.length; i++) {
 			System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
-			//loggingString("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
 		}
 		
 		System.out.println("");
-		//loggingString(" " );
 		Arrays.sort(defenderDiceArray);
 
 		System.out.println("Defender Dice value are as follow : ");
-		//loggingString("Defender Dice value are as follow : ");
-
 		for (int i = 0; i < defenderDiceArray.length; i++) {
 			System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
-			//loggingString("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
 		}
 		
 		System.out.println("");
-		//loggingString(" " );
-
-
-		System.out.println(
-				"Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
-		//loggingString("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
+		System.out.println("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));	
+		System.out.println("Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
 		
-		System.out.println(
-				"Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
-		//loggingString("Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
-		
-
 		if (noOfDefenderDice == 1) {
 
 			if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
 				System.out.println(" Defender country loose 1 army");
-				//loggingString(" Defender country loose 1 army");
 				
 				updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 				if (updateArmyOfDefender == 0) {
@@ -630,42 +551,34 @@ public class HumanPlayer extends StartUpPhase {
 					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 				}
 				System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-				//loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 				
 				System.out.println("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
-				//loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				
 
-			} else {//// DCD(0) > ACD(0)// for defender dice == 1
+			} else {
 				System.out.println(" Attacker country loose 1 army");
-				//loggingString(" Attacker country loose 1 army");
 				
 				updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 
 				StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 
 				System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-				//loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 				
 				System.out.println("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
-				//loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				
 			}
-		} // end of defenderdice ==1
+		}
 
 		else {
 
 			if (attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]) {
-				System.out.println(" Defender country loose 1 army");
-				//loggingString(" Defender country loose 1 army");
-				
+				System.out.println(" Defender country loose 1 army");				
 				updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 				StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 
 				if (attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length
 						- 2]) {
 					System.out.println(" Defender country loose 1 more army");
-					//loggingString(" Defender country loose 1 more army");
 
 					updateArmyOfDefender = updateArmyOfDefender - 1;
 					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
@@ -700,11 +613,9 @@ public class HumanPlayer extends StartUpPhase {
 						StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					}
 					System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-					//loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 
 					System.out.println(
 							"Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
-					//loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				} else {
 					System.out.println(" Attacker country loose 1 army");
 					
@@ -713,11 +624,9 @@ public class HumanPlayer extends StartUpPhase {
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 
 					System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-					//loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 					
 					System.out.println(
 							"Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
-					//loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 					
 
 				}
@@ -726,7 +635,6 @@ public class HumanPlayer extends StartUpPhase {
 				if (attackerDiceArray[attackerDiceArray.length - 1] <= defenderDiceArray[defenderDiceArray.length
 						- 1]) {
 					System.out.println(" Attacker country loose 1 army");
-			//		loggingString(" Attacker country loose 1 army");
 					
 					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
@@ -734,14 +642,12 @@ public class HumanPlayer extends StartUpPhase {
 					if (attackerDiceArray[attackerDiceArray.length
 							- 2] <= defenderDiceArray[defenderDiceArray.length - 2]) {
 						System.out.println(" Attacker country loose 1 more army");
-						//loggingString(" Attacker country loose 1 more army");
 						
 						updateArmyOfAttacker -= 1;
 						StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 
 					} else {
 						System.out.println(" Defender country loose 1 more army");
-						//loggingString(" Defender country loose 1 more army");
 
 						updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 						StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
@@ -782,11 +688,7 @@ public class HumanPlayer extends StartUpPhase {
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 
 					System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-					//loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
-
-					System.out.println(
-							"Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
-					//loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
+					System.out.println(	"Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 					
 				}
 
@@ -794,82 +696,39 @@ public class HumanPlayer extends StartUpPhase {
 		}
 	} else
 		System.out.println("As you are having only 1 army, you can't attack");
-	//loggingString("As you are having only 1 army, you can't attack");
-
 
 	System.out.println("Do you want to still attack to other countries, press Y/N");
-	//loggingString("Do you want to still attack to other countries, press Y/N");
-
-	
+		
 	attackTurnOn = input.readLine();
-	//loggingString("Do you want to still attack to other countries, press Y/N " + " your chosen result : "+ attackTurnOn);
 
 	if (attackTurnOn.equals("Y")) {
-
 		countNoOfAttack++;
-		
-		//observer pattern attack phase
 		attackPhase(currentPlayer);
 
-//		RiskInterface objRIAPV = new RiskInterface();
-//		objRIAPV.demoAttackPhaseView();
 	} else {
-
 
 		newCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
-		//loggingString("===========newCOuntryListSize :========== " + newCOuntryListSize);
-
-		
-
-		if (newCOuntryListSize > oldCOuntryListSize) {
-			//System.out.println("asljdhdsfjkldkafhhsjdkgfv");
-			// code for card need to be done here
+			if (newCOuntryListSize > oldCOuntryListSize) {
+			
 			int indexOfCardToBeGet = (int) (Math.random() * (cardsInTheDeck.size() - 0));
 			List<String> temp = new ArrayList<String>(playersCards.get(playerName.getName()));
-			// System.out.println(temp);
 			System.out.println(cardsInTheDeck);
-			//loggingString(" "+cardsInTheDeck);
-
 			temp.add(cardsInTheDeck.get(indexOfCardToBeGet));
 			System.out.println("temp " + temp);
-			//loggingString("temp " + temp);
-
 			System.out.println("cards in the deck " + cardsInTheDeck);
-			//loggingString("cards in the deck " + cardsInTheDeck);
-
 			playersCards.put(playerName.getName(), temp);
 			temp.clear();
 			cardsInTheDeck.remove(indexOfCardToBeGet);
-			
-			//obsever pattern for world dominance
-//			RiskInterface objRIWD = new RiskInterface();
-//			objRIWD.demoWorldDominance();
+		
 			}
 
 		countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 		initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
-		// observer pattern
-//		setChanged();
-//		notifyObservers(this);
-		
-		//=========================================================
-		//=======// didn't get this part===========================
-		//=======fortifyPhase(currentPlayer);	===================	
-		//=======StartUpPhase.noOfReinforcementArmies = 0;=========
-		//=======RiskInterface objRIFPV = new RiskInterface();=====
-		//=======objRIFPV.demoFortifyPhaseView();==================
-		//=========================================================
-		
-//		RiskGame.noOfReinforcementArmies = 0;
-//		
-//		//observer pattern for fortify phase
-//		RiskInterface objRIFPV = new RiskInterface();
-//		objRIFPV.demoFortifyPhaseView();
 
 	}
-
-}// end of attackPhase
+	sc.close();
+}
 	/**
 	 * This is a random generator method
 	 * for generating random number in a dice
@@ -898,9 +757,7 @@ public class HumanPlayer extends StartUpPhase {
 			
 			System.out.println("You have these countries under your control "
 					+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
-			//loggingString("You have these countries under your control "					+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
 			System.out.println("Enter the name of country from which you want to move armies.");
-			//loggingString("Enter the name of country from which you want to move armies.");
 			String from;
 			from = scFrom.nextLine();
 			System.out.println(from);
@@ -920,20 +777,14 @@ public class HumanPlayer extends StartUpPhase {
 				}
 			}
 			Scanner scto = new Scanner(System.in);
-			System.out.println("Select the countries from your owned countries  and adjacent to " + from
-					+ " where you want to move your armies");
-			//loggingString("Select the countries from your owned countries  and adjacent to " + from					+ " where you want to move your armies");
-
+			System.out.println("Select the countries from your owned countries  and adjacent to " + from+ " where you want to move your armies");
 			
 			String to;
 			int numberOfArmiesToMove;
 			to = scto.nextLine();
 
 			if (tempAdjCountryToWhichWeCanMOve.contains(to)) {
-				System.out.println(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)
-						+ " armies on " + from + ".");
-				//loggingString(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)				+ " armies on " + from + ".");// doubt here
-				
+				System.out.println(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)+ " armies on " + from + ".");				
 				System.out.println("Please Enter the number of armies you want to move to " + "" + to + " " + "country.s");
 				numberOfArmiesToMove = sc.nextInt();
 				
@@ -948,97 +799,48 @@ public class HumanPlayer extends StartUpPhase {
 						StartUpPhase.countriesArmies.put(from, newArmiesToDelete);
 						countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 						System.out.println(from + " = " + StartUpPhase.countriesArmies.get(from));
-						//loggingString(from + " = " + StartUpPhase.countriesArmies.get(from));
 						System.out.println(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
-						//loggingString(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
-						//observer pattern
-//						setChanged();
-//						notifyObservers(this);
 						StartUpPhase.nextPlayer();
-						
-						//observer pattern for reinforcement pahse view
-//						RiskInterface objRIRPV = new RiskInterface();
-//						objRIRPV.demoReinforcePhaseView();
+
 					} else {
-						//Scanner sc = new Scanner(System.in);
 						String result;
 						System.out.println("You dont have sufficient number of armies to move from " + from
 								+ "Do you want to play fortify again? Y/N");
 						result = sc.nextLine();
-						//loggingString("You dont have sufficient number of armies to move from " + from + "Do you want to play fortify again? Y/N" + " your chosen result " +result);
 						
 						if (result.equals("N")) {
-							//calling of fortify phase
-							//RiskInterface objRILocalFortify2 = new RiskInterface();
-							//objRILocalFortify2.demoFortifyPhaseView();
 							fortifyPhase(currentPlayer);
-						} else {
-							
-						//observer pattern
-//							setChanged();
-//							notifyObservers(this);
-							StartUpPhase.nextPlayer();
-							placeReinforcementArmies(currentPlayer);
-							//RiskInterface objRILocalNew1 = new RiskInterface();
-							//objRILocalNew1.demoReinforcePhaseView();
-						}
-
+						} 
 					}
 				} else {
 					System.out.println(currentPlayer.getName() + " you can move " + numberOfArmiesToMove);
-					
-					//Scanner sc = new Scanner(System.in);
 					String result;
 					System.out.println("Do you want to stop? Y/N");
 					result = sc.nextLine();
-					//loggingString("Do you want to stop? Y/N " + "your chosen result : " + result);
-
-					
 					if (result.equals("N")) {
-						
-					// calling of fortify phase
-//						RiskInterface objRILocalFortify3 = new RiskInterface();
-//						objRILocalFortify3.demoFortifyPhaseView();
 						fortifyPhase(currentPlayer);
 					} else {
-//						setChanged();
-//						notifyObservers(this);
 						StartUpPhase.nextPlayer();
 						placeReinforcementArmies(currentPlayer);
-						//						RiskInterface objRILocalNew2 = new RiskInterface();
-//						objRILocalNew2.demoReinforcePhaseView();
-						// reinforcementPhase();
 					}
 				}
 
 			} else {
 				System.out.println(currentPlayer.getName() + " doesnt contain the country where you want to place armies.");
-			//loggingString(currentPlayer.getName() + " doesnt contain the country where you want to place armies.");
-
-			
-			//Scanner sc = new Scanner(System.in);
+		
 			String result;
 			System.out.println("Do you want to stop? Y/N");
 			result = sc.nextLine();
-			//loggingString("Do you want to stop? Y/N " + "your chosen result : " + result);
-
-			
+		
 			if (result.equals("N")) {
-//				RiskInterface objRILocalFortify4 = new RiskInterface();
-//				objRILocalFortify4.demoFortifyPhaseView();
 				fortifyPhase(currentPlayer);
 			} else {
-//				setChanged();
-//				notifyObservers(this);
 				StartUpPhase.nextPlayer();
 				placeReinforcementArmies(currentPlayer);
-//				RiskInterface objRILocalNewNew1 = new RiskInterface();
-//				objRILocalNewNew1.demoReinforcePhaseView();
 			}
 		}
-	}
-				
-			
-			
-				
+			scto.close();
+			scFrom.close();
+			sc.close();
+	}			
 }

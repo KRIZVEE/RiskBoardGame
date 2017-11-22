@@ -27,7 +27,7 @@ public class StartUpPhase {
 	 * @throws IOException Throw excetion.
 	 */
 	public static void main(String args[]) throws IOException {
-		obj.loadMap("3D Cliff.map");
+		obj.loadMap("Twin Volcano.map");
 		askUserToSelectPlayers();
 		initiallyPlaceArmies();
 		placeArmies();
