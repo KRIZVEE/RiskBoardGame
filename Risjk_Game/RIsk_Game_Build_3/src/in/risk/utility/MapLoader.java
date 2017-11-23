@@ -34,7 +34,7 @@ public class MapLoader {
 	 * Method for calling the LoadMap class at once.
 	 * @param path for the path fo the map.
 	 */
-	public void loadMap(String path){
+	public static void loadMap(String path){
 		loadContinent(path);
 		loadCountries(path);
 		removeSpcaes();

@@ -20,14 +20,13 @@ public class MapWriter {
 		
 		
 			try {
-				/*MapEditorInterface.editedContinentCountries.forEach((key,value) ->{
-					System.out.println(value);
-				});*/
+				
 				String pathName = "resources/maps/" + path;
 				PrintStream outFile = new PrintStream(new FileOutputStream(pathName));
 				outFile.println("[Map]");
 				for (int i = 0; i < MapLoader.mapDetail.size(); i++) {
-					outFile.println(MapLoader.mapDetail.get(i));
+//					outFile.println(MapLoader.mapDetail.get(i));
+					writeMapDetails(MapLoader.mapDetail.get(i), outFile);
 				}
 				outFile.println("");
 				outFile.println("[Continents]");
@@ -80,6 +79,12 @@ public class MapWriter {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}		
+	}
+
+	private static boolean writeMapDetails(String mapDetails, PrintStream outFile) {
+		outFile.println(mapDetails);
+		return true;
+		
 	}
 
 }

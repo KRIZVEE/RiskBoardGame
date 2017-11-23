@@ -25,8 +25,8 @@ public class TestPlayer {
 	 */
 	@BeforeClass
 	public static void startUp() throws IOException{
-		MapLoader.loadContinent("3D Cliff.map");
-		MapLoader.loadCountries("3D Cliff.map");
+		MapLoader.loadContinent("3D Cliff Test.map");
+		MapLoader.loadCountries("3D Cliff Test.map");
 		MapLoader.removeSpcaes();
 		StartUpPhase.addPlayerName("Mohit");
 		StartUpPhase.addPlayerName("Rana");

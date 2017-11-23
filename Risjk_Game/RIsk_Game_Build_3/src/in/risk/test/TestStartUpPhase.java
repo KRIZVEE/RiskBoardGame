@@ -20,7 +20,7 @@ public class TestStartUpPhase {
 
 	@BeforeClass
 	public static void Startup() throws IOException{
-		MapLoader.loadContinent("3D Cliff.map");
+		MapLoader.loadContinent("3D Cliff Test.map");
 		MapLoader.removeSpcaes();
 		StartUpPhase.addPlayerName("Mohit");
 		StartUpPhase.addPlayerName("Rana");
@@ -107,7 +107,7 @@ public class TestStartUpPhase {
 	@Test
 	public void testDistributeArmies() throws IOException{
 		StartUpPhase.distributeArmies(3);
-		int expectedValue = 35;
+		int expectedValue = 4;
 		int actualValue = StartUpPhase.players.get(0).getArmies();
 		assertEquals(expectedValue, actualValue);
 	}
