@@ -87,14 +87,21 @@ public class RiskInterface extends Application {
 
 			@Override
 			public void handle(ActionEvent event) {
+				pathMap = maplist2.getValue();			
+				objMapLoader.loadMap(pathMap);
 				primaryStage.close();
 				MapEditorInterface.continentEditorStage.close();
 				MapEditorInterface.countryEditorStage.close();
 				MapEditorInterface.mapEditorStage.close();
-				pathMap = maplist2.getValue();			
-				objMapLoader.loadMap(pathMap);
-				StartUpPhase.gamePlay();
-				
+				if(MapLoader.connectedCountry() == false){
+					System.out.println("It is an unconnected map.");
+					primaryStage.close();
+				}else if(MapLoader.unconnectedContinent() == false){
+					System.out.println("Map has unconnected continent.");
+					primaryStage.close();
+				}else{
+					StartUpPhase.gamePlay();
+				}				
 			}
 		});
 
