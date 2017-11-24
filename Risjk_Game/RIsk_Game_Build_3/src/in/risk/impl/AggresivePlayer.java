@@ -390,6 +390,7 @@ public class AggresivePlayer implements Strategy{
 								strongestCountry = key;
 								updatedarmyOfStrongestCountry = value;
 								findingStrongestCOuntry.put(key, value);}
+							break;
 						}
 					}
 				}
@@ -644,25 +645,26 @@ public class AggresivePlayer implements Strategy{
 //			}
 
 			System.out.println("");
-			System.out.println("ATTACKER COUNTRY NAME" + attackerCountry);
-			System.out.println("DEFENDER COUNTRY NAME" + defenderCountry);
+			System.out.println("ATTACKER COUNTRY NAME :" + attackerCountry);
+			System.out.println("DEFENDER COUNTRY NAME :" + defenderCountry);
 			System.out.println();
-			System.out.println("ATTACKER COUNTRY CHOOSEN NO OF DICE" + noOfAttackerDice);
-			System.out.println("DEFENDER COUNTRY CHOOSEN NO OF DICE" + noOfDefenderDice);
+			System.out.println("ATTACKER COUNTRY CHOOSEN NO OF DICE :" + noOfAttackerDice);
+			System.out.println("DEFENDER COUNTRY CHOOSEN NO OF DICE :" + noOfDefenderDice);
 			System.out.println();
+			System.out.println("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
+			System.out.println( "Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));System.out.println();
 			System.out.println("Attacker Dice value are as follow : ");
 			Arrays.sort(attackerDiceArray);
 			for (int i = 0; i < attackerDiceArray.length; i++) {
 				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
 			}			
 			System.out.println();
+			Arrays.sort(defenderDiceArray);
 			System.out.println("Defender Dice value are as follow : ");
 			for (int i = 0; i < defenderDiceArray.length; i++) {
 				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
 			}
-			System.out.println();
-			System.out.println("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
-			System.out.println( "Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
+			
 
 			// if defender choose dice as 1
 			if (noOfDefenderDice == 1) {
@@ -1054,6 +1056,7 @@ public class AggresivePlayer implements Strategy{
 								strongestCountry = key;
 								updatedarmyOfStrongestCountry = value;
 								findingStrongestCOuntryFortify.put(key, value);}
+							break;
 						}
 					}
 				}

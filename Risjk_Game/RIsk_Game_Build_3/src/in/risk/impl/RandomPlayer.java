@@ -56,7 +56,7 @@ public class RandomPlayer implements Strategy{
 	public static int countNoOfAttack = 1;
 	public static int conqueredMapCounter = 0;
 	public static int temp = 0;
-	public static int randomCountAttack = 0;
+	int randomCountAttack = 0;
 	public static int randomCountAttackflag = 0;
 
 
@@ -416,7 +416,7 @@ public class RandomPlayer implements Strategy{
 	 * @throws IOException
 	 */
 
-	public static void attackPhase(PlayerToPlay playerName) throws IOException {
+	public  void attackPhase(PlayerToPlay playerName) throws IOException {
 		System.out.println();
 		System.out.println();
 		System.out.println();
@@ -529,7 +529,15 @@ public class RandomPlayer implements Strategy{
 		System.out.println("the name of  *RANDOM* country in which you want to attack to");
 		String randomDefenderCountry="";
 		Random rNew = new Random();
-		int indexNew  = rNew.nextInt(attackerCountryAdjacent.size());//.get(playerName.getName()).size());
+		if(attackerCountryAdjacent.isEmpty()){
+			randomCountAttack++;
+			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+			attackPhase(playerName);
+			return;
+		}
+		int indexNew  = rNew.nextInt(attackerCountryAdjacent.size());
 		randomDefenderCountry = attackerCountryAdjacent.get(indexNew);
 
 		defenderCountry = randomDefenderCountry;
@@ -582,26 +590,42 @@ public class RandomPlayer implements Strategy{
 			for (int i = 0; i < defenderDiceArray.length; i++) {
 				defenderDiceArray[i] = randomNumberGenerator();
 			}
+//			System.out.println("Attacker Dice value are as follow : ");
+//			Arrays.sort(attackerDiceArray);
+//			for (int i = 0; i < attackerDiceArray.length; i++) {
+//				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
+//			}
+//
+//			System.out.println("");
+//			Arrays.sort(defenderDiceArray);
+//
+//			System.out.println("Defender Dice value are as follow : ");
+//			for (int i = 0; i < defenderDiceArray.length; i++) {
+//				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
+//			}
+
+			System.out.println("");
+			System.out.println("ATTACKER COUNTRY NAME :" + attackerCountry);
+			System.out.println("DEFENDER COUNTRY NAME :" + defenderCountry);
+			System.out.println();
+			System.out.println("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
+			System.out.println( "Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
+			System.out.println();
+			System.out.println("ATTACKER COUNTRY CHOOSEN NO OF DICE :" + noOfAttackerDice);
+			System.out.println("DEFENDER COUNTRY CHOOSEN NO OF DICE :" + noOfDefenderDice);
+			System.out.println();
 			System.out.println("Attacker Dice value are as follow : ");
 			Arrays.sort(attackerDiceArray);
 			for (int i = 0; i < attackerDiceArray.length; i++) {
 				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
-			}
-
-			System.out.println("");
+			}			
+			System.out.println();
 			Arrays.sort(defenderDiceArray);
-
 			System.out.println("Defender Dice value are as follow : ");
 			for (int i = 0; i < defenderDiceArray.length; i++) {
 				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
 			}
-
-			System.out.println("");
-
-			System.out.println(
-					"Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));		
-			System.out.println(
-					"Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));		
+		
 			//	Condition for defender dice as 1
 			// if defender choose dice as 1
 			if (noOfDefenderDice == 1) {
@@ -889,7 +913,7 @@ public class RandomPlayer implements Strategy{
 				else if(flagCheckDice==2)
 				{
 					// ELSE Condition for ======ACD(1) <= DCD(1)==== for defender dice == 2 and attacker dice ==
-					System.out.println(" Attacker country loose 1 army");
+					System.out.println(" Attacker country loose 1 more army");
 					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 				}
@@ -919,6 +943,7 @@ public class RandomPlayer implements Strategy{
 		} else
 			{System.out.println("As you are having only 1 army, you can't attack");
 		randomCountAttack++;}
+		System.out.println(" randomCountAttack value is: "+ randomCountAttack);
 		if(randomCountAttack == 0)
 		{
 
@@ -965,7 +990,7 @@ public class RandomPlayer implements Strategy{
 		}
 		else
 			{
-			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+			
 			if(randomCountAttack < randomCountAttackflag)
 			{
 				System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
@@ -1005,6 +1030,12 @@ public class RandomPlayer implements Strategy{
 	 * @throws IOException
 	 */
 	public static void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		
+		
 		System.out.println("@@@@@@@@@@@@@@@@@@    FORTIFY Phase BEGINS   @@@@@@@@@@@@@@@@@ " +currentPlayer.getName());
 
 

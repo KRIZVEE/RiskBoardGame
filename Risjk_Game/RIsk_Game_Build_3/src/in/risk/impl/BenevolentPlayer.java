@@ -386,6 +386,7 @@ public class BenevolentPlayer implements Strategy {
 								weakestCountry = key;
 								updatedarmyOfWeakestCountry = value;
 								findingWeakestCOuntryReinforcement.put(key, value);}
+							break;
 						}
 					}
 				}
@@ -547,6 +548,7 @@ public class BenevolentPlayer implements Strategy {
 								weakestCountry = key;
 								updatedarmyOfWeakestCountry = value;
 								findingWeakestCOuntry.put(key, value);}
+							break;
 						}
 					}
 				}

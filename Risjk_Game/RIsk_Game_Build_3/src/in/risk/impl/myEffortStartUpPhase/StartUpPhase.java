@@ -30,7 +30,7 @@ public class StartUpPhase {
 	 * @throws IOException Throw excetion.
 	 */
 	public static void main(String args[]) throws IOException{
-		obj.loadMap("World3.map");
+		obj.loadMap("World2005.map");
 		askUserToSelectPlayers();
 		initiallyPlaceArmies();
 		//placeArmies();
@@ -51,17 +51,18 @@ public class StartUpPhase {
 			
 			System.out.println(tournamentLoop);
 			
-			if(conqueredMapCounterTURN==0)
-			{objAssigningStrategy.setStrategy(new BenevolentPlayer());
-			System.out.println("========Current Player Name is: =========" + currentPlayer.getName());
-			objAssigningStrategy.executeStrategy(currentPlayer);}
+//			if(conqueredMapCounterTURN==0)
+//			{
+//			objAssigningStrategy.setStrategy(new BenevolentPlayer());
+//			System.out.println("========Current Player Name is: =========" + currentPlayer.getName());
+//			objAssigningStrategy.executeStrategy(currentPlayer);}
 			
 			nextPlayer();
-			if(conqueredMapCounterTURN==0)
-			{
-			objAssigningStrategy.setStrategy(new AggresivePlayer());
-			System.out.println("========Current Player Name is: =========" + currentPlayer.getName());
-			objAssigningStrategy.executeStrategy(currentPlayer);}
+//			if(conqueredMapCounterTURN==0)
+//			{
+//			objAssigningStrategy.setStrategy(new AggresivePlayer());
+//			System.out.println("========Current Player Name is: =========" + currentPlayer.getName());
+//			objAssigningStrategy.executeStrategy(currentPlayer);}
 			
 			nextPlayer();
 			
@@ -70,14 +71,20 @@ public class StartUpPhase {
 			objAssigningStrategy.setStrategy(new RandomPlayer());
 			System.out.println("========Current Player Name is: =========" + currentPlayer.getName());
 			objAssigningStrategy.executeStrategy(currentPlayer);}
-//			System.out.println("I AM HERE");
+			System.out.println("I AM HERE");
 			nextPlayer();
 			
 			
-//			tournamentLoop++;
+			tournamentLoop++;
 //			System.out.println(tournamentLoop);
 		}while(tournamentLoop <= 2||conqueredMapCounterTURN==1);
 		
+		System.out.println(" tournamentLoop " + tournamentLoop);
+		System.out.println(" conqueredMapCounterTURN "+ conqueredMapCounterTURN);
+		if(conqueredMapCounterTURN == 0)
+			System.out.println("Match Result is: "+ "DRAW");
+		else
+			System.out.println("WINNER NAME is: "+ currentPlayer.getName());
 		
         System.out.println("Final Initial Player COuntry List" + initialPlayerCountry);
         System.out.println("Final COuntry Armies List" + countriesArmies);
