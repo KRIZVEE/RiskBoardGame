@@ -46,6 +46,73 @@ public class StartUpPhase {
 			System.out.println(MapLoader.countryFilter.size());
 			initiallyPlaceArmies();
 			//placeArmies();
+			
+			//variables declared for tournament start up phase
+			String [] maplist = new String[5];
+			maplist[0] = "resources/maps/";
+			maplist[1] = "resources/maps/";
+			maplist[2] = "resources/maps/";
+			maplist[3] = "resources/maps/";
+			maplist[4] = "resources/maps/";
+			
+			int [] numberOfGamesToPlay = new int[4];
+			int numOfMaps = 0;
+			int numOfPlayersStrategies = 0;
+			//int[] numOfGamesToPlay = new int[5];
+			int maxTurns = 0;
+			int numOfGames = 0;
+			
+			//Tournament rules declaration
+			System.out.println("Please read tournament rules first:  ");
+			System.out.println("Number of maps = 1 to 5" +" " +"number of players = 2 to 4" +" " +"number of games = 1 to 5" +" " +"Number of maximum turns = 10 to 50");
+			
+			Scanner tournamentscan = new Scanner(System.in);
+			
+			System.out.println(" Enter number of maps to play: ");
+			numOfMaps = tournamentscan.nextInt();
+			
+			System.out.println(" Enter number of players to play with: ");
+			numOfPlayersStrategies = tournamentscan.nextInt();
+			
+			System.out.println("Enter number of games to be played: ");
+			numOfGames = tournamentscan.nextInt();
+			
+			System.out.println("Enter number of maximum turns:  ");
+			maxTurns = tournamentscan.nextInt();
+			
+			
+			//logic for start up playing tournament mode
+			for(int i = 0; i < maplist.length; i++ )
+			{
+				for (int j = 0; j <numberOfGamesToPlay.length; j++)
+				{
+					do{
+						
+						AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+				        
+				        // Three contexts following different strategies
+						objAssigningStrategy.setStrategy(new BenevolentPlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+
+						nextPlayer();
+						
+						objAssigningStrategy.setStrategy(new AggresivePlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+						
+						nextPlayer();
+
+
+						objAssigningStrategy.setStrategy(new RandomPlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+						
+						nextPlayer();
+
+						
+					}while(maxTurns == 30 );//|| //flagCheckWorldWinner==true)
+					
+				}
+			}
+			
 
 			
 			AssigningStrategy objAssigningStrategy = new AssigningStrategy();
