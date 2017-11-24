@@ -1,4 +1,4 @@
-package in.risk.impl;
+package in.risk.utility;
 
 import java.io.IOException;
 
