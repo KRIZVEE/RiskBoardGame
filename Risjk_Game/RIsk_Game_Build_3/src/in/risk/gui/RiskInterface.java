@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import in.risk.utility.MapLoader;
-import in.risk.utility.StartUpPhase;
+import in.risk.impl.MapLoader;
+import in.risk.impl.StartUpPhase;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

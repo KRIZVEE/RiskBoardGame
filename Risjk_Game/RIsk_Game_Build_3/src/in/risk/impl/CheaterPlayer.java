@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;

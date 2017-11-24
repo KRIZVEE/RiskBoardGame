@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl;
 /**
  * This class is used to implement the playerTOPlay class.
  * @author mohitrana

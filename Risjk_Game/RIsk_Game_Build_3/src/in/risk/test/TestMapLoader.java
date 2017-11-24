@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.risk.utility.MapLoader;
+import in.risk.impl.MapLoader;
 /**
  * THis class test load map class.
  * @author mohitrana

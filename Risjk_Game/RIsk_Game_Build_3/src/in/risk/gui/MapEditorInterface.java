@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
 
-import in.risk.utility.MapLoader;
-import in.risk.utility.MapWriter;
-import in.risk.utility.StartUpPhase;
+import in.risk.impl.MapLoader;
+import in.risk.impl.MapWriter;
+import in.risk.impl.StartUpPhase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

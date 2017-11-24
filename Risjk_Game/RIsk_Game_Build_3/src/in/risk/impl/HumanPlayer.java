@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;

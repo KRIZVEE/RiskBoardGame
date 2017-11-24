@@ -1,15 +1,13 @@
-package in.risk.utility;
+package in.risk.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
+import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Vector;
 
 import in.risk.gui.RiskInterface;
-
-import java.util.Map.Entry;
 
 /**
  * This class is used to implement the intial starting of the game.
@@ -39,7 +37,7 @@ public class StartUpPhase {
 	public static void gamePlay(){
 		
 		try{
-			obj.loadMap(RiskInterface.pathMap);
+			MapLoader.loadMap(RiskInterface.pathMap);
 			askUserToSelectPlayers();
 			System.out.println(players.get(0).getName());
 			System.out.println(players.get(1).getName());
@@ -83,6 +81,7 @@ public class StartUpPhase {
 		result = sc.nextInt();
 		noOfPlayer = result;
 		selectPlayer(noOfPlayer);
+		sc.close();
 	}
 
 	/**
@@ -125,10 +124,9 @@ public class StartUpPhase {
 			result = sc1.nextInt();
 			if(result == 1){
 				Scanner scForHumanPlayerName = new Scanner(System.in);
-				String nameOfTheHumanPlayer = null;
 				System.out.println("Please enter the name of the human player.");
 				playerName = scForHumanPlayerName.nextLine();
-				
+				scForHumanPlayerName.close();
 			}else if(result == 2){
 				playerName = "Aggressive";
 			}else if(result == 3){
@@ -143,6 +141,7 @@ public class StartUpPhase {
 			addPlayerName(playerName);
 		}
 		initialPlayerCountry();
+		sc1.close();
 	}
 
 	/**
@@ -255,7 +254,6 @@ public class StartUpPhase {
 		int loopSize = players.size() * currentPlayer.getArmies();
 		int updatedArmies;
 		Scanner sc = new Scanner(System.in);
-		String result;
 		ArrayList<String> temp = new ArrayList<>();
 		System.out.println("start here  :  ");
 		int iteratorForAggressive = 0;
@@ -288,6 +286,7 @@ public class StartUpPhase {
 				System.out.println(currentPlayer.getName());
 			}
 		}
+		sc.close();
 		return true;
 	}
 

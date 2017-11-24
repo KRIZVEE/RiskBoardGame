@@ -8,9 +8,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.risk.utility.MapLoader;
-import in.risk.utility.PlayerToPlay;
-import in.risk.utility.StartUpPhase;
+import in.risk.impl.MapLoader;
+import in.risk.impl.PlayerToPlay;
+import in.risk.impl.StartUpPhase;
 /**
  * This class is used to test the start up phase.
  * @author mohitrana

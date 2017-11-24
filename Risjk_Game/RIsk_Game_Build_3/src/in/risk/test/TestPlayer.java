@@ -9,9 +9,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import in.risk.utility.MapLoader;
-import in.risk.utility.HumanPlayer;
-import in.risk.utility.StartUpPhase;
+import in.risk.impl.HumanPlayer;
+import in.risk.impl.MapLoader;
+import in.risk.impl.StartUpPhase;
 /**
  * This class test the Player class.
  * @author mohitrana
