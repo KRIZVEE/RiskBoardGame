@@ -26,6 +26,7 @@ public class AssigningStrategy {
    
     public void executeStrategy(PlayerToPlay playerName) throws IOException {
         this.strategy.placeReinforcementArmies(playerName);
+        return;
 //        this.strategy.attackPhase(playerName);//(playerName);
 //        this.strategy.fortifyPhase(playerName);//(playerName);
 
