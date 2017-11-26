@@ -31,7 +31,7 @@ public class StartUpPhase {
 	/**
 	 * This method is used to initially start the game.
 	 * @param args arguments.
-	 * @throws IOException Throw excetion.
+	 * @throws IOException Throw exception
 	 */
 
 	public static void gamePlay(){
@@ -45,7 +45,7 @@ public class StartUpPhase {
 			System.out.println(initialPlayerCountry.get(players.get(0).getName()).size() + initialPlayerCountry.get(players.get(2).getName()).size() + initialPlayerCountry.get(players.get(1).getName()).size());
 			System.out.println(MapLoader.countryFilter.size());
 			initiallyPlaceArmies();
-			//placeArmies();
+			placeArmies();
 
 			
 			AssigningStrategy objAssigningStrategy = new AssigningStrategy();
