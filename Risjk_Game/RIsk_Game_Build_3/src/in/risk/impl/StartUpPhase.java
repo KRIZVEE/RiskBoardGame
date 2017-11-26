@@ -59,7 +59,7 @@ public class StartUpPhase {
 			int [] numberOfGamesToPlay = new int[4];
 			int numOfMaps = 0;
 			int numOfPlayersStrategies = 0;
-			//int[] numOfGamesToPlay = new int[5];
+			
 			int maxTurns = 0;
 			int numOfGames = 0;
 			
@@ -109,7 +109,7 @@ public class StartUpPhase {
 						nextPlayer();
 
 						
-					}while(maxTurns == 30 );//|| //flagCheckWorldWinner==true)
+					}while(maxTurns == 30 );
 					
 				}
 			}
