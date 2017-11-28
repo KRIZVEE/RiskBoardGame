@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import in.risk.gui.RiskInterface;
+import in.risk.saveload.SaveData;
 
 /**
  * This class is used to implement the intial starting of the game.
@@ -19,7 +20,7 @@ public class StartUpPhase {
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
 
-	
+	public SaveData objSaveData = new SaveData();
 	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
 	static MapLoader obj = new MapLoader();
 	static int noOfPlayer = 0;
