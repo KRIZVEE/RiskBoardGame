@@ -1,11 +1,18 @@
-package in.risk.impl;
+package in.risk.utility;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
+
+import javafx.print.PageLayout;
+
+import java.util.Map.Entry;
 
 
 /**
@@ -88,7 +95,7 @@ public class BenevolentPlayer implements Strategy {
 	public int getArmiesaFromContinet(String playerName){
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
-		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
+		for (Entry<String, List<String>> entry : LoadMap.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
@@ -97,7 +104,7 @@ public class BenevolentPlayer implements Strategy {
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
 			} else if (resultOfContinentCountry.contains(true)) {
-				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + MapLoader.continentValue.get(Key);
+				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + LoadMap.continentValue.get(Key);
 			}
 			resultOfContinentCountry.clear();
 		}
@@ -157,7 +164,7 @@ public class BenevolentPlayer implements Strategy {
 		cardType.add(cardTypeB);
 		cardType.add(cardTypeC);
 		int j = 0;
-		cardInTheDeck = MapLoader.countryFilter.size();
+		cardInTheDeck = LoadMap.countryFilter.size();
 		for (int i = 0; i < cardInTheDeck; i++) {
 			cardsInTheDeck.add(cardType.get(j));
 			j++;
@@ -347,14 +354,18 @@ public class BenevolentPlayer implements Strategy {
 		int armyOfWeakestCountry = 0;
 		int updatedarmyOfWeakestCountry = 0;
 
-		int  loop = StartUpPhase.initialPlayerCountry.size();
+		int  loop = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		int temp = 0;
 
+		System.out.println("loop value is: " + loop);
+		System.out.println(StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 
 		//finding the weakest country
 		for (Entry<String, Integer> entry : StartUpPhase.countriesArmies.entrySet()) {
 			String key = entry.getKey();
 			Integer value = entry.getValue();
+			
+			
 
 			for(int i = 0; i< loop; i++){
 				String str = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(i).toString();
@@ -479,15 +490,15 @@ public class BenevolentPlayer implements Strategy {
 		System.out.println("Strongest Country from army needs to displace: \"FROM\" " + from);		
 
 		int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
-		int tempAdjSize = MapLoader.adj.get(from).size();
+		int tempAdjSize = LoadMap.adj.get(from).size();
 
 		ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
 
 		for (int i = 0; i < tempAdjSize; i++) {
 			for (int j = 0; j < tempCountrySize; j++) {
 				if (StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(j)
-						.contains(MapLoader.adj.get(from).get(i))) {
-					tempAdjCountryToWhichWeCanMOve.add(MapLoader.adj.get(from).get(i));
+						.contains(LoadMap.adj.get(from).get(i))) {
+					tempAdjCountryToWhichWeCanMOve.add(LoadMap.adj.get(from).get(i));
 				}
 			}
 		}
