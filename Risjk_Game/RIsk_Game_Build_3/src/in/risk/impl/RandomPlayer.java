@@ -1,15 +1,15 @@
-package in.risk.impl;
+package in.risk.utility;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
-
-import in.risk.tournament.StartUpPhaseTournament;
+import java.util.Map.Entry;
 
 /**
  * This class implements the Reinforcement, Attack and Fortify game phases.
@@ -95,7 +95,7 @@ public class RandomPlayer implements Strategy{
 		System.out.println(StartUpPhase.countriesArmies);
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
-		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
+		for (Entry<String, List<String>> entry : LoadMap.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
@@ -104,7 +104,7 @@ public class RandomPlayer implements Strategy{
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
 			} else if (resultOfContinentCountry.contains(true)) {
-				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + MapLoader.continentValue.get(Key);
+				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + LoadMap.continentValue.get(Key);
 			}
 			resultOfContinentCountry.clear();
 		}
@@ -164,7 +164,7 @@ public class RandomPlayer implements Strategy{
 		cardType.add(cardTypeB);
 		cardType.add(cardTypeC);
 		int j = 0;
-		cardInTheDeck = MapLoader.countryFilter.size();
+		cardInTheDeck = LoadMap.countryFilter.size();
 		for (int i = 0; i < cardInTheDeck; i++) {
 			cardsInTheDeck.add(cardType.get(j));
 			j++;
@@ -432,7 +432,7 @@ public class RandomPlayer implements Strategy{
 		System.out.println("Current Player : " + playerName.getName());		
 		System.out.println(StartUpPhase.initialPlayerCountry);	
 
-		//		StartUpPhase.countriesArmies.put("Test", 5);// for checking
+				StartUpPhase.countriesArmies.put("Argentina", 4);// for checking
 		//		StartUpPhase.countriesArmies.put("Greenland", 5);// for checking
 		//		StartUpPhase.countriesArmies.put("Alaska", 5);// for checking		
 
@@ -456,13 +456,13 @@ public class RandomPlayer implements Strategy{
 
 		List<String> attackerCountryAdjacent = new ArrayList<String>();
 		int size = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
-		int size2 = MapLoader.adj.get(attackerCountry).size();
+		int size2 = LoadMap.adj.get(attackerCountry).size();
 		for (int i = 0; i < size2; i++) {
 			if (StartUpPhase.initialPlayerCountry.get(playerName.getName())
-					.contains(MapLoader.adj.get(attackerCountry).get(i))) {
+					.contains(LoadMap.adj.get(attackerCountry).get(i))) {
 				continue;
 			} else {
-				attackerCountryAdjacent.add(MapLoader.adj.get(attackerCountry).get(i));
+				attackerCountryAdjacent.add(LoadMap.adj.get(attackerCountry).get(i));
 			}
 		}
 
@@ -552,17 +552,31 @@ public class RandomPlayer implements Strategy{
 			if (StartUpPhase.countriesArmies.get(attackerCountry) > 3) {
 				System.out.println("Attacker Country Player, can opt among 1, 2 or 3 dice for rolling");
 				//noOfAttackerDice = 1;
-				noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;
+				//noOfAttackerDice = r.nextInt(3 - 1 + 1) + 1;
+//				System.out.println();
+//				System.out.println();
+//				System.out.println();
+				System.out.println(StartUpPhase.countriesArmies.get(attackerCountry));
+				noOfAttackerDice = 3;
+				System.out.println(noOfAttackerDice);
+				System.out.println();
+//				System.out.println();
+//				System.out.println();
+
+				
 				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 3) {
 				System.out.println("Attacker Country Player, can opt among 1 or 2  dice for rolling");
 				noOfAttackerDice = r.nextInt(2 - 1 + 1) + 1;
+				//noOfAttackerDice = 2;
 				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);			
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 2) {
 				System.out.println(
 						"Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
 								+ attackerCountry);			
+				//noOfAttackerDice = 1;//===> need to un comment this
 				noOfAttackerDice = 1;
+
 			}
 			if (noOfAttackerDice == 3)
 				flagCheckDice = 3;
@@ -579,7 +593,16 @@ public class RandomPlayer implements Strategy{
 				System.out.println("Defender Country Player, can opt among 1 or 2 dice to roll");
 				//noOfDefenderDice=2;
 				noOfDefenderDice = r.nextInt(2 - 1 + 1) + 1;
+//				System.out.println();
+//				System.out.println();
+//				System.out.println();
+				System.out.println(StartUpPhase.countriesArmies.get(attackerCountry));
+				//noOfDefenderDice = 1;
 				System.out.println(noOfDefenderDice);
+//				System.out.println();
+//				System.out.println();
+//				System.out.println();
+				//System.out.println(noOfDefenderDice);
 			} else {
 				System.out.println(
 						"Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
@@ -630,11 +653,13 @@ public class RandomPlayer implements Strategy{
 			// if defender choose dice as 1
 			if (noOfDefenderDice == 1) {
 				//if attacker chooses 3 dice to play with and defender chooses to play with 1 dice
-				//attackerDiceArray[0]=0;
+				attackerDiceArray[0]=6;
+				System.out.println(attackerDiceArray[0]);
 				if (flagCheckDice==3 && attackerDiceArray[attackerDiceArray.length - 3] > defenderDiceArray[defenderDiceArray.length - 1]) {
 					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 1 and attacker dice = 3
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					if (updateArmyOfDefender == 0) {
 						for (Entry<String, ArrayList<String>> entry : StartUpPhase.initialPlayerCountry.entrySet()) {
 							String key = entry.getKey();
@@ -661,9 +686,9 @@ public class RandomPlayer implements Strategy{
 						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 
 						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == MapLoader.countryFilter.size()){
+						if(newCOuntryListSize == LoadMap.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
+							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 							
@@ -685,6 +710,7 @@ public class RandomPlayer implements Strategy{
 					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 1 and attacker dice = 2
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					if (updateArmyOfDefender == 0) {
 						for (Entry<String, ArrayList<String>> entry : StartUpPhase.initialPlayerCountry.entrySet()) {
 							String key = entry.getKey();
@@ -711,9 +737,9 @@ public class RandomPlayer implements Strategy{
 						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 
 						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == MapLoader.countryFilter.size()){
+						if(newCOuntryListSize == LoadMap.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
+							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -735,6 +761,7 @@ public class RandomPlayer implements Strategy{
 					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 1  and attacker dice == 1 
 					System.out.println(" Defender country loose 1 army");
 					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					if (updateArmyOfDefender == 0) {
 						for (Entry<String, ArrayList<String>> entry : StartUpPhase.initialPlayerCountry.entrySet()) {
 							String key = entry.getKey();
@@ -761,9 +788,9 @@ public class RandomPlayer implements Strategy{
 						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 
 						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == MapLoader.countryFilter.size()){
+						if(newCOuntryListSize == LoadMap.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
+							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -782,8 +809,11 @@ public class RandomPlayer implements Strategy{
 			} // end of defenderdice ==1
 
 			// Condition starting for defender dice value chosen as 2
-			else {
-				//if attacker chooses 3 dice to play with and defender chooses to play with 2 dice
+			else {		//need to copy from here
+				
+				//writing from scratch
+				
+				//		attacker 3 dice defender 2 dice
 				if(flagCheckDice == 3 && attackerDiceArray[attackerDiceArray.length - 3] > defenderDiceArray[defenderDiceArray.length - 2]){
 					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==3
 					System.out.println(" Defender country loose 1 army");
@@ -797,9 +827,11 @@ public class RandomPlayer implements Strategy{
 					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 				}
+				
+				
 				if(flagCheckDice == 3 && attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 1]){
-					// IF Condition for ======ACD(1) > DCD(1)==== for defender dice == 2 and attacker dice ==3
-					System.out.println(" Defender country looses 1 more army");
+					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==3
+					System.out.println(" Defender country loose 1 more army");
 					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
 					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					if (updateArmyOfDefender == 0) {
@@ -828,9 +860,9 @@ public class RandomPlayer implements Strategy{
 
 						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
 						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == MapLoader.countryFilter.size()){
+						if(newCOuntryListSize == LoadMap.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
+							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -839,95 +871,8 @@ public class RandomPlayer implements Strategy{
 					else {
 						StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					}
-
 				}
 				else if(flagCheckDice==3)
-				{
-					// ELSE Condition for ======ACD(1) <= DCD(1)==== for defender dice == 2 and attacker dice ==3
-					System.out.println(" Attacker country loose 1 army");
-					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
-					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-				}
-
-				
-				
-				
-				//if attacker chooses 2 dice to play with and defender chooses to play with 2 dice
-				if(flagCheckDice == 2 && attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]){
-					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==2
-					System.out.println(" Defender country loose 1 army");
-					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
-					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
-				}
-				else if(flagCheckDice==2)
-				{
-					// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 2 and attacker dice ==2
-					System.out.println(" Attacker country loose 1 army");
-					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
-					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-				}
-				if(flagCheckDice == 2 && attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]){
-					// IF Condition for ======ACD(1) > DCD(1)==== for defender dice == 2 and attacker dice ==2
-					System.out.println(" Defender country looses 1 more army");
-					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
-					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					if (updateArmyOfDefender == 0) {
-
-						for (Entry<String, ArrayList<String>> entry : StartUpPhase.initialPlayerCountry.entrySet()) {
-							String key = entry.getKey();
-							ArrayList<String> value = entry.getValue();
-
-							if ((StartUpPhase.initialPlayerCountry.get(key).contains(defenderCountry))
-									&& key != playerName.getName()) {
-
-								for (int i = 0; i < value.size(); i++) {
-									if (value.get(i).equals(defenderCountry)) {
-										indx = i;
-										break;
-									}
-								}
-								entry.getValue().remove(indx);
-								StartUpPhase.initialPlayerCountry.get(playerName.getName())
-								.add(defenderCountry);
-
-								newCOuntryListSize = StartUpPhase.initialPlayerCountry
-										.get(playerName.getName()).size();
-							}
-						}
-
-						StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
-						//ON WINNING A GAME LOGIC
-						if(newCOuntryListSize == MapLoader.countryFilter.size()){
-							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
-							System.out.println("WooHooo you conquered the whole world map");
-							return;							
-						}
-
-					}
-					else {
-						StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
-					}
-
-				}
-				else if(flagCheckDice==2)
-				{
-					// ELSE Condition for ======ACD(1) <= DCD(1)==== for defender dice == 2 and attacker dice ==
-					System.out.println(" Attacker country loose 1 more army");
-					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
-					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
-				}
-				
-				
-				
-				//if attacker chooses 1 dice to play with WHILE defender chooses to play with 2 dice
-				if(flagCheckDice==1 && attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 2]){
-					// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==3
-					System.out.println(" Defender country loose 1 army");
-					updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
-					StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
-				}
-				else if(flagCheckDice==1)
 				{
 					// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 2 and attacker dice ==3
 					System.out.println(" Attacker country loose 1 army");
@@ -935,9 +880,89 @@ public class RandomPlayer implements Strategy{
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 				}
 				
-				
-				
-			}
+//				attacker 2 dice defender 2 dice
+						if(flagCheckDice == 2 && attackerDiceArray[attackerDiceArray.length - 2] > defenderDiceArray[defenderDiceArray.length - 2]){
+							// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==2
+							System.out.println(" Defender country loose 1 army");
+							updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+							StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
+						}
+						else if(flagCheckDice==2)
+						{
+							// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 2 and attacker dice ==3
+							System.out.println(" Attacker country loose 1 army");
+							updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
+							StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+						}
+						
+						
+						if(flagCheckDice == 2 && attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 1]){
+							// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==3
+							System.out.println(" Defender country loose 1 more army");
+							updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+							StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
+							if (updateArmyOfDefender == 0) {
+
+								for (Entry<String, ArrayList<String>> entry : StartUpPhase.initialPlayerCountry.entrySet()) {
+									String key = entry.getKey();
+									ArrayList<String> value = entry.getValue();
+
+									if ((StartUpPhase.initialPlayerCountry.get(key).contains(defenderCountry))
+											&& key != playerName.getName()) {
+
+										for (int i = 0; i < value.size(); i++) {
+											if (value.get(i).equals(defenderCountry)) {
+												indx = i;
+												break;
+											}
+										}
+										entry.getValue().remove(indx);
+										StartUpPhase.initialPlayerCountry.get(playerName.getName())
+										.add(defenderCountry);
+
+										newCOuntryListSize = StartUpPhase.initialPlayerCountry
+												.get(playerName.getName()).size();
+									}
+								}
+
+								StartUpPhase.countriesArmies.put(defenderCountry, noOfAttackerDice);
+								//ON WINNING A GAME LOGIC
+								if(newCOuntryListSize == LoadMap.countryFilter.size()){
+									System.out.println("WooHooo you conquered the whole world map");
+									StartUpPhase.conqueredMapCounterTURN = 1;
+									System.out.println("WooHooo you conquered the whole world map");
+									return;
+								}
+
+							}
+							else {
+								StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
+							}
+						}
+						else if(flagCheckDice==2)
+						{
+							// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 2 and attacker dice ==3
+							System.out.println(" Attacker country loose 1 army");
+							updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
+							StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+						}
+						
+//						attacker 1 dice defender 2 dice
+						if(flagCheckDice == 1 && attackerDiceArray[attackerDiceArray.length - 1] > defenderDiceArray[defenderDiceArray.length - 2]){
+							// IF Condition for ======ACD(0) > DCD(0)==== for defender dice == 2 and attacker dice ==2
+							System.out.println(" Defender country loose 1 army");
+							updateArmyOfDefender = StartUpPhase.countriesArmies.get(defenderCountry) - 1;
+							StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
+						}
+						else if(flagCheckDice==2)
+						{
+							// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 2 and attacker dice ==3
+							System.out.println(" Attacker country loose 1 army");
+							updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
+							StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
+						}
+						
+			}// till here
 			randomCountAttack++;
 			
 		} else
@@ -985,7 +1010,8 @@ public class RandomPlayer implements Strategy{
 			//		initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
 			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);			fortifyPhase(playerName);
+			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);			
+			fortifyPhase(playerName);
 			return;
 		}
 		else
@@ -1053,15 +1079,15 @@ public class RandomPlayer implements Strategy{
 		System.out.println("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));		
 
 		int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
-		int tempAdjSize = MapLoader.adj.get(from).size();
+		int tempAdjSize = LoadMap.adj.get(from).size();
 
 		ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
 
 		for (int i = 0; i < tempAdjSize; i++) {
 			for (int j = 0; j < tempCountrySize; j++) {
 				if (StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(j)
-						.contains(MapLoader.adj.get(from).get(i))) {
-					tempAdjCountryToWhichWeCanMOve.add(MapLoader.adj.get(from).get(i));
+						.contains(LoadMap.adj.get(from).get(i))) {
+					tempAdjCountryToWhichWeCanMOve.add(LoadMap.adj.get(from).get(i));
 				}
 			}
 		}

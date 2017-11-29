@@ -1,4 +1,4 @@
-package in.risk.impl;
+package in.risk.utility;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class CheaterPlayer implements Strategy {
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForCountries);
 			System.out.println("Currently testing country = " + counrtryName);
 			
-			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
+			List<String> adjacentOfCurrentCountry = LoadMap.adj.get(counrtryName);
 			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
 			
 			int sizeOfAdjacent = adjacentOfCurrentCountry.size();
@@ -134,6 +134,7 @@ public class CheaterPlayer implements Strategy {
 				if(!countriesOfCheaterPlayer.contains(adjacentCountry)){
 					
 					countriesOfCheaterPlayer.add(adjacentCountry);
+					System.out.println("bhbfhdbhd " + adjacentCountry);
 					StartUpPhase.initialPlayerCountry.put(playerName.getName(), countriesOfCheaterPlayer);
 					
 					System.out.println(StartUpPhase.initialPlayerCountry.get(playerName.getName()) + "\n");
@@ -160,52 +161,53 @@ public class CheaterPlayer implements Strategy {
 		int newNoOfArmies = 0;
 		ArrayList<String> countriesOfCheaterPlayer = StartUpPhase.initialPlayerCountry.get(playerName.getName());
 		
-	//	System.out.println("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
+		System.out.println("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
 		
 		int sizeOfCheaterPlayerCountries = countriesOfCheaterPlayer.size();
 		
-	//	System.out.println("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
+		System.out.println("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
 		
 		
 		for(int iteratorForFindingTheAdjacent =0; iteratorForFindingTheAdjacent < sizeOfCheaterPlayerCountries ; iteratorForFindingTheAdjacent++){
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForFindingTheAdjacent);
-		//	System.out.println("Currently testing country = " + counrtryName);
+			System.out.println("Currently testing country = " + counrtryName);
 			
-			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
+			List<String> adjacentOfCurrentCountry = LoadMap.adj.get(counrtryName);
 			
-			//System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
+			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
 			
 			int sizeOfAdjacent = adjacentOfCurrentCountry.size();
 			
-		//	System.out.println("Size of adjacent countries " + sizeOfAdjacent);
+			System.out.println("Size of adjacent countries " + sizeOfAdjacent);
 			ArrayList<Boolean> tempForAdjacent = new ArrayList<>();
 			for(int iteratorForAdjacent = 0; iteratorForAdjacent < sizeOfAdjacent ; iteratorForAdjacent++){
 				String adjacentCountry = adjacentOfCurrentCountry.get(iteratorForAdjacent);
 				
-			//	System.out.println("Adjacent countries to " + counrtryName + "are " + adjacentCountry);
+				System.out.println("Adjacent countries to " + counrtryName + "are " + adjacentCountry);
 				
 				if(countriesOfCheaterPlayer.contains(adjacentCountry)){
-			//		System.out.println("True");
+					System.out.println("True");
 					tempForAdjacent.add(true);
 				}else{
-				//	System.out.println("False");
+					System.out.println("False");
 					tempForAdjacent.add(false);
 				}
 			}
-		//	System.out.println("temp for adjacent = " + tempForAdjacent);
+			System.out.println("temp for adjacent = " + tempForAdjacent);
 			if(tempForAdjacent.contains(false)){
-			//	System.out.println(counrtryName + " has some adjacent countries belongd to other players.");
+				System.out.println(counrtryName + " has some adjacent countries belongd to other players.");
 				
 				int oldArmies = StartUpPhase.countriesArmies.get(counrtryName);
 				
-			//	System.out.println(counrtryName + " has " + StartUpPhase.countriesArmies.get(counrtryName));
+				System.out.println(counrtryName + " has " + StartUpPhase.countriesArmies.get(counrtryName));
 				
 				int newArmies = oldArmies*2;
 				
 				newNoOfArmies = newArmies;
 				StartUpPhase.countriesArmies.put(counrtryName, newArmies);
+				
 
-			//	System.out.println(counrtryName + " has " + newArmies  + "\n");
+				System.out.println(counrtryName + " has " + newArmies  + "\n");
 			}else{
 				int oldArmies = StartUpPhase.countriesArmies.get(counrtryName);
 				
