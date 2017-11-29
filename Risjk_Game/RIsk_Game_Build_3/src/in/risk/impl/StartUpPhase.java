@@ -17,6 +17,11 @@ import in.risk.gui.RiskInterface;
  */
 public class StartUpPhase extends Observable {
 
+	
+	
+	
+	
+	
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
 
@@ -65,6 +70,7 @@ public class StartUpPhase extends Observable {
 			System.out.println("2.Tournament Gam Mode");
 			result = scForGameMode.nextInt();
 			if(result == 1) {
+				MapLoader.clearAll();
 				MapLoader.loadMap(RiskInterface.pathMap);
 				askUserToSelectPlayers();
 				//initiallyPlaceArmies();
@@ -91,7 +97,7 @@ public class StartUpPhase extends Observable {
 					objAssigningStrategy.setStrategy(new RandomPlayer());
 					objAssigningStrategy.executeStrategy(currentPlayer);
 					nextPlayer(1);
-				}else if(currentPlayer.getName().equals("a") || currentPlayer.getName().equals("s") || currentPlayer.getName().equals("d")) {
+				}else{
 					objAssigningStrategy.setStrategy(new HumanPlayer());
 					objAssigningStrategy.executeStrategy(currentPlayer);
 					nextPlayer(1);
@@ -409,8 +415,7 @@ public class StartUpPhase extends Observable {
 	 * @return true if everything goes well.
 	 * @throws IOException exception.
 	 */
-	public boolean initialPlayerCountry(int typeOfGame) throws IOException{
-
+	public static boolean initialPlayerCountry(int typeOfGame) throws IOException{
 		if(typeOfGame == 1) {
 			int i = 0;
 			int j = MapLoader.countryFilter.size() - 1;
@@ -422,27 +427,20 @@ public class StartUpPhase extends Observable {
 				if (initialPlayerCountry.containsKey(players.get(i).getName())) {
 					list = initialPlayerCountry.get(players.get(i).getName());
 					list.add(MapLoader.countryFilter.get(j));
+					initialPlayerCountry.put(players.get(i).getName(), list);
 				} else {
 					list = new ArrayList<String>();
 					list.add(MapLoader.countryFilter.get(j));
 					initialPlayerCountry.put(players.get(i).getName(), list);
-				}
+					}
 				i++;
 				j--;
 				if (i == players.size()) {
 					i = 0;
 				}
 			}
-			
-//			setChanged();
-//			notifyObservers(this);
-			//notifyObservers();
-			//System.out.println("wapsi");
-			distributeArmies(noOfPlayer, 1);
-
-			//getWorldDominance();
-			
-			
+			distributeArmies(noOfPlayer,1);
+			return true;
 		}else if(typeOfGame == 2) {
 			int i = 0;
 			int j = MapLoader.countryFilter.size() - 1;
@@ -494,7 +492,7 @@ public class StartUpPhase extends Observable {
 		if(typeOfGame == 1) {
 			int armies = 0;
 			if (noOfPlayers == 3)
-				armies = 35;
+				armies = 5;
 			// armies = 35;
 			if (noOfPlayers == 4)
 				armies = 30;
@@ -509,7 +507,7 @@ public class StartUpPhase extends Observable {
 		}else if(typeOfGame == 2) {
 			int armies = 0;
 			if (noOfPlayers == 3)
-				armies = 35;
+				armies = 5;
 			// armies = 35;
 			if (noOfPlayers == 4)
 				armies = 30;
@@ -612,7 +610,7 @@ public class StartUpPhase extends Observable {
 						nextPlayer(2);
 					temp.clear();
 				}
-
+				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Benovalent")){
 				String resultForBenovalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
 				if(currentPlayer.getArmies() != 0) {
@@ -635,6 +633,7 @@ public class StartUpPhase extends Observable {
 						nextPlayer(2);
 					temp.clear();
 				}
+				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Random")){
 				String resultForRandom = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForRandom);
 				if(currentPlayer.getArmies() != 0) {
@@ -657,6 +656,7 @@ public class StartUpPhase extends Observable {
 						nextPlayer(2);
 					temp.clear();
 				}
+				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Cheater")){
 				String resultForCheater = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForCheater);
 				if(currentPlayer.getArmies() != 0) {
@@ -679,12 +679,86 @@ public class StartUpPhase extends Observable {
 						nextPlayer(2);
 					temp.clear();
 				}
-			}else if(currentPlayer.getName().equals("Human")){
-				if(typeOfGame == 1)
-					nextPlayer(1);
-				else if(typeOfGame == 2)
-					nextPlayer(2);
-				temp.clear();
+				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+			}else{
+				String result;
+				System.out.println(initialPlayerCountry);
+				System.out.println(currentPlayer.getName() + " you own these countries " + initialPlayerCountry.get(currentPlayer.getName()) + ".");
+				System.out.println("Please enter the name of the country you want to add armies to!!");
+				result = sc.nextLine();
+				if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
+					int noOfArmiesPlayerContains = currentPlayer.getArmies();
+					int countriesWith0Armies = temp.size();
+					
+					if (noOfArmiesPlayerContains == 0) {
+
+						System.out.println("noOfArmiesPlayerContains == 0");
+
+						if (players.size() != 3) {
+							if(typeOfGame == 1)
+								nextPlayer(1);
+							else if(typeOfGame == 2)
+								nextPlayer(2);
+							break;
+						} else
+							System.out.println("Next Phase");
+					}
+					if (noOfArmiesPlayerContains == countriesWith0Armies) {
+						System.out.println(currentPlayer.getArmies());
+						System.out.println(countriesArmies);
+						
+						if (temp.contains(result)){
+							updatedArmies = countriesArmies.get(result) + 1;
+							updateArmies(updatedArmies, result, currentPlayer);
+							System.out.println(result + " armies has been updated. New armies of " + result + " are "
+									+ countriesArmies.get(result));
+							temp.remove(result);
+							System.out.println(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+							temp.clear();
+							if(typeOfGame == 1)
+								nextPlayer(1);
+							else if(typeOfGame == 2)
+								nextPlayer(2);
+						}else{
+							System.out.println("You are not allowed to add armies to other countries except " + temp
+									+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
+							System.out.println(
+									"Please enter the name of country from given list where you want to placce armies \n"
+											+ temp);
+							result = sc.nextLine();
+							if (temp.contains(result)) {
+								updatedArmies = countriesArmies.get(result) + 1;
+								updateArmies(updatedArmies, result, currentPlayer);
+								System.out.println(result + " armies has been updated. New armies of " + result + " are "
+										+ countriesArmies.get(result));
+								temp.remove(result);
+								System.out.println(
+										currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+								temp.clear();
+								if(typeOfGame == 1)
+									nextPlayer(1);
+								else if(typeOfGame == 2)
+									nextPlayer(2);
+							}
+						}
+					}else{
+						updatedArmies = countriesArmies.get(result) + 1;
+						updateArmies(updatedArmies, result, currentPlayer);
+						System.out.println(result + " armies has been updated. New armies of " + result + " are "
+								+ countriesArmies.get(result));
+						temp.remove(result);
+						System.out.println((currentPlayer.getName() + " has Countries with 0 number of armies " + temp));
+						temp.clear();
+						if(typeOfGame == 1)
+							nextPlayer(1);
+						else if(typeOfGame == 2)
+							nextPlayer(2);
+					}
+				}else{
+					System.out.println("Please enter correct name of the country");
+					i--;
+				}
+				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}						
 		}
 		

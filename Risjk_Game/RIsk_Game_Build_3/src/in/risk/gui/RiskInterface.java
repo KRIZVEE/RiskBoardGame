@@ -30,6 +30,8 @@ import javafx.stage.Stage;
  */
 public class RiskInterface extends Application {
 
+	StartUpPhase obj = new StartUpPhase();
+	
 	MapEditorInterface objMapEditorInterface = new MapEditorInterface();
 	MapLoader objMapLoader = new MapLoader();
 
@@ -104,7 +106,7 @@ public class RiskInterface extends Application {
 					System.out.println("Map has unconnected continent.");
 					primaryStage.close();
 				}else{
-					StartUpPhase.gamePlay();
+					obj.gamePlay();
 				}				
 			}
 		});

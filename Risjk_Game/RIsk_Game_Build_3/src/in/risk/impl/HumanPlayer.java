@@ -124,7 +124,7 @@ public class HumanPlayer extends StartUpPhase implements Strategy {
 				if (result.equals("Y")) {
 					noOfReinforcementArmiesForCards = checkUniqueCombination(playersCards.get(playerName).size(), playerName) + checkDiscreteCombination(playerName);
 				}
-				sc.close();
+//				sc.close();
 			}
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
@@ -341,7 +341,7 @@ public class HumanPlayer extends StartUpPhase implements Strategy {
 				placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
 			}
 		}
-		sc.close();
+//		sc.close();
 		attackPhase(playerName);
 		return;
 		
@@ -907,7 +907,7 @@ public class HumanPlayer extends StartUpPhase implements Strategy {
 //		initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
 
 	}
-	sc.close();
+//	sc.close();
 }
 	/**
 	 * This is a random generator method
@@ -1034,8 +1034,8 @@ public class HumanPlayer extends StartUpPhase implements Strategy {
 //				placeReinforcementArmies(currentPlayer);
 			}
 		}
-			scto.close();
-			scFrom.close();
-			sc.close();
+//			scto.close();
+//			scFrom.close();
+//			sc.close();
 	}			
 }
