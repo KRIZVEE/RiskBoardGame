@@ -56,9 +56,13 @@ public class StartUpPhase {
 			Scanner scForGameMode = new Scanner(System.in);
 			int result = 0;
 			System.out.println("Please choose the type of play from following options.");
+			loggingString("Please choose the type of play from following options.");
 			System.out.println("1.Single Game Mode.");
+			loggingString("1.Single Game Mode.");
 			System.out.println("2.Tournament Gam Mode");
+			loggingString("2.Tournament Gam Mode");
 			result = scForGameMode.nextInt();
+			loggingString("Game Type:"+ result);
 			if(result == 1) {
 				MapLoader.loadMap(RiskInterface.pathMap);
 				askUserToSelectPlayers();
@@ -72,20 +76,24 @@ public class StartUpPhase {
 				String map4 = "Earth.map";
 				String map5 = "Europe.map";
 				
+				
 				ArrayList<String> mapList = new ArrayList<>();
 				
 				Scanner scForTournament = new Scanner(System.in);
 				
 				System.out.println("Please enter the number of maps you want to play with.");
+				loggingString("Please enter the number of maps you want to play with.");
 				int numOfMaps = scForTournament.nextInt();
 				
 				for(int i = 0; i < numOfMaps; i++) {
 					System.out.println("Please select the map from below give maps to play with.");
+					loggingString("Please select the map from below give maps to play with.");
 					System.out.println("1. " + map1);
 					System.out.println("2. " + map2);
 					System.out.println("3. " + map3);
 					System.out.println("4. " + map4);
 					System.out.println("5. " + map5);
+					loggingString("All the maps: "+map1 +map2+ map3+ map4+map5);
 					int resultForMap = scForTournament.nextInt();
 					if(resultForMap == 1) {
 						mapList.add(map1);
@@ -102,17 +110,23 @@ public class StartUpPhase {
 				askUserToSelectPlayersForTournament();
 				
 				System.out.println("Please enter the number fo games you want to play.");
+				loggingString("Please enter the number fo games you want to play.");
 				int numOfGames = scForTournament.nextInt();
+				loggingString("no of games:"+numOfGames);
 				
 				System.out.println("Please enter the maximum number of turns you want to play in the tournament.");
+				loggingString("Please enter the maximum number of turns you want to play in the tournament.");
 				int maxTurns = scForTournament.nextInt();
+				loggingString("Number of maximum turns:" +maxTurns);
 				
 				for(int i =0; i< numOfMaps; i++) {
 					String mapPath = mapList.get(i);
 					System.out.println(mapList.get(i));
+					loggingString(mapList.get(i));
 					MapLoader.loadMap(mapPath);
 					initialPlayerCountry(2);
 					System.out.println(initialPlayerCountry);
+					loggingString("countries of the player:"+initialPlayerCountry);
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
 				}
@@ -147,7 +161,9 @@ public class StartUpPhase {
 		Scanner sc = new Scanner(System.in);
 		int result;
 		System.out.println("Please enter the number of player you want to play with");
+		loggingString("Please enter the number of player you want to play with");
 		result = sc.nextInt();
+		loggingString("number of players:"+ result);
 		noOfPlayer = result;
 		selectPlayer(noOfPlayer);
 	}
@@ -157,7 +173,9 @@ public class StartUpPhase {
 		Scanner sc1 = new Scanner(System.in);
 		int result;
 		System.out.println("Please enter the number of player you want to play with");
+		loggingString("Please enter the number of player you want to play tournament with");
 		result = sc1.nextInt();
+		loggingString("players for tournaments:" + result);
 		noOfPlayer = result;
 		selectTournamentPlayer(noOfPlayer);
 	}
@@ -215,33 +233,39 @@ public class StartUpPhase {
 		String playerName = null;
 		for (int i = 0; i < noOfPlayers; i++) {
 			System.out.println("You have following types of players. Choose the tpe of player you want to playe with.");
+			loggingString("You have following types of players. Choose the tpe of player you want to playe with.");
 			//System.out.println("1. Human Player");
 			System.out.println("1. Aggressive Player");
 			System.out.println("2. Random Player");
 			System.out.println("3. Benovalent Player");
 			System.out.println("4. Cheater Player");
 			result = sc1.nextInt();
+			loggingString("selected player: "+result);
 			if(result == 1){
 				//Scanner scForHumanPlayerName = new Scanner(System.in);
 				playerName = "Aggresive";
 				playerNameAggresive = playerName;
 				System.out.println(" playerNameAggresive : " + playerNameAggresive);
+				loggingString(" playerNameAggresive : " + playerNameAggresive);
 				System.out.println("You have selected aggresive player");
 				//playerName = scForHumanPlayerName.nextLine();
 			}else if(result == 2){
 				playerName = "Random";
 				playerNameRandom = playerName;
 				System.out.println(" playerNameRandom : " + playerNameRandom);
+				loggingString(" playerNameRandom : " + playerNameRandom);
 				System.out.println("You have selected random player");
 			}else if(result == 3){
 				playerName = "Benovalent";
 				playerNameBenevolent = playerName;
 				System.out.println(" playerNameBenavolent : " + playerNameBenevolent);
+				loggingString(" playerNameBenavolent : " + playerNameBenevolent);
 				System.out.println("You have selected benevolent player");
 			}else if(result == 4){
 				playerName = "Cheater";
 				playerNameCheater = playerName;
 				System.out.println(" playerNameCheater : " + playerNameCheater);
+				loggingString(" playerNameCheater : " + playerNameCheater);
 				System.out.println("You have selected cheater player");
 			}else{
 				System.out.println("Please choose the correct player");
@@ -262,16 +286,20 @@ public class StartUpPhase {
 		String playerName = null;
 		for (int i = 0; i < noOfPlayers; i++) {
 			System.out.println("You have following types of players. Choose the tpe of player you want to playe with.");
+			loggingString("You have following types of players. Choose the tpe of player you want to playe with.");
 			System.out.println("1. Human Player");
 			System.out.println("2. Aggressive Player");
 			System.out.println("3. Random Player");
 			System.out.println("4. Bonavalent Player");
 			System.out.println("5. Cheater Player");
 			result = sc1.nextInt();
+			loggingString("selected player: "+ result);
 			if(result == 1){
 				Scanner scForHumanPlayerName = new Scanner(System.in);
 				System.out.println("Please enter the name of the human player.");
+				loggingString("Please enter the name of the human player.");
 				playerName = scForHumanPlayerName.nextLine();
+				loggingString("name of human player:"+playerName);
 			}else if(result == 2){
 				playerName = "Aggressive";
 			}else if(result == 3){
