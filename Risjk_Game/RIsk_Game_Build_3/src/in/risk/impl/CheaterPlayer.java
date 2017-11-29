@@ -183,7 +183,7 @@ public class CheaterPlayer implements RiskStrategy {
 		defenderDiceArray = new int[noOfDefenderDice];
 
 		for (int i = 0; i < defenderDiceArray.length; i++) {
-			defenderDiceArray[i] = randomNumberGenerator();
+			defenderDiceArray[i] = StartUpPhase.randomNumberGenerator();
 		}
 
 		System.out.println("Attacker Dice value are as follow : ");

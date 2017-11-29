@@ -1,8 +1,15 @@
 package in.risk.impl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Vector;
@@ -486,6 +493,30 @@ public class StartUpPhase {
 		playerName.looseArmy();
 		return true;
 	}
+	/**
+	 * This is a random generator method
+	 * for generating random number in a dice
+	 * @return
+	 */
+	public static int randomNumberGenerator() {
+		int randomNumber;
+		Random random = new Random(); /* <-- this is a constructor */
+		randomNumber = random.nextInt(6)
+				+ 1; 
+		return randomNumber;
+	}
+	
+	 
+	public static void loggingString(String whatToLog) throws IOException {
+	                           FileWriter fw = new FileWriter("Resources/log.txt", true);
+	                           BufferedWriter bw = new BufferedWriter(fw);
+	                           PrintWriter pw = new PrintWriter(bw);
+	                           DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+	                           Date date = new Date();
+	                           pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
+	                           pw.flush();
+	                           pw.close();
+	              }
 
 
 }

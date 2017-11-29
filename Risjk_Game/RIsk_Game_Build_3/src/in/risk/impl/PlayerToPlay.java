@@ -6,6 +6,7 @@ package in.risk.impl;
  */
 public class PlayerToPlay {
 
+	//stores player's name, armies and ID
 	private String name;
 	private int armies;
 	private int playerId;
