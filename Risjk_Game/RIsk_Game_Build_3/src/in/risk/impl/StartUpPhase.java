@@ -60,6 +60,7 @@ public class StartUpPhase {
 				initiallyPlaceArmies();
 				placeArmies(1);
 				// do while loopp to be implemented for choosing winner.
+				do{
 				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
 				if(currentPlayer.getName().equals("Aggressive")) {
 					objAssigningStrategy.setStrategy(new AggresivePlayer());
@@ -82,7 +83,8 @@ public class StartUpPhase {
 					objAssigningStrategy.executeStrategy(currentPlayer);
 					nextPlayer(1);
 				}
-				
+				}while(conqueredMapCounterTURN == 1);
+
 			}else {
 				System.out.println("##########################################Tournament Mode#########################################");
 
@@ -156,35 +158,27 @@ public class StartUpPhase {
 									objAssigningStrategy.executeStrategy(currentPlayer);
 									nextPlayer(2);
 								}
-							}
+							}// end of each individual player phase loop
 							maxTurns--;
+							if(conqueredMapCounterTURN == 1)
+							{
+								System.out.println("We have a winner as "+ currentPlayer.getName());
+								break;
+							}
+						}// end of players turn loop
+						if(conqueredMapCounterTURN == 1)
+						{
+							break;
 						}
-					}
+					}// end og game play loop
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
 					countriesArmies.clear();
 				}
-				//				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
-				//
-				//				// Three contexts following different strategies
-				//				objAssigningStrategy.setStrategy(new BenevolentPlayer());
-				//				objAssigningStrategy.executeStrategy(currentPlayer);
-				//
-				//
-				//				objAssigningStrategy.setStrategy(new AggresivePlayer());
-				//				objAssigningStrategy.executeStrategy(currentPlayer);
-				//
-				//				objAssigningStrategy.setStrategy(new RandomPlayer());
-				//				objAssigningStrategy.executeStrategy(currentPlayer);
 			}
-			//placeArmies();
-			//			Player.placeReinforcementArmies(currentPlayer);
-			//			Player.attackPhase(currentPlayer);// @author Kashif
-			//			Player.fortifyPhase(currentPlayer);// @author Kashif
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -566,7 +560,7 @@ public class StartUpPhase {
 						nextPlayer(2);
 					temp.clear();
 				}
-				
+
 			}else if(currentPlayer.getName().equals("Benovalent")){
 				String resultForBenovalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
 				if(currentPlayer.getArmies() != 0) {
