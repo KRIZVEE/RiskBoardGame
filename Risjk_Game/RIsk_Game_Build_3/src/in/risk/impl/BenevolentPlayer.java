@@ -354,14 +354,18 @@ public class BenevolentPlayer implements Strategy {
 		int armyOfWeakestCountry = 0;
 		int updatedarmyOfWeakestCountry = 0;
 
-		int  loop = StartUpPhase.initialPlayerCountry.size();
+		int  loop = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		int temp = 0;
 
+		System.out.println("loop value is: " + loop);
+		System.out.println(StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 
 		//finding the weakest country
 		for (Entry<String, Integer> entry : StartUpPhase.countriesArmies.entrySet()) {
 			String key = entry.getKey();
 			Integer value = entry.getValue();
+			
+			
 
 			for(int i = 0; i< loop; i++){
 				String str = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(i).toString();

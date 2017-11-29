@@ -1,15 +1,15 @@
 package in.risk.impl;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Map.Entry;
+
+import in.risk.tournament.StartUpPhaseTournament;
 
 /**
  * This class implements the Reinforcement, Attack and Fortify game phases.
@@ -663,7 +663,7 @@ public class RandomPlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 							
@@ -713,7 +713,7 @@ public class RandomPlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -763,7 +763,7 @@ public class RandomPlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -830,7 +830,7 @@ public class RandomPlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -899,7 +899,7 @@ public class RandomPlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;							
 						}

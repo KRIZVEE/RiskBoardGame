@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class MapLoader {
+public class  MapLoader{
 
 	public static ArrayList<String> continentFilterNew = new ArrayList<String>();
 	public static List<String> newList;

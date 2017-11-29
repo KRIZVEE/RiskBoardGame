@@ -10,7 +10,7 @@ public class ResourceManager {
 	
 	public static void save(Serializable data, String fileName) throws Exception{
 		try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))){
-			oos.writeObject(oos);
+			oos.writeObject(data);
 		}
 	}
 	

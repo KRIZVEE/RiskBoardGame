@@ -37,6 +37,7 @@ public class RiskInterface extends Application {
 
 	Button mapEditor;
 	Button startGame;
+	Button loadGame;
 
 	 Image logo = new Image(StartUpPhase.logoPath);
 	 ImageView imgView = new ImageView();
@@ -57,6 +58,7 @@ public class RiskInterface extends Application {
 
 		mapEditor = new Button("Map Editor");
 		startGame = new Button("Start Game");
+		loadGame  = new Button("load Game");
 
 		Text selectmap = new Text("Select Maps: ");
 
@@ -68,7 +70,7 @@ public class RiskInterface extends Application {
 
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
-		vbox.getChildren().addAll(imgView,selectmap, maplist2, mapEditor, startGame);
+		vbox.getChildren().addAll(imgView,selectmap, maplist2, mapEditor, startGame,loadGame);
 
 		Group root = new Group();
 
@@ -88,7 +90,7 @@ public class RiskInterface extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				pathMap = maplist2.getValue();			
-				objMapLoader.loadMap(pathMap);
+				MapLoader.loadMap(pathMap);
 				primaryStage.close();
 				MapEditorInterface.continentEditorStage.close();
 				MapEditorInterface.countryEditorStage.close();
@@ -109,7 +111,7 @@ public class RiskInterface extends Application {
 			@Override
 			public void handle(ActionEvent event) {
 				pathMap = maplist2.getValue();
-				objMapLoader.loadMap(pathMap);
+				MapLoader.loadMap(pathMap);
 				if(MapLoader.connectedCountry() == false){
 					System.out.println("It is an unconnected map.");
 					primaryStage.close();

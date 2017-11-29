@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Map.Entry;
 
 
 /**
@@ -702,7 +702,11 @@ public class AggresivePlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+<<<<<<< HEAD
 							StartUpPhase.conqueredMapCounterTURN= 1;
+=======
+							in.risk.tournament.StartUpPhaseTournament.conqueredMapCounterTURN = 1;
+>>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -751,7 +755,7 @@ public class AggresivePlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							in.risk.tournament.StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -801,7 +805,7 @@ public class AggresivePlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							in.risk.tournament.StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -867,7 +871,7 @@ public class AggresivePlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							in.risk.tournament.StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}
@@ -936,7 +940,7 @@ public class AggresivePlayer implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
-							StartUpPhase.conqueredMapCounterTURN = 1;
+							in.risk.tournament.StartUpPhaseTournament.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
 							return;
 						}

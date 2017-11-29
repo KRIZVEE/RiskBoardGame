@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import in.risk.gui.RiskInterface;
+import in.risk.saveload.SaveData;
 
 /**
  * This class is used to implement the intial starting of the game.
@@ -19,7 +20,11 @@ public class StartUpPhase {
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
 
+<<<<<<< HEAD
 
+=======
+	public SaveData objSaveData = new SaveData();
+>>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e
 	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
 	static public Vector<PlayerToPlay> playersForTournament = new Vector<PlayerToPlay>();
 	static MapLoader obj = new MapLoader();
@@ -40,10 +45,11 @@ public class StartUpPhase {
 	/**
 	 * This method is used to initially start the game.
 	 * @param args arguments.
-	 * @throws IOException Throw excetion.
+	 * @throws IOException Throw exception
 	 */
 
 	public static void gamePlay(){
+<<<<<<< HEAD
 
 		try{
 			Scanner scForGameMode = new Scanner(System.in);
@@ -108,6 +114,84 @@ public class StartUpPhase {
 					System.out.println(initialPlayerCountry);
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
+=======
+		
+		try{
+			MapLoader.loadMap(RiskInterface.pathMap);
+			askUserToSelectPlayers();
+			System.out.println(players.get(0).getName());
+			System.out.println(players.get(1).getName());
+			System.out.println(players.get(2).getName());
+			System.out.println(initialPlayerCountry.get(players.get(0).getName()).size() + initialPlayerCountry.get(players.get(2).getName()).size() + initialPlayerCountry.get(players.get(1).getName()).size());
+			System.out.println(MapLoader.countryFilter.size());
+			initiallyPlaceArmies();
+
+			placeArmies();
+			
+			//variables declared for tournament start up phase
+			String [] maplist = new String[5];
+			maplist[0] = "resources/maps/";
+			maplist[1] = "resources/maps/";
+			maplist[2] = "resources/maps/";
+			maplist[3] = "resources/maps/";
+			maplist[4] = "resources/maps/";
+			
+			int [] numberOfGamesToPlay = new int[4];
+			int numOfMaps = 0;
+			int numOfPlayersStrategies = 0;
+			
+			int maxTurns = 0;
+			int numOfGames = 0;
+			
+			//Tournament rules declaration
+			System.out.println("Please read tournament rules first:  ");
+			System.out.println("Number of maps = 1 to 5" +" " +"number of players = 2 to 4" +" " +"number of games = 1 to 5" +" " +"Number of maximum turns = 10 to 50");
+			
+			Scanner tournamentscan = new Scanner(System.in);
+			
+			System.out.println(" Enter number of maps to play: ");
+			numOfMaps = tournamentscan.nextInt();
+			
+			System.out.println(" Enter number of players to play with: ");
+			numOfPlayersStrategies = tournamentscan.nextInt();
+			
+			System.out.println("Enter number of games to be played: ");
+			numOfGames = tournamentscan.nextInt();
+			
+			System.out.println("Enter number of maximum turns:  ");
+			maxTurns = tournamentscan.nextInt();
+			
+			
+			//logic for start up playing tournament mode
+			for(int i = 0; i < maplist.length; i++ )
+			{
+				for (int j = 0; j <numberOfGamesToPlay.length; j++)
+				{
+					do{
+						
+						AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+				        
+				        // Three contexts following different strategies
+						objAssigningStrategy.setStrategy(new BenevolentPlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+
+						nextPlayer();
+						
+						objAssigningStrategy.setStrategy(new AggresivePlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+						
+						nextPlayer();
+
+
+						objAssigningStrategy.setStrategy(new RandomPlayer());
+						objAssigningStrategy.executeStrategy(currentPlayer);
+						
+						nextPlayer();
+
+						
+					}while(maxTurns == 30 );
+					
+>>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e
 				}
 //				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
 //
@@ -122,10 +206,32 @@ public class StartUpPhase {
 //				objAssigningStrategy.setStrategy(new RandomPlayer());
 //				objAssigningStrategy.executeStrategy(currentPlayer);
 			}
+<<<<<<< HEAD
 			//placeArmies();
 			//			Player.placeReinforcementArmies(currentPlayer);
 			//			Player.attackPhase(currentPlayer);// @author Kashif
 			//			Player.fortifyPhase(currentPlayer);// @author Kashif
+=======
+
+
+			
+			AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+	        
+	        // Three contexts following different strategies
+			objAssigningStrategy.setStrategy(new BenevolentPlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
+
+
+			objAssigningStrategy.setStrategy(new AggresivePlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
+
+			objAssigningStrategy.setStrategy(new RandomPlayer());
+			objAssigningStrategy.executeStrategy(currentPlayer);
+			
+//			Player.placeReinforcementArmies(currentPlayer);
+//			Player.attackPhase(currentPlayer);// @author Kashif
+//			Player.fortifyPhase(currentPlayer);// @author Kashif
+>>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e
 		}catch(Exception e){
 			e.printStackTrace();
 		}
