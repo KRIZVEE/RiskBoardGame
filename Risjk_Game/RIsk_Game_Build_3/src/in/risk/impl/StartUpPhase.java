@@ -24,18 +24,19 @@ public class StartUpPhase {
 	static public Vector<PlayerToPlay> playersForTournament = new Vector<PlayerToPlay>();
 	static MapLoader obj = new MapLoader();
 	static int noOfPlayer = 0;
+	static int noOfPlayerForTournament = 0;
 	public static PlayerToPlay currentPlayer;
 	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
 	public static ArrayList<String> initialCountries = new ArrayList<String>();
 	public static HashMap<String, Integer> countriesArmies = new HashMap<String, Integer>();
 	public static int iter = 0;
 	public static int conqueredMapCounterTURN;
-	
+
 	public static String playerNameAggresive = "";
 	public static String playerNameRandom = "";
 	public static String playerNameBenevolent = "";
 	public static String playerNameCheater = "";
-	
+
 	public static String tournamentPlayerName[] = new String[4];
 	/**
 	 * This method is used to initially start the game.
@@ -58,20 +59,20 @@ public class StartUpPhase {
 				initiallyPlaceArmies();
 			}else {
 				System.out.println("##########################################Tournament Mode#########################################");
-				
+
 				String map1 = "3D Cliff.map";
 				String map2 = "D-Day.map";
 				String map3 = "Drak.map";
 				String map4 = "Earth.map";
 				String map5 = "Europe.map";
-				
+
 				ArrayList<String> mapList = new ArrayList<>();
-				
+
 				Scanner scForTournament = new Scanner(System.in);
-				
+
 				System.out.println("Please enter the number of maps you want to play with.");
 				int numOfMaps = scForTournament.nextInt();
-				
+
 				for(int i = 0; i < numOfMaps; i++) {
 					System.out.println("Please select the map from below give maps to play with.");
 					System.out.println("1. " + map1);
@@ -93,34 +94,62 @@ public class StartUpPhase {
 					}
 				}
 				askUserToSelectPlayersForTournament();
-				
+
 				System.out.println("Please enter the number fo games you want to play.");
 				int numOfGames = scForTournament.nextInt();
-				
+
 				System.out.println("Please enter the maximum number of turns you want to play in the tournament.");
 				int maxTurns = scForTournament.nextInt();
-				
+
 				for(int i =0; i< numOfMaps; i++) {
 					String mapPath = mapList.get(i);
-					System.out.println(mapList.get(i));
 					MapLoader.loadMap(mapPath);
 					initialPlayerCountry(2);
-					System.out.println(initialPlayerCountry);
+					initiallyPlaceArmies();
+					placeArmies(2);
+
+					for(int j=0; j< numOfGames; j++) {
+
+						for(int l =0; l < maxTurns ; l++) {
+							AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+							for(int k=0; k< noOfPlayerForTournament; k++) {
+								if(currentPlayer.getName().equals("Aggressive")) {
+									objAssigningStrategy.setStrategy(new AggresivePlayer());
+									objAssigningStrategy.executeStrategy(currentPlayer);
+									nextPlayer(2);
+								}else if(currentPlayer.getName().equals("Benovalent")) {
+									objAssigningStrategy.setStrategy(new BenevolentPlayer());
+									objAssigningStrategy.executeStrategy(currentPlayer);
+									nextPlayer(2);
+								}else if(currentPlayer.getName().equals("Cheater")) {
+									objAssigningStrategy.setStrategy(new CheaterPlayer());
+									objAssigningStrategy.executeStrategy(currentPlayer);
+									nextPlayer(2);
+								}else if(currentPlayer.getName().equals("Random")) {
+									objAssigningStrategy.setStrategy(new RandomPlayer());
+									objAssigningStrategy.executeStrategy(currentPlayer);
+									nextPlayer(2);
+								}
+							}
+							maxTurns--;
+						}
+					}
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
+					countriesArmies.clear();
 				}
-//				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
-//
-//				// Three contexts following different strategies
-//				objAssigningStrategy.setStrategy(new BenevolentPlayer());
-//				objAssigningStrategy.executeStrategy(currentPlayer);
-//
-//
-//				objAssigningStrategy.setStrategy(new AggresivePlayer());
-//				objAssigningStrategy.executeStrategy(currentPlayer);
-//
-//				objAssigningStrategy.setStrategy(new RandomPlayer());
-//				objAssigningStrategy.executeStrategy(currentPlayer);
+				//				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+				//
+				//				// Three contexts following different strategies
+				//				objAssigningStrategy.setStrategy(new BenevolentPlayer());
+				//				objAssigningStrategy.executeStrategy(currentPlayer);
+				//
+				//
+				//				objAssigningStrategy.setStrategy(new AggresivePlayer());
+				//				objAssigningStrategy.executeStrategy(currentPlayer);
+				//
+				//				objAssigningStrategy.setStrategy(new RandomPlayer());
+				//				objAssigningStrategy.executeStrategy(currentPlayer);
 			}
 			//placeArmies();
 			//			Player.placeReinforcementArmies(currentPlayer);
@@ -144,15 +173,15 @@ public class StartUpPhase {
 		noOfPlayer = result;
 		selectPlayer(noOfPlayer);
 	}
-	
-	
+
+
 	public static void askUserToSelectPlayersForTournament() throws IOException{
 		Scanner sc1 = new Scanner(System.in);
 		int result;
 		System.out.println("Please enter the number of player you want to play with");
 		result = sc1.nextInt();
-		noOfPlayer = result;
-		selectTournamentPlayer(noOfPlayer);
+		noOfPlayerForTournament = result;
+		selectTournamentPlayer(noOfPlayerForTournament);
 	}
 
 	/**
@@ -175,7 +204,7 @@ public class StartUpPhase {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method is used to select the number of player user wants to play within Tournament MOde.
 	 * @param noOfPlayerToPlay user selected number of players.
@@ -196,7 +225,7 @@ public class StartUpPhase {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * This method is used to ask the user to enter the tournament player name he want to give to the player.
 	 * @param noOfPlayers total no of players.
@@ -216,7 +245,7 @@ public class StartUpPhase {
 			result = sc1.nextInt();
 			if(result == 1){
 				//Scanner scForHumanPlayerName = new Scanner(System.in);
-				playerName = "Aggresive";
+				playerName = "Aggressive";
 				playerNameAggresive = playerName;
 				System.out.println(" playerNameAggresive : " + playerNameAggresive);
 				System.out.println("You have selected aggresive player");
@@ -258,7 +287,7 @@ public class StartUpPhase {
 			System.out.println("1. Human Player");
 			System.out.println("2. Aggressive Player");
 			System.out.println("3. Random Player");
-			System.out.println("4. Bonavalent Player");
+			System.out.println("4. Benovalent Player");
 			System.out.println("5. Cheater Player");
 			result = sc1.nextInt();
 			if(result == 1){
@@ -270,7 +299,7 @@ public class StartUpPhase {
 			}else if(result == 3){
 				playerName = "Random";
 			}else if(result == 4){
-				playerName = "Bonavalent";
+				playerName = "Benovalent";
 			}else if(result == 5){
 				playerName = "Cheater";
 			}else{
@@ -278,7 +307,7 @@ public class StartUpPhase {
 			}
 			addPlayerName(playerName);
 		}
-//		initialPlayerCountry();
+		//		initialPlayerCountry();
 	}
 
 	/**
@@ -294,7 +323,7 @@ public class StartUpPhase {
 		initialPlayer();
 		return true;
 	}
-	
+
 	/**
 	 * This method is used to implement the logic of addin player name to player vector.
 	 * @param playerName name of the player.
@@ -316,7 +345,7 @@ public class StartUpPhase {
 	public static void initialPlayer() throws IOException {
 		currentPlayer = players.elementAt(0);
 	}
-	
+
 	/**
 	 * This method is used to initialize the intial player.
 	 * @throws IOException exception.
@@ -331,7 +360,7 @@ public class StartUpPhase {
 	 * @throws IOException exception.
 	 */
 	public static boolean initialPlayerCountry(int typeOfGame) throws IOException{
-		
+
 		if(typeOfGame == 1) {
 			int i = 0;
 			int j = MapLoader.countryFilter.size() - 1;
@@ -354,7 +383,7 @@ public class StartUpPhase {
 					i = 0;
 				}
 			}
-			distributeArmies(noOfPlayer);
+			distributeArmies(noOfPlayer, 1);
 		}else if(typeOfGame == 2) {
 			int i = 0;
 			int j = MapLoader.countryFilter.size() - 1;
@@ -377,7 +406,8 @@ public class StartUpPhase {
 					i = 0;
 				}
 			}
-//			distributeArmies(noOfPlayer);
+			noOfPlayer = playersForTournament.size();
+			distributeArmies(noOfPlayer, 2);
 		}
 		return true;
 	}
@@ -388,20 +418,37 @@ public class StartUpPhase {
 	 * @return true is everything goes well.
 	 * @throws IOException exception
 	 */
-	public static boolean distributeArmies(int noOfPlayers) throws IOException{
-		int armies = 0;
-		if (noOfPlayers == 3)
-			armies = 4;
-		// armies = 35;
-		if (noOfPlayers == 4)
-			armies = 30;
-		// armies = 30;
-		if (noOfPlayers == 5)
-			armies = 25;
-		if (noOfPlayers == 6)
-			armies = 20;
-		for (int i = 0; i < noOfPlayers; i++) {
-			players.elementAt(i).addArmies(armies);
+	public static boolean distributeArmies(int noOfPlayers , int typeOfGame) throws IOException{
+		if(typeOfGame == 1) {
+			int armies = 0;
+			if (noOfPlayers == 3)
+				armies = 35;
+			// armies = 35;
+			if (noOfPlayers == 4)
+				armies = 30;
+			// armies = 30;
+			if (noOfPlayers == 5)
+				armies = 25;
+			if (noOfPlayers == 6)
+				armies = 20;
+			for (int i = 0; i < noOfPlayers; i++) {
+				players.elementAt(i).addArmies(armies);
+			}
+		}else if(typeOfGame == 2) {
+			int armies = 0;
+			if (noOfPlayers == 3)
+				armies = 35;
+			// armies = 35;
+			if (noOfPlayers == 4)
+				armies = 30;
+			// armies = 30;
+			if (noOfPlayers == 5)
+				armies = 25;
+			if (noOfPlayers == 6)
+				armies = 20;
+			for (int i = 0; i < noOfPlayers; i++) {
+				playersForTournament.elementAt(i).addArmies(armies);
+			}
 		}
 		return true;
 	}
@@ -410,12 +457,21 @@ public class StartUpPhase {
 	 * This method on call directs the next player.
 	 * @throws IOException excpetion.
 	 */
-	public static void nextPlayer() throws IOException {
-		if (currentPlayer == players.lastElement()) {
-			currentPlayer = players.elementAt(0);
-			iter = 0;
-		} else
-			currentPlayer = players.elementAt(++iter);
+	public static void nextPlayer(int typeOfGame) throws IOException {
+		if(typeOfGame == 1) {
+			if (currentPlayer == players.lastElement()) {
+				currentPlayer = players.elementAt(0);
+				iter = 0;
+			} else
+				currentPlayer = players.elementAt(++iter);
+		}else if(typeOfGame == 2) {
+			if (currentPlayer == playersForTournament.lastElement()) {
+				currentPlayer = playersForTournament.elementAt(0);
+				iter = 0;
+			} else
+				currentPlayer = playersForTournament.elementAt(++iter);
+		}
+
 	}
 
 	/**
@@ -427,7 +483,6 @@ public class StartUpPhase {
 		for (int i = 0; i < totalNumberOfCountries; i++) {
 			countriesArmies.put(MapLoader.countryFilter.get(i), 0);
 		}
-		placeArmies();
 	}
 
 	/**
@@ -435,13 +490,20 @@ public class StartUpPhase {
 	 * @return true if everything goes well
 	 * @throws IOException excpetion
 	 */
-	public static boolean placeArmies() throws IOException{
-		int loopSize = players.size() * currentPlayer.getArmies();
+	public static boolean placeArmies(int typeOfGame) throws IOException{
+		int loopSize = 0;
+		if(typeOfGame == 1) {
+			loopSize = players.size() * currentPlayer.getArmies();
+		}else if(typeOfGame == 2) {
+			loopSize = playersForTournament.size() * currentPlayer.getArmies();
+		}
 		int updatedArmies;
 		Scanner sc = new Scanner(System.in);
 		ArrayList<String> temp = new ArrayList<>();
-		System.out.println("start here  :  ");
 		int iteratorForAggressive = 0;
+		int iteratorForBonavalent = 0;
+		int iteratorForRandom = 0;
+		int iteratorForCheater = 0;
 		for (int i = 1; i < loopSize + 1; i++) {
 
 			for (Entry<String, Integer> entry : countriesArmies.entrySet()) {
@@ -459,16 +521,62 @@ public class StartUpPhase {
 
 			if(currentPlayer.getName().equals("Aggressive")){
 				String resultForAgressive = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForAggressive);
+				updatedArmies = countriesArmies.get(resultForAgressive) + 1;
+				updateArmies(updatedArmies, resultForAgressive, currentPlayer);
 				iteratorForAggressive = iteratorForAggressive +1;
 				if(iteratorForAggressive == initialPlayerCountry.get(currentPlayer.getName()).size()){
 					iteratorForAggressive = 0;
 				}
-				updatedArmies = countriesArmies.get(resultForAgressive) + 1;
-				System.out.println(temp);
-				nextPlayer();
-			}else{
-				nextPlayer();
-				System.out.println(currentPlayer.getName());
+				if(typeOfGame == 1)
+					nextPlayer(1);
+				else if(typeOfGame == 2)
+					nextPlayer(2);
+				temp.clear();
+			}else if(currentPlayer.getName().equals("Benovalent")){
+				String resultForBonavalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
+				updatedArmies = countriesArmies.get(resultForBonavalent) + 1;
+				updateArmies(updatedArmies, resultForBonavalent, currentPlayer);
+				iteratorForBonavalent = iteratorForBonavalent +1;
+				if(iteratorForBonavalent == initialPlayerCountry.get(currentPlayer.getName()).size()){
+					iteratorForBonavalent = 0;
+				}
+				if(typeOfGame == 1)
+					nextPlayer(1);
+				else if(typeOfGame == 2)
+					nextPlayer(2);
+				temp.clear();
+			}else if(currentPlayer.getName().equals("Random")){
+				String resultForRandom = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForRandom);
+				updatedArmies = countriesArmies.get(resultForRandom) + 1;
+				updateArmies(updatedArmies, resultForRandom, currentPlayer);
+				iteratorForRandom = iteratorForRandom +1;
+				if(iteratorForRandom == initialPlayerCountry.get(currentPlayer.getName()).size()){
+					iteratorForRandom = 0;
+				}
+				if(typeOfGame == 1)
+					nextPlayer(1);
+				else if(typeOfGame == 2)
+					nextPlayer(2);
+				temp.clear();
+			}else if(currentPlayer.getName().equals("Cheater")){
+				String resultForCheater = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForCheater);
+				updatedArmies = countriesArmies.get(resultForCheater) + 1;
+				updateArmies(updatedArmies, resultForCheater, currentPlayer);
+				iteratorForCheater = iteratorForCheater +1;
+				if(iteratorForCheater == initialPlayerCountry.get(currentPlayer.getName()).size()){
+					iteratorForCheater = 0;
+				}
+				if(typeOfGame == 1)
+					nextPlayer(1);
+				else if(typeOfGame == 2)
+					nextPlayer(2);
+				temp.clear();
+			}else if(currentPlayer.getName().equals("Human")){
+				if(typeOfGame == 1)
+					nextPlayer(1);
+				else if(typeOfGame == 2)
+					nextPlayer(2);
+				temp.clear();
 			}
 		}
 		return true;

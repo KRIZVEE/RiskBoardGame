@@ -800,7 +800,7 @@ public class HumanPlayer extends StartUpPhase {
 						countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 						System.out.println(from + " = " + StartUpPhase.countriesArmies.get(from));
 						System.out.println(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
-						StartUpPhase.nextPlayer();
+						StartUpPhase.nextPlayer(1);
 
 					} else {
 						String result;
@@ -820,7 +820,7 @@ public class HumanPlayer extends StartUpPhase {
 					if (result.equals("N")) {
 						fortifyPhase(currentPlayer);
 					} else {
-						StartUpPhase.nextPlayer();
+						StartUpPhase.nextPlayer(1);
 						placeReinforcementArmies(currentPlayer);
 					}
 				}
@@ -835,7 +835,7 @@ public class HumanPlayer extends StartUpPhase {
 			if (result.equals("N")) {
 				fortifyPhase(currentPlayer);
 			} else {
-				StartUpPhase.nextPlayer();
+				StartUpPhase.nextPlayer(1);
 				placeReinforcementArmies(currentPlayer);
 			}
 		}

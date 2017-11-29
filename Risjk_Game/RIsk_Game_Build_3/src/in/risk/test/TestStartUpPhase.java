@@ -32,7 +32,7 @@ public class TestStartUpPhase {
 	 */
 	@Test
 	public void testNextPlayer() throws IOException{
-		StartUpPhase.nextPlayer();
+		StartUpPhase.nextPlayer(1);
 		String expectedValue = "Rana";
 		String actualValue = StartUpPhase.currentPlayer.getName();
 		assertEquals(expectedValue, actualValue);
@@ -106,7 +106,7 @@ public class TestStartUpPhase {
 	 */
 	@Test
 	public void testDistributeArmies() throws IOException{
-		StartUpPhase.distributeArmies(3);
+		StartUpPhase.distributeArmies(3,1);
 		int expectedValue = 4;
 		int actualValue = StartUpPhase.players.get(0).getArmies();
 		assertEquals(expectedValue, actualValue);

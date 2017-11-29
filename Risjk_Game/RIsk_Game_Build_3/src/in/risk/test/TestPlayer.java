@@ -32,7 +32,7 @@ public class TestPlayer {
 		StartUpPhase.addPlayerName("Rana");
 		StartUpPhase.addPlayerName("Preet");
 		StartUpPhase.initialPlayerCountry(1);
-		StartUpPhase.distributeArmies(3);
+		StartUpPhase.distributeArmies(3,1);
 	}
 	
 	/**
