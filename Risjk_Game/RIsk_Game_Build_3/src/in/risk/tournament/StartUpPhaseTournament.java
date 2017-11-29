@@ -1,8 +1,4 @@
-<<<<<<< HEAD:Risjk_Game/RIsk_Game_Build_3/src/in/risk/impl/myEffortStartUpPhase/StartUpPhase.java
-package in.risk.impl.myEffortStartUpPhase;
-=======
 package in.risk.tournament;
->>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e:Risjk_Game/RIsk_Game_Build_3/src/in/risk/tournament/StartUpPhaseTournament.java
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,19 +6,16 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Vector;
-
-<<<<<<< HEAD:Risjk_Game/RIsk_Game_Build_3/src/in/risk/impl/myEffortStartUpPhase/StartUpPhase.java
 import in.risk.impl.MapLoader;
 import in.risk.impl.PlayerToPlay;
 import in.risk.impl.RandomPlayer;
 
 import java.util.Map.Entry;
-=======
+
 import in.risk.impl.AssigningStrategy;
 import in.risk.impl.MapLoader;
 import in.risk.impl.PlayerToPlay;
 import in.risk.impl.RandomPlayer;
->>>>>>> c705cb8a0b88c41520e0c6b4f2c0ec676afa5c5e:Risjk_Game/RIsk_Game_Build_3/src/in/risk/tournament/StartUpPhaseTournament.java
 
 import in.risk.impl.AssigningStrategy;
 /**

@@ -80,7 +80,7 @@ public class TestStartUpPhase {
 	 */
 	@Test
 	public void testInitialPlayerCountry() throws IOException{
-		StartUpPhase.initialPlayerCountry();
+		StartUpPhase.initialPlayerCountry(1);
 		int actualValue = StartUpPhase.initialPlayerCountry.get("Mohit").size();
 		int expectedValue = 7;
 		System.out.println(actualValue);
