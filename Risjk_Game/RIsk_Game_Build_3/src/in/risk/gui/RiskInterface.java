@@ -52,6 +52,7 @@ public class RiskInterface extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		//risk game main interface
 		File dir = new File("resources/maps");
 
 		path = new ArrayList<String>(Arrays.asList(dir.list()));
@@ -85,6 +86,7 @@ public class RiskInterface extends Application {
 		primaryStage.centerOnScreen();
 		primaryStage.show();
 
+		//game starting method on startGame button click
 		startGame.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -107,6 +109,7 @@ public class RiskInterface extends Application {
 			}
 		});
 
+		//launching map editor by clicking on mapEditor button
 		mapEditor.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

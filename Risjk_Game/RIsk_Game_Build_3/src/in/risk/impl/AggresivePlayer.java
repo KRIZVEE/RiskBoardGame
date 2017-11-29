@@ -102,6 +102,7 @@ public class AggresivePlayer implements Strategy{
 	public int getArmiesaFromContinet(String playerName){
 		
 		System.out.println(StartUpPhase.initialPlayerCountry);
+		
 		System.out.println(StartUpPhase.countriesArmies);
 		
 		int noOfReinforcementArmiesForContinent = 0;

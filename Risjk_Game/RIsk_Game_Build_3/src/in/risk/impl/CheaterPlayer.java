@@ -147,6 +147,14 @@ public class CheaterPlayer implements Strategy {
 		return;
 	}
 
+<<<<<<< HEAD
+=======
+		defenderDiceArray = new int[noOfDefenderDice];
+
+		for (int i = 0; i < defenderDiceArray.length; i++) {
+			defenderDiceArray[i] = StartUpPhase.randomNumberGenerator();
+		}
+>>>>>>> d1c641f4a54f7629d10466714dd614289f6b3a3f
 
 	/**
 	 * This method used to capture the fortify phase information

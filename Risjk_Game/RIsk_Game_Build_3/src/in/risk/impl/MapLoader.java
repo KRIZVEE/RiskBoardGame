@@ -16,6 +16,8 @@ import java.util.Map.Entry;
  */
 public class  MapLoader{
 
+	// data structures for storing map elements
+	
 	public static ArrayList<String> continentFilterNew = new ArrayList<String>();
 	public static List<String> newList;
 	public static ArrayList<String> countryFilter = new ArrayList<String>();
@@ -35,6 +37,7 @@ public class  MapLoader{
 	 * @param path for the path fo the map.
 	 */
 	public static void loadMap(String path){
+		//calling map laoding methods
 		loadContinent(path);
 		loadCountries(path);
 		removeSpcaes();
@@ -56,7 +59,7 @@ public class  MapLoader{
 			Scanner mapfile = new Scanner(file);
 			while (mapfile.hasNextLine()) {
 				next = mapfile.nextLine();
-				
+				//reading the map file
 				if (next.equals("[Map]")) {
 					next = mapfile.nextLine();
 					do {
@@ -126,6 +129,7 @@ public class  MapLoader{
 	 */
 	public static boolean getCountriesAdjacency(){
 
+		//reading map for adjacent countries
 		if (map.containsKey("")) {
 			map.remove("");
 		}

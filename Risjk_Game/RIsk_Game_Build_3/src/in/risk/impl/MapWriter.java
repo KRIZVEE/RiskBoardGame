@@ -18,17 +18,20 @@ public class MapWriter {
 	 */
 	public static void mapWriter(String path) {
 		
-		
+		//writing into a new map file
 			try {
 				
 				String pathName = "resources/maps/" + path;
 				PrintStream outFile = new PrintStream(new FileOutputStream(pathName));
+				//writing initial map info
 				outFile.println("[Map]");
 				for (int i = 0; i < MapLoader.mapDetail.size(); i++) {
 //					outFile.println(MapLoader.mapDetail.get(i));
 					writeMapDetails(MapLoader.mapDetail.get(i), outFile);
 				}
 				outFile.println("");
+				
+				//writing all the continents
 				outFile.println("[Continents]");
 				if (MapEditorInterface.editedContinents.isEmpty()) {
 					for (int i = 0; i < MapLoader.continentFilterNew.size(); i++) {
@@ -43,6 +46,8 @@ public class MapWriter {
 				}
 
 				outFile.println("");
+				
+				//writing all the countries with corresponding info
 				outFile.println("[Territories]");
 				if (MapEditorInterface.editedCountries.isEmpty()) {
 					for (int i = 0; i < MapLoader.countryFilter.size(); i++) {

@@ -26,6 +26,8 @@ import javafx.stage.Stage;
 
 public class MapEditorInterface {
 
+	//data structures for storing the map elements.
+	
 	public static List<String> editedContinents = new ArrayList<String>();
 	public static List<String> editedCountries = new ArrayList<String>();
 
@@ -51,7 +53,7 @@ public class MapEditorInterface {
 
 	public void mapEditorInterface() {
 		
-
+		//putting map elements from Map loader class to edited data structures
 		editedContinentCountries.putAll(MapLoader.continentCountries);
 		editedCountryContinents.putAll(MapLoader.countryContinent);
 		editedCountryCoordinates.putAll(MapLoader.countryCoordinates);
@@ -122,6 +124,7 @@ public class MapEditorInterface {
 
 	public static void editContinentsInterface() {
 
+		// method for editing continents in map editor
 		Image logo = new Image(StartUpPhase.logoPath);
 		ImageView imageView = new ImageView(logo);
 
@@ -261,6 +264,7 @@ public class MapEditorInterface {
 
 	public static void editCountriesInterface() {
 
+		//method for editing countries in map editor
 		Image logo = new Image(StartUpPhase.logoPath);
 		ImageView imgview = new ImageView(logo);
 		ObservableList<String> continentList;
