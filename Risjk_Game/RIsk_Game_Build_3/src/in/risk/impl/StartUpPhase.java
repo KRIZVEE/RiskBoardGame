@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.Observable;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -14,7 +15,7 @@ import in.risk.gui.RiskInterface;
  * @author mohitrana
  *
  */
-public class StartUpPhase {
+public class StartUpPhase extends Observable {
 
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
@@ -38,12 +39,23 @@ public class StartUpPhase {
 	public static String playerNameCheater = "";
 
 	public static String tournamentPlayerName[] = new String[4];
+	
+	int currentPlayerCountrySize = 0;
+	double playerDominanceInPercent = 0;
+	
+	//RiskInterface objRI = new RiskInterface();
+	//StartUpPhase objSU = new StartUpPhase();
+
+	
+	
+	//StartUpPhase objStartUpPhaseCurrentClass = new StartUpPhase();
+	
 	/**
 	 * This method is used to initially start the game.
 	 * @param args arguments.
 	 * @throws IOException Throw excetion.
 	 */
-	public static void gamePlay(){
+	public void gamePlay(){
 
 		try{
 			Scanner scForGameMode = new Scanner(System.in);
@@ -55,12 +67,13 @@ public class StartUpPhase {
 			if(result == 1) {
 				MapLoader.loadMap(RiskInterface.pathMap);
 				askUserToSelectPlayers();
-				initiallyPlaceArmies();
+				//initiallyPlaceArmies();
 				initialPlayerCountry(1);
 				initiallyPlaceArmies();
 				placeArmies(1);
 				// do while loopp to be implemented for choosing winner.
 				do{
+					System.out.println("inside of do loop");
 				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
 				if(currentPlayer.getName().equals("Aggressive")) {
 					objAssigningStrategy.setStrategy(new AggresivePlayer());
@@ -78,12 +91,16 @@ public class StartUpPhase {
 					objAssigningStrategy.setStrategy(new RandomPlayer());
 					objAssigningStrategy.executeStrategy(currentPlayer);
 					nextPlayer(1);
-				}else if(currentPlayer.getName().equals("Human")) {
+				}else if(currentPlayer.getName().equals("a") || currentPlayer.getName().equals("s") || currentPlayer.getName().equals("d")) {
 					objAssigningStrategy.setStrategy(new HumanPlayer());
 					objAssigningStrategy.executeStrategy(currentPlayer);
 					nextPlayer(1);
 				}
-				}while(conqueredMapCounterTURN == 1);
+				if(conqueredMapCounterTURN == 1){
+					System.out.println("We have a winner ");
+					break;
+				}
+				}while(conqueredMapCounterTURN == 0);
 
 			}else {
 				System.out.println("##########################################Tournament Mode#########################################");
@@ -137,6 +154,8 @@ public class StartUpPhase {
 					placeArmies(2);
 
 					for(int j=0; j< numOfGames; j++) {
+						
+						int turn = maxTurns; 
 
 						for(int l =0; l < maxTurns ; l++) {
 							AssigningStrategy objAssigningStrategy = new AssigningStrategy();
@@ -159,7 +178,7 @@ public class StartUpPhase {
 									nextPlayer(2);
 								}
 							}// end of each individual player phase loop
-							maxTurns--;
+							turn--;
 							if(conqueredMapCounterTURN == 1)
 							{
 								System.out.println("We have a winner as "+ currentPlayer.getName());
@@ -168,9 +187,20 @@ public class StartUpPhase {
 						}// end of players turn loop
 						if(conqueredMapCounterTURN == 1)
 						{
+							System.out.println(" ON MAP " + mapList.get(i) + "Player Name : " + currentPlayer.getName() + " is a winner");
 							break;
 						}
-					}// end og game play loop
+						else if(turn == 0)
+						{
+							System.out.println(" ON MAP " + mapList.get(i) + " Match Result is Draw " + "for Game no " + j);
+							//break;
+						}
+						
+						// need to write the logic for winner or draw result particular to game played on a particular map
+
+					}// end of game play loop
+					
+					
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
 					countriesArmies.clear();
@@ -379,7 +409,7 @@ public class StartUpPhase {
 	 * @return true if everything goes well.
 	 * @throws IOException exception.
 	 */
-	public static boolean initialPlayerCountry(int typeOfGame) throws IOException{
+	public boolean initialPlayerCountry(int typeOfGame) throws IOException{
 
 		if(typeOfGame == 1) {
 			int i = 0;
@@ -403,7 +433,16 @@ public class StartUpPhase {
 					i = 0;
 				}
 			}
+			
+//			setChanged();
+//			notifyObservers(this);
+			//notifyObservers();
+			//System.out.println("wapsi");
 			distributeArmies(noOfPlayer, 1);
+
+			//getWorldDominance();
+			
+			
 		}else if(typeOfGame == 2) {
 			int i = 0;
 			int j = MapLoader.countryFilter.size() - 1;
@@ -426,11 +465,24 @@ public class StartUpPhase {
 					i = 0;
 				}
 			}
+			
+//			setChanged();
+//			notifyObservers(this);
+			//objSU.notifyObservers();
 			noOfPlayer = playersForTournament.size();
 			distributeArmies(noOfPlayer, 2);
 		}
 		return true;
 	}
+	
+	
+//	public void getWorldDominance() {
+//		
+//		setChanged();
+//		notifyObservers();
+//		
+//
+//	}
 
 	/**
 	 * This method is used to distribute armies to each player.
@@ -510,7 +562,7 @@ public class StartUpPhase {
 	 * @return true if everything goes well
 	 * @throws IOException excpetion
 	 */
-	public static boolean placeArmies(int typeOfGame) throws IOException{
+	public boolean placeArmies(int typeOfGame) throws IOException{
 		int loopSize = 0;
 		if(typeOfGame == 1) {
 			loopSize = players.size() * currentPlayer.getArmies();
@@ -633,9 +685,22 @@ public class StartUpPhase {
 				else if(typeOfGame == 2)
 					nextPlayer(2);
 				temp.clear();
-			}
+			}						
 		}
+		
+		//name();
+		
+//		setChanged();
+//		notifyObservers(this);
+		//notifyObservers();
 		return true;
+	}
+	
+	public void name() {
+		
+		//System.out.println("I am inside name method");
+//		setChanged();
+//		notifyObservers(this);
 	}
 
 	/**
