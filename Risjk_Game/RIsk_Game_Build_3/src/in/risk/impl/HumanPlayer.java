@@ -16,7 +16,7 @@ import java.util.Scanner;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class HumanPlayer extends StartUpPhase {
+public class HumanPlayer extends StartUpPhase implements Strategy {
 
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
@@ -315,7 +315,7 @@ public class HumanPlayer extends StartUpPhase {
 	 * @param playerName name of the player.
 	 * @throws IOException exception
 	 */
-	public static void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
+	public void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
 		Scanner sc = new Scanner(System.in);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
@@ -372,7 +372,7 @@ public class HumanPlayer extends StartUpPhase {
 	 * @throws IOException
 	 */
 
-	public static void attackPhase(PlayerToPlay playerName) throws IOException {
+	public  void attackPhase(PlayerToPlay playerName) throws IOException {
 	
 		Scanner sc = new Scanner(System.in);
 		String attackTurnOn = "hello";
@@ -734,7 +734,7 @@ public class HumanPlayer extends StartUpPhase {
 	 * for generating random number in a dice
 	 * @return
 	 */
-	public static int randomNumberGenerator() {
+	public  int randomNumberGenerator() {
 		int randomNumber;
 		Random random = new Random(); /* <-- this is a constructor */
 		randomNumber = random.nextInt(6)
@@ -748,7 +748,7 @@ public class HumanPlayer extends StartUpPhase {
 	 * @param currentPlayer
 	 * @throws IOException
 	 */
-		public static void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
+		public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
 			Scanner scFrom = new Scanner(System.in);
 			Scanner sc = new Scanner(System.in);
 			

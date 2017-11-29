@@ -107,7 +107,7 @@ public class TestStartUpPhase {
 	@Test
 	public void testDistributeArmies() throws IOException{
 		StartUpPhase.distributeArmies(3,1);
-		int expectedValue = 4;
+		int expectedValue = 35;
 		int actualValue = StartUpPhase.players.get(0).getArmies();
 		assertEquals(expectedValue, actualValue);
 	}

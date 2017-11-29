@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -97,7 +97,7 @@ public class BenevolentPlayer implements Strategy {
 	public int getArmiesaFromContinet(String playerName){
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
-		for (Entry<String, List<String>> entry : LoadMap.continentCountries.entrySet()) {
+		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
 			String Key = entry.getKey();
 			List<String> value = entry.getValue();
 			for (int i = 0; i < value.size(); i++) {
@@ -106,7 +106,7 @@ public class BenevolentPlayer implements Strategy {
 			if (resultOfContinentCountry.contains(false)) {
 				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + 0;
 			} else if (resultOfContinentCountry.contains(true)) {
-				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + LoadMap.continentValue.get(Key);
+				noOfReinforcementArmiesForContinent = noOfReinforcementArmiesForContinent + MapLoader.continentValue.get(Key);
 			}
 			resultOfContinentCountry.clear();
 		}
@@ -166,7 +166,7 @@ public class BenevolentPlayer implements Strategy {
 		cardType.add(cardTypeB);
 		cardType.add(cardTypeC);
 		int j = 0;
-		cardInTheDeck = LoadMap.countryFilter.size();
+		cardInTheDeck = MapLoader.countryFilter.size();
 		for (int i = 0; i < cardInTheDeck; i++) {
 			cardsInTheDeck.add(cardType.get(j));
 			j++;
@@ -531,15 +531,15 @@ public class BenevolentPlayer implements Strategy {
 		System.out.println("Strongest Country from army needs to displace: \"FROM\" " + from);		
 
 		int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
-		int tempAdjSize = LoadMap.adj.get(from).size();
+		int tempAdjSize = MapLoader.adj.get(from).size();
 
 		ArrayList<String> tempAdjCountryToWhichWeCanMOve = new ArrayList<String>();
 
 		for (int i = 0; i < tempAdjSize; i++) {
 			for (int j = 0; j < tempCountrySize; j++) {
 				if (StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(j)
-						.contains(LoadMap.adj.get(from).get(i))) {
-					tempAdjCountryToWhichWeCanMOve.add(LoadMap.adj.get(from).get(i));
+						.contains(MapLoader.adj.get(from).get(i))) {
+					tempAdjCountryToWhichWeCanMOve.add(MapLoader.adj.get(from).get(i));
 				}
 			}
 		}

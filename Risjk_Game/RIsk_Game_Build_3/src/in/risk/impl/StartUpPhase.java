@@ -43,7 +43,6 @@ public class StartUpPhase {
 	 * @param args arguments.
 	 * @throws IOException Throw excetion.
 	 */
-
 	public static void gamePlay(){
 
 		try{
@@ -57,6 +56,33 @@ public class StartUpPhase {
 				MapLoader.loadMap(RiskInterface.pathMap);
 				askUserToSelectPlayers();
 				initiallyPlaceArmies();
+				initialPlayerCountry(1);
+				initiallyPlaceArmies();
+				placeArmies(1);
+				// do while loopp to be implemented for choosing winner.
+				AssigningStrategy objAssigningStrategy = new AssigningStrategy();
+				if(currentPlayer.getName().equals("Aggressive")) {
+					objAssigningStrategy.setStrategy(new AggresivePlayer());
+					objAssigningStrategy.executeStrategy(currentPlayer);
+					nextPlayer(1);
+				}else if(currentPlayer.getName().equals("Benovalent")) {
+					objAssigningStrategy.setStrategy(new BenevolentPlayer());
+					objAssigningStrategy.executeStrategy(currentPlayer);
+					nextPlayer(1);
+				}else if(currentPlayer.getName().equals("Cheater")) {
+					objAssigningStrategy.setStrategy(new CheaterPlayer());
+					objAssigningStrategy.executeStrategy(currentPlayer);
+					nextPlayer(1);
+				}else if(currentPlayer.getName().equals("Random")) {
+					objAssigningStrategy.setStrategy(new RandomPlayer());
+					objAssigningStrategy.executeStrategy(currentPlayer);
+					nextPlayer(1);
+				}else if(currentPlayer.getName().equals("Human")) {
+					objAssigningStrategy.setStrategy(new HumanPlayer());
+					objAssigningStrategy.executeStrategy(currentPlayer);
+					nextPlayer(1);
+				}
+				
 			}else {
 				System.out.println("##########################################Tournament Mode#########################################");
 
@@ -339,7 +365,7 @@ public class StartUpPhase {
 	}
 
 	/**
-	 * This method is used to initialize the intial player.
+	 * This method is used to initialize the initial player.
 	 * @throws IOException exception.
 	 */
 	public static void initialPlayer() throws IOException {
@@ -347,7 +373,7 @@ public class StartUpPhase {
 	}
 
 	/**
-	 * This method is used to initialize the intial player.
+	 * This method is used to initialize the initial player.
 	 * @throws IOException exception.
 	 */
 	public static void initialPlayerForTournament() throws IOException {
@@ -475,7 +501,7 @@ public class StartUpPhase {
 	}
 
 	/**
-	 * This method is used to place intial armies to every country that is 0.
+	 * This method is used to place initial armies to every country that is 0.
 	 * @throws IOException exception.
 	 */
 	public static void initiallyPlaceArmies() throws IOException {
@@ -518,59 +544,95 @@ public class StartUpPhase {
 					}
 				}
 			}
-
 			if(currentPlayer.getName().equals("Aggressive")){
 				String resultForAgressive = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForAggressive);
-				updatedArmies = countriesArmies.get(resultForAgressive) + 1;
-				updateArmies(updatedArmies, resultForAgressive, currentPlayer);
-				iteratorForAggressive = iteratorForAggressive +1;
-				if(iteratorForAggressive == initialPlayerCountry.get(currentPlayer.getName()).size()){
-					iteratorForAggressive = 0;
+				if(currentPlayer.getArmies() != 0) {
+					updatedArmies = countriesArmies.get(resultForAgressive) + 1;
+					updateArmies(updatedArmies, resultForAgressive, currentPlayer);
+					iteratorForAggressive = iteratorForAggressive +1;
+					if(iteratorForAggressive == initialPlayerCountry.get(currentPlayer.getName()).size()){
+						iteratorForAggressive = 0;
+					}
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
+				}else {
+					System.out.println("You dont  have enough armies to move");
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
 				}
-				if(typeOfGame == 1)
-					nextPlayer(1);
-				else if(typeOfGame == 2)
-					nextPlayer(2);
-				temp.clear();
+				
 			}else if(currentPlayer.getName().equals("Benovalent")){
-				String resultForBonavalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
-				updatedArmies = countriesArmies.get(resultForBonavalent) + 1;
-				updateArmies(updatedArmies, resultForBonavalent, currentPlayer);
-				iteratorForBonavalent = iteratorForBonavalent +1;
-				if(iteratorForBonavalent == initialPlayerCountry.get(currentPlayer.getName()).size()){
-					iteratorForBonavalent = 0;
+				String resultForBenovalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
+				if(currentPlayer.getArmies() != 0) {
+					updatedArmies = countriesArmies.get(resultForBenovalent) + 1;
+					updateArmies(updatedArmies, resultForBenovalent, currentPlayer);
+					iteratorForBonavalent = iteratorForBonavalent +1;
+					if(iteratorForBonavalent == initialPlayerCountry.get(currentPlayer.getName()).size()){
+						iteratorForBonavalent = 0;
+					}
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
+				}else {
+					System.out.println("You dont  have enough armies to move");
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
 				}
-				if(typeOfGame == 1)
-					nextPlayer(1);
-				else if(typeOfGame == 2)
-					nextPlayer(2);
-				temp.clear();
 			}else if(currentPlayer.getName().equals("Random")){
 				String resultForRandom = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForRandom);
-				updatedArmies = countriesArmies.get(resultForRandom) + 1;
-				updateArmies(updatedArmies, resultForRandom, currentPlayer);
-				iteratorForRandom = iteratorForRandom +1;
-				if(iteratorForRandom == initialPlayerCountry.get(currentPlayer.getName()).size()){
-					iteratorForRandom = 0;
+				if(currentPlayer.getArmies() != 0) {
+					updatedArmies = countriesArmies.get(resultForRandom) + 1;
+					updateArmies(updatedArmies, resultForRandom, currentPlayer);
+					iteratorForRandom = iteratorForRandom +1;
+					if(iteratorForRandom == initialPlayerCountry.get(currentPlayer.getName()).size()){
+						iteratorForRandom = 0;
+					}
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
+				}else {
+					System.out.println("You dont  have enough armies to move");
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
 				}
-				if(typeOfGame == 1)
-					nextPlayer(1);
-				else if(typeOfGame == 2)
-					nextPlayer(2);
-				temp.clear();
 			}else if(currentPlayer.getName().equals("Cheater")){
 				String resultForCheater = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForCheater);
-				updatedArmies = countriesArmies.get(resultForCheater) + 1;
-				updateArmies(updatedArmies, resultForCheater, currentPlayer);
-				iteratorForCheater = iteratorForCheater +1;
-				if(iteratorForCheater == initialPlayerCountry.get(currentPlayer.getName()).size()){
-					iteratorForCheater = 0;
+				if(currentPlayer.getArmies() != 0) {
+					updatedArmies = countriesArmies.get(resultForCheater) + 1;
+					updateArmies(updatedArmies, resultForCheater, currentPlayer);
+					iteratorForCheater = iteratorForCheater +1;
+					if(iteratorForCheater == initialPlayerCountry.get(currentPlayer.getName()).size()){
+						iteratorForCheater = 0;
+					}
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
+				}else {
+					System.out.println("You dont  have enough armies to move");
+					if(typeOfGame == 1)
+						nextPlayer(1);
+					else if(typeOfGame == 2)
+						nextPlayer(2);
+					temp.clear();
 				}
-				if(typeOfGame == 1)
-					nextPlayer(1);
-				else if(typeOfGame == 2)
-					nextPlayer(2);
-				temp.clear();
 			}else if(currentPlayer.getName().equals("Human")){
 				if(typeOfGame == 1)
 					nextPlayer(1);

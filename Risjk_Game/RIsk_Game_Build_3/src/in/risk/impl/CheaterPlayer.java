@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -121,7 +121,7 @@ public class CheaterPlayer implements Strategy {
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForCountries);
 			System.out.println("Currently testing country = " + counrtryName);
 			
-			List<String> adjacentOfCurrentCountry = LoadMap.adj.get(counrtryName);
+			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
 			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
 			
 			int sizeOfAdjacent = adjacentOfCurrentCountry.size();
@@ -172,7 +172,7 @@ public class CheaterPlayer implements Strategy {
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForFindingTheAdjacent);
 			System.out.println("Currently testing country = " + counrtryName);
 			
-			List<String> adjacentOfCurrentCountry = LoadMap.adj.get(counrtryName);
+			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
 			
 			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
 			
