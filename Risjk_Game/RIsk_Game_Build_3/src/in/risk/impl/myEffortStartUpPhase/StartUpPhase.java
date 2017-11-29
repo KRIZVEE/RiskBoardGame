@@ -1,4 +1,4 @@
-package in.risk.utility;
+package in.risk.impl.myEffortStartUpPhase;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -6,8 +6,14 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Vector;
+
+import in.risk.impl.MapLoader;
+import in.risk.impl.PlayerToPlay;
+import in.risk.impl.RandomPlayer;
+
 import java.util.Map.Entry;
 
+import in.risk.impl.AssigningStrategy;
 /**
  * This class is used to implement the intial starting of the game.
  * @author mohitrana
@@ -15,7 +21,7 @@ import java.util.Map.Entry;
  */
 public class StartUpPhase {
 	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
-	static LoadMap obj = new LoadMap();
+	static MapLoader obj = new MapLoader();
 	static int noOfPlayer = 0;
 	public static PlayerToPlay currentPlayer;
 	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
@@ -184,18 +190,18 @@ public class StartUpPhase {
 	 */
 	public static boolean initialPlayerCountry() throws IOException{
 		int i = 0;
-		int j = LoadMap.countryFilter.size() - 1;
+		int j = MapLoader.countryFilter.size() - 1;
 		while (j >= 0) {
-			initialCountries.add(LoadMap.countryFilter.get(j));
+			initialCountries.add(MapLoader.countryFilter.get(j));
 			players.get(i);
 
 			ArrayList<String> list;
 			if (initialPlayerCountry.containsKey(players.get(i).getName())) {
 				list = initialPlayerCountry.get(players.get(i).getName());
-				list.add(LoadMap.countryFilter.get(j));
+				list.add(MapLoader.countryFilter.get(j));
 			} else {
 				list = new ArrayList<String>();
-				list.add(LoadMap.countryFilter.get(j));
+				list.add(MapLoader.countryFilter.get(j));
 				initialPlayerCountry.put(players.get(i).getName(), list);
 				}
 			i++;
@@ -249,9 +255,9 @@ public class StartUpPhase {
 	 * @throws IOException exception.
 	 */
 	public static void initiallyPlaceArmies() throws IOException {
-		int totalNumberOfCountries = LoadMap.countryFilter.size();
+		int totalNumberOfCountries = MapLoader.countryFilter.size();
 		for (int i = 0; i < totalNumberOfCountries; i++) {
-			countriesArmies.put(LoadMap.countryFilter.get(i), 2);
+			countriesArmies.put(MapLoader.countryFilter.get(i), 2);
 		}
 	}
 	

@@ -10,7 +10,7 @@ public class PlayerToPlay {
 	private int armies;
 	private int playerId;
 
-	PlayerToPlay(String nm, int id) {
+	public PlayerToPlay(String nm, int id) {
 		name = nm;
 		playerId = id;
 	}

@@ -281,4 +281,13 @@ public static boolean unconnectedContinent(){
 			return true;
 		}		
 	}
+	
+	public static void clearAll() {
+		MapLoader.countryFilter.clear();
+		MapLoader.continentCountries.clear();
+		MapLoader.adj.clear();
+		MapLoader.continentFilterNew.clear();
+		MapLoader.continentValue.clear();
+		MapLoader.countryContinent.clear();
+	}
 }
