@@ -79,6 +79,8 @@ public class AggresivePlayer implements Strategy{
 	 */
 	public int getArmiesFromCountries(String playerName) throws IOException{
 		int noOfReinforcementArmiesForCountry = 0;
+		
+		//calculation for cqlculating armies and retreiving it 
 		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
 		}else{
@@ -102,6 +104,7 @@ public class AggresivePlayer implements Strategy{
 		System.out.println(StartUpPhase.countriesArmies);
 		StartUpPhase.loggingString(""+StartUpPhase.countriesArmies);
 		
+		//Same logic for calculating armies as per continent
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
 		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
@@ -133,6 +136,8 @@ public class AggresivePlayer implements Strategy{
 		int noOfReinforcementArmiesForCards = 0;
 		initialCardDistribution();
 		int tempSize = playersCards.get(playerName).size();
+		
+		//Logic for calculating armies from cards
 		if (tempSize >= 5) {
 			noOfReinforcementArmiesForCards = checkUniqueCombination(tempSize, playerName) + checkDiscreteCombination(playerName);
 		} else {

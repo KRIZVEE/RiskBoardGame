@@ -113,6 +113,7 @@ public class RiskInterface extends Application {
 			}
 		});
 
+		//event handler on load game button
 	loadGame.setOnAction(new EventHandler<ActionEvent>() {
 		
 		@Override
