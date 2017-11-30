@@ -81,9 +81,10 @@ public class TestPlayer {
 	
 	/**
 	 * This method is used to testr the placing reinforcement armies method.
+	 * @throws IOException 
 	 */
 	@Test
-	public void testPlaceReinforcementArmies() {
+	public void testPlaceReinforcementArmies() throws IOException {
 		StartUpPhase.countriesArmies.put("fifthright", 0);
 		HumanPlayer.placeReinforcementArmies("fifthright", 4, StartUpPhase.players.get(0));
 		int expectedValue = 4;
