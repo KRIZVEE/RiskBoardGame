@@ -15,6 +15,8 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import in.risk.gui.RiskInterface;
+import in.risk.saveload.ResourceManager;
+import in.risk.saveload.SaveData;
 
 /**
  * This class is used to implement the intial starting of the game.
@@ -611,6 +613,10 @@ public class StartUpPhase extends Observable {
 	 * @throws IOException excpetion
 	 */
 	public boolean placeArmies(int typeOfGame) throws IOException{
+		Scanner sc = new Scanner(System.in);
+		
+		
+		
 		int loopSize = 0;
 		if(typeOfGame == 1) {
 			loopSize = players.size() * currentPlayer.getArmies();
@@ -618,7 +624,7 @@ public class StartUpPhase extends Observable {
 			loopSize = playersForTournament.size() * currentPlayer.getArmies();
 		}
 		int updatedArmies;
-		Scanner sc = new Scanner(System.in);
+		
 		ArrayList<String> temp = new ArrayList<>();
 		int iteratorForAggressive = 0;
 		int iteratorForBonavalent = 0;
@@ -843,11 +849,21 @@ public class StartUpPhase extends Observable {
 			}						
 		}
 		
-		//name();
-		
-//		setChanged();
-//		notifyObservers(this);
-		//notifyObservers();
+		System.out.println("Do you want to save the game at this point?");
+		String result = sc.nextLine();
+		if(result.equalsIgnoreCase("yes")){
+			SaveData data = new SaveData();
+			data.currentPlayer = currentPlayer;
+			data.noOfPlayers = noOfPlayer;
+			data.namesOfplayers = players;
+			data.countriesArmies = countriesArmies;
+			data.playerCountries = initialPlayerCountry;
+			try {
+				ResourceManager.save(data, "Resources/data.txt");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return true;
 	}
 	
@@ -867,7 +883,7 @@ public class StartUpPhase extends Observable {
 	 */
 	
 	public static void loggingString(String whatToLog) throws IOException {
-        FileWriter fw = new FileWriter("Resources/log.txt", true);
+        FileWriter fw = new FileWriter("Resources/log.txt",true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter pw = new PrintWriter(bw);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

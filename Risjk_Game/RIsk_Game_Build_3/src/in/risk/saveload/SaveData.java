@@ -3,6 +3,7 @@ package in.risk.saveload;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Vector;
 
 import in.risk.impl.PlayerToPlay;
 
@@ -13,7 +14,7 @@ public class SaveData implements Serializable {
 	//data structures for storing the game data on save command
 	public  PlayerToPlay currentPlayer;
 	public int noOfPlayers;
-	public ArrayList<String> namesOfplayers;
+	public Vector<PlayerToPlay> namesOfplayers;
 	public HashMap<String, Integer> countriesArmies;
 	public HashMap<String, ArrayList<String>> playerCountries;
 	public HashMap<String, Integer> playerArmies;

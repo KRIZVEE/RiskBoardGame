@@ -3,12 +3,11 @@ package in.risk.gui;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import in.risk.impl.MapLoader;
 import in.risk.impl.StartUpPhase;
+import in.risk.saveload.ResourceManager;
+import in.risk.saveload.SaveData;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -114,6 +113,21 @@ public class RiskInterface extends Application {
 			}
 		});
 
+	loadGame.setOnAction(new EventHandler<ActionEvent>() {
+		
+		@Override
+		public void handle(ActionEvent event) {
+			try {
+				SaveData data = (SaveData) ResourceManager.load("Resources/data.txt");
+				System.out.println(data.countriesArmies);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+	});
+		
 		//launching map editor by clicking on mapEditor button
 		mapEditor.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
