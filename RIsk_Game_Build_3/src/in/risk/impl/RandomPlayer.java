@@ -74,11 +74,12 @@ public class RandomPlayer extends Observable implements Strategy{
 
 
 	/**
-	 * This method is used to get reinforcement armies from the countries player own.
-	 * @param playerName used to specify the name of the current player
-	 * @return true is all goes well.
-	 */
-	public int getArmiesFromCountries(String playerName){
+	* This method is used to get reinforcement armies from the countries player own.
+	* @param playerName used to specify the name of the current player
+	* @return true is all goes well.
+	 * @throws IOException 
+	*/
+	public int getArmiesFromCountries(String playerName) throws IOException{
 		int noOfReinforcementArmiesForCountry = 0;
 		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
@@ -86,15 +87,17 @@ public class RandomPlayer extends Observable implements Strategy{
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + StartUpPhase.initialPlayerCountry.get(playerName).size()/3;
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
+		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
 		return noOfReinforcementArmiesForCountry;
 	}
 
 	/**
-	 * This method is used to get reinforcement armies from owned continents.
-	 * @param playerName used to specify the name of current player.
-	 * @return true if everything goes well.
-	 */
-	public int getArmiesaFromContinet(String playerName){
+	* This method is used to get reinforcement armies from owned continents.
+	* @param playerName used to specify the name of current player.
+	* @return true if everything goes well.
+	 * @throws IOException 
+	*/
+	public int getArmiesaFromContinet(String playerName) throws IOException{
 		System.out.println(StartUpPhase.initialPlayerCountry);
 		System.out.println(StartUpPhase.countriesArmies);
 		int noOfReinforcementArmiesForContinent = 0;
@@ -113,16 +116,17 @@ public class RandomPlayer extends Observable implements Strategy{
 			resultOfContinentCountry.clear();
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForContinent + " from owned continents.");
+		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForContinent + " from owned continents.");
 		return noOfReinforcementArmiesForContinent;
 	}
 
 	/**
-	 * This method is about trading of cards and getting armies in return.
-	 * Armies added will be as per the game logic.
-	 * @param playerName name of the player
-	 * @return no of reinforcement armies from the cards
-	 * @throws IOException exception
-	 */
+	* This method is about trading of cards and getting armies in return.
+	* Armies added will be as per the game logic.
+	* @param playerName name of the player
+	* @return no of reinforcement armies from the cards
+	* @throws IOException exception
+	*/
 		public int getArmiesFromCards(String playerName, int typrOfGame) throws IOException {
 		int noOfReinforcementArmiesForCards = 0;
 		if(typrOfGame == 1){
@@ -144,10 +148,12 @@ public class RandomPlayer extends Observable implements Strategy{
 		} else {
 			if(tempSize < 3){
 				System.out.println("You dont have enough cards to play.");
+				StartUpPhase.loggingString("You dont have enough cards to play.");
 			}else{
 				String result;
 				Scanner sc = new Scanner(System.in);
 				System.out.println("Now you have less than 5 cards. Do you want to play cards now? Y/N");
+				StartUpPhase.loggingString("Now you have less than 5 cards. Do you want to play cards now? Y/N");
 				result = sc.nextLine();
 				if (result.equals("Y")) {
 					if(typrOfGame == 1){
@@ -161,11 +167,12 @@ public class RandomPlayer extends Observable implements Strategy{
 			}
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
+		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
 		return noOfReinforcementArmiesForCards;
 	}	/**
-	 * This method is used to distribute catds in the deck intially.
-	 * @throws IOException exception
-	 */
+	* This method is used to distribute catds in the deck intially.
+	* @throws IOException exception
+	*/
 		public void initialCardDistribution(int typeOfGame) throws IOException {
 		if(typeOfGame == 1){
 			int size = StartUpPhase.players.size();
@@ -180,9 +187,9 @@ public class RandomPlayer extends Observable implements Strategy{
 		}
 	}
 		/** This method is used to place cards in the deck of player initially.
-	 * @return the deck
-	 * @throws IOException exception.
-	 */
+	* @return the deck
+	* @throws IOException exception.
+	*/
 		public List<String> placeCardsInTheDeck() throws IOException {
 			cardType.add(cardTypeA);
 			cardType.add(cardTypeB);
@@ -200,11 +207,11 @@ public class RandomPlayer extends Observable implements Strategy{
 		}
 
 	/**
-	 * This method is used to check the combination of players cards and then give reinforcemtn armies.
-	 * @param playerName name of the current player.
-	 * @return reinforcement armies.
-	 * @throws IOException exception
-	 */
+	* This method is used to check the combination of players cards and then give reinforcemtn armies.
+	* @param playerName name of the current player.
+	* @return reinforcement armies.
+	* @throws IOException exception
+	*/
 		public int checkDiscreteCombination(String playerName, int typeOfGame) throws IOException {
 			if(typeOfGame == 1){
 				initialCardDistribution(1);
@@ -280,12 +287,12 @@ public class RandomPlayer extends Observable implements Strategy{
 			return noOfReinforcementArmiesForDiscrete;
 		}
 	/**
-	 * This method provide number of reinforcement armies on the basis of unique card combination.
-	 * @param tempSize no of cards player have
-	 * @param playerName name of the player 
-	 * @return no of reinforcement armies
-	 * @throws IOException exception.
-	 */
+	* This method provide number of reinforcement armies on the basis of unique card combination.
+	* @param tempSize no of cards player have
+	* @param playerName name of the player 
+	* @return no of reinforcement armies
+	* @throws IOException exception.
+	*/
 		public int checkUniqueCombination(int tempSize, String playerName) throws IOException {
 			int noOfReinforcementArmiesForUnique = 0;
 			List<Integer> tempListA = new ArrayList<Integer>();
@@ -349,17 +356,21 @@ public class RandomPlayer extends Observable implements Strategy{
 		}
 
 	/**
-	 * This method is used to place reinforcement armies and then place them in the countries where player want to place them
-	 * @param playerName name of the player.
-	 * @throws IOException exception
-	 */
+	* This method is used to place reinforcement armies and then place them in the countries where player want to place them
+	* @param playerName name of the player.
+	* @throws IOException exception
+	*/
 
 	public void placeReinforcementArmies(PlayerToPlay playerName, int typeOfGame) throws IOException {
 
 		System.out.println("####################     REINFORCEMENT Phase BEGINS     #################### ");
+		StartUpPhase.loggingString("####################     REINFORCEMENT Phase BEGINS     ####################");
 		System.out.println("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
+		StartUpPhase.loggingString("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
@@ -410,14 +421,20 @@ public class RandomPlayer extends Observable implements Strategy{
 				}
 			}
 			System.out.println("country armies: for all player " + StartUpPhase.countriesArmies);
+			StartUpPhase.loggingString("country armies: for all player " + StartUpPhase.countriesArmies);
 			noOfArmiesWantToPlace = noOfRinforcementArmies;
 			System.out.println( " randomNoOfArmies : " + randomNoOfArmies);
+			StartUpPhase.loggingString(" randomNoOfArmies : " + randomNoOfArmies);
 			System.out.println( " noOfRinforcementArmies : " + noOfRinforcementArmies);
+			StartUpPhase.loggingString(" noOfRinforcementArmies : " + noOfRinforcementArmies);
 			System.out.println( " noOfArmiesWantToPlace : " + noOfArmiesWantToPlace);			
+			StartUpPhase.loggingString(" noOfArmiesWantToPlace : " + noOfArmiesWantToPlace);
 			placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
 			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 			System.out.println("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
+			StartUpPhase.loggingString("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
 			if(typeOfGame == 1){
 				noOfReinforcementArmiesFromCards = getArmiesFromCards(playerName.getName(), 1);
 			}else{
@@ -427,12 +444,12 @@ public class RandomPlayer extends Observable implements Strategy{
 	}// end of Reinforcement Phase
 
 	/**
-	 * This method is used to update the countries armies according to user inputed data.
-	 * @param countryNameToEnterArmies Name of the country to add armies.
-	 * @param noOfArmiesWantToPlace Number of armies player wants to add to the selected country.
-	 * @param playerName Player who wants to add the armies.
-	 * @return true if everything goes well.
-	 */
+	* This method is used to update the countries armies according to user inputed data.
+	* @param countryNameToEnterArmies Name of the country to add armies.
+	* @param noOfArmiesWantToPlace Number of armies player wants to add to the selected country.
+	* @param playerName Player who wants to add the armies.
+	* @return true if everything goes well.
+	*/
 	public boolean placeReinforcementArmies(String countryNameToEnterArmies, int noOfArmiesWantToPlace , PlayerToPlay playerName) {
 		int initialAriesCountryOwn = StartUpPhase.countriesArmies.get(countryNameToEnterArmies);
 		int finalArmiesCOuntryHave = initialAriesCountryOwn + noOfArmiesWantToPlace;
@@ -442,12 +459,12 @@ public class RandomPlayer extends Observable implements Strategy{
 
 	}
 	/**
-	 * 	
-	 * This method used to capture the attack phase information
-	 * of Random player.
-	 * @param currentPlayer
-	 * @throws IOException
-	 */
+	* 	
+	* This method used to capture the attack phase information
+	* of Random player.
+	* @param currentPlayer
+	* @throws IOException
+	*/
 
 	public  void attackPhase(PlayerToPlay playerName, int typeOfGame) throws IOException {
 		System.out.println();
@@ -457,10 +474,15 @@ public class RandomPlayer extends Observable implements Strategy{
 		if(randomCountAttack == 0)
 		{randomCountAttackflag = r1.nextInt(5 - 1 + 1) + 1;}	// attacker country can attack between 1 to 5 times
 		System.out.println("Attacker COuntry Should Attack only " + (randomCountAttackflag) + " number of times");
+		StartUpPhase.loggingString("Attacker COuntry Should Attack only " + (randomCountAttackflag) + " number of times");
 		System.out.println("You are Randomly attacking TURN is : " + (randomCountAttack));
+		StartUpPhase.loggingString("You are Randomly attacking TURN is : " + (randomCountAttack));
 		System.out.println("Random No of times you should attack " + randomCountAttackflag);
+		StartUpPhase.loggingString("Random No of times you should attack " + randomCountAttackflag);
 		System.out.println("$$$$$$$$$$$$$$$$$     Attack Phase BEGINS    $$$$$$$$$$$$$$$$$$$ " +playerName.getName());
+		StartUpPhase.loggingString("$$$$$$$$$$$$$$$$$     Attack Phase BEGINS    $$$$$$$$$$$$$$$$$$$ " +playerName.getName());
 		System.out.println("Player Name on ENTERING ATTACK Phase +++++++++++++++++++ " +playerName.getName());
+		StartUpPhase.loggingString("Player Name on ENTERING ATTACK Phase +++++++++++++++++++ " +playerName.getName());
 		String attackTurnOn = "hello";
 		System.out.println("Current Player : " + playerName.getName());		
 		System.out.println(StartUpPhase.initialPlayerCountry);	
@@ -470,11 +492,15 @@ public class RandomPlayer extends Observable implements Strategy{
 		//		StartUpPhase.countriesArmies.put("Alaska", 5);// for checking		
 
 		System.out.println("Initailly player country list before any attack : "				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));		
+		StartUpPhase.loggingString("Initailly player country list before any attack : "				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		if(temp==0)
 			oldCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 		temp++;		System.out.println("===========oldCOuntryListSize :========== " + oldCOuntryListSize);		
 		System.out.println("Current Player owning ciuntries : "
+				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("Current Player owning ciuntries : "
 				+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 
 		// choosing random country as a attacker country
@@ -486,6 +512,7 @@ public class RandomPlayer extends Observable implements Strategy{
 		System.out.println("Random attacking country Name is: "+ randomAttackingCountry);
 		attackerCountry = randomAttackingCountry;
 		System.out.println("No of armies in the attacker country : " + StartUpPhase.countriesArmies.get(attackerCountry));
+		StartUpPhase.loggingString("No of armies in the attacker country : " + StartUpPhase.countriesArmies.get(attackerCountry));
 
 		List<String> attackerCountryAdjacent = new ArrayList<String>();
 		int size = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
@@ -502,6 +529,8 @@ public class RandomPlayer extends Observable implements Strategy{
 
 		System.out.println("Based on this country name, you can attack to corresponding countries only : "
 				+ attackerCountryAdjacent);
+		StartUpPhase.loggingString("Based on this country name, you can attack to corresponding countries only : "
+				+ attackerCountryAdjacent);
 
 		if(attackerCountryAdjacent.isEmpty()){
 			String result123;
@@ -509,6 +538,7 @@ public class RandomPlayer extends Observable implements Strategy{
 
 			newCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 			System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
+			StartUpPhase.loggingString("===========newCOuntryListSize :========== " + newCOuntryListSize);
 			if (newCOuntryListSize > oldCOuntryListSize) {
 
 				//	need to uncomment this after implementing observer pattern 
@@ -529,19 +559,25 @@ public class RandomPlayer extends Observable implements Strategy{
 				System.out.println(" temp : " +temp);
 				System.out.println(" playersCards :"+playersCards);
 				System.out.println("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
+				StartUpPhase.loggingString("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
 //				temp.clear();
 				cardsInTheDeck.remove(indexOfCardToBeGet);
 				System.out.println("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
+				StartUpPhase.loggingString("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
 
 				setChanged();
 				notifyObservers();
 			}
 			System.out.println("OUTside newCOuntryListSize > oldCOuntryListSize");
+			StartUpPhase.loggingString("OUTside newCOuntryListSize > oldCOuntryListSize");
 			if(randomCountAttack < randomCountAttackflag)
 			{randomCountAttack++;
 			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+			StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+			StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 			if(typeOfGame == 1){
 				attackPhase(playerName,1);
 			}else{
@@ -550,7 +586,9 @@ public class RandomPlayer extends Observable implements Strategy{
 			else if(randomCountAttack == randomCountAttackflag)
 			{
 				System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+				StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 				System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+				StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 				System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 				fortifyPhase(playerName);
 				return;
@@ -565,12 +603,15 @@ public class RandomPlayer extends Observable implements Strategy{
 
 		// selection of defender country
 		System.out.println("the name of  *RANDOM* country in which you want to attack to");
+		StartUpPhase.loggingString("the name of  *RANDOM* country in which you want to attack to");
 		String randomDefenderCountry="";
 		Random rNew = new Random();
 		if(attackerCountryAdjacent.isEmpty()){
 			randomCountAttack++;
 			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+			StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 			if(typeOfGame == 1){
 				attackPhase(playerName,1);
@@ -587,6 +628,7 @@ public class RandomPlayer extends Observable implements Strategy{
 		System.out.println(" defenderCountry :NAME " + defenderCountry);
 
 		System.out.println("No of armies in the defender country : " + StartUpPhase.countriesArmies.get(defenderCountry));
+		StartUpPhase.loggingString("No of armies in the defender country : " + StartUpPhase.countriesArmies.get(defenderCountry));
 
 		if (StartUpPhase.countriesArmies.get(attackerCountry) >= 2) {
 			System.out.println("As, You have minimum of 2 armies, you can attack");
@@ -606,15 +648,19 @@ public class RandomPlayer extends Observable implements Strategy{
 
 
 				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
+				StartUpPhase.loggingString("No of Dice chosen by attacker is :"+noOfAttackerDice);
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 3) {
 				System.out.println("Attacker Country Player, can opt among 1 or 2  dice for rolling");
 				noOfAttackerDice = r.nextInt(2 - 1 + 1) + 1;
 				//noOfAttackerDice = 2;
-				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);			
+				System.out.println("No of Dice chosen by attacker is :"+noOfAttackerDice);
+				StartUpPhase.loggingString("No of Dice chosen by attacker is :"+noOfAttackerDice);
 			} else if (StartUpPhase.countriesArmies.get(attackerCountry) == 2) {
 				System.out.println(
 						"Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
 								+ attackerCountry);			
+				StartUpPhase.loggingString("Attacker Country Player, can have only 1 dice to roll, as you have only 2 army on country : "
+								+ attackerCountry);
 				//noOfAttackerDice = 1;//===> need to un comment this
 				noOfAttackerDice = 1;
 
@@ -647,7 +693,9 @@ public class RandomPlayer extends Observable implements Strategy{
 			} else {
 				System.out.println(
 						"Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
-								+ defenderCountry);			
+								+ defenderCountry);		
+				StartUpPhase.loggingString("Defender Country Player, can have only 1 dice to roll, as you have only 1 army on country : "
+								+ defenderCountry);
 				noOfDefenderDice = 1;
 			}
 			defenderDiceArray = new int[noOfDefenderDice];
@@ -670,10 +718,14 @@ public class RandomPlayer extends Observable implements Strategy{
 
 			System.out.println("");
 			System.out.println("ATTACKER COUNTRY NAME :" + attackerCountry);
+			StartUpPhase.loggingString("ATTACKER COUNTRY NAME :" + attackerCountry);
 			System.out.println("DEFENDER COUNTRY NAME :" + defenderCountry);
+			StartUpPhase.loggingString("DEFENDER COUNTRY NAME :" + defenderCountry);
 			System.out.println();
 			System.out.println("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
+			StartUpPhase.loggingString("Number of armies in Attacker Country is : " + StartUpPhase.countriesArmies.get(attackerCountry));
 			System.out.println( "Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
+			StartUpPhase.loggingString("Number of armies in Defender Country is : " + StartUpPhase.countriesArmies.get(defenderCountry));
 			System.out.println();
 			System.out.println("ATTACKER COUNTRY CHOOSEN NO OF DICE :" + noOfAttackerDice);
 			System.out.println("DEFENDER COUNTRY CHOOSEN NO OF DICE :" + noOfDefenderDice);
@@ -682,12 +734,14 @@ public class RandomPlayer extends Observable implements Strategy{
 			Arrays.sort(attackerDiceArray);
 			for (int i = 0; i < attackerDiceArray.length; i++) {
 				System.out.println("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
+				StartUpPhase.loggingString("Attacker dice for position " + (i + 1) + " is " + " " + attackerDiceArray[i]);
 			}			
 			System.out.println();
 			Arrays.sort(defenderDiceArray);
 			System.out.println("Defender Dice value are as follow : ");
 			for (int i = 0; i < defenderDiceArray.length; i++) {
 				System.out.println("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
+				StartUpPhase.loggingString("Defender dice for position " + (i + 1) + " is " + " " + defenderDiceArray[i]);
 			}
 
 			//	Condition for defender dice as 1
@@ -729,8 +783,10 @@ public class RandomPlayer extends Observable implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							return;
 
 						}
@@ -780,8 +836,10 @@ public class RandomPlayer extends Observable implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							return;
 						}
 					} else {
@@ -831,21 +889,27 @@ public class RandomPlayer extends Observable implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							return;
 						}
 					} else {
 						StartUpPhase.countriesArmies.put(defenderCountry, updateArmyOfDefender);
 					}
 					System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
+					StartUpPhase.loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 					System.out.println("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
+					StartUpPhase.loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				} else if(flagCheckDice==1) {// ELSE Condition for ======ACD(0) <= DCD(0)==== for defender dice == 1 and attacker dice 1
 					System.out.println(" Attacker country loose 1 army");
 					updateArmyOfAttacker = StartUpPhase.countriesArmies.get(attackerCountry) - 1;
 					StartUpPhase.countriesArmies.put(attackerCountry, updateArmyOfAttacker);
 					System.out.println("new list of initial player country" + StartUpPhase.initialPlayerCountry);
+					StartUpPhase.loggingString("new list of initial player country" + StartUpPhase.initialPlayerCountry);
 					System.out.println("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
+					StartUpPhase.loggingString("Initailly player country list with initial army : " + StartUpPhase.countriesArmies);
 				}
 			} // end of defenderdice ==1
 
@@ -903,8 +967,10 @@ public class RandomPlayer extends Observable implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							return;
 						}
 
@@ -970,8 +1036,10 @@ public class RandomPlayer extends Observable implements Strategy{
 						//ON WINNING A GAME LOGIC
 						if(newCOuntryListSize == MapLoader.countryFilter.size()){
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							StartUpPhase.conqueredMapCounterTURN = 1;
 							System.out.println("WooHooo you conquered the whole world map");
+							StartUpPhase.loggingString("WooHooo you conquered the whole world map");
 							return;
 						}
 
@@ -1010,11 +1078,13 @@ public class RandomPlayer extends Observable implements Strategy{
 		{System.out.println("As you are having only 1 army, you can't attack");
 		randomCountAttack++;}
 		System.out.println(" randomCountAttack value is: "+ randomCountAttack);
+		StartUpPhase.loggingString(" randomCountAttack value is: "+ randomCountAttack);
 		if(randomCountAttack == 0)
 		{
 
 			newCOuntryListSize = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
 			System.out.println("===========newCOuntryListSize :========== " + newCOuntryListSize);
+			StartUpPhase.loggingString("===========newCOuntryListSize :========== " + newCOuntryListSize);
 			//loggingString("===========newCOuntryListSize :========== " + newCOuntryListSize);		
 
 			if (newCOuntryListSize > oldCOuntryListSize) {
@@ -1033,13 +1103,16 @@ public class RandomPlayer extends Observable implements Strategy{
 				temp.add(cardsInTheDeck.get(indexOfCardToBeGet));
 				System.out.println("temp " + temp);
 				System.out.println("cards in the deck " + cardsInTheDeck);
+				StartUpPhase.loggingString("cards in the deck " + cardsInTheDeck);
 				playersCards.put(playerName.getName(), temp);
 				System.out.println(" temp : " +temp);
 				System.out.println(" playersCards :"+playersCards);
 				System.out.println("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
+				StartUpPhase.loggingString("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
 //				temp.clear();
 				cardsInTheDeck.remove(indexOfCardToBeGet);
 				System.out.println("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
+				StartUpPhase.loggingString("Player : " + playerName.getName() + " received "+ playersCards.get(playerName.getName()) +" card.");
 
 			setChanged();
 			notifyObservers();
@@ -1051,8 +1124,11 @@ public class RandomPlayer extends Observable implements Strategy{
 			//		countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 			//		initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
 			System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+			StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 			System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+			StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 			System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);			
+			StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 			fortifyPhase(playerName);
 			return;
 		}
@@ -1062,7 +1138,9 @@ public class RandomPlayer extends Observable implements Strategy{
 			if(randomCountAttack < randomCountAttackflag)
 			{
 				System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+				StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 				System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+				StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 				System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 				if(typeOfGame == 1){
 					attackPhase(playerName,1);
@@ -1072,8 +1150,11 @@ public class RandomPlayer extends Observable implements Strategy{
 			else if(randomCountAttack == randomCountAttackflag)
 			{
 				System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+				StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 				System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+				StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 				System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+				StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 				fortifyPhase(playerName);
 				return;
 			}
@@ -1083,9 +1164,9 @@ public class RandomPlayer extends Observable implements Strategy{
 
 
 	/** This is a random generator method
-	 * for generating random number in a dice
-	 * @return
-	 */
+	* for generating random number in a dice
+	* @return
+	*/
 	public static int randomNumberGenerator() {
 		int randomNumber;
 		Random random = new Random(); /* <-- this is a constructor */
@@ -1095,11 +1176,11 @@ public class RandomPlayer extends Observable implements Strategy{
 	}
 
 	/**
-	 * This method used to capture the fortify phase information
-	 * of each player.
-	 * @param currentPlayer
-	 * @throws IOException
-	 */
+	* This method used to capture the fortify phase information
+	* of each player.
+	* @param currentPlayer
+	* @throws IOException
+	*/
 	public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
 
 		System.out.println();
@@ -1108,10 +1189,13 @@ public class RandomPlayer extends Observable implements Strategy{
 
 
 		System.out.println("@@@@@@@@@@@@@@@@@@    FORTIFY Phase BEGINS   @@@@@@@@@@@@@@@@@ " +currentPlayer.getName());
+		StartUpPhase.loggingString("@@@@@@@@@@@@@@@@@@    FORTIFY Phase BEGINS   @@@@@@@@@@@@@@@@@ " +currentPlayer.getName());
 
 
-		System.out.println(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");		
+		System.out.println(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");	
+		StartUpPhase.loggingString(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("country for All player "	+ StartUpPhase.initialPlayerCountry);
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 
@@ -1121,7 +1205,9 @@ public class RandomPlayer extends Observable implements Strategy{
 		from =  StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).get(indexFROM);
 		//from = "Groenlandia";
 		System.out.println("Choosen Country as FROM : " + from);
-		System.out.println("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));		
+		StartUpPhase.loggingString("Choosen Country as FROM : " + from);
+		System.out.println("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));
+		StartUpPhase.loggingString("No of armies in the FROM country : " + StartUpPhase.countriesArmies.get(from));
 
 		int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
 		int tempAdjSize = MapLoader.adj.get(from).size();
@@ -1138,11 +1224,14 @@ public class RandomPlayer extends Observable implements Strategy{
 		}
 		System.out.println("Select the countries from your owned countries  and adjacent to " + from
 				+ " where you want to move your armies");
+		StartUpPhase.loggingString("Select the countries from your owned countries  and adjacent to " + from
+				+ " where you want to move your armies");
 		//	System.out.println("tempAdjCountryToWhichWeCanMOve.size() "+tempAdjCountryToWhichWeCanMOve.size());
 		if(tempAdjCountryToWhichWeCanMOve.size()==0)
 		{
 			System.out.println("There is no adjacent country present");
 			System.out.println("Player Name on exiting FORTIFY Phase ---------------------- " +currentPlayer.getName());
+			StartUpPhase.loggingString("Player Name on exiting FORTIFY Phase ---------------------- " +currentPlayer.getName());
 			return;
 			//StartUpPhase.nextPlayer();		
 			//placeReinforcementArmies(currentPlayer);
@@ -1157,7 +1246,8 @@ public class RandomPlayer extends Observable implements Strategy{
 			System.out.println(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)
 			+ " armies on " + from + ".");
 			if (StartUpPhase.countriesArmies.get(from) > 1) {
-				System.out.println("The randomly choosen number of armies you want to move to " + "" + to + " " + "country.s");				
+				System.out.println("The randomly choosen number of armies you want to move to " + "" + to + " " + "country.s");	
+				StartUpPhase.loggingString("The randomly choosen number of armies you want to move to " + "" + to + " " + "country.s");
 				for (Entry<String, Integer> entry : StartUpPhase.countriesArmies.entrySet()) {
 					String key = entry.getKey();
 					Integer value = entry.getValue();
@@ -1174,7 +1264,9 @@ public class RandomPlayer extends Observable implements Strategy{
 				int newArmiesToDelete = currentArmiesOfFromCountry - numberOfArmiesToMove;
 				StartUpPhase.countriesArmies.put(from, newArmiesToDelete);
 				System.out.println(from + " = " + StartUpPhase.countriesArmies.get(from));
+				StartUpPhase.loggingString(from + " = " + StartUpPhase.countriesArmies.get(from));
 				System.out.println(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
+				StartUpPhase.loggingString(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
 				//StartUpPhase.nextPlayer();
 				//placeReinforcementArmies(currentPlayer);
 			}
@@ -1193,8 +1285,11 @@ public class RandomPlayer extends Observable implements Strategy{
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		System.out.println("*******************    FORTIFY Phase ENDS   ******************* " +currentPlayer.getName());
+		StartUpPhase.loggingString("*******************    FORTIFY Phase ENDS   ******************* " +currentPlayer.getName());
 		return;
 	}// end of fortify phase	
 
