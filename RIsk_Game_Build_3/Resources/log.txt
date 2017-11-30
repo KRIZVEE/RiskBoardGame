@@ -252,3 +252,9 @@
 2017/11/30 00:26:10 Aggressive Has 0 armies left
 2017/11/30 00:26:10  ON MAP D-Day.map Match Result is Draw for Game no 0
 2017/11/30 00:26:10  ON MAP D-Day.map Match Result is Draw for Game no 1
+2017/11/30 00:43:14 Mohit got 3 armies from owned countries.
+2017/11/30 00:43:14 Mohit got 0 from owned continents.
+2017/11/30 00:43:14 Aggressive got 3 armies from owned countries.
+2017/11/30 00:43:14 Aggressive got 0 from owned continents.
+2017/11/30 00:43:14 You cannot play the game with less than 3 players.
+2017/11/30 00:43:14 You cannot play the game with more than 6 players.
