@@ -1,7 +1,13 @@
 package in.risk.impl;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Observable;
@@ -17,10 +23,6 @@ import in.risk.gui.RiskInterface;
  */
 public class StartUpPhase extends Observable {
 
-	
-	
-	
-	
 	
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
@@ -61,14 +63,19 @@ public class StartUpPhase extends Observable {
 	 * @throws IOException Throw excetion.
 	 */
 	public void gamePlay(){
-
+		
 		try{
+		
 			Scanner scForGameMode = new Scanner(System.in);
 			int result = 0;
 			System.out.println("Please choose the type of play from following options.");
+			StartUpPhase.loggingString("Please choose the type of play from following options.");
 			System.out.println("1.Single Game Mode.");
-			System.out.println("2.Tournament Gam Mode");
+			StartUpPhase.loggingString("1.Single Game Mode.");
+			System.out.println("2.Tournament Game Mode");
+			StartUpPhase.loggingString("2.Tournament Game Mode");
 			result = scForGameMode.nextInt();
+			loggingString(""+result);
 			if(result == 1) {
 				MapLoader.clearAll();
 				MapLoader.loadMap(RiskInterface.pathMap);
@@ -104,13 +111,14 @@ public class StartUpPhase extends Observable {
 				}
 				if(conqueredMapCounterTURN == 1){
 					System.out.println("We have a winner ");
+					StartUpPhase.loggingString("We have a winner ");
 					break;
 				}
 				}while(conqueredMapCounterTURN == 0);
 
 			}else {
 				System.out.println("##########################################Tournament Mode#########################################");
-
+				StartUpPhase.loggingString("##########################################Tournament Mode#########################################");
 				String map1 = "3D Cliff.map";
 				String map2 = "D-Day.map";
 				String map3 = "Drak.map";
@@ -122,16 +130,24 @@ public class StartUpPhase extends Observable {
 				Scanner scForTournament = new Scanner(System.in);
 
 				System.out.println("Please enter the number of maps you want to play with.");
+				StartUpPhase.loggingString("Please enter the number of maps you want to play with.");
 				int numOfMaps = scForTournament.nextInt();
 
 				for(int i = 0; i < numOfMaps; i++) {
 					System.out.println("Please select the map from below give maps to play with.");
+					StartUpPhase.loggingString("Please select the map from below give maps to play with.");
 					System.out.println("1. " + map1);
+					StartUpPhase.loggingString("1. " + map1);
 					System.out.println("2. " + map2);
+					StartUpPhase.loggingString("2. " + map2);
 					System.out.println("3. " + map3);
+					StartUpPhase.loggingString("3. " + map3);
 					System.out.println("4. " + map4);
+					StartUpPhase.loggingString("4. " + map4);
 					System.out.println("5. " + map5);
+					StartUpPhase.loggingString("5. " + map5);
 					int resultForMap = scForTournament.nextInt();
+					StartUpPhase.loggingString(""+resultForMap);
 					if(resultForMap == 1) {
 						mapList.add(map1);
 					}if(resultForMap == 2) {
@@ -147,9 +163,11 @@ public class StartUpPhase extends Observable {
 				askUserToSelectPlayersForTournament();
 
 				System.out.println("Please enter the number fo games you want to play.");
+				StartUpPhase.loggingString("Please enter the number fo games you want to play.");
 				int numOfGames = scForTournament.nextInt();
 
 				System.out.println("Please enter the maximum number of turns you want to play in the tournament.");
+				StartUpPhase.loggingString("Please enter the maximum number of turns you want to play in the tournament.");
 				int maxTurns = scForTournament.nextInt();
 
 				for(int i =0; i< numOfMaps; i++) {
@@ -188,17 +206,20 @@ public class StartUpPhase extends Observable {
 							if(conqueredMapCounterTURN == 1)
 							{
 								System.out.println("We have a winner as "+ currentPlayer.getName());
+								StartUpPhase.loggingString("We have a winner as "+ currentPlayer.getName());
 								break;
 							}
 						}// end of players turn loop
 						if(conqueredMapCounterTURN == 1)
 						{
 							System.out.println(" ON MAP " + mapList.get(i) + "Player Name : " + currentPlayer.getName() + " is a winner");
+							StartUpPhase.loggingString(" ON MAP " + mapList.get(i) + "Player Name : " + currentPlayer.getName() + " is a winner");
 							break;
 						}
 						else if(turn == 0)
 						{
 							System.out.println(" ON MAP " + mapList.get(i) + " Match Result is Draw " + "for Game no " + j);
+							StartUpPhase.loggingString(" ON MAP " + mapList.get(i) + " Match Result is Draw " + "for Game no " + j);
 							//break;
 						}
 						
@@ -210,11 +231,12 @@ public class StartUpPhase extends Observable {
 					MapLoader.clearAll();
 					initialPlayerCountry.clear();
 					countriesArmies.clear();
+					
 				}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-		}
+		}		
 	}
 
 	/**
@@ -225,7 +247,9 @@ public class StartUpPhase extends Observable {
 		Scanner sc = new Scanner(System.in);
 		int result;
 		System.out.println("Please enter the number of player you want to play with");
+		StartUpPhase.loggingString("Please enter the number of player you want to play with");
 		result = sc.nextInt();
+		loggingString(""+result);
 		noOfPlayer = result;
 		selectPlayer(noOfPlayer);
 	}
@@ -235,7 +259,9 @@ public class StartUpPhase extends Observable {
 		Scanner sc1 = new Scanner(System.in);
 		int result;
 		System.out.println("Please enter the number of player you want to play with");
+		StartUpPhase.loggingString("Please enter the number of player you want to play with");
 		result = sc1.nextInt();
+		loggingString(""+result);
 		noOfPlayerForTournament = result;
 		selectTournamentPlayer(noOfPlayerForTournament);
 	}
@@ -258,6 +284,7 @@ public class StartUpPhase extends Observable {
 			playerName(noOfPlayerToPlay);
 			result = noOfPlayerToPlay + " no of players are selected to play the game";
 		}
+		loggingString(result);
 		return result;
 	}
 
@@ -279,6 +306,7 @@ public class StartUpPhase extends Observable {
 			playerTournamentName(noOfPlayerToPlay);
 			result = noOfPlayerToPlay + " no of players are selected to play the game";
 		}
+		loggingString(result);
 		return result;
 	}
 
@@ -293,34 +321,48 @@ public class StartUpPhase extends Observable {
 		String playerName = null;
 		for (int i = 0; i < noOfPlayers; i++) {
 			System.out.println("You have following types of players. Choose the tpe of player you want to playe with.");
+			loggingString("You have following types of players. Choose the tpe of player you want to playe with.");
 			//System.out.println("1. Human Player");
 			System.out.println("1. Aggressive Player");
+			loggingString("1. Aggressive Player");
 			System.out.println("2. Random Player");
+			loggingString("2. Random Player");
 			System.out.println("3. Benovalent Player");
+			loggingString("3. Benovalent Player");
 			System.out.println("4. Cheater Player");
+			loggingString("4. Cheater Player");
 			result = sc1.nextInt();
+			loggingString(""+result);
 			if(result == 1){
 				//Scanner scForHumanPlayerName = new Scanner(System.in);
 				playerName = "Aggressive";
 				playerNameAggresive = playerName;
 				System.out.println(" playerNameAggresive : " + playerNameAggresive);
+				loggingString(" playerNameAggresive : " + playerNameAggresive);
 				System.out.println("You have selected aggresive player");
+				loggingString("You have selected aggresive player");
 				//playerName = scForHumanPlayerName.nextLine();
 			}else if(result == 2){
 				playerName = "Random";
 				playerNameRandom = playerName;
 				System.out.println(" playerNameRandom : " + playerNameRandom);
+				loggingString(" playerNameRandom : " + playerNameRandom);
 				System.out.println("You have selected random player");
+				loggingString("You have selected random player");
 			}else if(result == 3){
 				playerName = "Benovalent";
 				playerNameBenevolent = playerName;
 				System.out.println(" playerNameBenavolent : " + playerNameBenevolent);
+				loggingString(" playerNameBenavolent : " + playerNameBenevolent);
 				System.out.println("You have selected benevolent player");
+				loggingString("You have selected benevolent player");
 			}else if(result == 4){
 				playerName = "Cheater";
 				playerNameCheater = playerName;
 				System.out.println(" playerNameCheater : " + playerNameCheater);
+				loggingString(" playerNameCheater : " + playerNameCheater);
 				System.out.println("You have selected cheater player");
+				loggingString("You have selected cheater player");
 			}else{
 				System.out.println("Please choose the correct player");
 			}
@@ -340,15 +382,23 @@ public class StartUpPhase extends Observable {
 		String playerName = null;
 		for (int i = 0; i < noOfPlayers; i++) {
 			System.out.println("You have following types of players. Choose the tpe of player you want to playe with.");
+			loggingString("You have following types of players. Choose the tpe of player you want to playe with.");
 			System.out.println("1. Human Player");
+			loggingString("1. Human Player");
 			System.out.println("2. Aggressive Player");
+			loggingString("2. Aggressive Player");
 			System.out.println("3. Random Player");
+			loggingString("3. Random Player");
 			System.out.println("4. Benovalent Player");
+			loggingString("4. Benovalent Player");
 			System.out.println("5. Cheater Player");
+			loggingString("5. Cheater Player");
 			result = sc1.nextInt();
+			loggingString(""+result);
 			if(result == 1){
 				Scanner scForHumanPlayerName = new Scanner(System.in);
 				System.out.println("Please enter the name of the human player.");
+				loggingString("Please enter the name of the human player.");
 				playerName = scForHumanPlayerName.nextLine();
 			}else if(result == 2){
 				playerName = "Aggressive";
@@ -604,6 +654,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}else {
 					System.out.println("You dont  have enough armies to move");
+					loggingString("You dont  have enough armies to move");
 					if(typeOfGame == 1)
 						nextPlayer(1);
 					else if(typeOfGame == 2)
@@ -611,6 +662,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}
 				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+				loggingString(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Benovalent")){
 				String resultForBenovalent = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForBonavalent);
 				if(currentPlayer.getArmies() != 0) {
@@ -627,6 +679,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}else {
 					System.out.println("You dont  have enough armies to move");
+					loggingString("You dont  have enough armies to move");
 					if(typeOfGame == 1)
 						nextPlayer(1);
 					else if(typeOfGame == 2)
@@ -634,6 +687,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}
 				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+				loggingString(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Random")){
 				String resultForRandom = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForRandom);
 				if(currentPlayer.getArmies() != 0) {
@@ -650,6 +704,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}else {
 					System.out.println("You dont  have enough armies to move");
+					loggingString("You dont  have enough armies to move");
 					if(typeOfGame == 1)
 						nextPlayer(1);
 					else if(typeOfGame == 2)
@@ -657,6 +712,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}
 				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+				loggingString(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else if(currentPlayer.getName().equals("Cheater")){
 				String resultForCheater = initialPlayerCountry.get(currentPlayer.getName()).get(iteratorForCheater);
 				if(currentPlayer.getArmies() != 0) {
@@ -673,6 +729,7 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}else {
 					System.out.println("You dont  have enough armies to move");
+					loggingString("You dont  have enough armies to move");
 					if(typeOfGame == 1)
 						nextPlayer(1);
 					else if(typeOfGame == 2)
@@ -680,11 +737,15 @@ public class StartUpPhase extends Observable {
 					temp.clear();
 				}
 				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+				loggingString(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}else{
 				String result;
 				System.out.println(initialPlayerCountry);
+				loggingString(""+initialPlayerCountry);
 				System.out.println(currentPlayer.getName() + " you own these countries " + initialPlayerCountry.get(currentPlayer.getName()) + ".");
+				loggingString(currentPlayer.getName() + " you own these countries " + initialPlayerCountry.get(currentPlayer.getName()) + ".");
 				System.out.println("Please enter the name of the country you want to add armies to!!");
+				loggingString("Please enter the name of the country you want to add armies to!!");
 				result = sc.nextLine();
 				if (initialPlayerCountry.get(currentPlayer.getName()).contains(result)) {
 					int noOfArmiesPlayerContains = currentPlayer.getArmies();
@@ -693,7 +754,7 @@ public class StartUpPhase extends Observable {
 					if (noOfArmiesPlayerContains == 0) {
 
 						System.out.println("noOfArmiesPlayerContains == 0");
-
+						loggingString("noOfArmiesPlayerContains == 0");
 						if (players.size() != 3) {
 							if(typeOfGame == 1)
 								nextPlayer(1);
@@ -702,18 +763,23 @@ public class StartUpPhase extends Observable {
 							break;
 						} else
 							System.out.println("Next Phase");
+						loggingString("Next Phase");
 					}
 					if (noOfArmiesPlayerContains == countriesWith0Armies) {
 						System.out.println(currentPlayer.getArmies());
+						loggingString(""+currentPlayer.getArmies());
 						System.out.println(countriesArmies);
-						
+						loggingString(""+countriesArmies);
 						if (temp.contains(result)){
 							updatedArmies = countriesArmies.get(result) + 1;
 							updateArmies(updatedArmies, result, currentPlayer);
 							System.out.println(result + " armies has been updated. New armies of " + result + " are "
 									+ countriesArmies.get(result));
+							loggingString(result + " armies has been updated. New armies of " + result + " are "
+									+ countriesArmies.get(result));
 							temp.remove(result);
 							System.out.println(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+							loggingString(currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
 							temp.clear();
 							if(typeOfGame == 1)
 								nextPlayer(1);
@@ -722,17 +788,27 @@ public class StartUpPhase extends Observable {
 						}else{
 							System.out.println("You are not allowed to add armies to other countries except " + temp
 									+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
+							loggingString("You are not allowed to add armies to other countries except " + temp
+									+ " countries. \n Because you have minimum number of armies to place ermies in each countyr");
 							System.out.println(
 									"Please enter the name of country from given list where you want to placce armies \n"
 											+ temp);
+							loggingString(
+									"Please enter the name of country from given list where you want to placce armies \n"
+											+ temp);
 							result = sc.nextLine();
+							loggingString(""+result);
 							if (temp.contains(result)) {
 								updatedArmies = countriesArmies.get(result) + 1;
 								updateArmies(updatedArmies, result, currentPlayer);
 								System.out.println(result + " armies has been updated. New armies of " + result + " are "
 										+ countriesArmies.get(result));
+								loggingString(result + " armies has been updated. New armies of " + result + " are "
+										+ countriesArmies.get(result));
 								temp.remove(result);
 								System.out.println(
+										currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
+								loggingString(
 										currentPlayer.getName() + " has Countries with 0 number of armies " + temp);
 								temp.clear();
 								if(typeOfGame == 1)
@@ -746,8 +822,11 @@ public class StartUpPhase extends Observable {
 						updateArmies(updatedArmies, result, currentPlayer);
 						System.out.println(result + " armies has been updated. New armies of " + result + " are "
 								+ countriesArmies.get(result));
+						loggingString(result + " armies has been updated. New armies of " + result + " are "
+								+ countriesArmies.get(result));
 						temp.remove(result);
 						System.out.println((currentPlayer.getName() + " has Countries with 0 number of armies " + temp));
+						loggingString((currentPlayer.getName() + " has Countries with 0 number of armies " + temp));
 						temp.clear();
 						if(typeOfGame == 1)
 							nextPlayer(1);
@@ -756,9 +835,11 @@ public class StartUpPhase extends Observable {
 					}
 				}else{
 					System.out.println("Please enter correct name of the country");
+					loggingString("Please enter correct name of the country");
 					i--;
 				}
 				System.out.println(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
+				loggingString(currentPlayer.getName() + " Has " + currentPlayer.getArmies() + " armies left");
 			}						
 		}
 		
@@ -784,6 +865,17 @@ public class StartUpPhase extends Observable {
 	 * @param playerName name of player want to add.
 	 * @return true if all goes well.
 	 */
+	
+	public static void loggingString(String whatToLog) throws IOException {
+        FileWriter fw = new FileWriter("Resources/log.txt", true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        PrintWriter pw = new PrintWriter(bw);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        pw.print("\n" + dateFormat.format(date) + " " + whatToLog);
+        pw.flush();
+        pw.close();
+}
 	public static boolean updateArmies(int updatedArmies, String countryName, PlayerToPlay playerName) {
 		countriesArmies.put(countryName, updatedArmies);
 		playerName.looseArmy();

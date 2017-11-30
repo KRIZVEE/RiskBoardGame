@@ -3,6 +3,9 @@ package in.risk.gui;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import in.risk.impl.MapLoader;
 import in.risk.impl.StartUpPhase;
@@ -137,8 +140,7 @@ public class RiskInterface extends Application {
 	 */
 
 	public static void main(String[] args){
-		launch(args);
-		/*MapLoader.mapLoader("UnconnectedContinent.map");
-		MapLoader.unconnectedContinent();*/
+		launch(args);		
+	
 	}
 }
