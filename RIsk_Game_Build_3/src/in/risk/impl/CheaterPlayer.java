@@ -73,15 +73,18 @@ public class CheaterPlayer extends Observable implements Strategy {
 	public void placeReinforcementArmies(PlayerToPlay playerName) throws IOException{
 
 		System.out.println("####################     REINFORCEMENT Phase BEGINS     #################### ");
+		StartUpPhase.loggingString("####################     REINFORCEMENT Phase BEGINS     #################### ");
 		System.out.println("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
+		StartUpPhase.loggingString("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
 
 		int t = 0;
 		int loop = StartUpPhase.initialPlayerCountry.get(playerName.getName()).size();
-		System.out.println("loop size is : "+ loop);
 
 		ArrayList<String> playerCountry = new ArrayList<>();
 		for(int i =0; i< loop; i++)
@@ -89,6 +92,7 @@ public class CheaterPlayer extends Observable implements Strategy {
 			playerCountry.add(StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(i));
 		}
 		System.out.println("playerCountry names are "+playerCountry);
+		StartUpPhase.loggingString("playerCountry names are "+playerCountry);
 
 		for (Entry<String, Integer> entry : StartUpPhase.countriesArmies.entrySet()) {
 			String key = entry.getKey();
@@ -106,7 +110,9 @@ public class CheaterPlayer extends Observable implements Strategy {
 		}
 
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("####################     Attack Phase BEGINS     #################### ");
 		attackPhase(playerName);
 		return;
 	}
@@ -114,22 +120,22 @@ public class CheaterPlayer extends Observable implements Strategy {
 
 	public  void attackPhase(PlayerToPlay playerName) throws IOException{
 		System.out.println("####################     Attack Phase BEGINS     #################### ");
-		
+		StartUpPhase.loggingString("####################     Attack Phase BEGINS     #################### ");
 		ArrayList<String> countriesOfCheaterPlayer = StartUpPhase.initialPlayerCountry.get(playerName.getName());
 		
 		System.out.println("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
-		
+		StartUpPhase.loggingString("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
 		int sizeOfCheaterPlayerCountries = countriesOfCheaterPlayer.size();
 		
 		System.out.println("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
-		
+		StartUpPhase.loggingString("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
 		for(int iteratorForCountries = 0; iteratorForCountries < sizeOfCheaterPlayerCountries ; iteratorForCountries++){
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForCountries);
-			System.out.println("Currently testing country = " + counrtryName);
+		//	System.out.println("Currently testing country = " + counrtryName);
 			
 			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
-			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
-			
+			//System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
+			//StartUpPhase.loggingString
 			int sizeOfAdjacent = adjacentOfCurrentCountry.size();
 			
 			for(int iteratorForAdjacent = 0; iteratorForAdjacent < sizeOfAdjacent ; iteratorForAdjacent++){
@@ -140,7 +146,7 @@ public class CheaterPlayer extends Observable implements Strategy {
 				if(!countriesOfCheaterPlayer.contains(adjacentCountry)){
 					
 					countriesOfCheaterPlayer.add(adjacentCountry);
-					System.out.println("bhbfhdbhd " + adjacentCountry);
+				//	System.out.println("bhbfhdbhd " + adjacentCountry);
 					StartUpPhase.initialPlayerCountry.put(playerName.getName(), countriesOfCheaterPlayer);
 					
 					System.out.println(StartUpPhase.initialPlayerCountry.get(playerName.getName()) + "\n");
@@ -148,8 +154,11 @@ public class CheaterPlayer extends Observable implements Strategy {
 			}
 		}
 		System.out.println("******************     Attack Phase ENDS   *********************** " +playerName.getName());
+		StartUpPhase.loggingString("******************     Attack Phase ENDS   *********************** " +playerName.getName());
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		fortifyPhase(playerName);
 		return;
 	}
@@ -163,33 +172,33 @@ public class CheaterPlayer extends Observable implements Strategy {
 	 */
 	public void fortifyPhase(PlayerToPlay playerName) throws IOException {
 		System.out.println("####################     FORTIFY Phase BEGINS     #################### ");
-		
+		StartUpPhase.loggingString("####################     FORTIFY Phase BEGINS     #################### ");
 		int newNoOfArmies = 0;
 		countriesOfCheaterPlayer = StartUpPhase.initialPlayerCountry.get(playerName.getName());
 
 		System.out.println("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
-		
+		StartUpPhase.loggingString("Countries of Cheaeter Player = " + countriesOfCheaterPlayer);
 		int sizeOfCheaterPlayerCountries = countriesOfCheaterPlayer.size();
 		
-		System.out.println("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
+		//System.out.println("Size of cheater player countries = " + sizeOfCheaterPlayerCountries);
 		
 		
 		for(int iteratorForFindingTheAdjacent =0; iteratorForFindingTheAdjacent < sizeOfCheaterPlayerCountries ; iteratorForFindingTheAdjacent++){
 			String counrtryName = StartUpPhase.initialPlayerCountry.get(playerName.getName()).get(iteratorForFindingTheAdjacent);
-			System.out.println("Currently testing country = " + counrtryName);
+			//System.out.println("Currently testing country = " + counrtryName);
 			
 			List<String> adjacentOfCurrentCountry = MapLoader.adj.get(counrtryName);
 			
-			System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
+			//System.out.println("Adjacent of " + counrtryName + " are = " + adjacentOfCurrentCountry);
 			
 			int sizeOfAdjacent = adjacentOfCurrentCountry.size();
 			
-			System.out.println("Size of adjacent countries " + sizeOfAdjacent);
+		//	System.out.println("Size of adjacent countries " + sizeOfAdjacent);
 			ArrayList<Boolean> tempForAdjacent = new ArrayList<>();
 			for(int iteratorForAdjacent = 0; iteratorForAdjacent < sizeOfAdjacent ; iteratorForAdjacent++){
 				String adjacentCountry = adjacentOfCurrentCountry.get(iteratorForAdjacent);
 				
-				System.out.println("Adjacent countries to " + counrtryName + "are " + adjacentCountry);
+				//System.out.println("Adjacent countries to " + counrtryName + "are " + adjacentCountry);
 				
 				if(countriesOfCheaterPlayer.contains(adjacentCountry)){
 //					System.out.println("True");
@@ -199,13 +208,14 @@ public class CheaterPlayer extends Observable implements Strategy {
 					tempForAdjacent.add(false);
 				}
 			}
-			System.out.println("temp for adjacent = " + tempForAdjacent);
+		//	System.out.println("temp for adjacent = " + tempForAdjacent);
+			
 			if(tempForAdjacent.contains(false)){
-				System.out.println(counrtryName + " has some adjacent countries belongd to other players.");
+		//		System.out.println(counrtryName + " has some adjacent countries belongd to other players.");
 				
 				int oldArmies = StartUpPhase.countriesArmies.get(counrtryName);
 				
-				System.out.println(counrtryName + " has " + StartUpPhase.countriesArmies.get(counrtryName));
+			//	System.out.println(counrtryName + " has " + StartUpPhase.countriesArmies.get(counrtryName));
 				
 				int newArmies = oldArmies*2;
 				
@@ -213,7 +223,7 @@ public class CheaterPlayer extends Observable implements Strategy {
 				StartUpPhase.countriesArmies.put(counrtryName, newArmies);
 				
 
-				System.out.println(counrtryName + " has " + newArmies  + "\n");
+			//	System.out.println(counrtryName + " has " + newArmies  + "\n");
 			}else{
 				int oldArmies = StartUpPhase.countriesArmies.get(counrtryName);
 				
@@ -223,10 +233,12 @@ public class CheaterPlayer extends Observable implements Strategy {
 		//return newNoOfArmies;
 		
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		
+		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		setChanged();
 		notifyObservers(this);
 		System.out.println("*******************    FORTIFY Phase ENDS   ******************* " +playerName.getName());
+		StartUpPhase.loggingString("*******************    FORTIFY Phase ENDS   ******************* " +playerName.getName());
 	}
 }
