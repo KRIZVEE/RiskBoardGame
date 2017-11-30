@@ -1,0 +1,254 @@
+
+2017/11/30 00:25:39 Please choose the type of play from following options.
+2017/11/30 00:25:39 1.Single Game Mode.
+2017/11/30 00:25:39 2.Tournament Game Mode
+2017/11/30 00:25:41 2
+2017/11/30 00:25:41 ##########################################Tournament Mode#########################################
+2017/11/30 00:25:41 Please enter the number of maps you want to play with.
+2017/11/30 00:25:44 Please select the map from below give maps to play with.
+2017/11/30 00:25:44 1. 3D Cliff.map
+2017/11/30 00:25:44 2. D-Day.map
+2017/11/30 00:25:44 3. Drak.map
+2017/11/30 00:25:44 4. Earth.map
+2017/11/30 00:25:44 5. Europe.map
+2017/11/30 00:25:50 Please choose the type of play from following options.
+2017/11/30 00:25:50 1.Single Game Mode.
+2017/11/30 00:25:50 2.Tournament Game Mode
+2017/11/30 00:25:51 2
+2017/11/30 00:25:51 ##########################################Tournament Mode#########################################
+2017/11/30 00:25:51 Please enter the number of maps you want to play with.
+2017/11/30 00:25:53 Please select the map from below give maps to play with.
+2017/11/30 00:25:53 1. 3D Cliff.map
+2017/11/30 00:25:53 2. D-Day.map
+2017/11/30 00:25:53 3. Drak.map
+2017/11/30 00:25:53 4. Earth.map
+2017/11/30 00:25:53 5. Europe.map
+2017/11/30 00:25:53 1
+2017/11/30 00:25:53 Please select the map from below give maps to play with.
+2017/11/30 00:25:53 1. 3D Cliff.map
+2017/11/30 00:25:53 2. D-Day.map
+2017/11/30 00:25:53 3. Drak.map
+2017/11/30 00:25:53 4. Earth.map
+2017/11/30 00:25:53 5. Europe.map
+2017/11/30 00:25:54 2
+2017/11/30 00:25:54 Please enter the number of player you want to play with
+2017/11/30 00:25:55 4
+2017/11/30 00:25:55 You have following types of players. Choose the tpe of player you want to playe with.
+2017/11/30 00:25:55 1. Aggressive Player
+2017/11/30 00:25:55 2. Random Player
+2017/11/30 00:25:55 3. Benovalent Player
+2017/11/30 00:25:55 4. Cheater Player
+2017/11/30 00:25:56 1
+2017/11/30 00:25:56  playerNameAggresive : Aggressive
+2017/11/30 00:25:56 You have selected aggresive player
+2017/11/30 00:25:56 You have following types of players. Choose the tpe of player you want to playe with.
+2017/11/30 00:25:56 1. Aggressive Player
+2017/11/30 00:25:56 2. Random Player
+2017/11/30 00:25:56 3. Benovalent Player
+2017/11/30 00:25:56 4. Cheater Player
+2017/11/30 00:25:56 2
+2017/11/30 00:25:56  playerNameRandom : Random
+2017/11/30 00:25:56 You have selected random player
+2017/11/30 00:25:56 You have following types of players. Choose the tpe of player you want to playe with.
+2017/11/30 00:25:56 1. Aggressive Player
+2017/11/30 00:25:56 2. Random Player
+2017/11/30 00:25:56 3. Benovalent Player
+2017/11/30 00:25:56 4. Cheater Player
+2017/11/30 00:25:57 3
+2017/11/30 00:25:57  playerNameBenavolent : Benovalent
+2017/11/30 00:25:57 You have selected benevolent player
+2017/11/30 00:25:57 You have following types of players. Choose the tpe of player you want to playe with.
+2017/11/30 00:25:57 1. Aggressive Player
+2017/11/30 00:25:57 2. Random Player
+2017/11/30 00:25:57 3. Benovalent Player
+2017/11/30 00:25:57 4. Cheater Player
+2017/11/30 00:25:58 4
+2017/11/30 00:25:58  playerNameCheater : Cheater
+2017/11/30 00:25:58 You have selected cheater player
+2017/11/30 00:25:58 4 no of players are selected to play the game
+2017/11/30 00:25:58 Please enter the number fo games you want to play.
+2017/11/30 00:26:05 Please enter the maximum number of turns you want to play in the tournament.
+2017/11/30 00:26:09 Benovalent Has 30 armies left
+2017/11/30 00:26:09 Cheater Has 30 armies left
+2017/11/30 00:26:09 Aggressive Has 29 armies left
+2017/11/30 00:26:09 Benovalent Has 29 armies left
+2017/11/30 00:26:09 Cheater Has 29 armies left
+2017/11/30 00:26:09 Aggressive Has 28 armies left
+2017/11/30 00:26:09 Benovalent Has 28 armies left
+2017/11/30 00:26:09 Cheater Has 28 armies left
+2017/11/30 00:26:09 Aggressive Has 27 armies left
+2017/11/30 00:26:09 Benovalent Has 27 armies left
+2017/11/30 00:26:09 Cheater Has 27 armies left
+2017/11/30 00:26:09 Aggressive Has 26 armies left
+2017/11/30 00:26:09 Benovalent Has 26 armies left
+2017/11/30 00:26:09 Cheater Has 26 armies left
+2017/11/30 00:26:09 Aggressive Has 25 armies left
+2017/11/30 00:26:09 Benovalent Has 25 armies left
+2017/11/30 00:26:09 Cheater Has 25 armies left
+2017/11/30 00:26:09 Aggressive Has 24 armies left
+2017/11/30 00:26:09 Benovalent Has 24 armies left
+2017/11/30 00:26:09 Cheater Has 24 armies left
+2017/11/30 00:26:09 Aggressive Has 23 armies left
+2017/11/30 00:26:09 Benovalent Has 23 armies left
+2017/11/30 00:26:09 Cheater Has 23 armies left
+2017/11/30 00:26:09 Aggressive Has 22 armies left
+2017/11/30 00:26:09 Benovalent Has 22 armies left
+2017/11/30 00:26:09 Cheater Has 22 armies left
+2017/11/30 00:26:09 Aggressive Has 21 armies left
+2017/11/30 00:26:09 Benovalent Has 21 armies left
+2017/11/30 00:26:09 Cheater Has 21 armies left
+2017/11/30 00:26:09 Aggressive Has 20 armies left
+2017/11/30 00:26:09 Benovalent Has 20 armies left
+2017/11/30 00:26:09 Cheater Has 20 armies left
+2017/11/30 00:26:09 Aggressive Has 19 armies left
+2017/11/30 00:26:09 Benovalent Has 19 armies left
+2017/11/30 00:26:09 Cheater Has 19 armies left
+2017/11/30 00:26:09 Aggressive Has 18 armies left
+2017/11/30 00:26:09 Benovalent Has 18 armies left
+2017/11/30 00:26:09 Cheater Has 18 armies left
+2017/11/30 00:26:09 Aggressive Has 17 armies left
+2017/11/30 00:26:09 Benovalent Has 17 armies left
+2017/11/30 00:26:09 Cheater Has 17 armies left
+2017/11/30 00:26:09 Aggressive Has 16 armies left
+2017/11/30 00:26:09 Benovalent Has 16 armies left
+2017/11/30 00:26:09 Cheater Has 16 armies left
+2017/11/30 00:26:09 Aggressive Has 15 armies left
+2017/11/30 00:26:09 Benovalent Has 15 armies left
+2017/11/30 00:26:09 Cheater Has 15 armies left
+2017/11/30 00:26:09 Aggressive Has 14 armies left
+2017/11/30 00:26:09 Benovalent Has 14 armies left
+2017/11/30 00:26:09 Cheater Has 14 armies left
+2017/11/30 00:26:09 Aggressive Has 13 armies left
+2017/11/30 00:26:09 Benovalent Has 13 armies left
+2017/11/30 00:26:09 Cheater Has 13 armies left
+2017/11/30 00:26:09 Aggressive Has 12 armies left
+2017/11/30 00:26:09 Benovalent Has 12 armies left
+2017/11/30 00:26:09 Cheater Has 12 armies left
+2017/11/30 00:26:09 Aggressive Has 11 armies left
+2017/11/30 00:26:09 Benovalent Has 11 armies left
+2017/11/30 00:26:09 Cheater Has 11 armies left
+2017/11/30 00:26:09 Aggressive Has 10 armies left
+2017/11/30 00:26:09 Benovalent Has 10 armies left
+2017/11/30 00:26:09 Cheater Has 10 armies left
+2017/11/30 00:26:09 Aggressive Has 9 armies left
+2017/11/30 00:26:09 Benovalent Has 9 armies left
+2017/11/30 00:26:09 Cheater Has 9 armies left
+2017/11/30 00:26:09 Aggressive Has 8 armies left
+2017/11/30 00:26:09 Benovalent Has 8 armies left
+2017/11/30 00:26:09 Cheater Has 8 armies left
+2017/11/30 00:26:09 Aggressive Has 7 armies left
+2017/11/30 00:26:09 Benovalent Has 7 armies left
+2017/11/30 00:26:09 Cheater Has 7 armies left
+2017/11/30 00:26:09 Aggressive Has 6 armies left
+2017/11/30 00:26:09 Benovalent Has 6 armies left
+2017/11/30 00:26:09 Cheater Has 6 armies left
+2017/11/30 00:26:09 Aggressive Has 5 armies left
+2017/11/30 00:26:09 Benovalent Has 5 armies left
+2017/11/30 00:26:09 Cheater Has 5 armies left
+2017/11/30 00:26:09 Aggressive Has 4 armies left
+2017/11/30 00:26:09 Benovalent Has 4 armies left
+2017/11/30 00:26:09 Cheater Has 4 armies left
+2017/11/30 00:26:09 Aggressive Has 3 armies left
+2017/11/30 00:26:09 Benovalent Has 3 armies left
+2017/11/30 00:26:09 Cheater Has 3 armies left
+2017/11/30 00:26:09 Aggressive Has 2 armies left
+2017/11/30 00:26:09 Benovalent Has 2 armies left
+2017/11/30 00:26:09 Cheater Has 2 armies left
+2017/11/30 00:26:09 Aggressive Has 1 armies left
+2017/11/30 00:26:09 Benovalent Has 1 armies left
+2017/11/30 00:26:09 Cheater Has 1 armies left
+2017/11/30 00:26:09 Aggressive Has 0 armies left
+2017/11/30 00:26:09  ON MAP 3D Cliff.map Match Result is Draw for Game no 0
+2017/11/30 00:26:09  ON MAP 3D Cliff.map Match Result is Draw for Game no 1
+2017/11/30 00:26:09 Benovalent Has 30 armies left
+2017/11/30 00:26:09 Cheater Has 30 armies left
+2017/11/30 00:26:09 Aggressive Has 29 armies left
+2017/11/30 00:26:09 Benovalent Has 29 armies left
+2017/11/30 00:26:09 Cheater Has 29 armies left
+2017/11/30 00:26:09 Aggressive Has 28 armies left
+2017/11/30 00:26:09 Benovalent Has 28 armies left
+2017/11/30 00:26:09 Cheater Has 28 armies left
+2017/11/30 00:26:09 Aggressive Has 27 armies left
+2017/11/30 00:26:09 Benovalent Has 27 armies left
+2017/11/30 00:26:09 Cheater Has 27 armies left
+2017/11/30 00:26:09 Aggressive Has 26 armies left
+2017/11/30 00:26:09 Benovalent Has 26 armies left
+2017/11/30 00:26:09 Cheater Has 26 armies left
+2017/11/30 00:26:09 Aggressive Has 25 armies left
+2017/11/30 00:26:09 Benovalent Has 25 armies left
+2017/11/30 00:26:09 Cheater Has 25 armies left
+2017/11/30 00:26:09 Aggressive Has 24 armies left
+2017/11/30 00:26:09 Benovalent Has 24 armies left
+2017/11/30 00:26:09 Cheater Has 24 armies left
+2017/11/30 00:26:09 Aggressive Has 23 armies left
+2017/11/30 00:26:09 Benovalent Has 23 armies left
+2017/11/30 00:26:09 Cheater Has 23 armies left
+2017/11/30 00:26:09 Aggressive Has 22 armies left
+2017/11/30 00:26:09 Benovalent Has 22 armies left
+2017/11/30 00:26:09 Cheater Has 22 armies left
+2017/11/30 00:26:09 Aggressive Has 21 armies left
+2017/11/30 00:26:10 Benovalent Has 21 armies left
+2017/11/30 00:26:10 Cheater Has 21 armies left
+2017/11/30 00:26:10 Aggressive Has 20 armies left
+2017/11/30 00:26:10 Benovalent Has 20 armies left
+2017/11/30 00:26:10 Cheater Has 20 armies left
+2017/11/30 00:26:10 Aggressive Has 19 armies left
+2017/11/30 00:26:10 Benovalent Has 19 armies left
+2017/11/30 00:26:10 Cheater Has 19 armies left
+2017/11/30 00:26:10 Aggressive Has 18 armies left
+2017/11/30 00:26:10 Benovalent Has 18 armies left
+2017/11/30 00:26:10 Cheater Has 18 armies left
+2017/11/30 00:26:10 Aggressive Has 17 armies left
+2017/11/30 00:26:10 Benovalent Has 17 armies left
+2017/11/30 00:26:10 Cheater Has 17 armies left
+2017/11/30 00:26:10 Aggressive Has 16 armies left
+2017/11/30 00:26:10 Benovalent Has 16 armies left
+2017/11/30 00:26:10 Cheater Has 16 armies left
+2017/11/30 00:26:10 Aggressive Has 15 armies left
+2017/11/30 00:26:10 Benovalent Has 15 armies left
+2017/11/30 00:26:10 Cheater Has 15 armies left
+2017/11/30 00:26:10 Aggressive Has 14 armies left
+2017/11/30 00:26:10 Benovalent Has 14 armies left
+2017/11/30 00:26:10 Cheater Has 14 armies left
+2017/11/30 00:26:10 Aggressive Has 13 armies left
+2017/11/30 00:26:10 Benovalent Has 13 armies left
+2017/11/30 00:26:10 Cheater Has 13 armies left
+2017/11/30 00:26:10 Aggressive Has 12 armies left
+2017/11/30 00:26:10 Benovalent Has 12 armies left
+2017/11/30 00:26:10 Cheater Has 12 armies left
+2017/11/30 00:26:10 Aggressive Has 11 armies left
+2017/11/30 00:26:10 Benovalent Has 11 armies left
+2017/11/30 00:26:10 Cheater Has 11 armies left
+2017/11/30 00:26:10 Aggressive Has 10 armies left
+2017/11/30 00:26:10 Benovalent Has 10 armies left
+2017/11/30 00:26:10 Cheater Has 10 armies left
+2017/11/30 00:26:10 Aggressive Has 9 armies left
+2017/11/30 00:26:10 Benovalent Has 9 armies left
+2017/11/30 00:26:10 Cheater Has 9 armies left
+2017/11/30 00:26:10 Aggressive Has 8 armies left
+2017/11/30 00:26:10 Benovalent Has 8 armies left
+2017/11/30 00:26:10 Cheater Has 8 armies left
+2017/11/30 00:26:10 Aggressive Has 7 armies left
+2017/11/30 00:26:10 Benovalent Has 7 armies left
+2017/11/30 00:26:10 Cheater Has 7 armies left
+2017/11/30 00:26:10 Aggressive Has 6 armies left
+2017/11/30 00:26:10 Benovalent Has 6 armies left
+2017/11/30 00:26:10 Cheater Has 6 armies left
+2017/11/30 00:26:10 Aggressive Has 5 armies left
+2017/11/30 00:26:10 Benovalent Has 5 armies left
+2017/11/30 00:26:10 Cheater Has 5 armies left
+2017/11/30 00:26:10 Aggressive Has 4 armies left
+2017/11/30 00:26:10 Benovalent Has 4 armies left
+2017/11/30 00:26:10 Cheater Has 4 armies left
+2017/11/30 00:26:10 Aggressive Has 3 armies left
+2017/11/30 00:26:10 Benovalent Has 3 armies left
+2017/11/30 00:26:10 Cheater Has 3 armies left
+2017/11/30 00:26:10 Aggressive Has 2 armies left
+2017/11/30 00:26:10 Benovalent Has 2 armies left
+2017/11/30 00:26:10 Cheater Has 2 armies left
+2017/11/30 00:26:10 Aggressive Has 1 armies left
+2017/11/30 00:26:10 Benovalent Has 1 armies left
+2017/11/30 00:26:10 Cheater Has 1 armies left
+2017/11/30 00:26:10 Aggressive Has 0 armies left
+2017/11/30 00:26:10  ON MAP D-Day.map Match Result is Draw for Game no 0
+2017/11/30 00:26:10  ON MAP D-Day.map Match Result is Draw for Game no 1
