@@ -1,11 +1,19 @@
 package in.risk.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Scanner;
+
+import javafx.print.PageLayout;
+
+import java.util.Map.Entry;
+import java.util.Observable;
 
 
 /**
@@ -13,7 +21,7 @@ import java.util.Scanner;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class BenevolentPlayer implements Strategy {
+public class BenevolentPlayer extends Observable implements Strategy {
 
 	// variables for reinforce phase
 
@@ -28,6 +36,11 @@ public class BenevolentPlayer implements Strategy {
 	public static String cardTypeC = "C";
 	public static int cardInTheDeck;
 	HashMap<String, Integer> findingWeakestCOuntryReinforcement = new HashMap<>();
+	int noOfReinforcementArmiesFromCountries = 0;
+	int noOfReinforcementArmiesFromContinents =0;
+	int noOfReinforcementArmiesFromCards = 0;
+	
+	
 	
 
 
@@ -70,9 +83,8 @@ public class BenevolentPlayer implements Strategy {
 	 * This method is used to get reinforcement armies from the countries player own.
 	 * @param playerName used to specify the name of the current player
 	 * @return true is all goes well.
-	 * @throws IOException 
 	 */
-	public int getArmiesFromCountries(String playerName) throws IOException{
+	public int getArmiesFromCountries(String playerName){
 		int noOfReinforcementArmiesForCountry = 0;
 		if(StartUpPhase.initialPlayerCountry.get(playerName).size() < 9){
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + 3;
@@ -80,7 +92,6 @@ public class BenevolentPlayer implements Strategy {
 			noOfReinforcementArmiesForCountry = noOfReinforcementArmiesForCountry + StartUpPhase.initialPlayerCountry.get(playerName).size()/3;
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
-		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForCountry + " armies from owned countries.");
 		return noOfReinforcementArmiesForCountry;
 	}
 
@@ -88,9 +99,8 @@ public class BenevolentPlayer implements Strategy {
 	 * This method is used to get reinforcement armies from owned continents.
 	 * @param playerName used to specify the name of current player.
 	 * @return true if everything goes well.
-	 * @throws IOException 
 	 */
-	public int getArmiesaFromContinet(String playerName) throws IOException{
+	public int getArmiesaFromContinet(String playerName){
 		int noOfReinforcementArmiesForContinent = 0;
 		ArrayList<Boolean> resultOfContinentCountry = new ArrayList<Boolean>();
 		for (Entry<String, List<String>> entry : MapLoader.continentCountries.entrySet()) {
@@ -107,7 +117,6 @@ public class BenevolentPlayer implements Strategy {
 			resultOfContinentCountry.clear();
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForContinent + " from owned continents.");
-		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForContinent + " from owned continents.");
 		return noOfReinforcementArmiesForContinent;
 	}
 
@@ -127,14 +136,11 @@ public class BenevolentPlayer implements Strategy {
 		} else {
 			if(tempSize < 3){
 				System.out.println("You dont have enough cards to play.");
-				StartUpPhase.loggingString("You dont have enough cards to play.");
 			}else{
 				String result;
 				Scanner sc = new Scanner(System.in);
 				System.out.println("Now you have less than 5 cards. Do you want to play cards now? Y/N");
-				StartUpPhase.loggingString("Now you have less than 5 cards. Do you want to play cards now? Y/N");
 				result = sc.nextLine();
-				StartUpPhase.loggingString(""+result);
 				if (result.equals("Y")) {
 					noOfReinforcementArmiesForCards = checkUniqueCombination(playersCards.get(playerName).size(), playerName) + checkDiscreteCombination(playerName);
 				}
@@ -142,7 +148,6 @@ public class BenevolentPlayer implements Strategy {
 			}
 		}
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
-		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
 		return noOfReinforcementArmiesForCards;
 	}
 
@@ -332,24 +337,19 @@ public class BenevolentPlayer implements Strategy {
 	 */
 	public void placeReinforcementArmies(PlayerToPlay playerName) throws IOException {
 		System.out.println("####################     REINFORCEMENT Phase BEGINS     #################### ");
-		StartUpPhase.loggingString("####################     REINFORCEMENT Phase BEGINS     #################### ");
 		System.out.println("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
-		StartUpPhase.loggingString("Player Name on ENTERING REINFORCEMENT Phase ++++++++++++++++++ " +playerName.getName());
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);		//Scanner sc = new Scanner(System.in);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		String countryNameToEnterArmies;
 		int noOfArmiesWantToPlace;
-		int noOfReinforcementArmiesFromCountries = getArmiesFromCountries(playerName.getName());
-		int noOfReinforcementArmiesFromContinents = getArmiesaFromContinet(playerName.getName());
-		//int noOfReinforcementArmiesFromCards = getArmiesFromCards(playerName.getName());
+		 noOfReinforcementArmiesFromCountries = getArmiesFromCountries(playerName.getName());
+		 noOfReinforcementArmiesFromContinents = getArmiesaFromContinet(playerName.getName());
+		// noOfReinforcementArmiesFromCards = getArmiesFromCards(playerName.getName());
 
 		//int noOfRinforcementArmies = noOfReinforcementArmiesFromCards + noOfReinforcementArmiesFromContinents + noOfReinforcementArmiesFromCountries;
 		int noOfRinforcementArmies =  noOfReinforcementArmiesFromContinents + noOfReinforcementArmiesFromCountries;
 
 		System.out.println(playerName.getName() + " you have " + noOfRinforcementArmies + " number of reinforcement armies.");
-		StartUpPhase.loggingString(playerName.getName() + " you have " + noOfRinforcementArmies + " number of reinforcement armies.");
 		playerName.addArmies(noOfRinforcementArmies);
 
 
@@ -358,7 +358,6 @@ public class BenevolentPlayer implements Strategy {
 		//StartUpPhase.countriesArmies.put("Venezuala", 1);// for checking
 
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		String weakestCountry="";
 		int armyOfWeakestCountry = 0;
 		int updatedarmyOfWeakestCountry = 0;
@@ -367,9 +366,8 @@ public class BenevolentPlayer implements Strategy {
 		int temp = 0;
 
 		System.out.println("loop value is: " + loop);
-		StartUpPhase.loggingString("loop value is: " + loop);
 		System.out.println(StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-		StartUpPhase.loggingString(""+StartUpPhase.initialPlayerCountry.get(playerName.getName()));
+
 		//finding the weakest country
 		for (Entry<String, Integer> entry : StartUpPhase.countriesArmies.entrySet()) {
 			String key = entry.getKey();
@@ -412,9 +410,7 @@ public class BenevolentPlayer implements Strategy {
 
 		System.out.println();
 		System.out.println("weakest country name is: " + weakestCountry);
-		StartUpPhase.loggingString("weakest country name is: " + weakestCountry);
 		System.out.println("weakest country army is: " + updatedarmyOfWeakestCountry);
-		StartUpPhase.loggingString("weakest country army is: " + updatedarmyOfWeakestCountry);
 		System.out.println();
 
 
@@ -423,12 +419,8 @@ public class BenevolentPlayer implements Strategy {
 		noOfArmiesWantToPlace = noOfRinforcementArmies;
 		placeReinforcementArmies(countryNameToEnterArmies, noOfArmiesWantToPlace, playerName);
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
-		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(playerName.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		System.out.println("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
-		
-		StartUpPhase.loggingString("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
 		fortifyPhase(playerName);
 		return;
 	}// end of reinforcement phase	
@@ -467,20 +459,16 @@ public class BenevolentPlayer implements Strategy {
 	public void fortifyPhase(PlayerToPlay currentPlayer) throws IOException {
 
 		System.out.println("@@@@@@@@@@@@@@@@@@    FORTIFY Phase BEGINS   @@@@@@@@@@@@@@@@@ " +currentPlayer.getName());
-		StartUpPhase.loggingString("@@@@@@@@@@@@@@@@@@    FORTIFY Phase BEGINS   @@@@@@@@@@@@@@@@@ " +currentPlayer.getName());
 
-		System.out.println(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");	
-		StartUpPhase.loggingString(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");
+
+		System.out.println(currentPlayer.getName() + " Is INSIDE FORTIFY PHASE");		
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
-		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("country for All player "	+ StartUpPhase.initialPlayerCountry);
-		StartUpPhase.loggingString("country for All player "	+ StartUpPhase.initialPlayerCountry);
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
+
 
 		//========strongest country to move armies FROM=============
-		System.out.println("The name of strongest country from which you need to move armies is : ");
-		StartUpPhase.loggingString("The name of strongest country from which you need to move armies is : ");
+		System.out.println("The name of strongest country from which you need to move armies is : ");		
 		String from;		
 		String strongestCountry="";
 		int armyOfStrongestCountry = 0;
@@ -543,12 +531,11 @@ public class BenevolentPlayer implements Strategy {
 		//	updatedarmyOfStrongestCountry = 2;
 		//Bielorrusia, SiberiaW
 		System.out.println("strongest country name is: " + strongestCountry);
-		StartUpPhase.loggingString("strongest country name is: " + strongestCountry);
 		System.out.println("strongest country army is: " + updatedarmyOfStrongestCountry);
-		StartUpPhase.loggingString("strongest country army is: " + updatedarmyOfStrongestCountry);
+
 		from = strongestCountry;
 		System.out.println("Strongest Country from army needs to displace: \"FROM\" " + from);		
-		StartUpPhase.loggingString("Strongest Country from army needs to displace: \"FROM\" " + from);
+
 		int tempCountrySize = StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()).size();
 		int tempAdjSize = MapLoader.adj.get(from).size();
 
@@ -564,10 +551,7 @@ public class BenevolentPlayer implements Strategy {
 		}
 
 		System.out.println(" tempAdjCountryToWhichWeCanMOve : " +tempAdjCountryToWhichWeCanMOve);
-		StartUpPhase.loggingString(" tempAdjCountryToWhichWeCanMOve : " +tempAdjCountryToWhichWeCanMOve);
 		System.out.println("The countries which your owned and adjacent to " + from
-				+ " where you want to move your armies");
-		StartUpPhase.loggingString("The countries which your owned and adjacent to " + from
 				+ " where you want to move your armies");
 
 
@@ -582,10 +566,9 @@ public class BenevolentPlayer implements Strategy {
 		int  loop = tempAdjCountryToWhichWeCanMOve.size();
 		//StartUpPhase.countriesArmies.put("Venezuala", 1);// for checking
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
+
 
 		System.out.println(tempAdjCountryToWhichWeCanMOve);
-		StartUpPhase.loggingString(""+tempAdjCountryToWhichWeCanMOve);
 		int t = 0;
 
 		//finding the weakest country
@@ -623,13 +606,11 @@ public class BenevolentPlayer implements Strategy {
 			}
 		}		
 		System.out.println(" findingWeakestCOuntry : " + findingWeakestCOuntry);
-		StartUpPhase.loggingString(" findingWeakestCOuntry : " + findingWeakestCOuntry);
 
 		if(weakestCountry=="")
 		{
 			System.out.println();
 			System.out.println("No country is adjacent to the "+ strongestCountry+ " country");
-			StartUpPhase.loggingString("No country is adjacent to the "+ strongestCountry+ " country");
 			System.out.println();
 
 		}
@@ -637,16 +618,14 @@ public class BenevolentPlayer implements Strategy {
 		{
 			System.out.println();
 			System.out.println("weakest country name is: " + weakestCountry);
-			StartUpPhase.loggingString("weakest country name is: " + weakestCountry);
 			System.out.println("weakest country army is: " + updatedarmyOfWeakestCountry);
-			StartUpPhase.loggingString("weakest country army is: " + updatedarmyOfWeakestCountry);
 			System.out.println();
 
 
 			String to;
 			to = weakestCountry;
 			System.out.println("Weakest Country where army needs to displace: \"TO\" " + to);
-			StartUpPhase.loggingString("Weakest Country where army needs to displace: \"TO\" " + to);
+
 
 
 			//		String to;
@@ -656,10 +635,9 @@ public class BenevolentPlayer implements Strategy {
 			if (tempAdjCountryToWhichWeCanMOve.contains(to)) {
 				System.out.println(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)
 				+ " armies on " + from + ".");
-				StartUpPhase.loggingString(currentPlayer.getName() + " you have " + StartUpPhase.countriesArmies.get(from)
-				+ " armies on " + from + ".");
+
 				System.out.println("The number of armies you want to move to " + "" + to + " " + "country.");
-				StartUpPhase.loggingString("The number of armies you want to move to " + "" + to + " " + "country.");
+
 				//how many armies should be displaced from strongest country to weakest country
 				numberOfArmiesToMove = updatedarmyOfStrongestCountry/2;// half armies moved from strongest to weakest
 				if (StartUpPhase.countriesArmies.get(from) > 1) {
@@ -672,9 +650,7 @@ public class BenevolentPlayer implements Strategy {
 					//countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
 					System.out.println();
 					System.out.println(from + " = " + StartUpPhase.countriesArmies.get(from));
-					StartUpPhase.loggingString(from + " = " + StartUpPhase.countriesArmies.get(from));
 					System.out.println(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
-					StartUpPhase.loggingString(to + " = " + StartUpPhase.countriesArmies.get(to) + "\n");
 					System.out.println();
 
 
@@ -684,7 +660,6 @@ public class BenevolentPlayer implements Strategy {
 				else{
 					String result;
 					System.out.println("You dont have sufficient number of armies to move from " + from);
-					StartUpPhase.loggingString("You dont have sufficient number of armies to move from " + from);
 					//automatic ends of fortify phase
 					//					StartUpPhase.nextPlayer();
 
@@ -693,11 +668,10 @@ public class BenevolentPlayer implements Strategy {
 			}
 		}
 		System.out.println("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
-		StartUpPhase.loggingString("You have these countries under your control "	+ StartUpPhase.initialPlayerCountry.get(currentPlayer.getName()));
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
-		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
+		setChanged();
+		notifyObservers(this);
 		System.out.println("*******************    FORTIFY Phase ENDS   ******************* " +currentPlayer.getName());
-		StartUpPhase.loggingString("*******************    FORTIFY Phase ENDS   ******************* " +currentPlayer.getName());
 		return;
 	}//end of fortify phase
 }

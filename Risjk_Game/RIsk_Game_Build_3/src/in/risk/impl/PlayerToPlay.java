@@ -1,13 +1,10 @@
 package in.risk.impl;
-
-import java.io.Serializable;
-
 /**
  * This class is used to implement the playerTOPlay class.
  * @author mohitrana
  *
  */
-public class PlayerToPlay implements Serializable {
+public class PlayerToPlay {
 
 	//stores player's name, armies and ID
 	private String name;
