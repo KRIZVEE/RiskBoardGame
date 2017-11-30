@@ -8,7 +8,12 @@ import in.risk.impl.MapLoader;
 import in.risk.impl.GamePhaseVIewObserver;
 import in.risk.impl.RandomPlayer;
 import in.risk.impl.StartUpPhase;
+<<<<<<< HEAD:RIsk_Game_Build_3/src/in/risk/gui/RiskInterface.java
 import in.risk.impl.WorldDominanceObserver;
+=======
+import in.risk.saveload.ResourceManager;
+import in.risk.saveload.SaveData;
+>>>>>>> b5ae9ba965c1925d4e15f82c2a65f93b8b5dbe10:Risjk_Game/RIsk_Game_Build_3/src/in/risk/gui/RiskInterface.java
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -140,6 +145,22 @@ public class RiskInterface extends Application {
 			}
 		});
 
+		//event handler on load game button
+	loadGame.setOnAction(new EventHandler<ActionEvent>() {
+		
+		@Override
+		public void handle(ActionEvent event) {
+			try {
+				SaveData data = (SaveData) ResourceManager.load("Resources/data.txt");
+				System.out.println(data.countriesArmies);
+			} catch (Exception e) {
+				
+				e.printStackTrace();
+			}
+			
+		}
+	});
+		
 		//launching map editor by clicking on mapEditor button
 		mapEditor.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -166,8 +187,7 @@ public class RiskInterface extends Application {
 	 */
 
 	public static void main(String[] args){
-		launch(args);
-		/*MapLoader.mapLoader("UnconnectedContinent.map");
-		MapLoader.unconnectedContinent();*/
+		launch(args);		
+	
 	}
 }

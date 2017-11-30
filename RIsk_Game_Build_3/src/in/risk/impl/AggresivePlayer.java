@@ -466,7 +466,10 @@ public class AggresivePlayer extends Observable implements Strategy{
 		System.out.println("country armies: for All player " + StartUpPhase.countriesArmies);
 		StartUpPhase.loggingString("country armies: for All player " + StartUpPhase.countriesArmies);
 		System.out.println("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
+<<<<<<< HEAD:RIsk_Game_Build_3/src/in/risk/impl/AggresivePlayer.java
 		StartUpPhase.loggingString("*********************    REINFORCEMENT Phase ENDS    *************************** " +playerName.getName());
+=======
+>>>>>>> b5ae9ba965c1925d4e15f82c2a65f93b8b5dbe10:Risjk_Game/RIsk_Game_Build_3/src/in/risk/impl/AggresivePlayer.java
 		trackVariable = typeOfGame;
 		trackPlayer = playerName.getName();
 		
@@ -1040,7 +1043,146 @@ public class AggresivePlayer extends Observable implements Strategy{
 			
 			
 			
+<<<<<<< HEAD:RIsk_Game_Build_3/src/in/risk/impl/AggresivePlayer.java
 }
+=======
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		}
+>>>>>>> b5ae9ba965c1925d4e15f82c2a65f93b8b5dbe10:Risjk_Game/RIsk_Game_Build_3/src/in/risk/impl/AggresivePlayer.java
 		
 
 		else

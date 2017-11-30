@@ -23,7 +23,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+/**
+ * This class is regarding performing functions of map editor
+ * @author ishan,Charanpreet, Kashief, Mohit
+ * @version 
+ *
+ */
 public class MapEditorInterface {
 
 	//data structures for storing the map elements.
@@ -51,6 +56,9 @@ public class MapEditorInterface {
 	Button back;
 	Button saveMap;
 
+	/**
+	 * This method is about creating gui for map interface
+	 */
 	public void mapEditorInterface() {
 		
 		//putting map elements from Map loader class to edited data structures
@@ -62,8 +70,10 @@ public class MapEditorInterface {
 		Image logo = new Image(StartUpPhase.logoPath);
 		ImageView imgview = new ImageView(logo);
 
+		//Creating button for edit continents
 		editContinents = new Button("Edit Continents");
 
+		//Creating event handler for edit continents
 		editContinents.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -73,6 +83,7 @@ public class MapEditorInterface {
 		});
 		editCountries = new Button("Edit Countries");
 
+		//create event handler for edit continents
 		editCountries.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -84,6 +95,7 @@ public class MapEditorInterface {
 
 		back = new Button("Back");
 
+		//creating event handler for back button
 		back.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -92,8 +104,10 @@ public class MapEditorInterface {
 			}
 		});
 
+		//create button for save map
 		saveMap = new Button("Save Map");
 
+		//create event handler for save map
 		saveMap.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -104,6 +118,7 @@ public class MapEditorInterface {
 			}
 		});
 
+		//Designing verticle box
 		VBox vbox = new VBox();
 		vbox.getStyleClass().add("vbox");
 		HBox hbox = new HBox();
@@ -122,12 +137,16 @@ public class MapEditorInterface {
 
 	}
 
+	/**
+	 * This method is related to editing continent interface
+	 */
 	public static void editContinentsInterface() {
 
 		// method for editing continents in map editor
 		Image logo = new Image(StartUpPhase.logoPath);
 		ImageView imageView = new ImageView(logo);
 
+		//Designing interface for continent
 		Label lblAdd = new Label("Add a new continent: ");
 		TextField fieldAdd = new TextField();
 		TextField fieldAdd1 = new TextField();
@@ -261,7 +280,11 @@ public class MapEditorInterface {
 		continentEditorStage.show();
 
 	}
+	
 
+	/**
+	 * This method is related to editing countries interface
+	 */
 	public static void editCountriesInterface() {
 
 		//method for editing countries in map editor
@@ -269,6 +292,7 @@ public class MapEditorInterface {
 		ImageView imgview = new ImageView(logo);
 		ObservableList<String> continentList;
 
+		//Designing interface for edit countries
 		if (!editedContinents.isEmpty()) {
 			continentList = FXCollections.observableArrayList(editedContinents);
 		} else
