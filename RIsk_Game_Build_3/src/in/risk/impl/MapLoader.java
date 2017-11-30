@@ -2,6 +2,7 @@ package in.risk.impl;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,6 +18,10 @@ import java.util.Map.Entry;
 public class  MapLoader{
 
 	// data structures for storing map elements
+	
+	/**
+	 * 
+	 */
 	
 	public static ArrayList<String> continentFilterNew = new ArrayList<String>();
 	public static List<String> newList;
@@ -142,7 +147,7 @@ public class  MapLoader{
 			tempList.add(value.get(2).toString());
 			countryCoordinates.put(key, tempList);
 
-			List<String> subList = value.subList(4, value.size());
+			List<String> subList = new ArrayList<String>(value.subList(4, value.size())); 
 			String continentName = value.get(3).toString();
 			adj.put(key, subList);
 			countryContinent.put(key, continentName);

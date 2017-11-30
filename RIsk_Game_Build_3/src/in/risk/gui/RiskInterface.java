@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 import in.risk.impl.MapLoader;
 import in.risk.impl.GamePhaseVIewObserver;
+import in.risk.impl.HumanPlayer;
 import in.risk.impl.RandomPlayer;
 import in.risk.impl.StartUpPhase;
 import in.risk.impl.WorldDominanceObserver;
@@ -144,20 +145,49 @@ public class RiskInterface extends Application {
 		});
 
 		//event handler on load game button
-	loadGame.setOnAction(new EventHandler<ActionEvent>() {
-		
-		@Override
-		public void handle(ActionEvent event) {
-			try {
-				SaveData data = (SaveData) ResourceManager.load("Resources/data.txt");
-				System.out.println(data.countriesArmies);
-			} catch (Exception e) {
-				
-				e.printStackTrace();
-			}
+		loadGame.setOnAction(new EventHandler<ActionEvent>() {
 			
-		}
-	});
+			@Override
+			public void handle(ActionEvent event) {
+				try {
+					HumanPlayer objHumanPlayer = new HumanPlayer();
+					primaryStage.close();
+					MapEditorInterface.continentEditorStage.close();
+					MapEditorInterface.countryEditorStage.close();
+					MapEditorInterface.mapEditorStage.close();
+					SaveData data = (SaveData) ResourceManager.load("Resources/data.txt");
+					
+					//loading the values into exciting data structures.
+					StartUpPhase.currentPlayer = data.currentPlayer;
+					StartUpPhase.noOfPlayer =data.noOfPlayers;
+					StartUpPhase.players  = data.players;
+					StartUpPhase.countriesArmies = data.countriesArmies;
+					StartUpPhase.initialPlayerCountry = data.playerCountries;
+					
+					MapLoader.countryFilter = data.countryFilter;
+					MapLoader.continentCountries = data.continentCountries;
+					MapLoader.countryContinent = data.countryContinent;
+					MapLoader.continentFilterNew = data.continentFilterNew;
+					MapLoader.continentValue = data.continentValue;
+					MapLoader.valueList = data.valueList;
+					MapLoader.adj = data.adjacent;
+					MapLoader.countryCoordinates = data.countryCoordinates;
+					
+					String nextMethod = data.nextMethod;
+					if(nextMethod.equalsIgnoreCase("attackphase")){
+						objHumanPlayer.attackPhase(StartUpPhase.currentPlayer);
+					}else if(nextMethod.equalsIgnoreCase("fortifyPhase")){
+						objHumanPlayer.fortifyPhase(StartUpPhase.currentPlayer);
+					}
+					
+					
+				} catch (Exception e) {
+					
+					e.printStackTrace();
+				}
+				
+			}
+		});
 		
 		//launching map editor by clicking on mapEditor button
 		mapEditor.setOnAction(new EventHandler<ActionEvent>() {

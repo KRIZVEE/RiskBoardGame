@@ -4,11 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Observable;
 import java.util.Scanner;
@@ -36,14 +38,15 @@ public class StartUpPhase extends Observable {
 	HumanPlayerCardPhaseViewObserver objHumanPlayerCardPhaseViewObserver = new HumanPlayerCardPhaseViewObserver();
 	
 	
+	
 	public static String css = "file:resources/css/application.css";
 	public static String logoPath = "file:resources/logo/Risk_logo.png";
 
 
-	static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
+	 static public Vector<PlayerToPlay> players = new Vector<PlayerToPlay>();
 	static public Vector<PlayerToPlay> playersForTournament = new Vector<PlayerToPlay>();
 	static MapLoader obj = new MapLoader();
-	static int noOfPlayer = 0;
+	public static int noOfPlayer = 0;
 	static int noOfPlayerForTournament = 0;
 	public static PlayerToPlay currentPlayer;
 	public static HashMap<String, ArrayList<String>> initialPlayerCountry = new HashMap<String, ArrayList<String>>();
@@ -89,20 +92,13 @@ public class StartUpPhase extends Observable {
 	            result = scForGameMode.nextInt();
 	            loggingString(""+result);
 			
-			
-//			System.out.println("Please choose the type of play from following options.");
-//			System.out.println("1.Single Game Mode.");
-//			System.out.println("2.Tournament Gam Mode");
-//			result = scForGameMode.nextInt();
 			if(result == 1) {
 				MapLoader.clearAll();
 				MapLoader.loadMap(RiskInterface.pathMap);
 				askUserToSelectPlayers();
-				//initiallyPlaceArmies();
 				initialPlayerCountry(1);
 				initiallyPlaceArmies();
-				//placeArmies(1);// need to uncomment this				@@@@@@@@@@@@@@@@@@@@@@@@@@
-				// do while loopp to be implemented for choosing winner.
+		
 				do{
 					
 					System.out.println("inside of do loop");
@@ -904,27 +900,6 @@ public class StartUpPhase extends Observable {
             }   				
 		}
 		
-		//name();
-		
-//		setChanged();
-//		notifyObservers(this);
-		//notifyObservers();
-		
-//		System.out.println("Do you want to save the game at this point?");
-//        String result = sc.nextLine();
-//        if(result.equalsIgnoreCase("yes")){
-//            SaveData data = new SaveData();
-//            data.currentPlayer = currentPlayer;
-//            data.noOfPlayers = noOfPlayer;
-//            data.namesOfplayers = players;
-//            data.countriesArmies = countriesArmies;
-//            data.playerCountries = initialPlayerCountry;
-//            try {
-//                ResourceManager.save(data, "Resources/data.txt");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
 		return true;
 	}
 	
@@ -946,7 +921,33 @@ public class StartUpPhase extends Observable {
         pw.flush();
         pw.close();
 }
+ 
 
+    public void saveGame(String currentGamePhase) {
+    	
+		SaveData data = new SaveData();
+		data.currentPlayer = currentPlayer;
+		data.noOfPlayers = noOfPlayer;
+		data.players = players;
+		data.countriesArmies = countriesArmies;
+		data.playerCountries = initialPlayerCountry;
+		data.countryFilter= MapLoader.countryFilter;
+		data.continentCountries = MapLoader.continentCountries;
+		data.countryContinent =MapLoader.countryContinent;
+		data.continentFilterNew=MapLoader.continentFilterNew ;
+		data.continentValue = MapLoader.continentValue;
+		data.valueList= MapLoader.valueList;
+		data.adjacent = MapLoader.adj;
+		data.countryCoordinates = MapLoader.countryCoordinates;
+		data.nextMethod = currentGamePhase;
+		try {
+			ResourceManager.save(data, "Resources/data.txt");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
+}
+    
 	/**
 	 * This method is logic behind adding armies to every country player own.
 	 * @param updatedArmies no of armies player want to add.

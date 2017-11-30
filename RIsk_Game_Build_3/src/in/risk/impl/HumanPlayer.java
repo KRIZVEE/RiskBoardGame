@@ -17,8 +17,9 @@ import java.util.Scanner;
  * @author Mohit Rana, Kashif Rizvee, Ishan Kansara, Charanpreet Singh
  *
  */
-public class HumanPlayer extends Observable implements Strategy {
+public class HumanPlayer extends Observable implements Strategy  {
 
+	StartUpPhase objStartUpPhase = new StartUpPhase();
 	public static HashMap<String, List<String>> playersCards = new HashMap<String, List<String>>();
 	public static List<String> cardsInTheDeck = new ArrayList<String>();
 	public static ArrayList<String> deck = new ArrayList<String>();
@@ -362,6 +363,16 @@ public class HumanPlayer extends Observable implements Strategy {
 			}
 		}
 		//		sc.close();
+		System.out.println("Do you wish to save the game?");
+		String answer = sc.nextLine();
+		if(answer.equalsIgnoreCase("yes")){
+			objStartUpPhase.saveGame("attackPhase");
+			System.out.println("Do you want to continue playing the game?");
+			String result = sc.nextLine();
+			if(result.equalsIgnoreCase("no")){
+				System.exit(0);
+			}
+		}
 		attackPhase(playerName);
 		return;
 
@@ -963,10 +974,8 @@ public class HumanPlayer extends Observable implements Strategy {
 				setChanged();
 				notifyObservers(this);
 			}
+			
 			fortifyPhase(playerName);
-
-			//		countriesArmiesObserver.putAll(StartUpPhase.countriesArmies);
-			//		initialPlayerCountryObserver.putAll(StartUpPhase.initialPlayerCountry);
 
 		}
 		//	sc.close();
