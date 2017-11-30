@@ -156,6 +156,8 @@ public class AggresivePlayer implements Strategy{
 				sc.close();
 			}
 		}
+		
+		//displaying details 
 		System.out.println(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
 		StartUpPhase.loggingString(playerName + " got " + noOfReinforcementArmiesForCards + " reinforcement armies from trading the cards.");
 		return noOfReinforcementArmiesForCards;
@@ -167,6 +169,8 @@ public class AggresivePlayer implements Strategy{
 	 */
 	public void initialCardDistribution() throws IOException {
 		int size = StartUpPhase.players.size();
+		
+		//Putting card in deck logic
 		for (int i = 0; i < size; i++) {
 			playersCards.put(StartUpPhase.players.get(i).getName(), deck.subList(0, 0));
 		}
@@ -209,6 +213,8 @@ public class AggresivePlayer implements Strategy{
 		int flagForB = 0;
 		int flagForC = 0;
 		String value;
+	
+		//logic for checking discrete combination of cards
 		for (int i = 0; i < playersCards.get(playerName).size(); i++) {
 			value = playersCards.get(playerName).get(i);
 			if (value.equals("A")) {
@@ -409,6 +415,8 @@ public class AggresivePlayer implements Strategy{
 				}
 			}
 		}
+		
+		//displaying all details after reinforcement   
 		System.out.println();
 		System.out.println("Strongest country name is: " + strongestCountry);
 		StartUpPhase.loggingString("Strongest country name is: " + strongestCountry);
